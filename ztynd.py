@@ -18,99 +18,52 @@ match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start
 m = gp.Model('model_%dx%d_%dR_Start_r%d_Meet_r%d' % (NROW, NCOL, total_round, start_round, match_round))
 
 def def_var(total_r: int, m:gp.Model):
-    # define variables to represent state pattern, with encoding scheme
-    # store the SB state at each round
-    S_b = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
-    S_r = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
-    S_g = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
-    S_w = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
+    # define vars storing the SB state at each round with encoding scheme
+    S_b = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='S_b').values()).reshape((total_r, NROW, NCOL))
+    S_r = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='S_r').values()).reshape((total_r, NROW, NCOL))
+    S_g = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='S_g').values()).reshape((total_r, NROW, NCOL))
+    S_w = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='S_w').values()).reshape((total_r, NROW, NCOL))
 
-    # store the MC state at each round
+    # define alias storing the MC state at each round with encoding scheme
     M_b = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
     M_r = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
     M_g = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
     M_w = np.ndarray(shape= (total_r, NROW, NCOL), dtype= gp.Var)
-
-    # register the variables
+    
+    # match the cells with alias through shift rows
     for r in range(total_r):
         for i in ROW:
-            for j in COL:
-                S_b[r,i,j] = m.addVar(vtype= GRB.BINARY, name= "R%d[%d,%d]_b" %(r,i,j))
-                S_r[r,i,j] = m.addVar(vtype= GRB.BINARY, name= "R%d[%d,%d]_r" %(r,i,j))
-                S_g[r,i,j] = m.addVar(vtype= GRB.BINARY, name= "R%d[%d,%d]_g" %(r,i,j))
-                S_w[r,i,j] = m.addVar(vtype= GRB.BINARY, name= "R%d[%d,%d]_w" %(r,i,j))
-
-                # match the cells through shift rows
-                M_b[r,i,(j+NCOL-i)%NCOL] = S_b[r,i,j]
-                M_r[r,i,(j+NCOL-i)%NCOL] = S_r[r,i,j]
-                M_g[r,i,(j+NCOL-i)%NCOL] = S_g[r,i,j]
-                M_w[r,i,(j+NCOL-i)%NCOL] = S_w[r,i,j]
+            for j in COL:   
+                M_b[r,i,j] = S_b[r,i,(j+i)%NCOL]
+                M_r[r,i,j] = S_r[r,i,(j+i)%NCOL]
+                M_g[r,i,j] = S_g[r,i,(j+i)%NCOL]
+                M_w[r,i,j] = S_w[r,i,(j+i)%NCOL]
 
     # define variables for columnwise encoding
-    S_col_u = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
-    S_col_x = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
-    S_col_y = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
+    S_col_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_u').values()).reshape((total_r, NCOL))
+    S_col_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_x').values()).reshape((total_r, NCOL))
+    S_col_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_y').values()).reshape((total_r, NCOL))
 
-    M_col_u = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
-    M_col_x = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
-    M_col_y = np.ndarray(shape = (total_r, NCOL), dtype= gp.Var)
+    M_col_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='M_col_u').values()).reshape((total_r, NCOL))
+    M_col_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='M_col_x').values()).reshape((total_r, NCOL))
+    M_col_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='M_col_y').values()).reshape((total_r, NCOL))
 
-    for r in range(total_r):
-        for j in COL:
-            S_col_u[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dSB_C%d_u" %(r,j))
-            S_col_x[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dSB_C%d_x" %(r,j))
-            S_col_y[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dSB_C%d_y" %(r,j))
-
-            M_col_u[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dMC_C%d_u" %(r,j))
-            M_col_x[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dMC_C%d_x" %(r,j))
-            M_col_y[r,j] = m.addVar(vtype=GRB.BINARY, name= "R%dMC_C%d_y" %(r,j))
-
-    # register auxiliary variables
-    start_b = np.ndarray(shape = (NROW, NCOL), dtype = gp.Var)
-    start_r = np.ndarray(shape = (NROW, NCOL), dtype = gp.Var)
-    for i in ROW:
-        for j in COL:
-            start_b[i,j] = m.addVar(vtype=GRB.BINARY, name= "Start[%d,%d]_b" %(i,j))
-            start_r[i,j] = m.addVar(vtype=GRB.BINARY, name= "Start[%d,%d]_r" %(i,j))
+    # define vars to track the start state
+    start_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Start_b').values()).reshape((NROW, NCOL))
+    start_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Start_r').values()).reshape((NROW, NCOL))
     
-    cost_fwd = np.ndarray(shape = (total_r, NCOL), dtype = gp.Var)
-    cost_bwd = np.ndarray(shape = (total_r, NCOL), dtype = gp.Var)
-    for r in range(total_r):
-        for j in COL:
-            cost_fwd[r, j] = m.addVar(lb=0, ub=NROW, vtype=GRB.INTEGER, name= "R%dC%d_fwd" %(r,j))
-            cost_bwd[r, j] = m.addVar(lb=0, ub=NROW, vtype=GRB.INTEGER, name= "R%dC%d_bwd" %(r,j))
+    # define auxiliary vars tracking cost of df at MC operations
+    cost_fwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_fwd').values()).reshape((total_r, NCOL))
+    cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
     
-    # define intermediate values for computations on degree of matching
-    meet_signed = np.ndarray(shape=(NCOL), dtype= gp.Var)
-    meet = np.ndarray(shape=(NCOL), dtype= gp.Var)
-    for j in COL:
-        meet_signed[j] = m.addVar(lb=-NROW, ub=NROW, vtype=GRB.INTEGER, name="Match_C%d_u" %j)
-        meet[j] = m.addVar(lb=0, ub=NROW, vtype=GRB.INTEGER, name="Match_C%d" %j)
+    # define auxiliary vars for computations on degree of matching
+    meet_signed = np.asarray(m.addVars(NCOL, lb=-NROW, ub=NROW, vtype=GRB.INTEGER, name='Meet_signed').values())
+    meet = np.asarray(m.addVars(NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Meet').values())
     
     m.update()
     return S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, start_b, start_r, cost_fwd, cost_bwd, meet_signed, meet
 
-def gen_MC_rule(m, in_b, in_r, in_col_u, in_col_x, in_col_y ,out_b, out_r, fwd: gp.Var, bwd: gp.Var):
-    m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
-    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
-    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
-
-    m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
-    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
-    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
-
-    m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
-    m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
-    m.update()
-
-def gen_match_rule(m, in_b, in_r, in_g, out_b, out_r, out_g, meet_signed, meet):
-    m.addConstr(meet_signed == 
-        gp.quicksum(in_b) + gp.quicksum(in_r) - gp.quicksum(in_g) +
-        gp.quicksum(out_b) + gp.quicksum(out_r) - gp.quicksum(out_g) - NROW)
-    m.addConstr(meet == gp.max_(meet_signed, 0))
-    m.update()
-
-def gen_encode_rule(m, total_r, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y):
+def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray, S_g: np.ndarray, S_w: np.ndarray, M_b: np.ndarray, M_r: np.ndarray, M_g: np.ndarray, M_w: np.ndarray, S_col_u: np.ndarray, S_col_x: np.ndarray, S_col_y: np.ndarray, M_col_u: np.ndarray, M_col_x: np.ndarray, M_col_y: np.ndarray):
     for r in range(total_r):
         for i in ROW:
             for j in COL:
@@ -128,7 +81,27 @@ def gen_encode_rule(m, total_r, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u,
             m.addConstr(M_col_u[r,j] == gp.max_(M_w[r,:,j].tolist()))
     m.update()
 
-def set_obj(m, start_b, start_r, cost_fwd, cost_bwd, meet):
+def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
+
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
+
+    m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
+    m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
+    m.update()
+
+def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.ndarray, out_b: np.ndarray, out_r: np.ndarray, out_g: np.ndarray, meet_signed, meet):
+    m.addConstr(meet_signed == 
+        gp.quicksum(in_b) + gp.quicksum(in_r) - gp.quicksum(in_g) +
+        gp.quicksum(out_b) + gp.quicksum(out_r) - gp.quicksum(out_g) - NROW)
+    m.addConstr(meet == gp.max_(meet_signed, 0))
+    m.update()
+
+def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, meet: np.ndarray):
     df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_b")
     df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_r")
     dm = m.addVar(lb=1, vtype=GRB.INTEGER, name="Match")
@@ -143,6 +116,9 @@ def set_obj(m, start_b, start_r, cost_fwd, cost_bwd, meet):
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
+
+#############################################################################
+# main
 fwd = []    # forward rounds
 bwd = []    # backward rounds
 
@@ -206,18 +182,18 @@ def writeSol():
                 m.params.SolutionNumber = i
                 xn = m.getAttr('Xn', gv)
                 lines = ["{} {}".format(v1, v2) for v1, v2 in zip(names, xn)]
-                with open('{}_{}.sol'.format(m.modelName, i), 'w') as f:
+                with open('./runlog/{}_{}.sol'.format(m.modelName, i), 'w') as f:
                     f.write("# Solution for model {}\n".format(m.modelName))
                     f.write("# Objective value = {}\n".format(m.PoolObjVal))
                     f.write("\n".join(lines))
         else:
-            m.write('./runlong/' + m.modelName + '.sol')
+            m.write('./runlog/' + m.modelName + '.sol')
     else:
         print('infeasible')
 
 def drawSol(total_r: int, ini_r: int, mat_r: int, F_r: list, B_r: list, outfile=None):
     if outfile == None:
-        outfile = m.modelName + '.sol'
+        outfile = './runlog/' + m.modelName + '.sol'
     solFile = open(outfile, 'r')
     Sol = dict()
     for line in solFile:
@@ -234,24 +210,28 @@ def drawSol(total_r: int, ini_r: int, mat_r: int, F_r: list, B_r: list, outfile=
     DoF_init_RD_v = np.ndarray(shape=(NROW, NCOL), dtype='int')
     CD_x_v = np.ndarray(shape=(total_r, NCOL), dtype='int')
     CD_y_v = np.ndarray(shape=(total_r, NCOL), dtype='int')
+
     for ri in range(total_r):
         for i in range(NROW):
             for j in range(NCOL):
-                SB_x_v[ri, i, j] = Sol["R%d[%d,%d]_b" %(ri,i,j)]
-                SB_y_v[ri, i, j] = Sol["R%d[%d,%d]_r" %(ri,i,j)]
+                SB_x_v[ri, i, j] = Sol["S_b[%d,%d,%d]" %(ri,i,j)]
+                SB_y_v[ri, i, j] = Sol["S_r[%d,%d,%d]" %(ri,i,j)]
+    
     for ri in range(total_r):
         for i in range(NROW):
             for j in range(NCOL):
                 MC_x_v[ri, i, j] = SB_x_v[ri, i, (j + i)%NCOL]
                 MC_y_v[ri, i, j] = SB_y_v[ri, i, (j + i)%NCOL]
+    
     for i in range(NROW):
         for j in range(NCOL):
-            DoF_init_BL_v[i, j] = Sol["Start[%d,%d]_b" %(i,j)]
-            DoF_init_RD_v[i, j] = Sol["Start[%d,%d]_r" %(i,j)]
+            DoF_init_BL_v[i, j] = Sol["Start_b[%d,%d]" %(i,j)]
+            DoF_init_RD_v[i, j] = Sol["Start_r[%d,%d]" %(i,j)]
     for ri in range(total_r):
         for j in range(NCOL):
-            CD_x_v[ri, j] = Sol["R%dC%d_fwd" %(ri,j)]
-            CD_y_v[ri, j] = Sol["R%dC%d_bwd" %(ri,j)]
+            CD_x_v[ri, j] = Sol["Cost_fwd[%d,%d]" %(ri,j)]
+            CD_y_v[ri, j] = Sol["Cost_bwd[%d,%d]" %(ri,j)]
+    
     DoF_BL_v = Sol["Final_b"]
     DoF_RD_v = Sol["Final_r"]
     DoM_v = Sol["Match"]
@@ -394,7 +374,8 @@ def drawSol(total_r: int, ini_r: int, mat_r: int, F_r: list, B_r: list, outfile=
 
 set_obj(m, start_b, start_r, cost_fwd, cost_bwd, meet)
 m.optimize()
+writeSol()
 print(m)
 
-#fnp = m.modelName + '.sol'
-#drawSol(7, 4, 1, fwd, bwd, fnp)
+fnp = './runlog/' + m.modelName + '.sol'
+drawSol(7, 4, 1, fwd, bwd, fnp)

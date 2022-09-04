@@ -211,7 +211,7 @@ def writeSol():
                     f.write("# Objective value = {}\n".format(m.PoolObjVal))
                     f.write("\n".join(lines))
         else:
-            m.write('./runlong/' + m.modelName + '.sol')
+            m.write(m.modelName + '.sol')
     else:
         print('infeasible')
 
@@ -395,6 +395,7 @@ def drawSol(total_r: int, ini_r: int, mat_r: int, F_r: list, B_r: list, outfile=
 set_obj(m, start_b, start_r, cost_fwd, cost_bwd, meet)
 m.optimize()
 print(m)
+writeSol()
 
-#fnp = m.modelName + '.sol'
-#drawSol(7, 4, 1, fwd, bwd, fnp)
+fnp = m.modelName + '.sol'
+drawSol(7, 4, 1, fwd, bwd, fnp)
