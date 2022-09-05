@@ -117,7 +117,7 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.update()
 
 
-#############################################################################
+####################################################################################################################
 # main
 fwd = []    # forward rounds
 bwd = []    # backward rounds
@@ -136,17 +136,14 @@ S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_co
 gen_encode_rule(m, total_round, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y)
 
 for r in range(total_round):
-    print(r)
     nr = (r+1) % total_round
     if r == start_round:
-        print('start', r)
         for i in ROW:
             for j in COL:
                 m.addConstr(S_b[r, i, j] + S_r[r, i, j] >= 1)
                 m.addConstr(start_b[i, j] + S_r[r, i, j] == 1)
                 m.addConstr(start_r[i, j] + S_b[r, i, j] == 1)
     if r == match_round:
-        print('mat', r)
         for j in COL:
             gen_match_rule(m, M_b[r,:,j], M_r[r,:,j], M_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
             m.addConstr(cost_fwd[r,j] == 0)
@@ -163,14 +160,10 @@ for r in range(total_round):
         elif r in fwd:
             print('fwd', r)
             for j in COL:
-                #continue
                 gen_MC_rule(m, M_b[r,:,j], M_r[r,:,j], M_col_u[r,j], M_col_x[r,j], M_col_y[r,j], S_b[nr,:,j], S_r[nr,:,j], cost_fwd[r,j], cost_bwd[r,j])
-                m.update()
-                print(m)
         elif r in bwd:
             print('bwd', r)
             for j in COL:
-                #continue
                 gen_MC_rule(m, S_b[nr,:,j], S_r[nr,:,j], S_col_u[nr,j], S_col_x[nr,j], S_col_y[nr,j], M_b[r,:,j], M_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
 
 def writeSol():
@@ -378,4 +371,4 @@ writeSol()
 print(m)
 
 fnp = './runlog/' + m.modelName + '.sol'
-drawSol(7, 4, 1, fwd, bwd, fnp)
+drawSol(total_r=7, ini_r= 4, mat_r=1, F_r= fwd, B_r=bwd, outfile= fnp)
