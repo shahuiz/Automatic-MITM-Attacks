@@ -15,6 +15,19 @@ total_round = 7 # total round
 start_round = 4   # start round, start in {0,1,2,...,total_r-1}
 match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
 
+# linear constriants for XOR operations
+XOR_A = np.asarray([
+    [0, 0, 0, 0, 0, 0, 1],
+    [-1, 0, -1, 0, 1, 0, -2],
+    [0, 0, 1, 0, -1, 0, 1],
+    [0, -1, 0, -1, 0, 1, 0],
+    [0, 0, 0, 1, 0, -1, 0],
+    [1, 0, 0, 0, -1, 0, 1],
+    [0, 1, 0, 0, 0, -1, 0],
+    [0, 0, 0, 0, 1, 0, -1],
+    [0, 0, 0, 0, 0, 1, -1]])
+XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
+
 m = gp.Model('model_%dx%d_%dR_Start_r%d_Meet_r%d_RelatedKey' % (NROW, NCOL, total_round, start_round, match_round))
 
 def def_var(total_r: int, m:gp.Model):
@@ -102,11 +115,10 @@ def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray,
             m.addConstr(M_col_u[r,j] == gp.max_(M_w[r,:,j].tolist()))
     m.update()
 
-def gen_XOR_fwd_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
-    pass
-
-
-
+# define XOR rule for forward computations, if backward, switch the input of blue and red
+def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
+    enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_df]
+    m.addMConstr(XOR_A, list(enum), '>=', -XOR_B)
 
 def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
@@ -143,7 +155,6 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
-
 ####################################################################################################################
 # main
 fwd = []    # forward rounds
@@ -159,7 +170,17 @@ else:
 print(fwd)
 print(bwd)
 
-S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, start_b, start_r, cost_fwd, cost_bwd, meet_signed, meet = def_var(total_round, m)
+[   S_b, S_r, S_g, S_w, 
+    M_b, M_r, M_g, M_w, 
+    K_b, K_r, K_g, K_w,
+    S_col_u, S_col_x, S_col_y, 
+    M_col_u, M_col_x, M_col_y, 
+    S_ini_b, S_ini_r, S_ini_g,
+    K_ini_b, K_ini_r, K_ini_g,
+    cost_fwd, 
+    cost_bwd, 
+    meet_signed, meet] = def_var(total_round, m)
+
 gen_encode_rule(m, total_round, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y)
 
 for r in range(total_round):
@@ -168,8 +189,8 @@ for r in range(total_round):
         for i in ROW:
             for j in COL:
                 m.addConstr(S_b[r, i, j] + S_r[r, i, j] >= 1)
-                m.addConstr(start_b[i, j] + S_r[r, i, j] == 1)
-                m.addConstr(start_r[i, j] + S_b[r, i, j] == 1)
+                m.addConstr(S_ini_b[i, j] + S_r[r, i, j] == 1)
+                m.addConstr(S_ini_r[i, j] + S_b[r, i, j] == 1)
     if r == match_round:
         for j in COL:
             gen_match_rule(m, M_b[r,:,j], M_r[r,:,j], M_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
@@ -193,7 +214,7 @@ for r in range(total_round):
             for j in COL:
                 gen_MC_rule(m, S_b[nr,:,j], S_r[nr,:,j], S_col_u[nr,j], S_col_x[nr,j], S_col_y[nr,j], M_b[r,:,j], M_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
 
-set_obj(m, start_b, start_r, cost_fwd, cost_bwd, meet)
+set_obj(m, S_ini_b, S_ini_r, cost_fwd, cost_bwd, meet)
 m.optimize()
 #writeSol()
 print(m)
