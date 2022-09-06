@@ -15,6 +15,7 @@ COL = range(NCOL)
 total_round = 7 # total round
 start_round = 4   # start round, start in {0,1,2,...,total_r-1}
 match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
+key_start_round = 4 
 
 # linear constriants for XOR operations
 XOR_A = np.asarray([
@@ -27,6 +28,7 @@ XOR_A = np.asarray([
     [0, 1, 0, 0, 0, -1, 0],
     [0, 0, 0, 0, 1, 0, -1],
     [0, 0, 0, 0, 0, 1, -1]])
+
 XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
 
 m = gp.Model('model_%dx%d_%dR_Start_r%d_Meet_r%d_RelatedKey' % (NROW, NCOL, total_round, start_round, match_round))
@@ -101,7 +103,7 @@ def def_var(total_r: int, m:gp.Model):
         key_cost_fwd, key_cost_bwd,
         meet_signed, meet]
 
-# define encode rules
+# generate encode rules
 def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray, S_g: np.ndarray, S_w: np.ndarray, M_b: np.ndarray, M_r: np.ndarray, M_g: np.ndarray, M_w: np.ndarray, S_col_u: np.ndarray, S_col_x: np.ndarray, S_col_y: np.ndarray, M_col_u: np.ndarray, M_col_x: np.ndarray, M_col_y: np.ndarray):
     for r in range(total_r):
         for i in ROW:
@@ -120,11 +122,12 @@ def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray,
             m.addConstr(M_col_u[r,j] == gp.max_(M_w[r,:,j].tolist()))
     m.update()
 
-# define XOR rule for forward computations, if backward, switch the input of blue and red
+# generate XOR rule for forward computations, if backward, switch the input of blue and red
 def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_df]
     m.addMConstr(XOR_A, list(enum), '>=', -XOR_B)
 
+# generate MC rule 
 def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
     m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
@@ -138,6 +141,7 @@ def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Va
     m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
     m.update()
 
+# generate matching rules, for easy calculation of dm
 def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.ndarray, out_b: np.ndarray, out_r: np.ndarray, out_g: np.ndarray, meet_signed, meet):
     m.addConstr(meet_signed == 
         gp.quicksum(in_b) + gp.quicksum(in_r) - gp.quicksum(in_g) +
@@ -145,6 +149,7 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
     m.addConstr(meet == gp.max_(meet_signed, 0))
     m.update()
 
+# set objective function
 def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, meet: np.ndarray):
     df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_b")
     df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_r")
@@ -160,7 +165,8 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
-def key_expansion(m:gp.Model, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, total_r: int, start_r: int):
+# generate key schedule
+def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray):
     for r in range(total_r):
         # initial state of key expansion, strictly no unknown or consumed df
         if r == start_r:
@@ -229,6 +235,8 @@ print(bwd)
     meet_signed, meet] = def_var(total_round, m)
 
 gen_encode_rule(m, total_round, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y)
+
+key_expansion(m, total_round, K_ini_b, K_ini_r, K_b, K_r)
 
 for r in range(total_round):
     nr = (r+1) % total_round
