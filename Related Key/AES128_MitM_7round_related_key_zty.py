@@ -1,3 +1,4 @@
+from tracemalloc import start
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
@@ -79,6 +80,9 @@ def def_var(total_r: int, m:gp.Model):
     # define auxiliary vars tracking cost of df at MC operations
     cost_fwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_fwd').values()).reshape((total_r, NCOL))
     cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
+
+    key_cost_fwd = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((total_r, NROW, NCOL))
+    key_cost_bwd = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((total_r, NROW, NCOL))
     
     # define auxiliary vars for computations on degree of matching
     meet_signed = np.asarray(m.addVars(NCOL, lb=-NROW, ub=NROW, vtype=GRB.INTEGER, name='Meet_signed').values())
@@ -93,10 +97,11 @@ def def_var(total_r: int, m:gp.Model):
         M_col_u, M_col_x, M_col_y, 
         S_ini_b, S_ini_r, S_ini_g,
         K_ini_b, K_ini_r, K_ini_g,
-        cost_fwd, 
-        cost_bwd, 
+        cost_fwd, cost_bwd, 
+        key_cost_fwd, key_cost_bwd,
         meet_signed, meet]
 
+# define encode rules
 def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray, S_g: np.ndarray, S_w: np.ndarray, M_b: np.ndarray, M_r: np.ndarray, M_g: np.ndarray, M_w: np.ndarray, S_col_u: np.ndarray, S_col_x: np.ndarray, S_col_y: np.ndarray, M_col_u: np.ndarray, M_col_x: np.ndarray, M_col_y: np.ndarray):
     for r in range(total_r):
         for i in ROW:
@@ -155,6 +160,48 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
+def key_expansion(m:gp.Model, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, total_r: int, start_r: int):
+    for r in range(total_r):
+        # initial state of key expansion, strictly no unknown or consumed df
+        if r == start_r:
+            for i in ROW:
+                for j in COL:
+                    m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
+                    m.addConstr(K_ini_b[i, j] + K_r[r, i, j] == 1)
+                    m.addConstr(K_ini_r[i, j] + K_b[r, i, j] == 1)
+                    m.addConstr(key_cost_bwd[r,i,j] == 0)
+                    m.addConstr(key_cost_fwd[r,i,j] == 0)
+        
+        # fwd direction
+        if r > start_r:
+            lr = r - 1
+            for j in COL:
+                if j == 0:  # special treatment for col 0 as in AES key schedule
+                    for i in ROW:
+                        rot_i = (i+1) % NROW
+                        rot_j = NCOL - 1
+                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[lr,rot_i,rot_j], in2_r=K_r[lr,rot_i,rot_j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        m.addConstr(key_cost_bwd[r,i,j] == 0)
+                else:
+                    for i in ROW:
+                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[r,i,j-1], in2_r=K_r[r,i,j-1], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        m.addConstr(key_cost_bwd[r,i,j] == 0)
+
+        # bwd direction, reverse blue and red cell notation for XOR propagation        
+        if r < start_r:  
+            lr = r + 1
+            for j in COL:
+                if j == 0:  # special treatment for col 0 as in AES key schedule
+                    for i in ROW:
+                        rot_i = (i+1) % NROW
+                        rot_j = NCOL - 1
+                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,rot_i,rot_j], in2_r=K_b[r,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        m.addConstr(key_cost_fwd[r,i,j] == 0)
+                else:
+                    for i in ROW:
+                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        m.addConstr(key_cost_fwd[r,i,j] == 0)
+
 ####################################################################################################################
 # main
 fwd = []    # forward rounds
@@ -177,8 +224,8 @@ print(bwd)
     M_col_u, M_col_x, M_col_y, 
     S_ini_b, S_ini_r, S_ini_g,
     K_ini_b, K_ini_r, K_ini_g,
-    cost_fwd, 
-    cost_bwd, 
+    cost_fwd, cost_bwd, 
+    key_cost_fwd, key_cost_bwd,
     meet_signed, meet] = def_var(total_round, m)
 
 gen_encode_rule(m, total_round, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y)

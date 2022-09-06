@@ -17,6 +17,26 @@ A = np.asarray([[0, 0, 0, 0, 0, 0, 1],
 
 B = np.asarray([0,1,0,1,0,0,0,0,0])
 
+Points = [
+    [0,1,0,1,0,1,0],
+    [0,1,0,1,1,1,1],
+    [0,1,1,0,0,0,0],
+    [1,0,0,1,0,0,0],
+    [1,0,1,0,1,0,0],
+    [1,0,1,1,1,0,0],
+    [1,1,1,0,1,0,0],
+    [0,1,1,1,0,1,0],
+    [1,1,0,1,0,1,0],
+    [1,1,1,1,1,1,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,1,0,0,0],
+    [0,0,1,0,0,0,0],
+    [0,0,1,1,0,0,0],
+    [0,1,0,0,0,0,0],
+    [1,0,0,0,0,0,0],
+    [1,1,0,0,0,0,0]
+]
+
 # the following code validates if the SAGEMATH tool correctly preserved all valid vectors
 from itertools import product
 x = [i for i in product(range(2), repeat=7)]
@@ -43,14 +63,9 @@ for yi in y:
 print('sat:', len(ans), 'unsat:', count)
 print('If satisfied amount is correct: ', len(ans)==17)
 
-safe = 1
-for i in ans:
-    if i not in A:
-        safe = 0
-        print('Error')
+print(ans)
+print(len(ans))
 
-if safe:
-    print("All valid combinations are correctly preserved.")
 
 # example usage of the XOR classifier
 m = gp.Model('x')
