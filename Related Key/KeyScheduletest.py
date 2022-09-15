@@ -125,5 +125,3 @@ with open('./Related Key/KStest.out','w') as f:
                     color+='g'
             f.write(color+'\n')
 f.close()
-
-        

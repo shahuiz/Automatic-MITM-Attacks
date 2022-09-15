@@ -55,6 +55,12 @@ def def_var(total_r: int, m:gp.Model):
                 M_g[r,i,j] = S_g[r,i,(j+i)%NCOL]
                 M_w[r,i,j] = S_w[r,i,(j+i)%NCOL]
 
+    # define vars storing the Add key state at each round with encoding scheme
+    A_b = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_b').values()).reshape((total_r, NROW, NCOL))
+    A_r = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_r').values()).reshape((total_r, NROW, NCOL))
+    A_g = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_g').values()).reshape((total_r, NROW, NCOL))
+    A_w = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_w').values()).reshape((total_r, NROW, NCOL))
+    
     # define vars storing the key state at each round with encoding scheme
     K_b = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_r, NROW, NCOL))
     K_r = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_r, NROW, NCOL))
@@ -70,6 +76,16 @@ def def_var(total_r: int, m:gp.Model):
     M_col_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='M_col_x').values()).reshape((total_r, NCOL))
     M_col_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='M_col_y').values()).reshape((total_r, NCOL))
 
+    K_col_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='K_col_u').values()).reshape((total_r, NCOL))
+    K_col_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='K_col_x').values()).reshape((total_r, NCOL))
+    K_col_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='K_col_y').values()).reshape((total_r, NCOL))
+
+    XorMC_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_u').values()).reshape((total_r, NCOL))
+    XorMC_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_x').values()).reshape((total_r, NCOL))
+    XorMC_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_y').values()).reshape((total_r, NCOL))
+    XorMC_z = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_z').values()).reshape((total_r, NCOL))
+    XorMC = np.asarray(m.addVars(total_r, NROW, NCOL, vtype=GRB.BINARY, name='XORMC').values()).reshape((total_r, NROW, NCOL))
+
     # define vars to track the start state of Encryption states (S) and Key states (K)
     S_ini_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_b').values()).reshape((NROW, NCOL))
     S_ini_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_r').values()).reshape((NROW, NCOL))
@@ -79,9 +95,13 @@ def def_var(total_r: int, m:gp.Model):
     K_ini_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((NROW, NCOL))
     K_ini_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_g').values()).reshape((NROW, NCOL))
     
-    # define auxiliary vars tracking cost of df at MC operations
+    # define auxiliary vars tracking cost of df at MC operations, cost_fwd is solely for MC, cost_bwd is for XOR_MC
     cost_fwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_fwd').values()).reshape((total_r, NCOL))
     cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
+    
+    # define auxiliary vars tracking cost of df at Add Key operations in foward direction
+    cost_XOR = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Cost_XOR').values()).reshape((total_r, NROW, NCOL))
+    #cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
 
     key_cost_fwd = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((total_r, NROW, NCOL))
     key_cost_bwd = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((total_r, NROW, NCOL))
@@ -94,22 +114,36 @@ def def_var(total_r: int, m:gp.Model):
     return [
         S_b, S_r, S_g, S_w, 
         M_b, M_r, M_g, M_w, 
+        A_b, A_r, A_g, A_w,
         K_b, K_r, K_g, K_w,
         S_col_u, S_col_x, S_col_y, 
         M_col_u, M_col_x, M_col_y, 
+        K_col_u, K_col_x, K_col_y,
+        XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
         S_ini_b, S_ini_r, S_ini_g,
         K_ini_b, K_ini_r, K_ini_g,
-        cost_fwd, cost_bwd, 
+        cost_fwd, cost_XOR, cost_bwd, 
         key_cost_fwd, key_cost_bwd,
         meet_signed, meet]
 
 # generate encode rules
-def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray, S_g: np.ndarray, S_w: np.ndarray, M_b: np.ndarray, M_r: np.ndarray, M_g: np.ndarray, M_w: np.ndarray, S_col_u: np.ndarray, S_col_x: np.ndarray, S_col_y: np.ndarray, M_col_u: np.ndarray, M_col_x: np.ndarray, M_col_y: np.ndarray):
+def gen_encode_rule(m: gp.Model, total_r: int, fwd, bwd,
+    S_b: np.ndarray, S_r: np.ndarray, S_g: np.ndarray, S_w: np.ndarray, 
+    M_b: np.ndarray, M_r: np.ndarray, M_g: np.ndarray, M_w: np.ndarray, 
+    K_b: np.ndarray, K_r: np.ndarray, K_g: np.ndarray, K_w: np.ndarray, 
+    S_col_u: np.ndarray, S_col_x: np.ndarray, S_col_y: np.ndarray, 
+    M_col_u: np.ndarray, M_col_x: np.ndarray, M_col_y: np.ndarray,
+    K_col_u: np.ndarray, K_col_x: np.ndarray, K_col_y: np.ndarray,
+    XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z
+    ):
     for r in range(total_r):
         for i in ROW:
             for j in COL:
                 m.addConstr(S_g[r,i,j] == gp.and_(S_b[r,i,j], S_r[r,i,j]))
                 m.addConstr(S_w[r,i,j] + S_b[r,i,j] + S_r[r,i,j] - S_g[r,i,j] == 1)
+
+                m.addConstr(K_g[r,i,j] == gp.and_(K_b[r,i,j], K_r[r,i,j]))
+                m.addConstr(K_w[r,i,j] + K_b[r,i,j] + K_r[r,i,j] - K_g[r,i,j] == 1)
 
     for r in range(total_r):
         for j in COL:
@@ -120,6 +154,21 @@ def gen_encode_rule(m: gp.Model, total_r: int, S_b: np.ndarray, S_r: np.ndarray,
             m.addConstr(M_col_x[r,j] == gp.min_(M_b[r,:,j].tolist()))
             m.addConstr(M_col_y[r,j] == gp.min_(M_r[r,:,j].tolist()))
             m.addConstr(M_col_u[r,j] == gp.max_(M_w[r,:,j].tolist()))
+
+            m.addConstr(K_col_x[r,j] == gp.min_(K_b[r,:,j].tolist()))
+            m.addConstr(K_col_y[r,j] == gp.min_(K_r[r,:,j].tolist()))
+            m.addConstr(K_col_u[r,j] == gp.max_(K_w[r,:,j].tolist()))
+
+    for r in bwd:
+        nr = (r+1) % total_round
+        for j in COL:
+            m.addConstr(XorMC_u[r,j] == gp.or_(S_col_u[nr,j], K_col_u[r,j]))
+            m.addConstr(XorMC_x[r,j] == gp.and_(S_col_x[nr,j], K_col_x[r,j]))
+            m.addConstr(XorMC_y[r,j] == gp.and_(S_col_y[nr,j], K_col_y[r,j]))
+            m.addConstr(XorMC_z[r,j] == gp.min_(S_r[nr,:,j].tolist() + K_r[r,:,j].tolist()))
+            for i in ROW:
+                m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_r[r,i,j]))
+
     m.update()
 
 # generate XOR rule for forward computations, if backward, switch the input of blue and red
@@ -139,6 +188,19 @@ def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Va
 
     m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
     m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
+    m.update()
+
+# generate XOR-MC rule
+def gen_XORMC_rule(m: gp.Model, in1_b: np.ndarray, in1_r: np.ndarray, in2_b: np.ndarray, in2_r: np.ndarray, col_u: gp.Var, col_x: gp.Var, col_y: gp.Var, col_z: gp.Var, col:np.ndarray, out_b: np.ndarray, out_r: np.ndarray, bwd: gp.Var):
+    m.addConstr(NROW*col_u + gp.quicksum(out_b) <= NROW)
+    m.addConstr(NROW*col_u + gp.quicksum(out_r) <= NROW)
+    m.addConstr(gp.quicksum(out_b) - NROW* col_x == 0)
+
+    m.addConstr(gp.quicksum(out_r) - gp.quicksum(col) - NBRANCH*col_y - col_u <= -1)
+    m.addConstr(gp.quicksum(out_r) - gp.quicksum(col) - 2*NROW*col_y >= -1*NROW)
+
+    m.addConstr(gp.quicksum(in1_r) + gp.quicksum(in2_r) <= 7 + col_z)
+    m.addConstr(bwd == -4* col_z + gp.quicksum(out_r))
     m.update()
 
 # generate matching rules, for easy calculation of dm
@@ -166,7 +228,7 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.update()
 
 # generate key schedule
-def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray):
+def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
     for r in range(total_r):
         # initial state of key expansion, strictly no unknown or consumed df
         if r == start_r:
@@ -225,19 +287,23 @@ print(bwd)
 
 [   S_b, S_r, S_g, S_w, 
     M_b, M_r, M_g, M_w, 
+    A_b, A_r, A_g, A_w,
     K_b, K_r, K_g, K_w,
     S_col_u, S_col_x, S_col_y, 
     M_col_u, M_col_x, M_col_y, 
+    K_col_u, K_col_x, K_col_y,
+    XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
     S_ini_b, S_ini_r, S_ini_g,
     K_ini_b, K_ini_r, K_ini_g,
-    cost_fwd, cost_bwd, 
+    cost_fwd, cost_XOR, cost_bwd, 
     key_cost_fwd, key_cost_bwd,
     meet_signed, meet] = def_var(total_round, m)
 
-gen_encode_rule(m, total_round, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y)
+gen_encode_rule(m, total_round, fwd, bwd, S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, K_b, K_r, K_g, K_w, S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y, XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z)
 
-key_expansion(m, total_round, K_ini_b, K_ini_r, K_b, K_r)
+key_expansion(m, total_round, start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 
+# main function
 for r in range(total_round):
     nr = (r+1) % total_round
     if r == start_round:
@@ -263,10 +329,16 @@ for r in range(total_round):
         elif r in fwd:
             print('fwd', r)
             for j in COL:
-                gen_MC_rule(m, M_b[r,:,j], M_r[r,:,j], M_col_u[r,j], M_col_x[r,j], M_col_y[r,j], S_b[nr,:,j], S_r[nr,:,j], cost_fwd[r,j], cost_bwd[r,j])
+                gen_MC_rule(m, M_b[r,:,j], M_r[r,:,j], M_col_u[r,j], M_col_x[r,j], M_col_y[r,j], A_b[r,:,j], A_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
+                #continue
+                for i in ROW:
+                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j],S_b[nr,i,j],S_r[nr,i,j], cost_XOR[r,i,j])
         elif r in bwd:
             print('bwd', r)
             for j in COL:
+                gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC[r,:,j], M_b[r,:,j], M_r[r,:,j], cost_bwd[r,j])
+                continue
+
                 gen_MC_rule(m, S_b[nr,:,j], S_r[nr,:,j], S_col_u[nr,j], S_col_x[nr,j], S_col_y[nr,j], M_b[r,:,j], M_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
 
 set_obj(m, S_ini_b, S_ini_r, cost_fwd, cost_bwd, meet)
