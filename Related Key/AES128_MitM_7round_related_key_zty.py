@@ -222,9 +222,8 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
-# generate key schedule
 def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
-    for r in range(total_r):
+    for r in range(0, total_r):
         # initial state of key expansion, strictly no unknown or consumed df
         if r == start_r:
             for i in ROW:
@@ -264,6 +263,30 @@ def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K
                     for i in ROW:
                         gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
                         m.addConstr(key_cost_fwd[r,i,j] == 0)
+    
+    # store k[-1] at the end of the key state array, either bwd array or 
+    r = total_r
+    if start_r == -1:
+        for i in ROW:
+            for j in COL:
+                m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
+                m.addConstr(K_ini_b[i, j] + K_r[r, i, j] == 1)
+                m.addConstr(K_ini_r[i, j] + K_b[r, i, j] == 1)
+                m.addConstr(key_cost_bwd[r,i,j] == 0)
+                m.addConstr(key_cost_fwd[r,i,j] == 0)
+    else:
+        lr = 0
+        for j in COL:
+            if j == 0:  # special treatment for col 0 as in AES key schedule
+                for i in ROW:
+                    rot_i = (i+1) % NROW
+                    rot_j = NCOL - 1
+                    gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,rot_i,rot_j], in2_r=K_b[r,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                    m.addConstr(key_cost_fwd[r,i,j] == 0)
+            else:
+                for i in ROW:
+                    gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                    m.addConstr(key_cost_fwd[r,i,j] == 0)
 
 ####################################################################################################################
 # main

@@ -1,42 +1,48 @@
 
 round: 0
-wwww
-wwww
-wwww
-wwww
-
-round: 1
-wwww
-wwww
-wwww
-wwww
-
-round: 2
-wwww
-wwww
-wwww
+bgww
+bbgb
+wbgg
 wrww
 
+round: 1
+ggwr
+bbbb
+gbbb
+rrwb
+
+round: 2
+bbrr
+bgbb
+bbbg
+rrbg
+
 round: 3
-wwwr
-wwww
-wbww
-rrww
+bgrr
+bbbb
+bbbb
+rgbb
 
 round: 4
-rbrr
-brbr
-bbrb
-rrbr
+ggrg
+bgbg
+bgbb
+ggbg
 
 round: 5
-gbww
-bwww
-wwww
-rrww
+ggrr
+bbbb
+bbbb
+ggbb
 
 round: 6
-wwww
-wwww
-wwww
+bbww
+bbbb
+bbbb
+rrww
+
+round: 7
+gbww
+bbbb
+wwbg
 wwww
