@@ -213,7 +213,7 @@ def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.
     dm = m.addVar(lb=1, vtype=GRB.INTEGER, name="Match")
     obj = m.addVar(lb=1, vtype=GRB.INTEGER, name="Obj")
 
-    m.addConstr(df_b == gp.quicksum(start_b.flatten()) - gp.quicksum(cost_fwd.flatten()))
+    m.addConstr(df_b == gp.quicksum(start_b.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(cost_XOR.flatten()))
     m.addConstr(df_r == gp.quicksum(start_r.flatten()) - gp.quicksum(cost_bwd.flatten()))
     m.addConstr(dm == gp.quicksum(meet.flatten()))
     m.addConstr(obj - df_b <= 0)
@@ -368,6 +368,8 @@ for r in range(total_round):
             print('bwd', r)
             for j in COL:
                 gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC[r,:,j], M_b[r,:,j], M_r[r,:,j], cost_bwd[r,j])
+                for i in ROW:
+                    m.addConstr(cost_XOR[r,i,j] == 0)
                 
 set_obj(m, S_ini_b, S_ini_r, cost_fwd, cost_bwd, meet)
 m.optimize()
