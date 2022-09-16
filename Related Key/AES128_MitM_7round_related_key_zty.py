@@ -62,13 +62,13 @@ def def_var(total_r: int, m:gp.Model):
     A_g = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_g').values()).reshape((total_r, NROW, NCOL))
     A_w = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='A_w').values()).reshape((total_r, NROW, NCOL))
     
-    # define vars storing the key state at each round with encoding scheme
+    # define vars storing the key state at each round with encoding scheme, add 1 more entry to store the whitening key
     K_b = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_r+1, NROW, NCOL))
     K_r = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_r+1, NROW, NCOL))
     K_g = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='K_g').values()).reshape((total_r+1, NROW, NCOL))
     K_w = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='K_w').values()).reshape((total_r+1, NROW, NCOL))
 
-    # define variables for columnwise encoding
+    # define vars for columnwise encoding, including SB, MC and Key
     S_col_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_u').values()).reshape((total_r, NCOL))
     S_col_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_x').values()).reshape((total_r, NCOL))
     S_col_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='S_col_y').values()).reshape((total_r, NCOL))
@@ -81,6 +81,7 @@ def def_var(total_r: int, m:gp.Model):
     K_col_x = np.asarray(m.addVars(total_r+1, NCOL, vtype=GRB.BINARY, name='K_col_x').values()).reshape((total_r+1, NCOL))
     K_col_y = np.asarray(m.addVars(total_r+1, NCOL, vtype=GRB.BINARY, name='K_col_y').values()).reshape((total_r+1, NCOL))
 
+    # define vars for XorMC encodings
     XorMC_u = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_u').values()).reshape((total_r, NCOL))
     XorMC_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_x').values()).reshape((total_r, NCOL))
     XorMC_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_y').values()).reshape((total_r, NCOL))
@@ -90,8 +91,7 @@ def def_var(total_r: int, m:gp.Model):
     # define vars to track the start state of Encryption states (S) and Key states (K)
     S_ini_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_b').values()).reshape((NROW, NCOL))
     S_ini_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_r').values()).reshape((NROW, NCOL))
-    S_ini_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_g').values()).reshape((NROW, NCOL))
-    
+    S_ini_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='S_ini_g').values()).reshape((NROW, NCOL))   
     K_ini_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_b').values()).reshape((NROW, NCOL))
     K_ini_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((NROW, NCOL))
     K_ini_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_g').values()).reshape((NROW, NCOL))
@@ -101,9 +101,9 @@ def def_var(total_r: int, m:gp.Model):
     cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
     
     # define auxiliary vars tracking cost of df at Add Key operations in foward direction
-    cost_XOR = np.asarray(m.addVars(total_r, NROW, NCOL, vtype= GRB.BINARY, name='Cost_XOR').values()).reshape((total_r, NROW, NCOL))
-    #cost_bwd = np.asarray(m.addVars(total_r, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Cost_bwd').values()).reshape((total_r, NCOL))
+    cost_XOR = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='Cost_XOR').values()).reshape((total_r+1, NROW, NCOL))
 
+    # define auxiliary vars trackin cost of df in the key expansion process, unpossible combinations are set to zeros
     key_cost_fwd = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((total_r+1, NROW, NCOL))
     key_cost_bwd = np.asarray(m.addVars(total_r+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((total_r+1, NROW, NCOL))
     
@@ -264,7 +264,7 @@ def key_expansion(m:gp.Model, total_r: int, start_r: int, K_ini_b: np.ndarray, K
                         gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
                         m.addConstr(key_cost_fwd[r,i,j] == 0)
     
-    # store k[-1] at the end of the key state array, either bwd array or 
+    # store k[-1] at the end of the key state array, either bwd state or start state
     r = total_r
     if start_r == -1:
         for i in ROW:
@@ -329,26 +329,41 @@ for r in range(total_round):
                 m.addConstr(S_ini_b[i, j] + S_r[r, i, j] == 1)
                 m.addConstr(S_ini_r[i, j] + S_b[r, i, j] == 1)
     if r == match_round:
+        # use tempK to store the key state after the inverse MC operation, include cost of df
+        tempK_b = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_b').values()).reshape((NROW, NCOL))
+        tempK_r = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_r').values()).reshape((NROW, NCOL))
+        for j in COL:    
+            gen_MC_rule(m, K_b[r,:,j], K_r[r,:,j], K_col_u[r,j], K_col_x[r,j], K_col_y[r,j], tempK_b[:,j], tempK_r[:,j], cost_fwd[r,j], cost_bwd[r,j])
+        
+        # use AK to store MC state after XOR with tempK (different from other rounds, take carefully note)
+        for i in ROW:
+            for j in COL:
+                gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], tempK_b[i,j], tempK_r[i,j], A_b[r,i,j], A_r[r,i,j], cost_XOR[r,i,j])
+
+        # meet-in-the-middle for AK == MC[r] XOR MC^-1(KEY[r]), and SB[nr]
         for j in COL:
-            gen_match_rule(m, M_b[r,:,j], M_r[r,:,j], M_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
+            gen_match_rule(m, A_b[r,:,j], A_r[r,:,j], A_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
             m.addConstr(cost_fwd[r,j] == 0)
             m.addConstr(cost_bwd[r,j] == 0)
     else:
         if r == total_round - 1:
+            tr = r + 1
             for j in COL:
                 m.addConstr(cost_fwd[r, j] == 0)
                 m.addConstr(cost_bwd[r, j] == 0)
-                # jump the MC for last round
+                # jump the MC for last round, use AK to store id(MC[lr]) XOR KEY[lr]
                 for i in ROW:
-                    m.addConstr(M_b[r, i, j] - S_b[nr, i, j] == 0)
-                    m.addConstr(M_r[r, i, j] - S_r[nr, i, j] == 0)
+                    gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], K_b[r,i,j], K_r[r,i,j], A_b[r,i,j], A_r[r,i,j], cost_XOR[r,i,j])
+                # add whitening key: AK[lr] XOR KEY[-1] (stored as KEY[tr]) should equal to SB[0]
+                for i in ROW:
+                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[tr,i,j], K_r[tr,i,j], S_b[0,i,j], S_r[0,i,j], cost_XOR[tr,i,j])
+
         elif r in fwd:
             print('fwd', r)
             for j in COL:
                 gen_MC_rule(m, M_b[r,:,j], M_r[r,:,j], M_col_u[r,j], M_col_x[r,j], M_col_y[r,j], A_b[r,:,j], A_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
-                #continue
                 for i in ROW:
-                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j],S_b[nr,i,j],S_r[nr,i,j], cost_XOR[r,i,j])
+                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j], S_b[nr,i,j], S_r[nr,i,j], cost_XOR[r,i,j])
         elif r in bwd:
             print('bwd', r)
             for j in COL:
