@@ -2,6 +2,7 @@ from tracemalloc import start
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
+import result_vis as vis
 
 # AES parameters
 NROW = 4
@@ -347,4 +348,4 @@ m.optimize()
 print(m)
 
 fnp = './runlog/' + m.modelName + '.sol'
-#drawSol(total_r=7, ini_r= 4, mat_r=1, F_r= fwd, B_r=bwd, outfile= fnp)
+vis.writeSol(m)
