@@ -2,7 +2,7 @@ from tracemalloc import start
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
-import result_vis as vis
+#import result_vis as vis
 
 # AES parameters
 NROW = 4
@@ -13,10 +13,10 @@ ROW = range(NROW)
 COL = range(NCOL)
 
 # variable declaration
-total_round = 7 # total round
+total_round = 8 # total round
 start_round = 4   # start round, start in {0,1,2,...,total_r-1}
 match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
-key_start_round = 4 
+key_start_round = 4 # key start round
 
 # linear constriants for XOR operations
 XOR_A = np.asarray([
@@ -148,7 +148,7 @@ def def_var(total_r: int, m:gp.Model):
             m.addConstr(XorMC_y[r,j] == gp.and_(S_col_y[nr,j], K_col_y[r,j]))
             m.addConstr(XorMC_z[r,j] == gp.min_(S_r[nr,:,j].tolist() + K_r[r,:,j].tolist()))
             for i in ROW:
-                m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_r[r,i,j]))
+                m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_b[r,i,j]))
 
     m.update()
     return [
@@ -178,15 +178,14 @@ def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Va
     m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
 
     m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
-    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
-    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
+    m.addConstr(NROW*in_col_y == gp.quicksum(out_r))
 
     m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
-    m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
+    m.addConstr(fwd == 0)
     m.update()
 
-# generate XOR-MC rule
-def gen_XORMC_rule(m: gp.Model, in1_b: np.ndarray, in1_r: np.ndarray, in2_b: np.ndarray, in2_r: np.ndarray, col_u: gp.Var, col_x: gp.Var, col_y: gp.Var, col_z: gp.Var, col:np.ndarray, out_b: np.ndarray, out_r: np.ndarray, bwd: gp.Var):
+# generate XOR-MC rule, for 
+def gen_XORMC_rule(m: gp.Model, in1_b: np.ndarray, in1_r: np.ndarray, in2_b: np.ndarray, in2_r: np.ndarray, col_u: gp.Var, col_x: gp.Var, col_y: gp.Var, col_z: gp.Var, col:np.ndarray, out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
     m.addConstr(NROW*col_u + gp.quicksum(out_b) <= NROW)
     m.addConstr(NROW*col_u + gp.quicksum(out_r) <= NROW)
     m.addConstr(gp.quicksum(out_b) - NROW* col_x == 0)
@@ -195,7 +194,8 @@ def gen_XORMC_rule(m: gp.Model, in1_b: np.ndarray, in1_r: np.ndarray, in2_b: np.
     m.addConstr(gp.quicksum(out_r) - gp.quicksum(col) - 2*NROW*col_y >= -1*NROW)
 
     m.addConstr(gp.quicksum(in1_r) + gp.quicksum(in2_r) <= 7 + col_z)
-    m.addConstr(bwd == -4* col_z + gp.quicksum(out_r))
+    m.addConstr(fwd ==  gp.quicksum(out_r) - NROW* col_z)
+    m.addConstr(bwd == 0)
     m.update()
 
 # generate matching rules, for easy calculation of dm
@@ -207,14 +207,14 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
     m.update()
 
 # set objective function
-def set_obj(m: gp.Model, start_b: np.ndarray, start_r: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, meet: np.ndarray):
-    df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_b")
-    df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="Final_r")
+def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, cost_fwd: np.ndarray, cost_XOR: np.ndarray, cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, meet: np.ndarray):
+    df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_r")
     dm = m.addVar(lb=1, vtype=GRB.INTEGER, name="Match")
     obj = m.addVar(lb=1, vtype=GRB.INTEGER, name="Obj")
 
-    m.addConstr(df_b == gp.quicksum(start_b.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(cost_XOR.flatten()))
-    m.addConstr(df_r == gp.quicksum(start_r.flatten()) - gp.quicksum(cost_bwd.flatten()))
+    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(cost_XOR.flatten()) - gp.quicksum(key_cost_fwd.flatten()))
+    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()))
     m.addConstr(dm == gp.quicksum(meet.flatten()))
     m.addConstr(obj - df_b <= 0)
     m.addConstr(obj - df_r <= 0)
@@ -311,42 +311,44 @@ print(bwd)
     M_col_u, M_col_x, M_col_y, 
     K_col_u, K_col_x, K_col_y,
     XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
-    S_ini_b, S_ini_r, S_ini_g,
+    E_ini_b, E_ini_r, E_ini_g,
     K_ini_b, K_ini_r, K_ini_g,
     cost_fwd, cost_XOR, cost_bwd, 
     key_cost_fwd, key_cost_bwd,
     meet_signed, meet] = def_var(total_round, m)
 
-key_expansion(m, total_round, start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
+key_expansion(m, total_round, key_start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 
 # main function
 for r in range(total_round):
     nr = (r+1) % total_round
+    # start round
     if r == start_round:
         for i in ROW:
             for j in COL:
                 m.addConstr(S_b[r, i, j] + S_r[r, i, j] >= 1)
-                m.addConstr(S_ini_b[i, j] + S_r[r, i, j] == 1)
-                m.addConstr(S_ini_r[i, j] + S_b[r, i, j] == 1)
+                m.addConstr(E_ini_b[i, j] + S_r[r, i, j] == 1)
+                m.addConstr(E_ini_r[i, j] + S_b[r, i, j] == 1)
+    # match round
     if r == match_round:
         # use tempK to store the key state after the inverse MC operation, include cost of df
         tempK_b = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_b').values()).reshape((NROW, NCOL))
         tempK_r = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_r').values()).reshape((NROW, NCOL))
         for j in COL:    
-            gen_MC_rule(m, K_b[r,:,j], K_r[r,:,j], K_col_u[r,j], K_col_x[r,j], K_col_y[r,j], tempK_b[:,j], tempK_r[:,j], cost_fwd[r,j], cost_bwd[r,j])
-        
+            gen_MC_rule(m, K_b[r,:,j], K_r[r,:,j], K_col_u[r,j], K_col_x[r,j], K_col_y[r,j], tempK_b[:,j], tempK_r[:,j], cost_fwd[r,j], cost_bwd[r,j])      
         # use AK to store MC state after XOR with tempK (different from other rounds, take carefully note)
         for i in ROW:
             for j in COL:
                 gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], tempK_b[i,j], tempK_r[i,j], A_b[r,i,j], A_r[r,i,j], cost_XOR[r,i,j])
-
         # meet-in-the-middle for AK == MC[r] XOR MC^-1(KEY[r]), and SB[nr]
         for j in COL:
             gen_match_rule(m, A_b[r,:,j], A_r[r,:,j], A_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
             m.addConstr(cost_fwd[r,j] == 0)
             m.addConstr(cost_bwd[r,j] == 0)
     else:
+        # last round
         if r == total_round - 1:
+            print('lastr', r)
             tr = r + 1
             for j in COL:
                 m.addConstr(cost_fwd[r, j] == 0)
@@ -357,7 +359,6 @@ for r in range(total_round):
                 # add whitening key: AK[lr] XOR KEY[-1] (stored as KEY[tr]) should equal to SB[0]
                 for i in ROW:
                     gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[tr,i,j], K_r[tr,i,j], S_b[0,i,j], S_r[0,i,j], cost_XOR[tr,i,j])
-
         elif r in fwd:
             print('fwd', r)
             for j in COL:
@@ -367,14 +368,47 @@ for r in range(total_round):
         elif r in bwd:
             print('bwd', r)
             for j in COL:
-                gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC[r,:,j], M_b[r,:,j], M_r[r,:,j], cost_bwd[r,j])
+                gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC[r,:,j], M_b[r,:,j], M_r[r,:,j], cost_fwd[r,j], cost_bwd[r,j])
                 for i in ROW:
                     m.addConstr(cost_XOR[r,i,j] == 0)
                 
-set_obj(m, S_ini_b, S_ini_r, cost_fwd, cost_bwd, meet)
+set_obj(m, E_ini_b, E_ini_r, K_ini_b, K_ini_r, cost_fwd, cost_XOR, cost_bwd, key_cost_fwd, key_cost_bwd, meet)
+print("optmization starts")
 m.optimize()
 #writeSol()
 print(m)
 
 fnp = './runlog/' + m.modelName + '.sol'
-vis.writeSol(m)
+#vis.writeSol(m)
+def writeSol(m: gp.Model):
+    if m.SolCount > 0:
+        if m.getParamInfo(GRB.Param.PoolSearchMode)[2] > 0:
+            gv = m.getVars()
+            names = m.getAttr('VarName', gv)
+            for i in range(m.SolCount):
+                m.params.SolutionNumber = i
+                xn = m.getAttr('Xn', gv)
+                lines = ["{} {}".format(v1, v2) for v1, v2 in zip(names, xn)]
+                with open('./runlog/{}_{}.sol'.format(m.modelName, i), 'w') as f:
+                    f.write("# Solution for model {}\n".format(m.modelName))
+                    f.write("# Objective value = {}\n".format(m.PoolObjVal))
+                    f.write("\n".join(lines))
+        else:
+            m.write('./runlog/' + m.modelName + '.sol')
+    else:
+        print('infeasible')
+
+writeSol(m)
+
+def printSol(outfile):
+    solFile = open(outfile, 'r')
+    Sol = dict()
+    for line in solFile:
+        if line[0] != '#':
+            temp = line
+            temp = temp.split()
+            Sol[temp[0]] = round(float(temp[1]))
+    print(Sol)
+    return 
+
+printSol(fnp)

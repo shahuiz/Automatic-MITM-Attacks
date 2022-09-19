@@ -21,7 +21,6 @@ def writeSol(m: gp.Model):
     else:
         print('infeasible')
 
-
 def drawSol(TR, NRow, NCol, outfile=None):
 
     solFile = open(outfile, 'r')
@@ -31,6 +30,7 @@ def drawSol(TR, NRow, NCol, outfile=None):
             temp = line
             temp = temp.split()
             Sol[temp[0]] = round(float(temp[1]))
+
     SB_x_v = np.ndarray(shape=(TR, NRow, NCol), dtype='int')
     SB_y_v = np.ndarray(shape=(TR, NRow, NCol), dtype='int')
     MC_x_v = np.ndarray(shape=(TR, NRow, NCol), dtype='int')
@@ -43,55 +43,60 @@ def drawSol(TR, NRow, NCol, outfile=None):
     DoF_init_RD_v = np.ndarray(shape=(NRow, NCol), dtype='int')
     CD_x_v = np.ndarray(shape=(TR, NCol), dtype='int')
     CD_y_v = np.ndarray(shape=(TR, NCol), dtype='int')
-    CD_ak_x_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='object')
-    CD_ak_y_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='object')
+    CD_ak_x_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='object')
+    CD_ak_y_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='object')
 
     # RK
-    RK_x_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='int')
-    RK_y_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='int')
+    RK_x_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='int')
+    RK_y_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='int')
     DoF_init_rk_BL_v = np.ndarray(shape=(NRow, NCol), dtype='int')
     DoF_init_rk_RD_v = np.ndarray(shape=(NRow, NCol), dtype='int')
-    CD_rk_x_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='int')
-    CD_rk_y_v = np.ndarray(shape=(self.TR + 1, NRow, NCol), dtype='int')
+    CD_rk_x_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='int')
+    CD_rk_y_v = np.ndarray(shape=(TR + 1, NRow, NCol), dtype='int')
 
-    for ri in range(self.TR):
+    for ri in range(TR):
         for i in range(NRow):
             for j in range(NCol):
-                SB_x_v[ri, i, j] = Sol["SB_x" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
-                SB_y_v[ri, i, j] = Sol["SB_y" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
-    for ri in range(self.TR):
+                SB_x_v[ri, i, j] = Sol["S_b[%d,%d,%d]" %(ri,i,j)]
+                SB_y_v[ri, i, j] = Sol["S_r[%d,%d,%d]" %(r,i,j)]
+    
+    for ri in range(TR):
         for i in range(NRow):
             for j in range(NCol):
                 MC_x_v[ri, i, j] = SB_x_v[ri, i, (j + i)%NCol]
                 MC_y_v[ri, i, j] = SB_y_v[ri, i, (j + i)%NCol]
+    
     for i in range(NRow):
         for j in range(NCol):
-            DoF_init_BL_v[i, j] = Sol["DoF_init_BL" + ('[%d,%d]' % (i,j))]
-            DoF_init_RD_v[i, j] = Sol["DoF_init_RD" + ('[%d,%d]' % (i,j))]
-            AT_x_v[i, j] = Sol["AT_x" + ('[%d,%d]' % (i,j))]
-            AT_y_v[i, j] = Sol["AT_y" + ('[%d,%d]' % (i,j))]
+            DoF_init_BL_v[i, j] = Sol["S_ini_b[%d,%d]" %(i,j)]
+            DoF_init_RD_v[i, j] = Sol["S_ini_r[%d,%d]" %(i,j)]
+            AT_x_v[i, j] = 0
+            AT_y_v[i, j] = 0
 
-    for ri in range(self.TR):
+    for ri in range(TR):
         for j in range(NCol):
-            CD_x_v[ri, j] = Sol["CD_x_c" + ('[%d]' % j) + "_r" + ('[%d]' % ri)]
-            CD_y_v[ri, j] = Sol["CD_y_c" + ('[%d]' % j) + "_r" + ('[%d]' % ri)]
-    DoF_ALL_BL_v = Sol["DoF_ALL_BL"]
-    DoF_ALL_RD_v = Sol["DoF_ALL_RD"]
-    DoM_v = Sol["DoM"]
+            CD_x_v[ri, j] = Sol["Cost_fwd[%d,%d]" %(ri,j)]
+            CD_y_v[ri, j] = Sol["Cost_bwd[%d,%d]" %(ri,j)]
+    
+    DoF_ALL_BL_v = Sol["DF_b"]
+    DoF_ALL_RD_v = Sol["DF_r"]
+    DoM_v = Sol["Match"]
 
     # RK
-    for ri in range(self.TR + 1):
+    for ri in range(TR + 1):
         for i in range(NRow):
             for j in range(NCol):
                 RK_x_v[ri, i, j] = Sol["RK_x" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
                 RK_y_v[ri, i, j] = Sol["RK_y" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
                 AK_x_v[ri, i, j] = Sol["AK_x" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
                 AK_y_v[ri, i, j] = Sol["AK_y" + ('[%d,%d]' % (i, j)) + "_r" + ('[%d]' % ri)]
+    
     for i in range(NRow):
         for j in range(NCol):
-            DoF_init_rk_BL_v[i, j] = Sol["DoF_init_rk_BL" + ('[%d,%d]' % (i,j))]
-            DoF_init_rk_RD_v[i, j] = Sol["DoF_init_rk_RD" + ('[%d,%d]' % (i,j))]
-    for ri in range(self.TR + 1):
+            DoF_init_rk_BL_v[i, j] = Sol["K_ini_b[%d,%d]" %(i,j)]
+            DoF_init_rk_RD_v[i, j] = Sol["K_ini_r[%d,%d]" %(i,j)]
+    
+    for ri in range(TR + 1):
         for i in range(NRow):
             for j in range(NCol):
                 CD_rk_x_v[ri, i, j] = Sol["CD_rk_x" + ('[%d,%d]' % (i,j)) + "_r" + ('[%d]' % ri)]
