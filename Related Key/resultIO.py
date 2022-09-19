@@ -118,7 +118,7 @@ def printSol(filename, total_round, enc_start, key_start, match_round):
     Match = Sol["Match"]
     Obj = Sol["Obj"]
 
-    with open('./runlog/'+ 'display' +'.out', 'w') as f:
+    with open('./runlog/'+ 'display' +'.txt', 'w') as f:
         f.write('ENC FWD: ' + str(ini_df_enc_b) + '\n' + 'ENC BWD: ' + str(ini_df_enc_r) + '\n')
         f.write('KEY FWD: ' + str(ini_df_key_b) + '\n' + 'ENC BWD: ' + str(ini_df_key_r) + '\n')
         f.write('Obj= min{DF_b=%d, DF_r=%d, Match=%d} = %d' %(DF_b, DF_r, Match, Obj) + '\n')
