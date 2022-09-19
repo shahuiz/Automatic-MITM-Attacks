@@ -1,0 +1,149 @@
+ENC FWD: 4
+ENC BWD: 12
+KEY FWD: 13
+ENC BWD: 0
+Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+
+
+
+r0  --->        
+SB#0        MC#0        AK#0        K#0 
+bwbw        bwbw        bwbw        bbbb
+wbwb        bwbw        bwbw        bbbb
+bwbw        bwbw        bwbw        bbbb
+wbwb        bwbw        bwbw        bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r1      -><-MAT 
+SB#1        MC#1        AK#1        K#1 
+bwbw        bwbw        bwbw        bbbb
+bwbw        wbwb        wbwb        bbbb
+bwbw        bwbw        bwbw        bbbb
+bwbw        wbwb        wbwb        bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r2  <---        
+SB#2        MC#2        AK#2        K#2 
+wwww        wwww                    bbbb
+wwwr        wwrw                    bbbb
+wwwr        wrww                    bbbb
+wwwr        rwww                    bbbb
+CostDF fwd: [1 1 1 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r3  <---        
+SB#3        MC#3        AK#3        K#3 
+rrrw        rrrw                    bbbb
+rrrw        rrwr                    bbbb
+rrrw        rwrr                    bbbb
+rrrw        wrrr                    bbbb
+CostDF fwd: [3 3 3 3]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r4  --->    ENC                     KEY 
+SB#4        MC#4        AK#4        K#4 
+brrr        brrr        bggr        bbbg
+rbrr        brrr        bggg        bbbb
+rrbr        brrr        brgg        bgbb
+rrrb        brrr        bgrg        bbgb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 3 3 3]
+
+
+
+r5  --->        
+SB#5        MC#5        AK#5        K#5 
+bbbr        bbbr        bbbw        bbbb
+bbbb        bbbb        bbbb        bbbb
+brbb        bbbr        bbbw        bbbb
+bbrb        bbbr        bbbb        bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 2]
+
+
+
+r6  --->        
+SB#6        MC#6        AK#6        K#6 
+bbbw        bbbw        bwbw        bbbb
+bbbb        bbbb        bwbw        bbbb
+bbbw        bwbb        bwbw        bbbb
+bbbb        bbbb        bwbw        bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r7  --->        
+SB#7        MC#7        AK#7        K#7 
+bwbw        bwbw                    bbbb
+bwbw        wbwb                    bbbb
+bwbw        bwbw                    bbbb
+bwbw        wbwb                    bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
+
+
+
+r-1  
+                        AT          K#-1
+                        bwbw        bbbb
+                        wbwb        bbbb
+                        bwbw        bbbb
+                        wbwb        bbbb
+CostDF fwd: [0 0 0 0]
+CostDF XOR: 
+[[0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+CostDF bwd: [0 0 0 0]
