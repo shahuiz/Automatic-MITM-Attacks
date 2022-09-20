@@ -113,9 +113,9 @@ key_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY
 key_expansion(m, 7, 4, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 m.addConstr(key_cost_bwd[7,0,0] == 1)
 m.optimize()
-m.write('./Related Key/KStest.sol')
+m.write('./Related Key/testFiles/KEtest.sol')
 
-solFile = open('./Related Key/KStest.sol', 'r')
+solFile = open('./Related Key/testFiles/KEtest.sol', 'r')
 K_b = np.ndarray(shape=(7+1,4,4))
 K_r = np.ndarray(shape=(7+1,4,4))
 
@@ -132,7 +132,7 @@ for lines in solFile:
         j = int(l[8])
         K_r[r,i,j] = l[11]
 
-with open('./Related Key/KStest.out','w') as f:
+with open('./Related Key/testFiles/KEtest.out','w') as f:
     for r in range(7+1):
         f.write('\nround: '+str(r)+'\n')
         for i in ROW:

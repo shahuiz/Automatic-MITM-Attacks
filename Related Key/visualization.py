@@ -1,8 +1,7 @@
-from curses import KEY_A1
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
-#import result_vis as vis
+import re
 
 # AES parameters
 NROW = 4
@@ -15,12 +14,12 @@ COL = range(NCOL)
 TAB = ' '*4
 
 # variable declaration
-total_round = 8 # total round
-start_round = 4   # start round, start in {0,1,2,...,total_r-1}
-match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
-key_start_round = 4 # key start round
+#total_round = 8 # total round
+#start_round = 4   # start round, start in {0,1,2,...,total_r-1}
+#match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
+#key_start_round = 4 # key start round
 
-filename =  'model_4x4_8R_Start_r4_Meet_r1_RelatedKey'
+#filename =  'model_4x4_8R_Start_r4_Meet_r1_RelatedKey'
 #fnp = './runlog/model_4x4_8R_Start_r4_Meet_r1_RelatedKey.sol'
 
 def color(b,r):
@@ -33,9 +32,26 @@ def color(b,r):
     if b==0 and r==0:
         return 'w'
 
+def writeSol(m: gp.Model, path):
+    if m.SolCount > 0:
+        if m.getParamInfo(GRB.Param.PoolSearchMode)[2] > 0:
+            gv = m.getVars()
+            names = m.getAttr('VarName', gv)
+            for i in range(m.SolCount):
+                m.params.SolutionNumber = i
+                xn = m.getAttr('Xn', gv)
+                lines = ["{} {}".format(v1, v2) for v1, v2 in zip(names, xn)]
+                with open('./runlog/{}_{}.sol'.format(m.modelName, i), 'w') as f:
+                    f.write("# Solution for model {}\n".format(m.modelName))
+                    f.write("# Objective value = {}\n".format(m.PoolObjVal))
+                    f.write("\n".join(lines))
+        else:
+            m.write(path + m.modelName + '.sol')
+    else:
+        print('infeasible')
 
-def printSol(filename, total_round, enc_start, key_start, match_round):
-    solFile = open('./runlog/' + filename +'.sol', 'r')
+def displaySol(m:gp.Model, path):
+    solFile = open(path + m.modelName +'.sol', 'r')
     Sol = dict()
     for line in solFile:
         if line[0] != '#':
@@ -43,6 +59,9 @@ def printSol(filename, total_round, enc_start, key_start, match_round):
             temp = temp.split()
             Sol[temp[0]] = round(float(temp[1]))
     
+    match = re.match(r'(\d+)R_ENC_r(\d+)_KEY_r(\d+)Meet_r(\d+)', m.modelName)
+    total_round, enc_start, key_start, match_round = int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4))
+
     fwd = []    # forward rounds
     bwd = []    # backward rounds
 
@@ -118,7 +137,7 @@ def printSol(filename, total_round, enc_start, key_start, match_round):
     Match = Sol["Match"]
     Obj = Sol["Obj"]
 
-    with open('./runlog/'+ 'display' +'.txt', 'w') as f:
+    with open(path + 'Vis_' + m.modelName +'.txt', 'w') as f:
         f.write('ENC FWD: ' + str(ini_df_enc_b) + '\n' + 'ENC BWD: ' + str(ini_df_enc_r) + '\n')
         f.write('KEY FWD: ' + str(ini_df_key_b) + '\n' + 'ENC BWD: ' + str(ini_df_key_r) + '\n')
         f.write('Obj= min{DF_b=%d, DF_r=%d, Match=%d} = %d' %(DF_b, DF_r, Match, Obj) + '\n')
@@ -169,6 +188,7 @@ def printSol(filename, total_round, enc_start, key_start, match_round):
 
             f.write('\n'*3)
 
+        # process whiten key
         r = -1
         f.write("r%d  " %r + '\n')
         f.write(6*TAB +'AT  '+ TAB*2 + 'K#-1' + '\n')
@@ -185,5 +205,3 @@ def printSol(filename, total_round, enc_start, key_start, match_round):
         f.write('CostDF bwd: '+ str(cost_bwd[r+total_round,:]) + '\n')
 
     return 
-
-printSol(filename, 8, 4, 4, 1)

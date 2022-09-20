@@ -72,6 +72,6 @@ m = gp.Model('x')
 vector = np.asarray(m.addVars(7, vtype=GRB.BINARY).values())
 m.addMConstr(A, list(vector), '>=', -B)
 m.update()
-m.write('./Related Key/SAGEtest.lp')
+m.write('./Related Key/testFiles/SAGEtest.lp')
 print(m)
 

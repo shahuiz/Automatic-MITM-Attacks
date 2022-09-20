@@ -2,7 +2,7 @@ from tracemalloc import start
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
-#import result_vis as vis
+import visualization as vis
 
 # AES parameters
 NROW = 4
@@ -32,7 +32,7 @@ XOR_A = np.asarray([
 
 XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
 
-m = gp.Model('model_%dx%d_%dR_Start_r%d_Meet_r%d_RelatedKey' % (NROW, NCOL, total_round, start_round, match_round))
+m = gp.Model('%dR_ENC_r%d_KEY_r%dMeet_r%d' % (total_round, start_round, key_start_round, match_round))
 
 def def_var(total_r: int, m:gp.Model):
     # define vars storing the SB state at each round with encoding scheme
@@ -376,39 +376,6 @@ set_obj(m, E_ini_b, E_ini_r, K_ini_b, K_ini_r, cost_fwd, cost_XOR, cost_bwd, key
 print("optmization starts")
 m.optimize()
 #writeSol()
-print(m)
-
-fnp = './runlog/' + m.modelName + '.sol'
-#vis.writeSol(m)
-def writeSol(m: gp.Model):
-    if m.SolCount > 0:
-        if m.getParamInfo(GRB.Param.PoolSearchMode)[2] > 0:
-            gv = m.getVars()
-            names = m.getAttr('VarName', gv)
-            for i in range(m.SolCount):
-                m.params.SolutionNumber = i
-                xn = m.getAttr('Xn', gv)
-                lines = ["{} {}".format(v1, v2) for v1, v2 in zip(names, xn)]
-                with open('./runlog/{}_{}.sol'.format(m.modelName, i), 'w') as f:
-                    f.write("# Solution for model {}\n".format(m.modelName))
-                    f.write("# Objective value = {}\n".format(m.PoolObjVal))
-                    f.write("\n".join(lines))
-        else:
-            m.write('./runlog/' + m.modelName + '.sol')
-    else:
-        print('infeasible')
-
-writeSol(m)
-
-def printSol(outfile):
-    solFile = open(outfile, 'r')
-    Sol = dict()
-    for line in solFile:
-        if line[0] != '#':
-            temp = line
-            temp = temp.split()
-            Sol[temp[0]] = round(float(temp[1]))
-    print(Sol)
-    return 
-
-printSol(fnp)
+#print(m)
+vis.writeSol(m, path = './Related Key/runlog/')
+vis.displaySol(m, path = './Related Key/runlog/')
