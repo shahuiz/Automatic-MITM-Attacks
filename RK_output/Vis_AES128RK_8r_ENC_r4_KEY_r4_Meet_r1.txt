@@ -1,0 +1,92 @@
+Model:
+    Total: 8
+    ENC starts at: r4
+    KEY starts at: r4
+    Meet at: r1
+
+Initialization:
+    ENC FWD: 4
+    ENC BWD: 12
+    KEY FWD: 13
+    KEY BWD: 0
+
+Solution:
+    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+
+Visualization:
+r0  --->
+
+SB#0        MC#0        AK#0        K#0 
+wbwb        wbwb        wbwb        bbbb
+bwbw        wbwb        wbwb        bbbb
+wbwb        wbwb        wbwb        bbbb
+bwbw        wbwb        wbwb        bbbb
+
+r1  -><-
+                              MAT 
+SB#1        MC#1        MC^K        SB#2        K#1 
+wbwb        wbwb        wbwb        wwww        bbbb
+wbwb        bwbw        bwbw        rwww        bbbb
+wbwb        wbwb        wbwb        rwww        bbbb
+wbwb        bwbw        bwbw        rwww        bbbb
+Meet_signed[ 1 -2 -2 -2]
+Meet[1 0 0 0]
+
+r2  <---
+
+SB#2        MC#2        AK#2        K#2 
+wwww        wwww                    bbbb
+rwww        wwwr                    bbbb
+rwww        wwrw                    bbbb
+rwww        wrww                    bbbb
+MC CostDF fwd: [0 1 1 1]    bwd: [0 0 0 0]
+
+r3  <---
+
+SB#3        MC#3        AK#3        K#3 
+wrrr        wrrr                    bbbb
+wrrr        rrrw                    bbbb
+wrrr        rrwr                    bbbb
+wrrr        rwrr                    bbbb
+MC CostDF fwd: [3 3 3 3]    bwd: [0 0 0 0]
+
+r4  --->
+ENC                                 KEY 
+SB#4        MC#4        AK#4        K#4 
+rrrb        rrrb        ggrb        bbgb
+brrr        rrrb        gggb        bbbb
+rbrr        rrrb        rggb        gbbb
+rrbr        rrrb        grgb        bgbb
+MC CostDF fwd: [0 0 0 0]    bwd: [3 3 3 0]
+
+r5  --->
+
+SB#5        MC#5        AK#5        K#5 
+bbrb        bbrb        bbwb        bbbb
+bbbb        bbbb        bbbb        bbbb
+rbbb        bbrb        bbwb        bbbb
+brbb        bbrb        bbbb        bbbb
+MC CostDF fwd: [0 0 0 0]    bwd: [0 0 2 0]
+
+r6  --->
+
+SB#6        MC#6        AK#6        K#6 
+bbwb        bbwb        wbwb        bbbb
+bbbb        bbbb        wbwb        bbbb
+bbwb        wbbb        wbwb        bbbb
+bbbb        bbbb        wbwb        bbbb
+
+r7  --->
+
+SB#7        MC#7        AK#7        K#7 
+wbwb        wbwb                    bbbb
+wbwb        bwbw                    bbbb
+wbwb        wbwb                    bbbb
+wbwb        bwbw                    bbbb
+
+r-1  
+                        AT          K#-1
+                        wbwb        bbbb
+                        bwbw        bbbb
+                        wbwb        bbbb
+                        bwbw        bbbb
