@@ -1,0 +1,27 @@
+[0 0 0 0 1] violated at eq# 13 with val: -1
+[0 0 0 1 1] violated at eq# 11 with val: -1
+[0 0 1 0 0] violated at eq# 3 with val: -1
+[0 0 1 1 1] violated at eq# 11 with val: -1
+[0 1 0 0 1] violated at eq# 8 with val: -1
+[0 1 0 1 1] violated at eq# 1 with val: -1
+[0 1 1 0 0] violated at eq# 3 with val: -1
+[0 1 1 1 1] violated at eq# 1 with val: -1
+[1 0 0 0 0] violated at eq# 5 with val: -1
+[1 0 0 1 0] violated at eq# 5 with val: -1
+[1 0 1 0 0] violated at eq# 3 with val: -1
+[1 0 1 1 0] violated at eq# 5 with val: -1
+[1 1 0 0 1] violated at eq# 8 with val: -1
+[1 1 0 1 1] violated at eq# 1 with val: -1
+[1 1 1 0 0] violated at eq# 3 with val: -1
+[1 1 1 1 1] violated at eq# 1 with val: -1
+sat: 16 unsat: 16
+If satisfied amount is correct:  False
+[array([0, 0, 0, 0, 0]), array([0, 0, 0, 1, 0]), array([0, 0, 1, 0, 1]), array([0, 0, 1, 1, 0]), array([0, 1, 0, 0, 0]), array([0, 1, 0, 1, 0]), array([0, 1, 1, 0, 1]), array([0, 1, 1, 1, 0]), array([1, 0, 0, 0, 1]), array([1, 0, 0, 1, 1]), array([1, 0, 1, 0, 1]), array([1, 0, 1, 1, 1]), array([1, 1, 0, 0, 0]), array([1, 1, 0, 1, 0]), array([1, 1, 1, 0, 1]), array([1, 1, 1, 1, 0])]
+16
+[0 0 1 0 1]
+[0 1 1 0 1]
+[1 0 0 0 1]
+[1 0 0 1 1]
+[1 0 1 0 1]
+[1 0 1 1 1]
+[1 1 1 0 1]

@@ -126,9 +126,9 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
             m.addConstr(K_col_u[r,j] == gp.max_(K_w[r,:,j].tolist()))
     
     TAU_A = np.asarray([
-        [0,0,0,0,1],[-1,0,0,0,0],[0,-1,0,0,-1],[0,0,-1,0,0],[0,0,0,-1,-1],[0,0,0,1,0],[0,0,1,0,-1],[0,1,0,0,0],[1,0,0,0,-1],[-1,1,-1,1,1]
-    ])
-    TAU_B = np.asarray([0,1,1,1,1,0,0,0,0,1])
+        [0, -1, 0, 0, 0], [0, -1, 0, -1, -1], [-1, 0, 0, 0, 0], [0, 0, -1, 1, 1], [0, 0, -1, 0, 0], [-1, 1, 0, 0, 1], [0, 0, 0, -1, 0], [0, 0, 0, 0, 1], [0, -1, 1, 0, -1], [0, 0, 0, 0, -1], [0, 1, 0, 0, 0], [1, 0, 0, -1, -1], [0, 0, 1, 0, 0], [1, 0, 1, 0, -1], [0, 0, 0, 1, 0], [1, 0, 0, 0, 0]
+        ])
+    TAU_B = np.asarray([1, 2, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0])
 
     for r in bwd:
         nr = (r+1) % total_r
@@ -138,8 +138,8 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
             m.addConstr(XorMC_y[r,j] == gp.and_(S_col_y[nr,j], K_col_y[r,j]))
             m.addConstr(XorMC_z[r,j] == gp.min_(S_r[nr,:,j].tolist() + K_r[r,:,j].tolist()))
             for i in ROW:
-                #m.addMConstr(TAU_A, (S_b[nr,i,j], S_r[nr,i,j], K_b[r,i,j], K_r[r,i,j], XorMC[r,i,j]), '>=', -TAU_B)
-                m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_b[r,i,j]))
+                m.addMConstr(TAU_A, (S_b[nr,i,j], S_r[nr,i,j], K_b[r,i,j], K_r[r,i,j], XorMC[r,i,j]), '>=', -TAU_B)
+                #m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_b[r,i,j]))
 
     m.update()
     return [
