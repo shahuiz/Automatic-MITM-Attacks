@@ -1,4 +1,5 @@
 import numpy as np
+import time
 import sys 
 import AES_RkMitM_zty as RkMitM
 
@@ -27,11 +28,12 @@ XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
 f = open('./runlog.txt', "a")
 for enc in range(7):
     for key in range(8):
-    #key=enc
         for mat in range(7):
+
             f = open('runlog.txt', 'a')
+            st = time.time()
             msg = RkMitM.solve(key_size=128, total_round=8, start_round=enc, key_start_round=key, match_round=mat)
-            f.write(msg)
-            f.write('\n')
-            #print(msg, '\n')
+            en = time.time()
+            f.write(msg + '\n' + TAB + 'time cost: ' + str(en-st) + '\n')
+            
             f.close()

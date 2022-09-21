@@ -1,0 +1,118 @@
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r0    Infeasible
+    time cost: 0.15527009963989258
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r1    Infeasible
+    time cost: 0.8671817779541016
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r2    Infeasible
+    time cost: 0.23374724388122559
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r3    Infeasible
+    time cost: 16.120469093322754
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r4    Infeasible
+    time cost: 6.416754245758057
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r5    Infeasible
+    time cost: 0.47019481658935547
+AES128RK_8r_ENC_r0_KEY_r0_Meet_r6    Infeasible
+    time cost: 0.351391077041626
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r0    Infeasible
+    time cost: 0.1506507396697998
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r1    Infeasible
+    time cost: 0.8251149654388428
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r2    Infeasible
+    time cost: 0.35413026809692383
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r3    Infeasible
+    time cost: 21.78356099128723
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r4    Infeasible
+    time cost: 7.93231987953186
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r5    Infeasible
+    time cost: 0.5095698833465576
+AES128RK_8r_ENC_r0_KEY_r1_Meet_r6    Infeasible
+    time cost: 0.3705160617828369
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r0    Infeasible
+    time cost: 0.16148614883422852
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r1    Infeasible
+    time cost: 0.6277346611022949
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r2    Infeasible
+    time cost: 0.8023688793182373
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r3    Infeasible
+    time cost: 26.226844787597656
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r4    Infeasible
+    time cost: 8.045732021331787
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r5    Infeasible
+    time cost: 0.5009088516235352
+AES128RK_8r_ENC_r0_KEY_r2_Meet_r6    Infeasible
+    time cost: 0.3304018974304199
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r0    Infeasible
+    time cost: 0.15589308738708496
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r1    Infeasible
+    time cost: 0.7106099128723145
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r2    Infeasible
+    time cost: 0.6792299747467041
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r3    Infeasible
+    time cost: 20.909063816070557
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r4    Infeasible
+    time cost: 19.226512908935547
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r5    Infeasible
+    time cost: 0.46251988410949707
+AES128RK_8r_ENC_r0_KEY_r3_Meet_r6    Infeasible
+    time cost: 0.3189089298248291
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r0    Infeasible
+    time cost: 0.160963773727417
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r1    Infeasible
+    time cost: 0.35709524154663086
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r2    Infeasible
+    time cost: 0.3631000518798828
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r3    Infeasible
+    time cost: 15.492208242416382
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r4    Infeasible
+    time cost: 11.65880799293518
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r5    Infeasible
+    time cost: 0.51603102684021
+AES128RK_8r_ENC_r0_KEY_r4_Meet_r6    Infeasible
+    time cost: 0.3724541664123535
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r0    Infeasible
+    time cost: 0.16467905044555664
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r1    Infeasible
+    time cost: 0.3756368160247803
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r2    Infeasible
+    time cost: 0.37304091453552246
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r3    Infeasible
+    time cost: 18.801933765411377
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r4    Infeasible
+    time cost: 9.839932918548584
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r5    Infeasible
+    time cost: 0.3185698986053467
+AES128RK_8r_ENC_r0_KEY_r5_Meet_r6    Infeasible
+    time cost: 0.46209287643432617
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r0    Infeasible
+    time cost: 0.16568589210510254
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r1    Infeasible
+    time cost: 0.50457763671875
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r2    Infeasible
+    time cost: 0.44484806060791016
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r3    Infeasible
+    time cost: 15.555638074874878
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r4    Infeasible
+    time cost: 8.843446016311646
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r5    Infeasible
+    time cost: 0.43002772331237793
+AES128RK_8r_ENC_r0_KEY_r6_Meet_r6    Infeasible
+    time cost: 0.3542599678039551
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r0    Infeasible
+    time cost: 0.1607210636138916
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r1    Infeasible
+    time cost: 0.4744100570678711
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r2    Infeasible
+    time cost: 0.48440980911254883
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r3    Infeasible
+    time cost: 29.433701753616333
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r4    Infeasible
+    time cost: 227.82625198364258
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r5    Infeasible
+    time cost: 0.43209123611450195
+AES128RK_8r_ENC_r0_KEY_r7_Meet_r6    Infeasible
+    time cost: 0.48262810707092285
+AES128RK_8r_ENC_r1_KEY_r0_Meet_r0    Infeasible
+    time cost: 0.15681195259094238
+AES128RK_8r_ENC_r1_KEY_r0_Meet_r1    Infeasible
+    time cost: 0.16497015953063965
+AES128RK_8r_ENC_r1_KEY_r0_Meet_r2    Infeasible
+    time cost: 0.7103807926177979
