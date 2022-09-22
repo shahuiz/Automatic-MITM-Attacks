@@ -1,48 +1,54 @@
 
 round: 0
-bgww
-bbgb
-wbgg
-wrww
+bbbb
+bbbb
+bbbb
+bbbb
 
 round: 1
-ggwr
 bbbb
-gbbb
-rrwb
+bbbb
+bbbb
+bbbb
 
 round: 2
-bbrr
-bgbb
-bbbg
-rrbg
+bbbb
+bbbb
+bbbb
+bbbb
 
 round: 3
-bgrr
 bbbb
 bbbb
-rgbb
+bbbb
+bbbb
 
 round: 4
-ggrg
-bgbg
-bgbb
-ggbg
+bbgb
+bbbb
+bbbb
+bbbb
 
 round: 5
-ggrr
 bbbb
 bbbb
-ggbb
+bbbb
+bbbb
 
 round: 6
-bbww
 bbbb
 bbbb
-rrww
+bbbb
+bbbb
 
 round: 7
-gbww
 bbbb
-wwbg
-wwww
+bbbb
+bbbb
+bbbb
+
+round: 8
+bbbb
+bbbb
+bbbb
+bbbb

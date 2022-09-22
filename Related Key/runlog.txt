@@ -1,0 +1,18 @@
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r-1    Infeasible
+    time cost: 12.27
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r0    Infeasible
+    time cost: 19.10
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r1    Infeasible
+    time cost: 10.93
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r2    Infeasible
+    time cost: 11.62
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r3    Infeasible
+    time cost: 18.19
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r4    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+    time cost: 22.01
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r5    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+    time cost: 21.32
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r6    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+    time cost: 26.44
+AES128RK_8r_ENC_r4_Meet_r1_KEY_r7    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+    time cost: 23.44

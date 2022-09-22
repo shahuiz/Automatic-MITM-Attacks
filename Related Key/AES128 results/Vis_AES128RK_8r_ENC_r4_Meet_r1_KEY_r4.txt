@@ -14,75 +14,75 @@ Solution:
     Obj= min{DF_b=2, DF_r=1, Match=1} = 1
 
 Visualization:
-r0  --->
-
+r0  fwd --->
 SB#0        MC#0        AK#0        K#0 
 wbwb        wbwb        wbwb        bbbb
 bwbw        wbwb        wbwb        bbbb
 wbwb        wbwb        wbwb        bbbb
 bwbw        wbwb        wbwb        bbbb
 
-r1  -><-
-                              MAT 
-SB#1        MC#1        MC^K        SB#2        K#1 
-wbwb        wbwb        wbwb        wwww        bbbb
-wbwb        bwbw        bwbw        rwww        bbbb
-wbwb        wbwb        wbwb        rwww        bbbb
-wbwb        bwbw        bwbw        rwww        bbbb
-Meet_signed[ 1 -2 -2 -2]
-Meet[1 0 0 0]
+r1  mat -><-
+SB#1        MC#1        AK#1        K#1 
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
 
-r2  <---
+Match:
+MC^K        SB#2
+wbwb        wwww
+bwbw        rwww
+wbwb        rwww
+bwbw        rwww
+Degree of Matching:[1 0 0 0]
 
+r2  bwd <---
 SB#2        MC#2        AK#2        K#2 
-wwww        wwww                    bbbb
-rwww        wwwr                    bbbb
-rwww        wwrw                    bbbb
-rwww        wrww                    bbbb
-MC CostDF fwd: [0 1 1 1]    bwd: [0 0 0 0]
+wwww        wwww        ////        bbbb
+rwww        wwwr        ////        bbbb
+rwww        wwrw        ////        bbbb
+rwww        wrww        ////        bbbb
+MixCol costs fwdDf: [0 1 1 1]    bwdDf: [0 0 0 0]
 
-r3  <---
-
+r3  bwd <---
 SB#3        MC#3        AK#3        K#3 
-wrrr        wrrr                    bbbb
-wrrr        rrrw                    bbbb
-wrrr        rrwr                    bbbb
-wrrr        rwrr                    bbbb
-MC CostDF fwd: [3 3 3 3]    bwd: [0 0 0 0]
+wrrr        wrrr        ////        bbbb
+wrrr        rrrw        ////        bbbb
+wrrr        rrwr        ////        bbbb
+wrrr        rwrr        ////        bbbb
+MixCol costs fwdDf: [3 3 3 3]    bwdDf: [0 0 0 0]
 
-r4  --->
-ENC                                 KEY 
+r4  fwd --->
+ENC_
+                               KEY_
 SB#4        MC#4        AK#4        K#4 
 rrrb        rrrb        ggrb        bbgb
 brrr        rrrb        gggb        bbbb
 rbrr        rrrb        rggb        gbbb
 rrbr        rrrb        grgb        bgbb
-MC CostDF fwd: [0 0 0 0]    bwd: [3 3 3 0]
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [3 3 3 0]
 
-r5  --->
-
+r5  fwd --->
 SB#5        MC#5        AK#5        K#5 
 bbrb        bbrb        bbwb        bbbb
 bbbb        bbbb        bbbb        bbbb
 rbbb        bbrb        bbwb        bbbb
 brbb        bbrb        bbbb        bbbb
-MC CostDF fwd: [0 0 0 0]    bwd: [0 0 2 0]
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 0 2 0]
 
-r6  --->
-
+r6  fwd --->
 SB#6        MC#6        AK#6        K#6 
 bbwb        bbwb        wbwb        bbbb
 bbbb        bbbb        wbwb        bbbb
 bbwb        wbbb        wbwb        bbbb
 bbbb        bbbb        wbwb        bbbb
 
-r7  --->
-
+r7  fwd --->
 SB#7        MC#7        AK#7        K#7 
-wbwb        wbwb                    bbbb
-wbwb        bwbw                    bbbb
-wbwb        wbwb                    bbbb
-wbwb        bwbw                    bbbb
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
 
 r-1  
                         AT          K#-1

@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import sys 
-import AES_RkMitM_zty as RkMitM
+import AES_RkMitM_zty_wLastRoundMatch as RkMitM
 
 NROW = 4
 NCOL = 4
@@ -25,15 +25,23 @@ XOR_A = np.asarray([
 
 XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
 
-f = open('./runlog.txt', "a")
-for enc in range(7):
-    for key in range(8):
-        for mat in range(7):
+file = open("Related Key/runlog.txt","w")
+file.close()
 
-            f = open('runlog.txt', 'a')
-            st = time.time()
-            msg = RkMitM.solve(key_size=128, total_round=8, start_round=enc, key_start_round=key, match_round=mat)
-            en = time.time()
-            f.write(msg + '\n' + TAB + 'time cost: ' + str(en-st) + '\n')
-            
-            f.close()
+for enc in range(8):
+    continue
+    for mat in range(8):
+        if mat != 7:
+            continue
+
+enc = 4
+mat = 1
+
+for key in range(-1,8):
+    f = open('Related Key/runlog.txt', 'a')
+    start = time.time()
+    msg = RkMitM.solve(key_size=128, total_round=8, start_round=enc, key_start_round=key, match_round=mat)
+    end = time.time()
+    f.write(msg + '\n' + TAB + 'time cost: ' + '%.2f' % (end - start) + '\n')
+
+    f.close()
