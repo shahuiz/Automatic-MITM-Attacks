@@ -1,6 +1,7 @@
 from io import TextIOWrapper
 import gurobipy as gp
 from gurobipy import GRB
+from string import Template
 import numpy as np
 import re
 import os
@@ -68,7 +69,7 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
     XorMC_x = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_x').values()).reshape((total_r, NCOL))
     XorMC_y = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_y').values()).reshape((total_r, NCOL))
     XorMC_z = np.asarray(m.addVars(total_r, NCOL, vtype=GRB.BINARY, name='XORMC_z').values()).reshape((total_r, NCOL))
-    XorMC = np.asarray(m.addVars(total_r, NROW, NCOL, vtype=GRB.BINARY, name='XORMC').values()).reshape((total_r, NROW, NCOL))
+    XorMC_t = np.asarray(m.addVars(total_r, NROW, NCOL, vtype=GRB.BINARY, name='XORMC_t').values()).reshape((total_r, NROW, NCOL))
 
     # define vars to track the start state of Encryption states (S) and Key states (K)
     E_ini_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='E_ini_b').values()).reshape((NROW, NCOL))
@@ -103,6 +104,11 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
                 
                 m.addConstr(A_g[r,i,j] == gp.and_(A_b[r,i,j], A_r[r,i,j]))
                 m.addConstr(A_w[r,i,j] + A_b[r,i,j] + A_r[r,i,j] - A_g[r,i,j] == 1)
+    
+    for i in ROW:
+        for j in COL:
+            m.addConstr(K_ini_g[i,j] == gp.and_(K_ini_b[i,j], K_ini_r[i,j]))
+            m.addConstr(E_ini_g[i,j] == gp.and_(E_ini_b[i,j], E_ini_r[i,j]))
 
     for r in range(total_r+1):
         for i in ROW:
@@ -139,14 +145,14 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
             m.addConstr(XorMC_y[r,j] == gp.and_(S_col_y[nr,j], K_col_y[r,j]))
             m.addConstr(XorMC_z[r,j] == gp.min_(S_r[nr,:,j].tolist() + K_r[r,:,j].tolist()))
             for i in ROW:
-                m.addMConstr(TAU_A, (S_b[nr,i,j], S_r[nr,i,j], K_b[r,i,j], K_r[r,i,j], XorMC[r,i,j]), '>=', -TAU_B)
+                m.addMConstr(TAU_A, (S_b[nr,i,j], S_r[nr,i,j], K_b[r,i,j], K_r[r,i,j], XorMC_t[r,i,j]), '>=', -TAU_B)
                 #m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_b[r,i,j]))
 
     m.update()
     return [
         S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, A_b, A_r, A_g, A_w, K_b, K_r, K_g, K_w,
         S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y,
-        XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
+        XorMC_t, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
         E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,
         mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet_signed, meet]
 
@@ -205,14 +211,14 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
     m.update()
 
 # set objective function
-def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, meet: np.ndarray):
+def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, ini_key_g: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, meet: np.ndarray):
     df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_b")
     df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_r")
     dm = m.addVar(lb=1, vtype=GRB.INTEGER, name="Match")
     obj = m.addVar(lb=1, vtype=GRB.INTEGER, name="Obj")
 
-    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(key_cost_fwd.flatten()))
-    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()))
+    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(key_cost_fwd.flatten()))
+    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()))
     m.addConstr(dm == gp.quicksum(meet.flatten()))
     m.addConstr(obj - df_b <= 0)
     m.addConstr(obj - df_r <= 0)
@@ -221,70 +227,57 @@ def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_key_b
     m.update()
 
 def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
-    for r in range(0, total_r):
-        # initial state of key expansion, strictly no unknown or consumed df
+    for ri in range(total_r + 1):
+        r = ri
+        if ri == total_r:
+            r = -1
+
+        # initial state of key expansion, strictly unknown and no consumed df, allow grey cells
         if r == start_r:
+            print(ri, 'ini')
             for i in ROW:
                 for j in COL:
                     m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
-                    m.addConstr(K_ini_b[i, j] + K_r[r, i, j] == 1)
-                    m.addConstr(K_ini_r[i, j] + K_b[r, i, j] == 1)
+                    m.addConstr(K_ini_b[i, j] == K_b[r, i, j])
+                    m.addConstr(K_ini_r[i, j] == K_r[r, i, j])
                     m.addConstr(key_cost_bwd[r,i,j] == 0)
                     m.addConstr(key_cost_fwd[r,i,j] == 0)
         
         # fwd direction
         if r > start_r:
+            print(ri, 'fwd')
             lr = r - 1
             for j in COL:
                 if j == 0:  # special treatment for col 0 as in AES key schedule
                     for i in ROW:
                         rot_i = (i+1) % NROW
                         rot_j = NCOL - 1
-                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[lr,rot_i,rot_j], in2_r=K_r[lr,rot_i,rot_j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_fwd[r,i,j])
-                        m.addConstr(key_cost_bwd[r,i,j] == 0)
+                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[lr,rot_i,rot_j], in2_r=K_r[lr,rot_i,rot_j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        #gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,rot_i,rot_j], in2_r=K_b[lr,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        m.addConstr(key_cost_fwd[r,i,j] == 0)
                 else:
                     for i in ROW:
-                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[r,i,j-1], in2_r=K_r[r,i,j-1], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_fwd[r,i,j])
-                        m.addConstr(key_cost_bwd[r,i,j] == 0)
+                        gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[r,i,j-1], in2_r=K_r[r,i,j-1], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        #gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,i,j-1], in2_r=K_b[r,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        m.addConstr(key_cost_fwd[r,i,j] == 0)
 
         # bwd direction, reverse blue and red cell notation for XOR propagation        
-        if r < start_r:  
+        if r < start_r: 
+            print(ri, 'bwd') 
             lr = r + 1
             for j in COL:
                 if j == 0:  # special treatment for col 0 as in AES key schedule
                     for i in ROW:
                         rot_i = (i+1) % NROW
                         rot_j = NCOL - 1
-                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,rot_i,rot_j], in2_r=K_b[r,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
-                        m.addConstr(key_cost_fwd[r,i,j] == 0)
+                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,rot_i,rot_j], in2_r=K_b[r,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        #gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[r,rot_i,rot_j], in2_r=K_r[r,rot_i,rot_j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        m.addConstr(key_cost_bwd[r,i,j] == 0)
                 else:
                     for i in ROW:
-                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
-                        m.addConstr(key_cost_fwd[r,i,j] == 0)
-    
-    # store k[-1] at the end of the key state array, either bwd state or start state
-    r = total_r
-    if start_r == -1:
-        for i in ROW:
-            for j in COL:
-                m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
-                m.addConstr(K_ini_b[i, j] + K_r[r, i, j] == 1)
-                m.addConstr(K_ini_r[i, j] + K_b[r, i, j] == 1)
-                m.addConstr(key_cost_bwd[r,i,j] == 0)
-                m.addConstr(key_cost_fwd[r,i,j] == 0)
-    else:
-        lr = 0
-        for j in COL:
-            if j == 0:  # special treatment for col 0 as in AES key schedule
-                for i in ROW:
-                    rot_i = (i+1) % NROW
-                    rot_j = NCOL - 1
-                    gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[r,rot_i,rot_j], in2_r=K_b[r,rot_i,rot_j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
-                    m.addConstr(key_cost_fwd[r,i,j] == 0)
-            else:
-                for i in ROW:
-                    gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_bwd[r,i,j])
-                    m.addConstr(key_cost_fwd[r,i,j] == 0)
+                        gen_XOR_rule(m, in1_b=K_r[lr,i,j], in1_r=K_b[lr,i,j], in2_b=K_r[lr,i,j-1], in2_r=K_b[lr,i,j-1], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                        #gen_XOR_rule(m, in1_b=K_b[lr,i,j], in1_r=K_r[lr,i,j], in2_b=K_b[lr,i,j-1], in2_r=K_r[lr,i,j-1], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                        m.addConstr(key_cost_bwd[r,i,j] == 0)
 
 def writeSol(m: gp.Model, path):
     if m.SolCount > 0:
@@ -321,22 +314,19 @@ def displaySol(m:gp.Model, path):
         sign = ''
         
         if r == match_round:
-            header+= '-><-'
+            header+= 'mat -><-\n'
         elif r in fwd:
-            header+= '--->'
+            header+= 'fwd --->\n'
         elif r in bwd:
-            header+= '<---'
+            header+= 'bwd <---\n'
 
         if r == enc_start:
-            sign+='ENC '
-        if r == match_round:
-            sign = "{:<30}".format(sign)
-            sign+='MAT '
+            sign+='ENC_\n'
         if r == key_start:
             sign = "{:<36}".format(sign)
-            sign += 'KEY '
+            sign += 'KEY_\n'
         
-        f.write(header + '\n' + sign + '\n')
+        f.write(header + sign)
 
     if not os.path.exists(path= path + m.modelName +'.sol'):
         return
@@ -349,8 +339,8 @@ def displaySol(m:gp.Model, path):
             temp = temp.split()
             Sol[temp[0]] = round(float(temp[1]))
     
-    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_KEY_r(\d+)_Meet_r(\d+)', m.modelName)
-    key_size, total_round, enc_start, key_start, match_round = int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4)), int(match.group(5))
+    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_Meet_r(\d+)_KEY_r(\d+)', m.modelName)
+    key_size, total_round, enc_start, match_round, key_start = int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4)), int(match.group(5))
 
     if enc_start < match_round:
         fwd = list(range(enc_start, match_round))
@@ -379,6 +369,8 @@ def displaySol(m:gp.Model, path):
     ini_key_b = np.ndarray(shape=(NROW, NCOL), dtype=int)
     ini_key_r = np.ndarray(shape=(NROW, NCOL), dtype=int)
     ini_key_g = np.ndarray(shape=(NROW, NCOL), dtype=int)
+    tempAT_b = np.ndarray(shape=(NROW, NCOL), dtype=int)
+    tempAT_r = np.ndarray(shape=(NROW, NCOL), dtype=int)
 
     meet =  np.ndarray(shape=(NCOL), dtype=int)
     meet_s =  np.ndarray(shape=(NCOL), dtype=int)
@@ -418,6 +410,13 @@ def displaySol(m:gp.Model, path):
             ini_key_b[i,j] = Sol["K_ini_b[%d,%d]" %(i,j)]
             ini_key_r[i,j] = Sol["K_ini_r[%d,%d]" %(i,j)]
             ini_key_g[i,j] = Sol["K_ini_g[%d,%d]" %(i,j)]
+
+    if match_round == total_round -1:
+        for i in ROW:
+            for j in COL:
+                tempAT_b[i,j] = Sol["tempAT_b[%d,%d]" %(i,j)]
+                tempAT_r[i,j] = Sol["tempAT_r[%d,%d]" %(i,j)]
+
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
@@ -437,61 +436,51 @@ def displaySol(m:gp.Model, path):
     f =  open(path + 'Vis_' + m.modelName +'.txt', 'w')
     f.write('Model:\n')
     f.write(TAB+ 'Total: ' + str(total_round) +'\n')
-    f.write(TAB+ 'ENC starts at: r' + str(enc_start) +'\n')
-    f.write(TAB+ 'KEY starts at: r' + str(key_start) +'\n')
+    f.write(TAB+ 'Start at: r' + str(enc_start) +'\n')
     f.write(TAB+ 'Meet at: r' + str(match_round) +'\n')
+    f.write(TAB+ 'KEY start at: r' + str(key_start) +'\n')
     f.write('\nInitialization:\n')
     f.write(TAB+'ENC FWD: ' + str(ini_df_enc_b) + '\n' + TAB+ 'ENC BWD: ' + str(ini_df_enc_r) + '\n')
     f.write(TAB+'KEY FWD: ' + str(ini_df_key_b) + '\n' + TAB+ 'KEY BWD: ' + str(ini_df_key_r) + '\n')
     f.write('\nSolution:\n'+TAB+'Obj= min{DF_b=%d, DF_r=%d, Match=%d} = %d' %(DF_b, DF_r, Match, Obj) + '\n')
     f.write('\nVisualization:\n')
-
+    
     for r in range(total_round):
         headliner(r, f)
-        if r == match_round:
-            f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'MC^K' +TAB*2+ 'SB#%d' % (r+1) + TAB*2 +'K#%d ' %r +'\n')
-            for i in ROW:
-                SB = ''
-                MC = ''
-                AK = ''
-                KEY = ''
-                NSB=''
-                for j in COL:
-                    SB+=color(SB_b[r,i,j], SB_r[r,i,j])
-                    MC+=color(MC_b[r,i,j], MC_r[r,i,j])
-                    KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
-                    NSB+=color(SB_b[r+1,i,j], SB_r[r+1,i,j])
-                    AK+=color(AK_b[r,i,j], AK_r[r,i,j])
-                
-                f.write(SB+TAB*2+MC+TAB*2+AK+TAB*2+NSB+TAB*2+KEY+'\n') 
-            f.write('Meet_signed' + str(meet_s[:]) + '\n')
-            f.write('Meet' + str(meet[:]) + '\n')
-        else:
-            f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'AK#%d' %r +TAB*2+'K#%d ' %r +'\n')
+        nr = (r+1)%total_round
         
-            for i in ROW:
-                SB = ''
-                MC = ''
-                AK = ''
-                KEY = ''
-                
-                for j in COL:
-                    SB+=color(SB_b[r,i,j], SB_r[r,i,j])
-                    MC+=color(MC_b[r,i,j], MC_r[r,i,j])
-                    KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
-                    if r == total_round -1 or r in bwd:
-                        AK+=' '
-                    else:
-                        AK+=color(AK_b[r,i,j], AK_r[r,i,j])
-                
-                f.write(SB+TAB*2+MC+TAB*2+AK+TAB*2+KEY+'\n')   
+        f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'AK#%d' %r +TAB*2+'K#%d ' %r +'\n')
+        for i in ROW:
+            SB, MC, AK, KEY = '','','',''
+            
+            for j in COL:
+                SB+=color(SB_b[r,i,j], SB_r[r,i,j])
+                MC+=color(MC_b[r,i,j], MC_r[r,i,j])
+                KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
+                if r == match_round or r== total_round -1 or r in bwd:
+                    AK+='/'
+                else:
+                    AK+=color(AK_b[r,i,j], AK_r[r,i,j])
+            f.write(SB+TAB*2+MC+TAB*2+AK+TAB*2+KEY+'\n')   
         
         if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
-            f.write('MC CostDF fwd: '+ str(mc_cost_fwd[r,:]) + TAB+ 'bwd: ' +str(mc_cost_bwd[r,:])+ '\n')
+            f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[r,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
         if xor_cost_fwd[r,:,:].any() or xor_cost_bwd[r,:,:].any():
-            f.write('AK CostDF fwd: ' + '\n' + str(xor_cost_fwd[r,:,:]) + '\n')
-            f.write('AK CostDF bwd: ' + '\n' + str(xor_cost_bwd[r,:,:]) + '\n')
+            f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[r,:,:]) + '\n')
+            f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[r,:,:]) + '\n')
         f.write('\n')
+        
+        if r == match_round and match_round != total_round - 1:
+            f.write('Match:'+'\n'+ 'MC^K' +TAB*2+ 'SB#%d' % (r+1) +'\n')
+            for i in ROW:
+                EQAK = ''
+                NSB=''
+                for j in COL:
+                    NSB+=color(SB_b[nr,i,j], SB_r[nr,i,j])
+                    EQAK+=color(AK_b[r,i,j], AK_r[r,i,j])
+                f.write(EQAK+TAB*2+NSB+'\n') 
+            #f.write('Meet_signed: ' + str(meet_s[:]) + '\n')
+            f.write('Degree of Matching:' + str(meet[:]) + '\n'*2)
 
     # process whiten key
     r = -1
@@ -502,24 +491,35 @@ def displaySol(m:gp.Model, path):
         AT = ''
         for j in COL:
             KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
-            AT +=color(AK_b[r+total_round,i,j], AK_r[r+total_round,i,j])
+            AT +=color(AK_b[r,i,j], AK_r[r,i,j])
         f.write(6*TAB + AT+ TAB*2 + KEY + '\n')
     
     tr = r + total_round
     if mc_cost_fwd[tr,:].any() or mc_cost_bwd[tr,:].any():
-        f.write('MC CostDF fwd: '+ str(mc_cost_fwd[tr,:]) + TAB+ 'bwd: ' +str(mc_cost_bwd[r,:])+ '\n')
+        f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[tr,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
     if xor_cost_fwd[tr,:,:].any() or xor_cost_bwd[tr,:,:].any():
-            f.write('AK CostDF fwd: ' + '\n' + str(xor_cost_fwd[tr,:,:]) + '\n')
-            f.write('AK CostDF bwd: ' + '\n' + str(xor_cost_bwd[tr,:,:]) + '\n')
+            f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[tr,:,:]) + '\n')
+            f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[tr,:,:]) + '\n')
+    
+    if match_round == total_round - 1:
+        f.write("MAT -><-" + '\n')
+        f.write(6*TAB +'AT^K'+ TAB*2 + 'SB#0' + '\n')
+        for i in ROW:
+            SB = ''
+            AT = ''
+            for j in COL:
+                SB +=color(SB_b[0,i,j], SB_r[0,i,j])
+                AT +=color(tempAT_b[i,j], tempAT_r[i,j])
+            f.write(6*TAB + AT+ TAB*2 + SB + '\n')
     f.close()
 
     return 'Obj= min{DF_b=%d, DF_r=%d, Match=%d} = %d' %(DF_b, DF_r, Match, Obj)
 ####################################################################################################################
 
-# interable
-def solve(key_size:int, total_round:int, start_round:int, key_start_round:int, match_round:int):
+# interable solve function with parameters
+def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_start_round:int, dir):
     # define optimization model
-    m = gp.Model('AES%dRK_%dr_ENC_r%d_KEY_r%d_Meet_r%d' % (key_size, total_round, start_round, key_start_round, match_round))
+    m = gp.Model('AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (key_size, total_round, start_round, match_round, key_start_round))
     
     # assign forward and backward rounds, excluding match round and last round
     if start_round < match_round:
@@ -529,11 +529,14 @@ def solve(key_size:int, total_round:int, start_round:int, key_start_round:int, m
         bwd = list(range(match_round+1, start_round))
         fwd = list(range(start_round, total_round)) + list(range(0, match_round))
 
-    # registration of variables
-    [   S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, A_b, A_r, A_g, A_w, K_b, K_r, K_g, K_w,
-    S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y, XorMC, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
-    E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,
-    mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet_signed, meet] = def_var(m, total_round, fwd, bwd)
+    [   # registration of variables
+        S_b, S_r, S_g, S_w, M_b, M_r, M_g, M_w, A_b, A_r, A_g, A_w, K_b, K_r, K_g, K_w,     # cell encodings
+        S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y,    # column encodings
+        XorMC_t, XorMC_u, XorMC_x, XorMC_y, XorMC_z,                                        # XORMC encodings 
+        E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,                               # initial states
+        mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd,   # cost of degree of freedom
+        meet_signed, meet                                                                   # degree of meeting
+    ] = def_var(m, total_round, fwd, bwd)
 
     # add constriants according to the key expansion algorithm
     key_expansion(m, key_size, total_round, key_start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
@@ -548,6 +551,38 @@ def solve(key_size:int, total_round:int, start_round:int, key_start_round:int, m
     # add constriants according to the encryption algorithm
     for r in range(total_round):
         nr = r + 1   # alias for next round
+        if r == match_round and match_round == total_round - 1:
+            # special case: meet at last round
+            print('mat lastr', r)
+            # since last round have two consecutive XORs, use tempAT:=AK[lr](AT) + K[tr](K-1), match between tempAT and SB[0]
+            tempAT_b = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempAT_b').values()).reshape((NROW, NCOL))
+            tempAT_r = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempAT_r').values()).reshape((NROW, NCOL))
+            tempAT_g = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempAT_g').values()).reshape((NROW, NCOL))
+            tempAT_w = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempAT_w').values()).reshape((NROW, NCOL))
+            for i in ROW:
+                for j in COL:
+                    m.addConstr(tempAT_g[i,j] == gp.and_(tempAT_b[i,j], tempAT_r[i,j]))
+                    m.addConstr(tempAT_w[i,j] + tempAT_b[i,j] + tempAT_r[i,j] - tempAT_g[i,j] == 1)
+            for i in ROW:
+                for j in COL:
+                    # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
+                    gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], K_b[r,i,j], K_r[r,i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_bwd[r,i,j])
+                    # fix bwd xor cost as 0
+                    m.addConstr(xor_cost_fwd[r,i,j] == 0)
+                    # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
+                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[nr,i,j], K_r[nr,i,j], tempAT_b[i,j], tempAT_r[i,j], xor_cost_bwd[nr,i,j])
+                    # fix bwd xor cost as 0
+                    m.addConstr(xor_cost_fwd[nr,i,j] == 0)
+            # calculate degree of match
+            tempMeet = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempMeet').values()).reshape((NROW, NCOL))
+            for j in ROW:
+                for i in COL:
+                    m.addConstr(tempMeet[i,j] == gp.or_(tempAT_w[i,j], S_w[0,i,j]))
+                m.addConstr(meet[j] == NROW - gp.quicksum(tempMeet[:,j]))
+                m.addConstr(meet_signed[j] == 0)
+            continue
+        
+        # General structure
         # match round
         if r == match_round:
             print('mat', r)
@@ -560,84 +595,79 @@ def solve(key_size:int, total_round:int, start_round:int, key_start_round:int, m
             # use AK[mr] to store MC[mr] XOR tempK (different from other rounds, take carefully note), should cost fwd xor
             for i in ROW:
                 for j in COL:
-                    gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], tempK_b[i,j], tempK_r[i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_fwd[r,i,j])
-                    m.addConstr(xor_cost_bwd[r,i,j] == 0)
+                    gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], tempK_b[i,j], tempK_r[i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_bwd[r,i,j])
+                    m.addConstr(xor_cost_fwd[r,i,j] == 0)
             # meet-in-the-middle for AK == MC[r] XOR MC^-1(KEY[r]), and SB[nr]
             for j in COL:
                 gen_match_rule(m, A_b[r,:,j], A_r[r,:,j], A_g[r,:,j], S_b[nr,:,j], S_r[nr,:,j], S_g[nr,:,j], meet_signed[j], meet[j])
-                #m.addConstr(cost_fwd[r,j] == 0)
-                #m.addConstr(cost_bwd[r,j] == 0)
+            continue
         # last round
-        elif r == total_round - 1:
+        if r == total_round - 1:
             print('lastr', r)
             # MC of last round is skipped, hence no cost in df
             for j in COL:
                 m.addConstr(mc_cost_fwd[r, j] == 0)
                 m.addConstr(mc_cost_bwd[r, j] == 0)
-            
             if r in fwd:    # enter last round in fwd direction
                 for i in ROW:
                     for j in COL:
                         # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
-                        gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], K_b[r,i,j], K_r[r,i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_fwd[r,i,j])
+                        gen_XOR_rule(m, M_b[r,i,j], M_r[r,i,j], K_b[r,i,j], K_r[r,i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_bwd[r,i,j])
                         # fix bwd xor cost as 0
-                        m.addConstr(xor_cost_bwd[nr,i,j] == 0)
+                        m.addConstr(xor_cost_fwd[r,i,j] == 0)
                         # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[nr,i,j], K_r[nr,i,j], S_b[0,i,j], S_r[0,i,j], xor_cost_fwd[nr,i,j])
+                        gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[nr,i,j], K_r[nr,i,j], S_b[0,i,j], S_r[0,i,j], xor_cost_bwd[nr,i,j])
                         # fix bwd xor cost as 0
-                        m.addConstr(xor_cost_bwd[r,i,j] == 0)
-                        
+                        m.addConstr(xor_cost_fwd[nr,i,j] == 0)         
             elif r in bwd:  # enter last round in bwd direction
                 for i in ROW:
                     for j in COL:
                         # add whitening key: AK[tr-1](storing AT) =  SB[0] XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, S_b[0,i,j], S_r[0,i,j], K_b[nr,i,j], K_r[nr,i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_bwd[nr,i,j])
+                        gen_XOR_rule(m, S_b[0,i,j], S_r[0,i,j], K_b[nr,i,j], K_r[nr,i,j], A_b[r,i,j], A_r[r,i,j], xor_cost_fwd[nr,i,j])
                         # fix fwd xor cost as 0
-                        m.addConstr(xor_cost_fwd[nr,i,j] == 0)
+                        m.addConstr(xor_cost_bwd[nr,i,j] == 0)
                         # add last round key: MC[lr] == id(MC[lr]) = AK[lr](storing AT) XOR KEY[lr]
-                        gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j], M_b[r,i,j], M_r[r,i,j], xor_cost_bwd[r,i,j])
+                        gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j], M_b[r,i,j], M_r[r,i,j], xor_cost_fwd[r,i,j])
                         # fix fwd xor cost as 0
-                        m.addConstr(xor_cost_fwd[r,i,j] == 0)
+                        m.addConstr(xor_cost_bwd[r,i,j] == 0)
             else:
                 raise Exception("Irregular Behavior at last round")
-    
+            continue 
         # forward direction
-        elif r in fwd:
+        if r in fwd:
             print('fwd', r)
             for j in COL:
                 gen_MC_rule(m, M_b[r,:,j], M_r[r,:,j], M_col_u[r,j], M_col_x[r,j], M_col_y[r,j], A_b[r,:,j], A_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
                 for i in ROW:
-                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j], S_b[nr,i,j], S_r[nr,i,j], xor_cost_fwd[r,i,j])
-                    m.addConstr(xor_cost_bwd[r,i,j] == 0)
+                    gen_XOR_rule(m, A_b[r,i,j], A_r[r,i,j], K_b[r,i,j], K_r[r,i,j], S_b[nr,i,j], S_r[nr,i,j], xor_cost_bwd[r,i,j])
+                    m.addConstr(xor_cost_fwd[r,i,j] == 0)
+            continue
         # backward direction
         elif r in bwd:
             print('bwd', r)
             for j in COL:
-                gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC[r,:,j], M_b[r,:,j], M_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
+                gen_XORMC_rule(m, S_b[nr,:,j], S_r[nr,:,j], K_b[r,:,j], K_r[r,:,j], XorMC_u[r,j], XorMC_x[r,j], XorMC_y[r,j], XorMC_z[r,j], XorMC_t[r,:,j], M_b[r,:,j], M_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
                 # since XOR is merged with MC, both directions of the XOR cost should fix as 0
                 for i in ROW:
                     m.addConstr(xor_cost_fwd[r,i,j] == 0)
                     m.addConstr(xor_cost_bwd[r,i,j] == 0)
+            continue
         else:
             raise Exception("Irregular Behavior at encryption")
     
     # set objective function
-    set_obj(m, E_ini_b, E_ini_r, K_ini_b, K_ini_r, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet)
+    set_obj(m, E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet)
     m.optimize()
     
-    dir = './RK_output/'
     if not os.path.exists(path= dir):
         os.makedirs(dir)
     
+    m.write(m.modelName + '.lp')
+    
     if writeSol(m, path=dir):
         solution = displaySol(m, path=dir)
-        return m.modelName + TAB + str(solution)
+        return (total_round, start_round, match_round, key_start_round), str(solution)
     else:
-        return m.modelName + TAB + 'Infeasible'
+        return (total_round, start_round, match_round, key_start_round), 'Infeasible'
 
-solve(key_size=128, total_round=8, start_round=4, key_start_round=5, match_round=1)
-    
-
-
-
-
+solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=4, dir='./128RK_output/')

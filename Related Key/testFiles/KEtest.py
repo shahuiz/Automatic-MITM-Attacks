@@ -2,6 +2,7 @@ from tracemalloc import start
 import gurobipy as gp
 from gurobipy import GRB
 import numpy as np
+import os
 
 # AES parameters
 NROW = 4
@@ -42,6 +43,7 @@ def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r
     m.addMConstr(XOR_A, list(enum), '>=', -XOR_B)
 
 def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
+    Nk = key_size // 32
     for ri in range(total_r + 1):
         r = ri
         if ri == total_r:
