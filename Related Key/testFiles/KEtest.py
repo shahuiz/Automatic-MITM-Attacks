@@ -13,9 +13,6 @@ NBRANCH = NROW + 1     # AES MC branch number
 ROW = range(NROW)
 COL = range(NCOL)
 
-# variable declaration
-total_round = 9 # total round
-#start_round = 4   # start round, start in {0,1,2,...,total_r-1}
 #match_round = 1  # meet in the middle round, mid in {0,1,2,...,total_r-1}, start != mid
 
 # linear constriants for XOR operations
@@ -32,12 +29,6 @@ XOR_A = np.asarray([
 XOR_B = np.asarray([0,1,0,1,0,0,0,0,0])
 
 m = gp.Model('x')
-
-K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
-K_r = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_round+1, NROW, NCOL))
-
-K_ini_b = np.asarray(m.addVars(NROW, 8, vtype=GRB.BINARY, name='K_ini_b').values()).reshape((NROW, 8))
-K_ini_r = np.asarray(m.addVars(NROW, 8, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((NROW, 8))
 
 def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_df]
@@ -105,18 +96,28 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
             raise Exception("Irregular Behavior at key expantion")
         m.update()
 
+# variable declaration
+key_size = 192
+total_round = 9 # total round
+start_round = 2   # start round, start in {0,1,2,...,total_r-1}
+Nk= key_size // 32
+
+K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
+K_r = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_round+1, NROW, NCOL))
+
+K_ini_b = np.asarray(m.addVars(NROW, Nk, vtype=GRB.BINARY, name='K_ini_b').values()).reshape((NROW, Nk))
+K_ini_r = np.asarray(m.addVars(NROW, Nk, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((NROW, Nk))
+
 
 key_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
 key_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
 
-key_expansion(m, 256, 9, 3, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
+key_expansion(m, key_size, total_round, start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 
-#m.addConstr(K_ini_b[0,0] == 1)
-#m.addConstr(K_ini_r[0,0] == 0)
-
+# AES192 example
 for i in ROW:
-    for j in range(6):
-        continue
+    for j in range(Nk):
+        #continue
         if (i==1 and j==0) or (i==2 and j==4) or (i==2 and j==5):
             m.addConstr(K_ini_b[i,j] == 0)
             m.addConstr(K_ini_r[i,j] == 1)
@@ -127,8 +128,10 @@ for i in ROW:
             m.addConstr(K_ini_b[i,j] == 1)
             m.addConstr(K_ini_r[i,j] == 1)
 
+# AES256 example 1
 for i in ROW:
-    for j in range(8):
+    for j in range(Nk):
+        continue
         if j == 3:
             m.addConstr(K_ini_b[i,j] == 1)
             m.addConstr(K_ini_r[i,j] == 0)
@@ -136,8 +139,24 @@ for i in ROW:
             m.addConstr(K_ini_b[i,j] == 1)
             m.addConstr(K_ini_r[i,j] == 1)
 
+# AES256 example 2
+for i in ROW:
+    for j in range(Nk):
+        continue
+        if i == 2:
+            if j == 1 or j==2 or j==3:
+                m.addConstr(K_ini_b[i,j] == 0)
+                m.addConstr(K_ini_r[i,j] == 1)
+            elif j==5 or j==6:
+                m.addConstr(K_ini_b[i,j] == 1)
+                m.addConstr(K_ini_r[i,j] == 0)
+            else:
+                m.addConstr(K_ini_b[i,j] == 1)
+                m.addConstr(K_ini_r[i,j] == 1)
+        else:
+            m.addConstr(K_ini_b[i,j] == 1)
+            m.addConstr(K_ini_r[i,j] == 1)
 
-#m.addConstr(key_cost_fwd[4,0,2] == 1)
 m.update()
 m.optimize()
 m.write('./Related Key/testFiles/KEtest.sol')
