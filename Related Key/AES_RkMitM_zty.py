@@ -146,7 +146,6 @@ def def_var(m:gp.Model, total_r: int, fwd, bwd):
             m.addConstr(XorMC_z[r,j] == gp.min_(S_r[nr,:,j].tolist() + K_r[r,:,j].tolist()))
             for i in ROW:
                 m.addMConstr(TAU_A, (S_b[nr,i,j], S_r[nr,i,j], K_b[r,i,j], K_r[r,i,j], XorMC_t[r,i,j]), '>=', -TAU_B)
-                #m.addConstr(XorMC[r,i,j] == gp.or_(S_b[nr,i,j], K_b[r,i,j]))
 
     m.update()
     return [
@@ -657,17 +656,18 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     
     # set objective function
     set_obj(m, E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet)
+    
     m.optimize()
     
     if not os.path.exists(path= dir):
         os.makedirs(dir)
     
-    m.write(m.modelName + '.lp')
+    m.write(dir + m.modelName + '.lp')
     
     if writeSol(m, path=dir):
         solution = displaySol(m, path=dir)
-        return (total_round, start_round, match_round, key_start_round), str(solution)
+        return (total_round, start_round, match_round, key_start_round), 1, str(solution)
     else:
-        return (total_round, start_round, match_round, key_start_round), 'Infeasible'
+        return (total_round, start_round, match_round, key_start_round), 0, 'Infeasible'
 
-solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=4, dir='./128RK_output/')
+#solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=4, dir='./128RK_output/')

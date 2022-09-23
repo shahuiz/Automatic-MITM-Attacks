@@ -35,8 +35,8 @@ m = gp.Model('x')
 K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
 K_r = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_round+1, NROW, NCOL))
 
-K_ini_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_b').values()).reshape((NROW, NCOL))
-K_ini_r = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((NROW, NCOL))
+K_ini_b = np.asarray(m.addVars(6, NCOL, vtype=GRB.BINARY, name='K_ini_b').values()).reshape((6, NCOL))
+K_ini_r = np.asarray(m.addVars(6, NCOL, vtype=GRB.BINARY, name='K_ini_r').values()).reshape((6, NCOL))
 
 def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_df]
@@ -44,6 +44,42 @@ def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r
 
 def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
     Nk = key_size // 32
+    Nr = total_r + 1
+    Nb = 4
+    
+    start_words = []
+    for ji in range(Nk):
+        if ji > 3:
+            r = start_r + 1
+            j = ji - 4
+        else:
+            j = ji
+            r = start_r   
+        start_words.append([r,j])
+    print(start_words)
+    
+    fwd_b = start_r * Nb
+    bwd_b = start_r * Nb + Nk - 1
+    
+
+    for w in range(Nb*(Nr+1)):
+        r, j = w//4, w%4
+        lr, lj = (w-1)//4, (w-1)%4
+        print('current:',r,j,'last',lr,lj)
+        print([r,j] in start_words)
+        if [r,j] in start_words:
+            for i in ROW:
+                continue
+                m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
+                m.addConstr(K_ini_b[i, j] == K_b[r, i, j])
+                m.addConstr(K_ini_r[i, j] == K_r[r, i, j])
+                m.addConstr(key_cost_bwd[r,i,j] == 0)
+                m.addConstr(key_cost_fwd[r,i,j] == 0)
+
+    
+    
+    
+    return 
     for ri in range(total_r + 1):
         r = ri
         if ri == total_r:
@@ -51,17 +87,26 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
 
         # initial state of key expansion, strictly unknown and no consumed df, allow grey cells
         if r == start_r:
-            print(ri, 'ini')
-            for i in ROW:
-                for j in COL:
+            for ji in range(Nk):
+                if ji > 3:
+                    r = start_r + 1
+                    j = ji - 4
+                else:
+                    j = ji
+                    r = start_r
+                
+                for i in ROW:
+                    print(r, i, j)
+                    continue
                     m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
                     m.addConstr(K_ini_b[i, j] == K_b[r, i, j])
                     m.addConstr(K_ini_r[i, j] == K_r[r, i, j])
                     m.addConstr(key_cost_bwd[r,i,j] == 0)
                     m.addConstr(key_cost_fwd[r,i,j] == 0)
-        
         # fwd direction
         if r > start_r:
+            #temp = 
+            continue
             print(ri, 'fwd')
             lr = r - 1
             for j in COL:
@@ -80,6 +125,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
 
         # bwd direction, reverse blue and red cell notation for XOR propagation        
         if r < start_r: 
+            continue
             print(ri, 'bwd') 
             lr = r + 1
             for j in COL:
@@ -100,19 +146,20 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
 key_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
 key_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
 
-key_expansion(m, 128, 8, 7, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
+key_expansion(m, 192, 9, 0, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 
 #m.addConstr(K_ini_b[0,0] == 1)
 #m.addConstr(K_ini_r[0,0] == 0)
 
 for j in COL:  
     for i in ROW:
+        continue
         m.addConstr(K_ini_b[i,j] == 1)
         m.addConstr(K_ini_r[i,j] == 0)
 
-m.addConstr(key_cost_fwd[4,0,2] == 1)
-m.optimize()
-m.write('./Related Key/testFiles/KEtest.sol')
+#m.addConstr(key_cost_fwd[4,0,2] == 1)
+#m.optimize()
+#m.write('./Related Key/testFiles/KEtest.sol')
 
 solFile = open('./Related Key/testFiles/KEtest.sol', 'r')
 K_b = np.ndarray(shape=(8+1,4,4))
