@@ -14,9 +14,7 @@ NGRID = NROW * NCOL
 NBRANCH = NROW + 1     # AES MC branch number
 ROW = range(NROW)
 COL = range(NCOL)
-TAB = ' '*4
-
-#m = gp.Model('%dR_ENC_r%d_KEY_r%dMeet_r%d' % (total_round, start_round, key_start_round, match_round))
+TAB = ' ' * 4
 
 def def_var(m:gp.Model, key_size: int, total_r: int, start_r: int, match_r: int):
     # define vars storing the SB state at each round with encoding scheme
@@ -111,8 +109,10 @@ def def_var(m:gp.Model, key_size: int, total_r: int, start_r: int, match_r: int)
     
     for i in ROW:
         for j in COL:
-            m.addConstr(K_ini_g[i,j] == gp.and_(K_ini_b[i,j], K_ini_r[i,j]))
             m.addConstr(E_ini_g[i,j] == gp.and_(E_ini_b[i,j], E_ini_r[i,j]))
+    for i in ROW:
+        for j in range(Nk):        
+            m.addConstr(K_ini_g[i,j] == gp.and_(K_ini_b[i,j], K_ini_r[i,j]))
 
     for r in range(total_r+1):
         for i in ROW:
@@ -279,7 +279,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
             
             qr, qj = (wi-Nk)//NCOL, (wi-Nk)%NCOL      # compute round and column params for w[i-Nk]
             for i in ROW:
-                gen_XOR_rule(m, in1_b=K_b[qr,i,qj], in1_r=K_r[qr,i,qj], in2_b=temp_b[i], in2_r=temp_r[j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                gen_XOR_rule(m, in1_b=K_b[qr,i,qj], in1_r=K_r[qr,i,qj], in2_b=temp_b[i], in2_r=temp_r[i], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
                 m.addConstr(key_cost_fwd[r,i,j] == 0)
             print("fwd", r,j,' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
             continue
@@ -293,7 +293,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 temp_b, temp_r = K_b[pr,:,pj], K_r[pr,:,pj] 
             qr, qj = (wi+Nk)//NCOL, (wi+Nk)%NCOL      # compute round and column params for w[i-Nk]
             for i in ROW:
-                gen_XOR_rule(m, in1_b=K_r[qr,i,qj], in1_r=K_b[qr,i,qj], in2_b=temp_r[i], in2_r=temp_b[j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                gen_XOR_rule(m, in1_b=K_r[qr,i,qj], in1_r=K_b[qr,i,qj], in2_b=temp_r[i], in2_r=temp_b[i], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
                 m.addConstr(key_cost_bwd[r,i,j] == 0)
             print("bwd", r,j, ' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
             continue
@@ -361,7 +361,7 @@ def displaySol(m:gp.Model, path):
             temp = temp.split()
             Sol[temp[0]] = round(float(temp[1]))
     
-    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_Meet_r(\d+)_KEY_r(\d+)', m.modelName)
+    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_Meet_r(\d+)_KEY_r(\d)', m.modelName)
     key_size, total_round, enc_start, match_round, key_start = int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4)), int(match.group(5))
 
     if enc_start < match_round:
@@ -380,6 +380,8 @@ def displaySol(m:gp.Model, path):
     AK_r = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     KEY_b= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     KEY_r= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    Key_cost_fwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    Key_cost_bwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     xor_cost_fwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     xor_cost_bwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     mc_cost_fwd = np.ndarray(shape=(total_round, NCOL), dtype=int)
@@ -416,6 +418,8 @@ def displaySol(m:gp.Model, path):
             for j in COL:
                 KEY_b[r,i,j]=Sol["K_b[%d,%d,%d]" %(r,i,j)]
                 KEY_r[r,i,j]=Sol["K_r[%d,%d,%d]" %(r,i,j)]
+                Key_cost_fwd[r,i,j]=Sol["Key_Cost_fwd[%d,%d,%d]" %(r,i,j)]
+                Key_cost_bwd[r,i,j]=Sol["Key_Cost_bwd[%d,%d,%d]" %(r,i,j)]
                 xor_cost_fwd[r,i,j] = Sol["XOR_Cost_fwd[%d,%d,%d]" %(r,i,j)]
                 xor_cost_bwd[r,i,j] = Sol["XOR_Cost_bwd[%d,%d,%d]" %(r,i,j)]
     
@@ -487,9 +491,14 @@ def displaySol(m:gp.Model, path):
         
         if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
             f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[r,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
-        if xor_cost_fwd[r,:,:].any() or xor_cost_bwd[r,:,:].any():
+        if xor_cost_fwd[r,:,:].any():
             f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[r,:,:]) + '\n')
-            f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[r,:,:]) + '\n')
+        if xor_cost_bwd[r,:,:].any():
+                f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[r,:,:]) + '\n')
+        if Key_cost_fwd[r,:,:].any():
+                f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[r,:,:]) + '\n')
+        if Key_cost_bwd[r,:,:].any():
+                f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[r,:,:]) + '\n')
         f.write('\n')
         
         if r == match_round and match_round != total_round - 1:
@@ -502,6 +511,10 @@ def displaySol(m:gp.Model, path):
                     EQAK+=color(AK_b[r,i,j], AK_r[r,i,j])
                 f.write(EQAK+TAB*2+NSB+'\n') 
             #f.write('Meet_signed: ' + str(meet_s[:]) + '\n')
+            if Key_cost_fwd[r,:,:].any():
+                f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[r,:,:]) + '\n')
+            if Key_cost_bwd[r,:,:].any():
+                f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[r,:,:]) + '\n')
             f.write('Degree of Matching:' + str(meet[:]) + '\n'*2)
 
     # process whiten key
@@ -519,9 +532,14 @@ def displaySol(m:gp.Model, path):
     tr = r + total_round
     if mc_cost_fwd[tr,:].any() or mc_cost_bwd[tr,:].any():
         f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[tr,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
-    if xor_cost_fwd[tr,:,:].any() or xor_cost_bwd[tr,:,:].any():
+    if xor_cost_fwd[tr,:,:].any():
             f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[tr,:,:]) + '\n')
+    if xor_cost_bwd[tr,:,:].any():
             f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[tr,:,:]) + '\n')
+    if Key_cost_fwd[tr,:,:].any():
+            f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[tr,:,:]) + '\n')
+    if Key_cost_bwd[tr,:,:].any():
+            f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[tr,:,:]) + '\n')
     
     if match_round == total_round - 1:
         f.write("MAT -><-" + '\n')
@@ -558,7 +576,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,                               # initial states
         mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd,   # cost of degree of freedom
         meet_signed, meet                                                                   # degree of meeting
-    ] = def_var(m, total_round, fwd, bwd)
+    ] = def_var(m, key_size, total_round, start_round, match_round)
 
     # add constriants according to the key expansion algorithm
     key_expansion(m, key_size, total_round, key_start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
@@ -567,8 +585,8 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     for i in ROW:
         for j in COL:
             m.addConstr(S_b[start_round, i, j] + S_r[start_round, i, j] >= 1)
-            m.addConstr(E_ini_b[i, j] + S_r[start_round, i, j] == 1)
-            m.addConstr(E_ini_r[i, j] + S_b[start_round, i, j] == 1)
+            m.addConstr(E_ini_b[i, j] == S_b[start_round, i, j] )
+            m.addConstr(E_ini_r[i, j] == S_r[start_round, i, j] )
 
     # add constriants according to the encryption algorithm
     for r in range(total_round):
@@ -693,4 +711,11 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     else:
         return (total_round, start_round, match_round, key_start_round), 0, 'Infeasible'
 
-#solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=4, dir='./128RK_output/')
+
+#for key in range(0, 8):
+    #continue
+    #solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=key, dir='./' )
+#solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=-1, dir='./' )
+#solve(key_size=256, total_round=9, start_round=1, match_round=7, key_start_round=1, dir='./')
+#solve(key_size=256, total_round=9, start_round=5, match_round=1, key_start_round=3, dir='./' )
+#solve(key_size=192, total_round=9, start_round=2, match_round=8, key_start_round=2, dir='./' )

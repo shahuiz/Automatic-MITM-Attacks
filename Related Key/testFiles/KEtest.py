@@ -74,7 +74,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
             
             qr, qj = (wi-Nk)//NCOL, (wi-Nk)%NCOL      # compute round and column params for w[i-Nk]
             for i in ROW:
-                gen_XOR_rule(m, in1_b=K_b[qr,i,qj], in1_r=K_r[qr,i,qj], in2_b=temp_b[i], in2_r=temp_r[j], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                gen_XOR_rule(m, in1_b=K_b[qr,i,qj], in1_r=K_r[qr,i,qj], in2_b=temp_b[i], in2_r=temp_r[i], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
                 m.addConstr(key_cost_fwd[r,i,j] == 0)
             print("fwd", r,j,' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
             continue
@@ -88,7 +88,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 temp_b, temp_r = K_b[pr,:,pj], K_r[pr,:,pj] 
             qr, qj = (wi+Nk)//NCOL, (wi+Nk)%NCOL      # compute round and column params for w[i-Nk]
             for i in ROW:
-                gen_XOR_rule(m, in1_b=K_r[qr,i,qj], in1_r=K_b[qr,i,qj], in2_b=temp_r[i], in2_r=temp_b[j], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                gen_XOR_rule(m, in1_b=K_r[qr,i,qj], in1_r=K_b[qr,i,qj], in2_b=temp_r[i], in2_r=temp_b[i], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
                 m.addConstr(key_cost_bwd[r,i,j] == 0)
             print("bwd", r,j, ' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
             continue
@@ -97,9 +97,9 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         m.update()
 
 # variable declaration
-key_size = 192
-total_round = 9 # total round
-start_round = 2   # start round, start in {0,1,2,...,total_r-1}
+key_size = 128
+total_round = 8 # total round
+start_round = 0   # start round, start in {0,1,2,...,total_r-1}
 Nk= key_size // 32
 
 K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
@@ -114,10 +114,20 @@ key_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY
 
 key_expansion(m, key_size, total_round, start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
 
+for i in ROW:
+    for j in range(Nk):
+        if [i,j] == [0,3] or [i,j] == [2,3] or [i,j] == [3,3]:
+            m.addConstr(K_ini_b[i,j] == 1)
+            m.addConstr(K_ini_r[i,j] == 0)
+        else:
+            m.addConstr(K_ini_b[i,j] == 1)
+            m.addConstr(K_ini_r[i,j] == 1)
+
+
 # AES192 example
 for i in ROW:
     for j in range(Nk):
-        #continue
+        continue
         if (i==1 and j==0) or (i==2 and j==4) or (i==2 and j==5):
             m.addConstr(K_ini_b[i,j] == 0)
             m.addConstr(K_ini_r[i,j] == 1)

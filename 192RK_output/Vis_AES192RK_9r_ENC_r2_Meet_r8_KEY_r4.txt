@@ -1,0 +1,111 @@
+Model:
+    Total: 9
+    Start at: r2
+    Meet at: r8
+    KEY start at: r4
+
+Initialization:
+    ENC FWD: 0
+    ENC BWD: 16
+    KEY FWD: 6
+    KEY BWD: 1
+
+Solution:
+    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+
+Visualization:
+r0  bwd <---
+SB#0        MC#0        AK#0        K#0 
+wwwr        wwwr        ////        bbbg
+rwww        wwwr        ////        grrr
+wrww        wwwr        ////        bbbg
+wwrw        wwwr        ////        bbbg
+
+r1  bwd <---
+SB#1        MC#1        AK#1        K#1 
+rrwr        rrwr        ////        ggbb
+wrrr        rrrw        ////        rggr
+wwrr        rrww        ////        ggbb
+rwwr        rrww        ////        ggbb
+MixCol costs fwdDf: [0 0 1 1]    bwdDf: [0 0 0 0]
+
+r2  fwd --->
+ENC_
+SB#2        MC#2        AK#2        K#2 
+rrrr        rrrr        rrrr        gggg
+rrrr        rrrr        rrrr        rrgg
+rrrr        rrrr        rrrr        gggg
+rrrr        rrrr        rrrr        gggg
+
+r3  fwd --->
+SB#3        MC#3        AK#3        K#3 
+rrrr        rrrr        gggr        bggg
+rrrr        rrrr        rrrg        grrg
+rrrr        rrrr        grgg        bggg
+rrrr        rrrr        ggrg        bggg
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [3 2 2 3]
+AddKey costs bwdDf: 
+[[0 0 0 0]
+ [0 1 1 0]
+ [0 0 0 0]
+ [0 0 0 0]]
+KeyExp costs fwdDf: 
+[[0 1 1 1]
+ [0 0 0 0]
+ [0 1 1 1]
+ [0 1 1 1]]
+
+r4  fwd --->
+                                    KEY_
+SB#4        MC#4        AK#4        K#4 
+bggr        bggr        bbbg        ggbb
+rggg        gggr        bbbr        gggr
+brgg        ggbr        bbbg        ggbb
+bgrg        gbgr        bbbg        ggbb
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 0 0 3]
+AddKey costs bwdDf: 
+[[0 0 0 0]
+ [0 0 0 1]
+ [0 0 0 0]
+ [0 0 0 0]]
+
+r5  fwd --->
+SB#5        MC#5        AK#5        K#5 
+bbbb        bbbb        bbbb        bbbb
+bbbg        bbgb        bbbb        gggg
+bbbb        bbbb        bbbb        bbbb
+bbbb        bbbb        bbbb        bbbb
+
+r6  fwd --->
+SB#6        MC#6        AK#6        K#6 
+bbbb        bbbb        bbbb        bbbb
+bbbb        bbbb        bbbb        bwww
+bbbb        bbbb        bbbb        bbbb
+bbbb        bbbb        bbbb        bbbb
+
+r7  fwd --->
+SB#7        MC#7        AK#7        K#7 
+bbbb        bbbb        wwwb        bbww
+bwww        wwwb        wwwb        wwbw
+bbbb        bbbb        wwwb        bbbb
+bbbb        bbbb        wwwb        bbbb
+
+r8  mat -><-
+SB#8        MC#8        AK#8        K#8 
+wwww        wwww        ////        wwww
+wwww        wwww        ////        wwww
+wwwb        wbww        ////        bbbb
+wwwb        bwww        ////        bbbb
+
+r-1  
+                        AT          K#-1
+                        wwww        bbgg
+                        wwww        rrrr
+                        wbww        bbgg
+                        bwww        bbgg
+MAT -><-
+                        AT^K        SB#0
+                        wwww        wwwr
+                        wwww        rwww
+                        wbww        wrww
+                        bwww        wwrw
