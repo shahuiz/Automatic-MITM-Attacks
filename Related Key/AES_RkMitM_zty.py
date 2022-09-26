@@ -160,6 +160,25 @@ def def_var(m:gp.Model, key_size: int, total_r: int, start_r: int, match_r: int)
             for j in COL:
                 m.addConstr(XorMC_u[r,j] +XorMC_x[r,j] +XorMC_y[r,j] +XorMC_z[r,j] == 0)
                 m.addConstr(gp.quicksum(XorMC_t[r,:,j]) == 0)
+    
+    # use tempK to store the key state after the inverse MC operation, include cost of df
+    tempK_b = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_b').values()).reshape((NROW, NCOL))
+    tempK_r = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_r').values()).reshape((NROW, NCOL))
+    tempK_g = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_g').values()).reshape((NROW, NCOL))
+    tempK_w = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_w').values()).reshape((NROW, NCOL))
+    tempK_col_u = np.asarray(m.addVars(NCOL, vtype= GRB.BINARY, name='tempK_col_u').values()).reshape((NCOL))
+    tempK_col_x = np.asarray(m.addVars(NCOL, vtype= GRB.BINARY, name='tempK_col_x').values()).reshape((NCOL))
+    tempK_col_y = np.asarray(m.addVars(NCOL, vtype= GRB.BINARY, name='tempK_col_y').values()).reshape((NCOL))
+
+    for i in ROW:
+        for j in COL:
+            m.addConstr(tempK_g[i,j] == gp.and_(tempK_b[i,j], tempK_r[i,j]))
+            m.addConstr(tempK_w[i,j] + tempK_b[i,j] + tempK_r[i,j] - tempK_g[i,j] == 1)
+
+    for j in COL:
+        m.addConstr(tempK_col_x[j] == gp.min_(tempK_b[:,j].tolist()))
+        m.addConstr(tempK_col_y[j] == gp.min_(tempK_r[:,j].tolist()))
+        m.addConstr(tempK_col_u[j] == gp.max_(tempK_w[:,j].tolist()))
 
     m.update()
     return [
@@ -167,6 +186,7 @@ def def_var(m:gp.Model, key_size: int, total_r: int, start_r: int, match_r: int)
         S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y,
         XorMC_t, XorMC_u, XorMC_x, XorMC_y, XorMC_z,
         E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,
+        tempK_b, tempK_r, tempK_g, tempK_w, tempK_col_u, tempK_col_x, tempK_col_y,
         mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet_signed, meet]
 
 # generate XOR rule for forward computations, if backward, switch the input of blue and red
@@ -247,7 +267,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
     
     # set territory marker bwd and fwd 
     bwd = start_r * Nb
-    fwd = start_r * Nb + Nk - 1
+    fwd = start_r * Nb + Nk
     
     ini_j = 0   # keep track of what column has been read from the initial setting
     for w in range(Nb*(Nr+1)):
@@ -259,7 +279,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
             r, j = w//4, w%4
             wi = w
         # initial state
-        if wi <= fwd and wi >= bwd: 
+        if wi >= bwd and wi < fwd: 
             print("start",r,j, 'from ini',ini_j)
             for i in ROW:
                 m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
@@ -269,9 +289,9 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 m.addConstr(key_cost_fwd[r,i,j] == 0)
             ini_j += 1
         # fwd direction
-        elif wi > fwd:            
+        elif wi >= fwd:            
             pr, pj = (wi-1)//NCOL, (wi-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 0:    # rotation
+            if (wi - fwd)% Nk == 0:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -286,7 +306,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # bwd direction
         elif wi < bwd:  
             pr, pj = (wi+Nk-1)//NCOL, (wi+Nk-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 0:    # rotation
+            if (bwd - wi) % Nk == 0:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -574,6 +594,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         S_col_u, S_col_x, S_col_y, M_col_u, M_col_x, M_col_y, K_col_u, K_col_x, K_col_y,    # column encodings
         XorMC_t, XorMC_u, XorMC_x, XorMC_y, XorMC_z,                                        # XORMC encodings 
         E_ini_b, E_ini_r, E_ini_g, K_ini_b, K_ini_r, K_ini_g,                               # initial states
+        tempK_b, tempK_r, tempK_g, tempK_w, tempK_col_u, tempK_col_x, tempK_col_y,          # equivalent key encodings for MC_inv(K[mat])
         mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd,   # cost of degree of freedom
         meet_signed, meet                                                                   # degree of meeting
     ] = def_var(m, key_size, total_round, start_round, match_round)
@@ -626,12 +647,10 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         # match round
         if r == match_round:
             print('mat', r)
-            # use tempK to store the key state after the inverse MC operation, include cost of df
-            tempK_b = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_b').values()).reshape((NROW, NCOL))
-            tempK_r = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempK_r').values()).reshape((NROW, NCOL))
+
             # pass the key to MC^inv, store the equivalent key as tempK, note the cost of df in cost_fwd and cost_bwd
             for j in COL:    
-                gen_MC_rule(m, K_b[r,:,j], K_r[r,:,j], K_col_u[r,j], K_col_x[r,j], K_col_y[r,j], tempK_b[:,j], tempK_r[:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])      
+                gen_MC_rule(m, tempK_b[:,j], tempK_r[:,j], tempK_col_u[j], tempK_col_x[j], tempK_col_y[j], K_b[r,:,j], K_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])      
             # use AK[mr] to store MC[mr] XOR tempK (different from other rounds, take carefully note), should cost fwd xor
             for i in ROW:
                 for j in COL:
@@ -718,4 +737,4 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
 #solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=-1, dir='./' )
 #solve(key_size=256, total_round=9, start_round=1, match_round=7, key_start_round=1, dir='./')
 #solve(key_size=256, total_round=9, start_round=5, match_round=1, key_start_round=3, dir='./' )
-#solve(key_size=192, total_round=9, start_round=2, match_round=8, key_start_round=2, dir='./' )
+solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=2, dir='./' )

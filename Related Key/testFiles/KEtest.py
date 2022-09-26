@@ -42,7 +42,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
     
     # set territory marker bwd and fwd 
     bwd = start_r * Nb
-    fwd = start_r * Nb + Nk - 1
+    fwd = start_r * Nb + Nk
     
     ini_j = 0   # keep track of what column has been read from the initial setting
     for w in range(Nb*(Nr+1)):
@@ -54,7 +54,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
             r, j = w//4, w%4
             wi = w
         # initial state
-        if wi <= fwd and wi >= bwd: 
+        if wi >= bwd and wi < fwd: 
             print("start",r,j, 'from ini',ini_j)
             for i in ROW:
                 m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
@@ -64,9 +64,9 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 m.addConstr(key_cost_fwd[r,i,j] == 0)
             ini_j += 1
         # fwd direction
-        elif wi > fwd:            
+        elif wi >= fwd:            
             pr, pj = (wi-1)//NCOL, (wi-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 0:    # rotation
+            if (wi - fwd)% Nk == 0:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -81,7 +81,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # bwd direction
         elif wi < bwd:  
             pr, pj = (wi+Nk-1)//NCOL, (wi+Nk-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 0:    # rotation
+            if (bwd - wi) % Nk == 0:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -97,9 +97,9 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         m.update()
 
 # variable declaration
-key_size = 128
-total_round = 8 # total round
-start_round = 0   # start round, start in {0,1,2,...,total_r-1}
+key_size = 192
+total_round = 9 # total round
+start_round = 2   # start round, start in {0,1,2,...,total_r-1}
 Nk= key_size // 32
 
 K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
@@ -116,6 +116,7 @@ key_expansion(m, key_size, total_round, start_round, K_ini_b, K_ini_r, K_b, K_r,
 
 for i in ROW:
     for j in range(Nk):
+        continue
         if [i,j] == [0,3] or [i,j] == [2,3] or [i,j] == [3,3]:
             m.addConstr(K_ini_b[i,j] == 1)
             m.addConstr(K_ini_r[i,j] == 0)
@@ -127,7 +128,7 @@ for i in ROW:
 # AES192 example
 for i in ROW:
     for j in range(Nk):
-        continue
+        #continue
         if (i==1 and j==0) or (i==2 and j==4) or (i==2 and j==5):
             m.addConstr(K_ini_b[i,j] == 0)
             m.addConstr(K_ini_r[i,j] == 1)

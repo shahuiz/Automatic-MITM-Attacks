@@ -1,60 +1,60 @@
 
 round: 0
-gggb
-gggg
-gggb
-gggb
+bbbg
+bbrr
+rrbg
+bbbg
 
 round: 1
-gggb
-bbbb
-bbbb
-bbbb
+ggbb
+ggbb
+ggrr
+ggbb
 
 round: 2
-bbbb
-bbbb
-bbbb
-bbbb
+gggg
+rggg
+gggg
+gggg
 
 round: 3
-bbbb
-bbbb
-bbbb
-bbbb
+bbgg
+bgrr
+rrgg
+bgbb
 
 round: 4
-bbbb
-bbbb
-bbbb
+ggbb
+rrww
+ggrr
 bbbb
 
 round: 5
-bbbb
-bbbb
+wwww
+rrrr
 bbbb
 bbbb
 
 round: 6
-bbbb
-bbbb
-bbbb
-bbbb
+wwww
+wwww
+wwbb
+bbww
 
 round: 7
-bbbb
-bbbb
-bbbb
-bbbb
+wwww
+wwww
+bbww
+wwww
+
+round: 8
+wwww
+wwww
+wwww
+wwww
 
 round: -1
-gggb
-bggg
-bggb
-bggb
-
-round: 9
-wwww
-wwww
-wwww
-wwww
+bbgg
+rrrg
+bbgg
+bbgg
