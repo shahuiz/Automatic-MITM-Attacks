@@ -16,101 +16,101 @@ Solution:
 Visualization:
 r0  bwd <---
 SB#0        MC#0        AK#0        K#0 
-wwwr        wwwr        ////        bbbg
-rwww        wwwr        ////        gbbg
+wwwr        wwwr        ////        ggrr
+rwww        wwwr        ////        grbg
 wrww        wwwr        ////        bbbg
-wwrw        wwwr        ////        grrr
+wwrw        wwwr        ////        bbgg
 
 r1  bwd <---
 SB#1        MC#1        AK#1        K#1 
-rrwr        rrwr        ////        ggbb
-wrrr        rrrw        ////        gggb
+rrwr        rrwr        ////        rggg
+wrrr        rrrw        ////        gggr
 wwrr        rrww        ////        ggbb
-rwwr        rrww        ////        rggr
+rwwr        rrww        ////        ggbb
 MixCol costs fwdDf: [0 0 1 1]    bwdDf: [0 0 0 0]
 
 r2  bwd <---
                                     KEY_
 SB#2        MC#2        AK#2        K#2 
-rrrr        rrrr        ////        gggg
-rrrr        rrrr        ////        gggg
-rrrr        rrrr        ////        gggg
 rrrr        rrrr        ////        rrgg
+rrrr        rrrr        ////        gggg
+rrrr        rrrr        ////        gggg
+rrrr        rrrr        ////        gggg
 
 r3  fwd --->
 ENC_
 SB#3        MC#3        AK#3        K#3 
-rrrr        rrrr        gggr        bggg
-rrrr        rrrr        rggg        gbbb
-rrrr        rrrr        grgg        bggg
-rrrr        rrrr        grrg        grrg
-MixCol costs fwdDf: [0 0 0 0]    bwdDf: [3 2 3 3]
+rrrr        rrrr        ggrr        ggrg
+rrrr        rrrr        rrgg        grgg
+rrrr        rrrr        grgg        bgbb
+rrrr        rrrr        ggrg        bbgg
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [3 2 2 3]
 AddKey costs bwdDf: 
-[[0 0 0 0]
+[[0 0 1 0]
+ [0 1 0 0]
  [0 0 0 0]
- [0 0 0 0]
- [0 1 0 0]]
+ [0 0 0 0]]
 KeyExp costs bwdDf: 
-[[0 0 0 0]
+[[0 0 0 1]
  [0 0 0 0]
  [0 0 0 0]
- [0 0 0 1]]
+ [0 0 0 0]]
 
 r4  fwd --->
 SB#4        MC#4        AK#4        K#4 
-bggr        bggr        bbbg        ggbb
-rbbb        bbbr        bbbg        bbgb
-brgg        ggbr        bbbg        ggbb
-ggrg        gggr        bbbr        gggr
+gggr        gggr        bbbg        gggg
+rggg        gggr        bbbr        gggr
+brbb        bbbr        bbbg        bbbb
+bbrg        gbbr        bbbg        ggbb
 MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 0 0 3]
 AddKey costs bwdDf: 
 [[0 0 0 0]
+ [0 0 0 1]
  [0 0 0 0]
- [0 0 0 0]
- [0 0 0 1]]
+ [0 0 0 0]]
 
 r5  fwd --->
 SB#5        MC#5        AK#5        K#5 
+bbbg        bbbg        bbbb        gggg
+bbbg        bbgb        bbbb        bbbb
 bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb
-bbbg        gbbb        bbbb        gggg
+bbbb        bbbb        bbbb        gggg
 KeyExp costs bwdDf: 
-[[0 0 0 0]
+[[1 0 0 0]
  [0 0 0 0]
  [0 0 0 0]
- [1 0 0 0]]
+ [0 0 0 0]]
 
 r6  fwd --->
 SB#6        MC#6        AK#6        K#6 
+bbbb        bbbb        bbbb        ggww
+bbbb        bbbb        bbbb        bwbb
 bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bwww
+bbbb        bbbb        bbbb        bbgg
 
 r7  fwd --->
 SB#7        MC#7        AK#7        K#7 
+bbww        bbww        wbww        wwww
+bwbb        wbbb        wbww        bbbw
 bbbb        bbbb        wbww        bbbb
-bbbb        bbbb        wbww        bbbb
-bbbb        bbbb        wbww        bbww
-bwww        wbww        wbww        wwbw
+bbbb        bbbb        wbww        ggbb
 
 r8  mat -><-
 SB#8        MC#8        AK#8        K#8 
-wbww        wbww        ////        bbbb
-wbww        bwww        ////        bbbb
-wbww        wwwb        ////        wwww
 wwww        wwww        ////        wwww
+wbww        bwww        ////        bbbb
+wbww        wwwb        ////        bbbb
+wbww        wwbw        ////        wwww
 
 r-1  
                         AT          K#-1
-                        wbww        bbgg
-                        bwww        bbgg
-                        wwww        bbgg
                         wwww        rrrr
+                        bwww        bbgg
+                        wwwb        bbgg
+                        wwww        gggg
 MAT -><-
                         AT^K        SB#0
-                        wbww        wwwr
+                        wwww        wwwr
                         bwww        rwww
-                        wwww        wrww
+                        wwwb        wrww
                         wwww        wwrw

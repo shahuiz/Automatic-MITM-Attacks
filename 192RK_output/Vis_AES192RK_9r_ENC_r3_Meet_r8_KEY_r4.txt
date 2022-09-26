@@ -23,8 +23,8 @@ wwrw        wwwr        ////        bbbg
 
 r1  bwd <---
 SB#1        MC#1        AK#1        K#1 
-rrwr        rrwr        ////        ggbb
-wrrr        rrrw        ////        rggr
+rrwr        rrwr        ////        rgbb
+wrrr        rrrw        ////        gggr
 wwrr        rrww        ////        ggbb
 rwwr        rrww        ////        ggbb
 MixCol costs fwdDf: [0 0 1 1]    bwdDf: [0 0 0 0]
@@ -71,8 +71,8 @@ AddKey costs bwdDf:
 
 r5  fwd --->
 SB#5        MC#5        AK#5        K#5 
-bbbb        bbbb        bbbb        bbbb
-bbbg        bbgb        bbbb        gggg
+bbbb        bbbb        bbbb        bbgg
+bbbg        bbgb        bbbb        ggbb
 bbbb        bbbb        bbbb        bbbb
 bbbb        bbbb        bbbb        bbbb
 
@@ -85,22 +85,22 @@ bbbb        bbbb        bbbb        bbbb
 
 r7  fwd --->
 SB#7        MC#7        AK#7        K#7 
-bbbb        bbbb        wwwb        bbww
-bwww        wwwb        wwwb        wwbw
+bbbb        bbbb        wwwb        wwww
+bwww        wwwb        wwwb        bbbw
 bbbb        bbbb        wwwb        bbbb
 bbbb        bbbb        wwwb        bbbb
 
 r8  mat -><-
 SB#8        MC#8        AK#8        K#8 
 wwww        wwww        ////        wwww
-wwww        wwww        ////        wwww
+wwww        wwww        ////        wwbb
 wwwb        wbww        ////        bbbb
-wwwb        bwww        ////        bbbb
+wwwb        bwww        ////        bbww
 
 r-1  
                         AT          K#-1
-                        wwww        bbgg
-                        wwww        rrrr
+                        wwww        bbrr
+                        wwww        rrgg
                         wbww        bbgg
                         bwww        bbgg
 MAT -><-

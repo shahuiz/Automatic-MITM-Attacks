@@ -737,4 +737,4 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
 #solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=-1, dir='./' )
 #solve(key_size=256, total_round=9, start_round=1, match_round=7, key_start_round=1, dir='./')
 #solve(key_size=256, total_round=9, start_round=5, match_round=1, key_start_round=3, dir='./' )
-solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=2, dir='./' )
+#solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=2, dir='./' )
