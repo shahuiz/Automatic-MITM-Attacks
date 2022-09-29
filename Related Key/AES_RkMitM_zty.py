@@ -291,7 +291,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # fwd direction
         elif wi >= fwd:            
             pr, pj = (wi-1)//NCOL, (wi-1)%NCOL        # compute round and column params for temp
-            if (wi - fwd)% Nk == 0:    # rotation
+            if wi % Nk == 2:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -306,7 +306,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # bwd direction
         elif wi < bwd:  
             pr, pj = (wi+Nk-1)//NCOL, (wi+Nk-1)%NCOL        # compute round and column params for temp
-            if (bwd - wi) % Nk == 0:    # rotation
+            if wi % Nk == 2:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -350,25 +350,6 @@ def displaySol(m:gp.Model, path):
             return 'g'
         if b==0 and r==0:
             return 'w'
-    
-    def headliner(r:int, f: TextIOWrapper):
-        header = "r%d  " %r 
-        sign = ''
-        
-        if r == match_round:
-            header+= 'mat -><-\n'
-        elif r in fwd:
-            header+= 'fwd --->\n'
-        elif r in bwd:
-            header+= 'bwd <---\n'
-
-        if r == enc_start:
-            sign+='ENC_\n'
-        if r == key_start:
-            sign = "{:<36}".format(sign)
-            sign += 'KEY_\n'
-        
-        f.write(header + sign)
 
     if not os.path.exists(path= path + m.modelName +'.sol'):
         return
@@ -380,8 +361,8 @@ def displaySol(m:gp.Model, path):
             temp = line
             temp = temp.split()
             Sol[temp[0]] = round(float(temp[1]))
-    
-    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_Meet_r(\d+)_KEY_r(\d)', m.modelName)
+    match = re.match(r'AES(\d+)RK_(\d+)r_ENC_r(\d+)_Meet_r(\d+)_KEY_r([-+]?\d+)', m.modelName)
+    print(m.modelName, match)
     key_size, total_round, enc_start, match_round, key_start = int(match.group(1)), int(match.group(2)), int(match.group(3)), int(match.group(4)), int(match.group(5))
 
     if enc_start < match_round:
@@ -390,8 +371,11 @@ def displaySol(m:gp.Model, path):
     else:
         bwd = list(range(match_round + 1, enc_start))
         fwd = list(range(enc_start, total_round)) + list(range(0, match_round))
-        
 
+    Nk= key_size // 32
+    Nr = total_round
+    Nb = 4
+        
     SB_b = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     SB_r = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     MC_b = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
@@ -410,9 +394,9 @@ def displaySol(m:gp.Model, path):
     ini_enc_b = np.ndarray(shape=(NROW, NCOL), dtype=int)
     ini_enc_r = np.ndarray(shape=(NROW, NCOL), dtype=int)
     ini_enc_g = np.ndarray(shape=(NROW, NCOL), dtype=int)
-    ini_key_b = np.ndarray(shape=(NROW, NCOL), dtype=int)
-    ini_key_r = np.ndarray(shape=(NROW, NCOL), dtype=int)
-    ini_key_g = np.ndarray(shape=(NROW, NCOL), dtype=int)
+    ini_key_b = np.ndarray(shape=(NROW, Nk), dtype=int)
+    ini_key_r = np.ndarray(shape=(NROW, Nk), dtype=int)
+    ini_key_g = np.ndarray(shape=(NROW, Nk), dtype=int)
     tempAT_b = np.ndarray(shape=(NROW, NCOL), dtype=int)
     tempAT_r = np.ndarray(shape=(NROW, NCOL), dtype=int)
 
@@ -453,6 +437,9 @@ def displaySol(m:gp.Model, path):
             ini_enc_b[i,j] = Sol["E_ini_b[%d,%d]" %(i,j)]
             ini_enc_r[i,j] = Sol["E_ini_r[%d,%d]" %(i,j)]
             ini_enc_g[i,j] = Sol["E_ini_g[%d,%d]" %(i,j)]
+    
+    for i in ROW:
+        for j in range(Nk):
             ini_key_b[i,j] = Sol["K_ini_b[%d,%d]" %(i,j)]
             ini_key_r[i,j] = Sol["K_ini_r[%d,%d]" %(i,j)]
             ini_key_g[i,j] = Sol["K_ini_g[%d,%d]" %(i,j)]
@@ -492,7 +479,18 @@ def displaySol(m:gp.Model, path):
     f.write('\nVisualization:\n')
     
     for r in range(total_round):
-        headliner(r, f)
+        header = "r%d  " %r 
+        
+        if r == match_round:
+            header+= 'mat -><-'
+        elif r in fwd:
+            header+= 'fwd --->'
+        elif r in bwd:
+            header+= 'bwd <---'
+        if r == enc_start:
+            header+=TAB*2 + 'ENC_start'
+        
+        f.write(header + '\n')
         nr = (r+1)%total_round
         
         f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'AK#%d' %r +TAB*2+'K#%d ' %r +'\n')
@@ -515,10 +513,6 @@ def displaySol(m:gp.Model, path):
             f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[r,:,:]) + '\n')
         if xor_cost_bwd[r,:,:].any():
                 f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[r,:,:]) + '\n')
-        if Key_cost_fwd[r,:,:].any():
-                f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[r,:,:]) + '\n')
-        if Key_cost_bwd[r,:,:].any():
-                f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[r,:,:]) + '\n')
         f.write('\n')
         
         if r == match_round and match_round != total_round - 1:
@@ -531,10 +525,6 @@ def displaySol(m:gp.Model, path):
                     EQAK+=color(AK_b[r,i,j], AK_r[r,i,j])
                 f.write(EQAK+TAB*2+NSB+'\n') 
             #f.write('Meet_signed: ' + str(meet_s[:]) + '\n')
-            if Key_cost_fwd[r,:,:].any():
-                f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[r,:,:]) + '\n')
-            if Key_cost_bwd[r,:,:].any():
-                f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[r,:,:]) + '\n')
             f.write('Degree of Matching:' + str(meet[:]) + '\n'*2)
 
     # process whiten key
@@ -556,10 +546,6 @@ def displaySol(m:gp.Model, path):
             f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[tr,:,:]) + '\n')
     if xor_cost_bwd[tr,:,:].any():
             f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[tr,:,:]) + '\n')
-    if Key_cost_fwd[tr,:,:].any():
-            f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[tr,:,:]) + '\n')
-    if Key_cost_bwd[tr,:,:].any():
-            f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[tr,:,:]) + '\n')
     
     if match_round == total_round - 1:
         f.write("MAT -><-" + '\n')
@@ -571,6 +557,45 @@ def displaySol(m:gp.Model, path):
                 SB +=color(SB_b[0,i,j], SB_r[0,i,j])
                 AT +=color(tempAT_b[i,j], tempAT_r[i,j])
             f.write(6*TAB + AT+ TAB*2 + SB + '\n')
+
+    f.write('\n'+'Key Schedule: starts at r'+str(key_start)+'\n')
+
+    for w in range(-Nb, Nb*Nr, Nk):
+        lr = w // NCOL
+        lj = w % NCOL
+        
+        if lj > 0:
+            f.write('K'+str(lr)+'R' + '+'+'K'+str(lr+1) + ' rot' + '\n')
+        else:
+            f.write('K'+str(lr) + '+' + 'K'+str(lr+1)+'L' + ' rot' + '\n')
+        
+        cost_fwd = np.empty(shape=(NROW, Nk))
+        cost_bwd = np.empty(shape=(NROW, Nk))
+        ji = -1
+        for wi in range(w, w+Nk):
+            r = wi // NCOL
+            j = wi % NCOL
+            ji += 1
+            for i in ROW:
+                cost_fwd[i, ji] = Key_cost_fwd[r,i,j]
+                cost_bwd[i, ji] = Key_cost_bwd[r,i,j]
+        
+        for i in ROW:
+            line = ''
+            for wi in range(w, w+Nk):
+                r = wi // NCOL
+                j = wi % NCOL
+                line += color(KEY_b[r,i,j], KEY_r[r,i,j])
+                if wi == w+Nk-1:
+                    line += '   ' + color(KEY_b[r,(i+1)%NCOL,j], KEY_r[r,(i+1)%NCOL,j])
+                elif j ==3:
+                    line += '|'
+            f.write(line+'\n')
+        if cost_fwd[:,:].any():
+            f.write('KeyExp costs fwdDf: ' + '\n' + str(cost_fwd[:,:]) + '\n')
+        if cost_bwd[:,:].any():
+            f.write('KeyExp costs bwdDf: ' + '\n' + str(cost_bwd[:,:]) + '\n')
+        f.write('\n'*2)
     f.close()
 
     return 'Obj= min{DF_b=%d, DF_r=%d, Match=%d} = %d' %(DF_b, DF_r, Match, Obj)
@@ -734,7 +759,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
 #for key in range(0, 8):
     #continue
     #solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=key, dir='./' )
-#solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=-1, dir='./' )
+#solve(key_size=128, total_round=7, start_round=4, match_round=1, key_start_round=-1, dir='./' )
 #solve(key_size=256, total_round=9, start_round=1, match_round=7, key_start_round=1, dir='./')
-#solve(key_size=256, total_round=9, start_round=5, match_round=1, key_start_round=3, dir='./' )
-#solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=2, dir='./' )
+#solve(key_size=256, total_round=9, start_round=3, match_round=6, key_start_round=0, dir='./' )
+#solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=3, dir='./' )

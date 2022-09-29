@@ -7,8 +7,8 @@ Model:
 Initialization:
     ENC FWD: 0
     ENC BWD: 16
-    KEY FWD: 0
-    KEY BWD: 1
+    KEY FWD: 3
+    KEY BWD: 3
 
 Solution:
     Obj= min{DF_b=1, DF_r=1, Match=1} = 1
@@ -29,9 +29,7 @@ wwrr        rrww        ////        gggg
 rwwr        rrww        ////        ggbb
 MixCol costs fwdDf: [0 0 1 1]    bwdDf: [0 0 0 0]
 
-r2  fwd --->
-ENC_
-                               KEY_
+r2  fwd --->        ENC_start
 SB#2        MC#2        AK#2        K#2 
 rrrr        rrrr        rrrr        rggg
 rrrr        rrrr        rrrr        gggg
@@ -50,11 +48,6 @@ AddKey costs bwdDf:
  [1 1 0 0]
  [0 0 0 0]
  [0 0 0 0]]
-KeyExp costs bwdDf: 
-[[0 0 1 0]
- [0 0 0 0]
- [0 0 0 0]
- [0 0 0 0]]
 
 r4  fwd --->
 SB#4        MC#4        AK#4        K#4 
@@ -66,11 +59,6 @@ MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 0 3 0]
 AddKey costs bwdDf: 
 [[0 0 0 0]
  [0 0 1 0]
- [0 0 0 0]
- [0 0 0 0]]
-KeyExp costs bwdDf: 
-[[0 0 0 0]
- [0 0 0 1]
  [0 0 0 0]
  [0 0 0 0]]
 
@@ -114,3 +102,59 @@ MAT -><-
                         bwww        rwww
                         wwwb        wrww
                         wwww        wwrw
+
+Key Schedule: starts at r2
+K-1+K0L rot
+rrrg|bb   r
+gggg|rr   g
+bbgg|gg   b
+bbgg|bb   b
+
+
+K0R+K1 rot
+rr|ggbb   r
+gg|ggrr   g
+bg|gggg   b
+bg|ggbb   b
+
+
+K2+K3L rot
+rggg|bb   r
+gggg|rr   g
+gggg|gg   g
+gggg|bg   b
+
+
+K3R+K4 rot
+gg|ggbb   g
+gg|ggrg   g
+gg|gggg   b
+bb|bbbb   b
+KeyExp costs bwdDf: 
+[[1. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0.]]
+
+
+K5+K6L rot
+gggg|bb   r
+gggg|rr   b
+bbbb|bb   b
+bbbb|bb   b
+
+
+K6R+K7 rot
+rr|rrww   w
+bb|bbww   b
+bb|bbbb   b
+bb|bbbb   w
+
+
+K8+K9L rot
+wwww|rr   g
+bbbb|gg   b
+bbbb|bb   b
+wwww|bb   r
+
+

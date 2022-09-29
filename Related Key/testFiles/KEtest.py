@@ -66,7 +66,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # fwd direction
         elif wi >= fwd:            
             pr, pj = (wi-1)//NCOL, (wi-1)%NCOL        # compute round and column params for temp
-            if (wi - fwd)% Nk == 0:    # rotation
+            if wi % Nk == 2:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -81,7 +81,7 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         # bwd direction
         elif wi < bwd:  
             pr, pj = (wi+Nk-1)//NCOL, (wi+Nk-1)%NCOL        # compute round and column params for temp
-            if (bwd - wi) % Nk == 0:    # rotation
+            if wi % Nk == 2:    # rotation
                 temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
                 print('after rot', temp_b,'\n', temp_r)
             else:               
@@ -101,6 +101,8 @@ key_size = 192
 total_round = 9 # total round
 start_round = 2   # start round, start in {0,1,2,...,total_r-1}
 Nk= key_size // 32
+Nr = total_round
+Nb = 4
 
 K_b = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round+1, NROW, NCOL))
 K_r = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_round+1, NROW, NCOL))
@@ -191,22 +193,35 @@ for lines in solFile:
         j = int(l[8])
         K_r[r,i,j] = l[11]
 
+def color(b,r):
+    if b==1 and r==0:
+        return 'b'
+    if b==0 and r==1:
+        return 'r'
+    if b==1 and r==1:
+        return 'g'
+    if b==0 and r==0:
+        return 'w'
+
 with open('./Related Key/testFiles/KEtest.out','w') as f:
-    for r in range(9+1):
-        if r ==total_round:
-            f.write('\nround: '+str(-1)+'\n')
+    for w in range(-Nb, Nb*Nr, Nk):
+        lr = w // NCOL
+        lj = w % NCOL
+        
+        if lj > 0:
+            f.write('K'+str(lr)+'R' + '+'+'K'+str(lr+1) + ' rot' + '\n')
         else:
-            f.write('\nround: '+str(r)+'\n')
+            f.write('K'+str(lr) + '+' + 'K'+str(lr+1)+'L' + ' rot' + '\n')
+        
         for i in ROW:
-            color=''
-            for j in COL:
-                if K_b[r,i,j] == 0 and K_r[r,i,j]==0:
-                    color+='w'
-                if K_b[r,i,j] == 1 and K_r[r,i,j]==0:
-                    color+='b'
-                if K_b[r,i,j] == 0 and K_r[r,i,j]==1:
-                    color+='r'
-                if K_b[r,i,j] == 1 and K_r[r,i,j]==1:
-                    color+='g'
-            f.write(color+'\n')
+            line = ''
+            for wi in range(w, w+Nk):
+                r = wi // NCOL
+                j = wi % NCOL
+                line += color(K_b[r,i,j], K_r[r,i,j])
+                if wi == w+Nk-1:
+                    line += '   ' + color(K_b[r,(i+1)%NCOL,j], K_r[r,(i+1)%NCOL,j])
+            f.write(line+'\n')
+        f.write('\n'*2)
+    
 f.close()

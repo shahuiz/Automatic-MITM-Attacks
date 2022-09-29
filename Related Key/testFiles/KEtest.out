@@ -1,60 +1,49 @@
+K-1+K0L rot
+bbggbb   b
+rrrgbb   r
+bbggrr   b
+bbggbb   b
 
-round: 0
-bbbg
-bbrr
-rrbg
-bbbg
 
-round: 1
-ggbb
-ggbb
-ggrr
-ggbb
+K0R+K1 rot
+bgggbb   b
+rrggbb   r
+bgggrr   b
+bgggbb   b
 
-round: 2
-gggg
-rggg
-gggg
-gggg
 
-round: 3
-bbgg
-bgrr
-rrgg
-bgbb
+K2+K3L rot
+ggggbb   g
+rgggbg   r
+ggggrr   g
+ggggbg   b
 
-round: 4
-ggbb
-rrww
-ggrr
-bbbb
 
-round: 5
-wwww
-rrrr
-bbbb
-bbbb
+K3R+K4 rot
+ggggbb   w
+rrrrww   r
+ggggrr   b
+bbbbbb   b
 
-round: 6
-wwww
-wwww
-wwbb
-bbww
 
-round: 7
-wwww
-wwww
-bbww
-wwww
+K5+K6L rot
+wwwwww   w
+rrrrww   w
+bbbbww   b
+bbbbbb   w
 
-round: 8
-wwww
-wwww
-wwww
-wwww
 
-round: -1
-bbgg
-rrrg
-bbgg
-bbgg
+K6R+K7 rot
+wwwwww   w
+wwwwww   w
+bbbbww   w
+wwwwww   w
+
+
+K8+K9L rot
+wwwwbb   r
+wwwwrr   b
+wwwwbb   b
+wwwwbb   b
+
+

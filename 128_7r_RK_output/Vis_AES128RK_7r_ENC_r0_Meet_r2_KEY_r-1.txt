@@ -1,0 +1,140 @@
+Model:
+    Total: 7
+    Start at: r0
+    Meet at: r2
+    KEY start at: r-1
+
+Initialization:
+    ENC FWD: 8
+    ENC BWD: 8
+    KEY FWD: 0
+    KEY BWD: 0
+
+Solution:
+    Obj= min{DF_b=4, DF_r=3, Match=1} = 1
+
+Visualization:
+r0  fwd --->        ENC_start
+SB#0        MC#0        AK#0        K#0 
+brbr        brbr        bgbr        gggg
+rbrb        brbr        brbr        gggg
+brbr        brbr        brbg        gggg
+rbrb        brbr        brbr        gggg
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 1 0 1]
+
+r1  fwd --->
+SB#1        MC#1        AK#1        K#1 
+bgbr        bgbr        wbww        gggg
+brbr        rbrb        wbbw        gggg
+brbg        bgbr        wbwb        gggg
+brbr        rbrb        bbww        gggg
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [1 0 1 1]
+
+r2  mat -><-
+SB#2        MC#2        AK#2        K#2 
+wbww        wbww        ////        gggg
+wbbw        bbww        ////        gggg
+wbwb        wbwb        ////        gggg
+bbww        wbbw        ////        gggg
+
+Match:
+MC^K        SB#3
+wbww        rwww
+bbww        wrww
+wbwb        wwrw
+wbbw        wwwr
+Degree of Matching:[0 1 0 0]
+
+r3  bwd <---
+SB#3        MC#3        AK#3        K#3 
+rwww        rwww        ////        gggg
+wrww        rwww        ////        gggg
+wwrw        rwww        ////        gggg
+wwwr        rwww        ////        gggg
+
+r4  bwd <---
+SB#4        MC#4        AK#4        K#4 
+rwww        rwww        ////        gggg
+rwww        wwwr        ////        gggg
+rwww        wwrw        ////        gggg
+rwww        wrww        ////        gggg
+MixCol costs fwdDf: [1 1 1 1]    bwdDf: [0 0 0 0]
+
+r5  bwd <---
+SB#5        MC#5        AK#5        K#5 
+brbr        brbr        ////        gggg
+rbrb        brbr        ////        gggg
+brbr        brbr        ////        gggg
+rbrb        brbr        ////        gggg
+
+r6  bwd <---
+SB#6        MC#6        AK#6        K#6 
+brbr        brbr        ////        gggg
+brbr        rbrb        ////        gggg
+brbr        brbr        ////        gggg
+brbr        rbrb        ////        gggg
+
+r-1  
+                        AT          K#-1
+                        brbr        gggg
+                        rbrb        gggg
+                        brbr        gggg
+                        rbrb        gggg
+
+Key Schedule: starts at r-1
+K-1+K0L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K0+K1L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K1+K2L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K2+K3L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K3+K4L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K4+K5L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K5+K6L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+K6+K7L rot
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
