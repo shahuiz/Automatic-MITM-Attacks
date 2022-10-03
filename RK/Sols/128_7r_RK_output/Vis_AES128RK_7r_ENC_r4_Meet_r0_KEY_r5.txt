@@ -1,0 +1,145 @@
+Model:
+    Total: 7
+    Start at: r4
+    Meet at: r0
+    KEY start at: r5
+
+Initialization:
+    ENC FWD: 4
+    ENC BWD: 9
+    KEY FWD: 16
+    KEY BWD: 0
+
+Solution:
+    Obj= min{DF_b=3, DF_r=3, Match=2} = 2
+
+Visualization:
+r0  mat -><-
+SB#0        MC#0        AK#0        K#0 
+wbwb        wbwb        ////        bbbb
+bwbw        wbwb        ////        bbbb
+wbwb        wbwb        ////        bbbb
+bwbw        wbwb        ////        bbbb
+
+Match:
+MC^K        SB#1
+wbwb        wwrw
+wbwb        wwwr
+wbwb        rwww
+wbwb        wrww
+Degree of Matching:[0 1 0 1]
+
+r1  bwd <---
+SB#1        MC#1        AK#1        K#1 
+wwrw        wwrw        ////        bbgb
+wwwr        wwrw        ////        bbgb
+rwww        wwrw        ////        bbgb
+wrww        wwrw        ////        bbgb
+
+r2  bwd <---
+SB#2        MC#2        AK#2        K#2 
+wrrr        wrrr        ////        bggb
+wwrr        wrrw        ////        bggb
+rwrr        rrrw        ////        bggb
+rrrw        wrrr        ////        bggb
+MixCol costs fwdDf: [1 0 0 2]    bwdDf: [0 0 0 0]
+
+r3  bwd <---
+SB#3        MC#3        AK#3        K#3 
+rrrb        rrrb        ////        gggb
+brrr        rrrb        ////        gggb
+rgrr        rrrg        ////        gggb
+rrgr        rrrg        ////        gggb
+MixCol costs fwdDf: [0 0 0 2]    bwdDf: [0 0 0 0]
+
+r4  fwd --->        ENC_start
+SB#4        MC#4        AK#4        K#4 
+grrb        grrb        bbwb        bbbb
+rgrb        grbr        bwbw        bbbb
+rrgb        gbrr        bbwb        bbbb
+rrrb        brrr        bwbw        bbbb
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 2 2 2]
+
+r5  fwd --->
+SB#5        MC#5        AK#5        K#5 
+bbwb        bbwb        wbwb        bbbb
+bwbw        wbwb        wbwb        bbbb
+bbwb        wbbb        wbwb        bbbb
+bwbw        wbwb        wbwb        bbbb
+
+r6  fwd --->
+SB#6        MC#6        AK#6        K#6 
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
+wbwb        wbwb        ////        bbbb
+wbwb        bwbw        ////        bbbb
+
+r-1  
+                        AT          K#-1
+                        wbwb        bbbb
+                        bwbw        bbbb
+                        wbwb        bbbb
+                        bwbw        bbbb
+
+Key Schedule: starts at r5
+K-1+K0L rot
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+
+K0+K1L rot
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+
+K1+K2L rot
+bbgb   b
+bbgb   b
+bbgb   b
+bbgb   b
+
+
+K2+K3L rot
+bggb   b
+bggb   b
+bggb   b
+bggb   b
+
+
+K3+K4L rot
+gggb   b
+gggb   b
+gggb   b
+gggb   b
+KeyExp costs fwdDf: 
+[[1. 1. 1. 0.]
+ [1. 1. 1. 0.]
+ [1. 1. 1. 0.]
+ [1. 1. 1. 0.]]
+
+
+K4+K5L rot
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+
+K5+K6L rot
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+
+K6+K7L rot
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+

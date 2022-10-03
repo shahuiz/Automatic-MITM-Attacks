@@ -1,0 +1,396 @@
+total: 7 start: 0 meet: 0 key_start: -1    time cost: 0.46    Infeasible
+total: 7 start: 0 meet: 0 key_start: 0    time cost: 0.42    Infeasible
+total: 7 start: 0 meet: 0 key_start: 1    time cost: 0.41    Infeasible
+total: 7 start: 0 meet: 0 key_start: 2    time cost: 0.55    Infeasible
+total: 7 start: 0 meet: 0 key_start: 3    time cost: 0.52    Infeasible
+total: 7 start: 0 meet: 0 key_start: 4    time cost: 0.55    Infeasible
+total: 7 start: 0 meet: 0 key_start: 5    time cost: 0.57    Infeasible
+total: 7 start: 0 meet: 0 key_start: 6    time cost: 0.56    Infeasible
+total: 7 start: 0 meet: 1 key_start: -1    time cost: 3.81    Infeasible
+total: 7 start: 0 meet: 1 key_start: 0    time cost: 6.17    Infeasible
+total: 7 start: 0 meet: 1 key_start: 1    time cost: 1.53    Infeasible
+total: 7 start: 0 meet: 1 key_start: 2    time cost: 7.20    Infeasible
+total: 7 start: 0 meet: 1 key_start: 3    time cost: 4.93    Infeasible
+total: 7 start: 0 meet: 1 key_start: 4    time cost: 9.35    Infeasible
+total: 7 start: 0 meet: 1 key_start: 5    time cost: 5.75    Infeasible
+total: 7 start: 0 meet: 1 key_start: 6    time cost: 6.99    Infeasible
+total: 7 start: 0 meet: 2 key_start: -1    time cost: 149.58    Obj= min{DF_b=4, DF_r=3, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 0    time cost: 50.65    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 1    time cost: 35.67    Obj= min{DF_b=4, DF_r=1, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 2    time cost: 17.43    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 3    time cost: 8.07    Obj= min{DF_b=1, DF_r=3, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 4    time cost: 15.09    Obj= min{DF_b=2, DF_r=3, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 5    time cost: 26.91    Obj= min{DF_b=1, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 2 key_start: 6    time cost: 27.80    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: -1    time cost: 38.16    Obj= min{DF_b=2, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 0    time cost: 35.13    Obj= min{DF_b=2, DF_r=3, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 1    time cost: 26.58    Obj= min{DF_b=3, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 2    time cost: 21.45    Obj= min{DF_b=4, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 3    time cost: 14.16    Obj= min{DF_b=2, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 4    time cost: 13.12    Obj= min{DF_b=2, DF_r=3, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 5    time cost: 16.34    Obj= min{DF_b=3, DF_r=4, Match=1} = 1
+total: 7 start: 0 meet: 3 key_start: 6    time cost: 23.38    Obj= min{DF_b=2, DF_r=2, Match=1} = 1
+total: 7 start: 0 meet: 4 key_start: -1    time cost: 10.94    Infeasible
+total: 7 start: 0 meet: 4 key_start: 0    time cost: 13.22    Infeasible
+total: 7 start: 0 meet: 4 key_start: 1    time cost: 23.93    Infeasible
+total: 7 start: 0 meet: 4 key_start: 2    time cost: 46.58    Infeasible
+total: 7 start: 0 meet: 4 key_start: 3    time cost: 16.35    Infeasible
+total: 7 start: 0 meet: 4 key_start: 4    time cost: 5.48    Infeasible
+total: 7 start: 0 meet: 4 key_start: 5    time cost: 6.01    Infeasible
+total: 7 start: 0 meet: 4 key_start: 6    time cost: 7.49    Infeasible
+total: 7 start: 0 meet: 5 key_start: -1    time cost: 9.20    Infeasible
+total: 7 start: 0 meet: 5 key_start: 0    time cost: 12.39    Infeasible
+total: 7 start: 0 meet: 5 key_start: 1    time cost: 12.28    Infeasible
+total: 7 start: 0 meet: 5 key_start: 2    time cost: 4.04    Infeasible
+total: 7 start: 0 meet: 5 key_start: 3    time cost: 15.86    Infeasible
+total: 7 start: 0 meet: 5 key_start: 4    time cost: 16.36    Infeasible
+total: 7 start: 0 meet: 5 key_start: 5    time cost: 15.39    Infeasible
+total: 7 start: 0 meet: 5 key_start: 6    time cost: 7.60    Infeasible
+total: 7 start: 0 meet: 6 key_start: -1    time cost: 0.51    Infeasible
+total: 7 start: 0 meet: 6 key_start: 0    time cost: 0.56    Infeasible
+total: 7 start: 0 meet: 6 key_start: 1    time cost: 0.63    Infeasible
+total: 7 start: 0 meet: 6 key_start: 2    time cost: 0.55    Infeasible
+total: 7 start: 0 meet: 6 key_start: 3    time cost: 0.62    Infeasible
+total: 7 start: 0 meet: 6 key_start: 4    time cost: 0.63    Infeasible
+total: 7 start: 0 meet: 6 key_start: 5    time cost: 0.66    Infeasible
+total: 7 start: 0 meet: 6 key_start: 6    time cost: 0.63    Infeasible
+total: 7 start: 1 meet: 0 key_start: -1    time cost: 1.81    Infeasible
+total: 7 start: 1 meet: 0 key_start: 0    time cost: 2.26    Infeasible
+total: 7 start: 1 meet: 0 key_start: 1    time cost: 3.53    Infeasible
+total: 7 start: 1 meet: 0 key_start: 2    time cost: 1.55    Infeasible
+total: 7 start: 1 meet: 0 key_start: 3    time cost: 5.26    Infeasible
+total: 7 start: 1 meet: 0 key_start: 4    time cost: 1.50    Infeasible
+total: 7 start: 1 meet: 0 key_start: 5    time cost: 1.45    Infeasible
+total: 7 start: 1 meet: 0 key_start: 6    time cost: 1.34    Infeasible
+total: 7 start: 1 meet: 1 key_start: -1    time cost: 0.45    Infeasible
+total: 7 start: 1 meet: 1 key_start: 0    time cost: 0.45    Infeasible
+total: 7 start: 1 meet: 1 key_start: 1    time cost: 0.48    Infeasible
+total: 7 start: 1 meet: 1 key_start: 2    time cost: 0.48    Infeasible
+total: 7 start: 1 meet: 1 key_start: 3    time cost: 0.59    Infeasible
+total: 7 start: 1 meet: 1 key_start: 4    time cost: 0.60    Infeasible
+total: 7 start: 1 meet: 1 key_start: 5    time cost: 0.63    Infeasible
+total: 7 start: 1 meet: 1 key_start: 6    time cost: 0.62    Infeasible
+total: 7 start: 1 meet: 2 key_start: -1    time cost: 26.86    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 0    time cost: 20.69    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 1    time cost: 27.29    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 2    time cost: 8.93    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 3    time cost: 12.48    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 4    time cost: 6.88    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 5    time cost: 8.08    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 2 key_start: 6    time cost: 37.59    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 3 key_start: -1    time cost: 56.44    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 0    time cost: 61.07    Obj= min{DF_b=1, DF_r=4, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 1    time cost: 37.03    Obj= min{DF_b=1, DF_r=3, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 2    time cost: 22.64    Obj= min{DF_b=4, DF_r=4, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 3    time cost: 6.35    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 4    time cost: 8.29    Obj= min{DF_b=2, DF_r=4, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 5    time cost: 22.26    Obj= min{DF_b=3, DF_r=4, Match=1} = 1
+total: 7 start: 1 meet: 3 key_start: 6    time cost: 20.79    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 1 meet: 4 key_start: -1    time cost: 30.32    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 0    time cost: 39.67    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 1    time cost: 27.80    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 2    time cost: 23.85    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 3    time cost: 19.15    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 4    time cost: 12.56    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 5    time cost: 9.30    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 4 key_start: 6    time cost: 89.11    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 1 meet: 5 key_start: -1    time cost: 4.75    Infeasible
+total: 7 start: 1 meet: 5 key_start: 0    time cost: 9.00    Infeasible
+total: 7 start: 1 meet: 5 key_start: 1    time cost: 15.73    Infeasible
+total: 7 start: 1 meet: 5 key_start: 2    time cost: 22.87    Infeasible
+total: 7 start: 1 meet: 5 key_start: 3    time cost: 10.77    Infeasible
+total: 7 start: 1 meet: 5 key_start: 4    time cost: 16.87    Infeasible
+total: 7 start: 1 meet: 5 key_start: 5    time cost: 7.79    Infeasible
+total: 7 start: 1 meet: 5 key_start: 6    time cost: 28.28    Infeasible
+total: 7 start: 1 meet: 6 key_start: -1    time cost: 0.46    Infeasible
+total: 7 start: 1 meet: 6 key_start: 0    time cost: 0.53    Infeasible
+total: 7 start: 1 meet: 6 key_start: 1    time cost: 0.61    Infeasible
+total: 7 start: 1 meet: 6 key_start: 2    time cost: 0.59    Infeasible
+total: 7 start: 1 meet: 6 key_start: 3    time cost: 0.52    Infeasible
+total: 7 start: 1 meet: 6 key_start: 4    time cost: 0.56    Infeasible
+total: 7 start: 1 meet: 6 key_start: 5    time cost: 0.58    Infeasible
+total: 7 start: 1 meet: 6 key_start: 6    time cost: 0.57    Infeasible
+total: 7 start: 2 meet: 0 key_start: -1    time cost: 10.09    Infeasible
+total: 7 start: 2 meet: 0 key_start: 0    time cost: 7.21    Infeasible
+total: 7 start: 2 meet: 0 key_start: 1    time cost: 4.38    Infeasible
+total: 7 start: 2 meet: 0 key_start: 2    time cost: 17.06    Obj= min{DF_b=1, DF_r=1, Match=2} = 1
+total: 7 start: 2 meet: 0 key_start: 3    time cost: 17.40    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 0 key_start: 4    time cost: 11.32    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 0 key_start: 5    time cost: 18.54    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 0 key_start: 6    time cost: 12.09    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 1 key_start: -1    time cost: 1.80    Infeasible
+total: 7 start: 2 meet: 1 key_start: 0    time cost: 1.60    Infeasible
+total: 7 start: 2 meet: 1 key_start: 1    time cost: 1.71    Infeasible
+total: 7 start: 2 meet: 1 key_start: 2    time cost: 1.57    Infeasible
+total: 7 start: 2 meet: 1 key_start: 3    time cost: 2.07    Infeasible
+total: 7 start: 2 meet: 1 key_start: 4    time cost: 1.75    Infeasible
+total: 7 start: 2 meet: 1 key_start: 5    time cost: 2.94    Infeasible
+total: 7 start: 2 meet: 1 key_start: 6    time cost: 2.90    Infeasible
+total: 7 start: 2 meet: 2 key_start: -1    time cost: 0.57    Infeasible
+total: 7 start: 2 meet: 2 key_start: 0    time cost: 0.52    Infeasible
+total: 7 start: 2 meet: 2 key_start: 1    time cost: 0.49    Infeasible
+total: 7 start: 2 meet: 2 key_start: 2    time cost: 0.50    Infeasible
+total: 7 start: 2 meet: 2 key_start: 3    time cost: 0.47    Infeasible
+total: 7 start: 2 meet: 2 key_start: 4    time cost: 0.66    Infeasible
+total: 7 start: 2 meet: 2 key_start: 5    time cost: 0.65    Infeasible
+total: 7 start: 2 meet: 2 key_start: 6    time cost: 0.63    Infeasible
+total: 7 start: 2 meet: 3 key_start: -1    time cost: 12.56    Infeasible
+total: 7 start: 2 meet: 3 key_start: 0    time cost: 8.79    Infeasible
+total: 7 start: 2 meet: 3 key_start: 1    time cost: 8.75    Infeasible
+total: 7 start: 2 meet: 3 key_start: 2    time cost: 11.18    Infeasible
+total: 7 start: 2 meet: 3 key_start: 3    time cost: 4.51    Infeasible
+total: 7 start: 2 meet: 3 key_start: 4    time cost: 4.20    Infeasible
+total: 7 start: 2 meet: 3 key_start: 5    time cost: 3.99    Infeasible
+total: 7 start: 2 meet: 3 key_start: 6    time cost: 4.16    Infeasible
+total: 7 start: 2 meet: 4 key_start: -1    time cost: 27.39    Obj= min{DF_b=3, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 4 key_start: 0    time cost: 21.08    Obj= min{DF_b=4, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 4 key_start: 1    time cost: 23.52    Obj= min{DF_b=3, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 4 key_start: 2    time cost: 21.72    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 2 meet: 4 key_start: 3    time cost: 18.40    Obj= min{DF_b=4, DF_r=1, Match=4} = 1
+total: 7 start: 2 meet: 4 key_start: 4    time cost: 18.48    Obj= min{DF_b=3, DF_r=1, Match=4} = 1
+total: 7 start: 2 meet: 4 key_start: 5    time cost: 9.06    Obj= min{DF_b=4, DF_r=1, Match=4} = 1
+total: 7 start: 2 meet: 4 key_start: 6    time cost: 25.59    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 5 key_start: -1    time cost: 19.16    Infeasible
+total: 7 start: 2 meet: 5 key_start: 0    time cost: 45.42    Infeasible
+total: 7 start: 2 meet: 5 key_start: 1    time cost: 53.34    Infeasible
+total: 7 start: 2 meet: 5 key_start: 2    time cost: 49.26    Infeasible
+total: 7 start: 2 meet: 5 key_start: 3    time cost: 29.11    Infeasible
+total: 7 start: 2 meet: 5 key_start: 4    time cost: 19.83    Infeasible
+total: 7 start: 2 meet: 5 key_start: 5    time cost: 19.56    Infeasible
+total: 7 start: 2 meet: 5 key_start: 6    time cost: 70.77    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 6 key_start: -1    time cost: 0.61    Infeasible
+total: 7 start: 2 meet: 6 key_start: 0    time cost: 0.63    Infeasible
+total: 7 start: 2 meet: 6 key_start: 1    time cost: 5.81    Infeasible
+total: 7 start: 2 meet: 6 key_start: 2    time cost: 10.82    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 6 key_start: 3    time cost: 9.96    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 6 key_start: 4    time cost: 12.83    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 6 key_start: 5    time cost: 12.34    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 2 meet: 6 key_start: 6    time cost: 7.36    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 3 meet: 0 key_start: -1    time cost: 24.61    Infeasible
+total: 7 start: 3 meet: 0 key_start: 0    time cost: 18.53    Infeasible
+total: 7 start: 3 meet: 0 key_start: 1    time cost: 13.10    Infeasible
+total: 7 start: 3 meet: 0 key_start: 2    time cost: 14.08    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 3 meet: 0 key_start: 3    time cost: 68.91    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 3 meet: 0 key_start: 4    time cost: 44.56    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 3 meet: 0 key_start: 5    time cost: 60.13    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 3 meet: 0 key_start: 6    time cost: 47.70    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 3 meet: 1 key_start: -1    time cost: 12.43    Obj= min{DF_b=1, DF_r=4, Match=4} = 1
+total: 7 start: 3 meet: 1 key_start: 0    time cost: 10.87    Obj= min{DF_b=1, DF_r=2, Match=4} = 1
+total: 7 start: 3 meet: 1 key_start: 1    time cost: 11.19    Obj= min{DF_b=2, DF_r=1, Match=4} = 1
+total: 7 start: 3 meet: 1 key_start: 2    time cost: 6.31    Obj= min{DF_b=1, DF_r=2, Match=4} = 1
+total: 7 start: 3 meet: 1 key_start: 3    time cost: 12.91    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 3 meet: 1 key_start: 4    time cost: 11.26    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 3 meet: 1 key_start: 5    time cost: 19.51    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 3 meet: 1 key_start: 6    time cost: 18.40    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 3 meet: 2 key_start: -1    time cost: 1.39    Infeasible
+total: 7 start: 3 meet: 2 key_start: 0    time cost: 1.44    Infeasible
+total: 7 start: 3 meet: 2 key_start: 1    time cost: 0.92    Infeasible
+total: 7 start: 3 meet: 2 key_start: 2    time cost: 1.42    Infeasible
+total: 7 start: 3 meet: 2 key_start: 3    time cost: 1.47    Infeasible
+total: 7 start: 3 meet: 2 key_start: 4    time cost: 1.47    Infeasible
+total: 7 start: 3 meet: 2 key_start: 5    time cost: 1.60    Infeasible
+total: 7 start: 3 meet: 2 key_start: 6    time cost: 2.65    Infeasible
+total: 7 start: 3 meet: 3 key_start: -1    time cost: 0.49    Infeasible
+total: 7 start: 3 meet: 3 key_start: 0    time cost: 0.50    Infeasible
+total: 7 start: 3 meet: 3 key_start: 1    time cost: 0.52    Infeasible
+total: 7 start: 3 meet: 3 key_start: 2    time cost: 0.54    Infeasible
+total: 7 start: 3 meet: 3 key_start: 3    time cost: 0.50    Infeasible
+total: 7 start: 3 meet: 3 key_start: 4    time cost: 0.59    Infeasible
+total: 7 start: 3 meet: 3 key_start: 5    time cost: 0.62    Infeasible
+total: 7 start: 3 meet: 3 key_start: 6    time cost: 0.62    Infeasible
+total: 7 start: 3 meet: 4 key_start: -1    time cost: 17.89    Obj= min{DF_b=4, DF_r=1, Match=4} = 1
+total: 7 start: 3 meet: 4 key_start: 0    time cost: 11.56    Obj= min{DF_b=1, DF_r=3, Match=3} = 1
+total: 7 start: 3 meet: 4 key_start: 1    time cost: 11.54    Obj= min{DF_b=1, DF_r=3, Match=1} = 1
+total: 7 start: 3 meet: 4 key_start: 2    time cost: 6.97    Obj= min{DF_b=1, DF_r=4, Match=1} = 1
+total: 7 start: 3 meet: 4 key_start: 3    time cost: 9.71    Obj= min{DF_b=4, DF_r=1, Match=4} = 1
+total: 7 start: 3 meet: 4 key_start: 4    time cost: 8.96    Obj= min{DF_b=1, DF_r=1, Match=8} = 1
+total: 7 start: 3 meet: 4 key_start: 5    time cost: 52.06    Obj= min{DF_b=1, DF_r=2, Match=4} = 1
+total: 7 start: 3 meet: 4 key_start: 6    time cost: 54.82    Obj= min{DF_b=4, DF_r=1, Match=4} = 1
+total: 7 start: 3 meet: 5 key_start: -1    time cost: 17.16    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 3 meet: 5 key_start: 0    time cost: 23.06    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 3 meet: 5 key_start: 1    time cost: 19.07    Obj= min{DF_b=1, DF_r=1, Match=2} = 1
+total: 7 start: 3 meet: 5 key_start: 2    time cost: 24.93    Obj= min{DF_b=1, DF_r=2, Match=1} = 1
+total: 7 start: 3 meet: 5 key_start: 3    time cost: 16.85    Infeasible
+total: 7 start: 3 meet: 5 key_start: 4    time cost: 19.04    Infeasible
+total: 7 start: 3 meet: 5 key_start: 5    time cost: 9.22    Infeasible
+total: 7 start: 3 meet: 5 key_start: 6    time cost: 36.36    Infeasible
+total: 7 start: 3 meet: 6 key_start: -1    time cost: 5.39    Infeasible
+total: 7 start: 3 meet: 6 key_start: 0    time cost: 7.59    Infeasible
+total: 7 start: 3 meet: 6 key_start: 1    time cost: 6.89    Infeasible
+total: 7 start: 3 meet: 6 key_start: 2    time cost: 9.12    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 3 meet: 6 key_start: 3    time cost: 7.39    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 3 meet: 6 key_start: 4    time cost: 15.34    Obj= min{DF_b=1, DF_r=2, Match=1} = 1
+total: 7 start: 3 meet: 6 key_start: 5    time cost: 12.42    Obj= min{DF_b=1, DF_r=2, Match=1} = 1
+total: 7 start: 3 meet: 6 key_start: 6    time cost: 6.32    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 4 meet: 0 key_start: -1    time cost: 28.07    Infeasible
+total: 7 start: 4 meet: 0 key_start: 0    time cost: 17.33    Infeasible
+total: 7 start: 4 meet: 0 key_start: 1    time cost: 22.05    Infeasible
+total: 7 start: 4 meet: 0 key_start: 2    time cost: 20.80    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 4 meet: 0 key_start: 3    time cost: 21.44    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 4 meet: 0 key_start: 4    time cost: 20.02    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 4 meet: 0 key_start: 5    time cost: 31.16    Obj= min{DF_b=3, DF_r=3, Match=2} = 2
+total: 7 start: 4 meet: 0 key_start: 6    time cost: 41.90    Obj= min{DF_b=2, DF_r=3, Match=2} = 2
+total: 7 start: 4 meet: 1 key_start: -1    time cost: 17.47    Obj= min{DF_b=4, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 0    time cost: 6.97    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 1    time cost: 9.75    Obj= min{DF_b=4, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 2    time cost: 16.97    Obj= min{DF_b=5, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 3    time cost: 11.94    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 4    time cost: 27.31    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 5    time cost: 19.02    Obj= min{DF_b=3, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 1 key_start: 6    time cost: 23.31    Obj= min{DF_b=4, DF_r=3, Match=3} = 3
+total: 7 start: 4 meet: 2 key_start: -1    time cost: 8.29    Infeasible
+total: 7 start: 4 meet: 2 key_start: 0    time cost: 4.92    Infeasible
+total: 7 start: 4 meet: 2 key_start: 1    time cost: 3.85    Infeasible
+total: 7 start: 4 meet: 2 key_start: 2    time cost: 2.86    Infeasible
+total: 7 start: 4 meet: 2 key_start: 3    time cost: 5.07    Infeasible
+total: 7 start: 4 meet: 2 key_start: 4    time cost: 2.51    Infeasible
+total: 7 start: 4 meet: 2 key_start: 5    time cost: 5.51    Infeasible
+total: 7 start: 4 meet: 2 key_start: 6    time cost: 4.54    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 4 meet: 3 key_start: -1    time cost: 1.07    Infeasible
+total: 7 start: 4 meet: 3 key_start: 0    time cost: 1.73    Infeasible
+total: 7 start: 4 meet: 3 key_start: 1    time cost: 1.65    Infeasible
+total: 7 start: 4 meet: 3 key_start: 2    time cost: 1.53    Infeasible
+total: 7 start: 4 meet: 3 key_start: 3    time cost: 1.56    Infeasible
+total: 7 start: 4 meet: 3 key_start: 4    time cost: 1.51    Infeasible
+total: 7 start: 4 meet: 3 key_start: 5    time cost: 1.56    Infeasible
+total: 7 start: 4 meet: 3 key_start: 6    time cost: 1.47    Infeasible
+total: 7 start: 4 meet: 4 key_start: -1    time cost: 0.52    Infeasible
+total: 7 start: 4 meet: 4 key_start: 0    time cost: 0.51    Infeasible
+total: 7 start: 4 meet: 4 key_start: 1    time cost: 0.57    Infeasible
+total: 7 start: 4 meet: 4 key_start: 2    time cost: 0.62    Infeasible
+total: 7 start: 4 meet: 4 key_start: 3    time cost: 0.68    Infeasible
+total: 7 start: 4 meet: 4 key_start: 4    time cost: 0.59    Infeasible
+total: 7 start: 4 meet: 4 key_start: 5    time cost: 0.70    Infeasible
+total: 7 start: 4 meet: 4 key_start: 6    time cost: 0.68    Infeasible
+total: 7 start: 4 meet: 5 key_start: -1    time cost: 6.95    Infeasible
+total: 7 start: 4 meet: 5 key_start: 0    time cost: 6.76    Infeasible
+total: 7 start: 4 meet: 5 key_start: 1    time cost: 10.70    Infeasible
+total: 7 start: 4 meet: 5 key_start: 2    time cost: 4.43    Infeasible
+total: 7 start: 4 meet: 5 key_start: 3    time cost: 4.45    Infeasible
+total: 7 start: 4 meet: 5 key_start: 4    time cost: 4.08    Infeasible
+total: 7 start: 4 meet: 5 key_start: 5    time cost: 4.40    Infeasible
+total: 7 start: 4 meet: 5 key_start: 6    time cost: 6.18    Infeasible
+total: 7 start: 4 meet: 6 key_start: -1    time cost: 0.61    Infeasible
+total: 7 start: 4 meet: 6 key_start: 0    time cost: 0.56    Infeasible
+total: 7 start: 4 meet: 6 key_start: 1    time cost: 0.63    Infeasible
+total: 7 start: 4 meet: 6 key_start: 2    time cost: 0.62    Infeasible
+total: 7 start: 4 meet: 6 key_start: 3    time cost: 0.63    Infeasible
+total: 7 start: 4 meet: 6 key_start: 4    time cost: 0.56    Infeasible
+total: 7 start: 4 meet: 6 key_start: 5    time cost: 0.61    Infeasible
+total: 7 start: 4 meet: 6 key_start: 6    time cost: 0.62    Infeasible
+total: 7 start: 5 meet: 0 key_start: -1    time cost: 2.69    Infeasible
+total: 7 start: 5 meet: 0 key_start: 0    time cost: 3.05    Infeasible
+total: 7 start: 5 meet: 0 key_start: 1    time cost: 8.96    Infeasible
+total: 7 start: 5 meet: 0 key_start: 2    time cost: 5.47    Infeasible
+total: 7 start: 5 meet: 0 key_start: 3    time cost: 9.36    Infeasible
+total: 7 start: 5 meet: 0 key_start: 4    time cost: 3.39    Infeasible
+total: 7 start: 5 meet: 0 key_start: 5    time cost: 8.18    Infeasible
+total: 7 start: 5 meet: 0 key_start: 6    time cost: 10.84    Infeasible
+total: 7 start: 5 meet: 1 key_start: -1    time cost: 8.88    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 1 key_start: 0    time cost: 11.83    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 1 key_start: 1    time cost: 8.70    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 1 key_start: 2    time cost: 16.67    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 1 key_start: 3    time cost: 10.18    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 1 key_start: 4    time cost: 23.62    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 5 meet: 1 key_start: 5    time cost: 34.97    Obj= min{DF_b=3, DF_r=2, Match=2} = 2
+total: 7 start: 5 meet: 1 key_start: 6    time cost: 36.48    Obj= min{DF_b=2, DF_r=2, Match=2} = 2
+total: 7 start: 5 meet: 2 key_start: -1    time cost: 14.39    Obj= min{DF_b=4, DF_r=1, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 0    time cost: 20.45    Obj= min{DF_b=3, DF_r=2, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 1    time cost: 16.71    Obj= min{DF_b=4, DF_r=2, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 2    time cost: 11.74    Obj= min{DF_b=3, DF_r=4, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 3    time cost: 18.41    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 4    time cost: 22.85    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 5    time cost: 17.56    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 5 meet: 2 key_start: 6    time cost: 30.59    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 5 meet: 3 key_start: -1    time cost: 7.24    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 0    time cost: 9.26    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 1    time cost: 11.68    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 2    time cost: 12.44    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 3    time cost: 9.70    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 4    time cost: 5.17    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 5    time cost: 13.87    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 3 key_start: 6    time cost: 21.46    Obj= min{DF_b=2, DF_r=2, Match=4} = 2
+total: 7 start: 5 meet: 4 key_start: -1    time cost: 1.45    Infeasible
+total: 7 start: 5 meet: 4 key_start: 0    time cost: 1.29    Infeasible
+total: 7 start: 5 meet: 4 key_start: 1    time cost: 1.56    Infeasible
+total: 7 start: 5 meet: 4 key_start: 2    time cost: 1.50    Infeasible
+total: 7 start: 5 meet: 4 key_start: 3    time cost: 1.56    Infeasible
+total: 7 start: 5 meet: 4 key_start: 4    time cost: 1.42    Infeasible
+total: 7 start: 5 meet: 4 key_start: 5    time cost: 1.51    Infeasible
+total: 7 start: 5 meet: 4 key_start: 6    time cost: 2.95    Infeasible
+total: 7 start: 5 meet: 5 key_start: -1    time cost: 0.51    Infeasible
+total: 7 start: 5 meet: 5 key_start: 0    time cost: 0.57    Infeasible
+total: 7 start: 5 meet: 5 key_start: 1    time cost: 0.56    Infeasible
+total: 7 start: 5 meet: 5 key_start: 2    time cost: 0.57    Infeasible
+total: 7 start: 5 meet: 5 key_start: 3    time cost: 0.57    Infeasible
+total: 7 start: 5 meet: 5 key_start: 4    time cost: 0.61    Infeasible
+total: 7 start: 5 meet: 5 key_start: 5    time cost: 0.62    Infeasible
+total: 7 start: 5 meet: 5 key_start: 6    time cost: 0.61    Infeasible
+total: 7 start: 5 meet: 6 key_start: -1    time cost: 0.58    Infeasible
+total: 7 start: 5 meet: 6 key_start: 0    time cost: 0.62    Infeasible
+total: 7 start: 5 meet: 6 key_start: 1    time cost: 0.64    Infeasible
+total: 7 start: 5 meet: 6 key_start: 2    time cost: 0.58    Infeasible
+total: 7 start: 5 meet: 6 key_start: 3    time cost: 0.58    Infeasible
+total: 7 start: 5 meet: 6 key_start: 4    time cost: 0.60    Infeasible
+total: 7 start: 5 meet: 6 key_start: 5    time cost: 0.56    Infeasible
+total: 7 start: 5 meet: 6 key_start: 6    time cost: 0.55    Infeasible
+total: 7 start: 6 meet: 0 key_start: -1    time cost: 2.61    Infeasible
+total: 7 start: 6 meet: 0 key_start: 0    time cost: 1.30    Infeasible
+total: 7 start: 6 meet: 0 key_start: 1    time cost: 1.45    Infeasible
+total: 7 start: 6 meet: 0 key_start: 2    time cost: 1.38    Infeasible
+total: 7 start: 6 meet: 0 key_start: 3    time cost: 1.92    Infeasible
+total: 7 start: 6 meet: 0 key_start: 4    time cost: 4.60    Infeasible
+total: 7 start: 6 meet: 0 key_start: 5    time cost: 2.04    Infeasible
+total: 7 start: 6 meet: 0 key_start: 6    time cost: 0.97    Infeasible
+total: 7 start: 6 meet: 1 key_start: -1    time cost: 2.40    Infeasible
+total: 7 start: 6 meet: 1 key_start: 0    time cost: 3.17    Infeasible
+total: 7 start: 6 meet: 1 key_start: 1    time cost: 3.37    Infeasible
+total: 7 start: 6 meet: 1 key_start: 2    time cost: 9.70    Infeasible
+total: 7 start: 6 meet: 1 key_start: 3    time cost: 7.43    Infeasible
+total: 7 start: 6 meet: 1 key_start: 4    time cost: 13.08    Infeasible
+total: 7 start: 6 meet: 1 key_start: 5    time cost: 25.61    Infeasible
+total: 7 start: 6 meet: 1 key_start: 6    time cost: 6.77    Infeasible
+total: 7 start: 6 meet: 2 key_start: -1    time cost: 11.11    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 0    time cost: 27.10    Obj= min{DF_b=4, DF_r=4, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 1    time cost: 44.86    Obj= min{DF_b=4, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 2    time cost: 17.05    Obj= min{DF_b=3, DF_r=2, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 3    time cost: 18.81    Obj= min{DF_b=1, DF_r=2, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 4    time cost: 22.10    Obj= min{DF_b=4, DF_r=3, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 5    time cost: 31.37    Obj= min{DF_b=2, DF_r=2, Match=1} = 1
+total: 7 start: 6 meet: 2 key_start: 6    time cost: 33.89    Obj= min{DF_b=3, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: -1    time cost: 9.15    Obj= min{DF_b=2, DF_r=3, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 0    time cost: 25.45    Obj= min{DF_b=3, DF_r=2, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 1    time cost: 17.36    Obj= min{DF_b=2, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 2    time cost: 23.95    Obj= min{DF_b=2, DF_r=4, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 3    time cost: 13.29    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 4    time cost: 24.65    Obj= min{DF_b=1, DF_r=1, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 5    time cost: 14.31    Obj= min{DF_b=1, DF_r=4, Match=1} = 1
+total: 7 start: 6 meet: 3 key_start: 6    time cost: 7.71    Obj= min{DF_b=2, DF_r=3, Match=1} = 1
+total: 7 start: 6 meet: 4 key_start: -1    time cost: 6.48    Infeasible
+total: 7 start: 6 meet: 4 key_start: 0    time cost: 7.85    Infeasible
+total: 7 start: 6 meet: 4 key_start: 1    time cost: 6.36    Infeasible
+total: 7 start: 6 meet: 4 key_start: 2    time cost: 4.28    Infeasible
+total: 7 start: 6 meet: 4 key_start: 3    time cost: 3.35    Infeasible
+total: 7 start: 6 meet: 4 key_start: 4    time cost: 5.13    Infeasible
+total: 7 start: 6 meet: 4 key_start: 5    time cost: 7.77    Infeasible
+total: 7 start: 6 meet: 4 key_start: 6    time cost: 4.24    Infeasible
+total: 7 start: 6 meet: 5 key_start: -1    time cost: 1.62    Infeasible
+total: 7 start: 6 meet: 5 key_start: 0    time cost: 1.59    Infeasible
+total: 7 start: 6 meet: 5 key_start: 1    time cost: 1.63    Infeasible
+total: 7 start: 6 meet: 5 key_start: 2    time cost: 1.55    Infeasible
+total: 7 start: 6 meet: 5 key_start: 3    time cost: 2.05    Infeasible
+total: 7 start: 6 meet: 5 key_start: 4    time cost: 1.97    Infeasible
+total: 7 start: 6 meet: 5 key_start: 5    time cost: 1.86    Infeasible
+total: 7 start: 6 meet: 5 key_start: 6    time cost: 1.54    Infeasible
+total: 7 start: 6 meet: 6 key_start: -1    time cost: 0.46    Infeasible
+total: 7 start: 6 meet: 6 key_start: 0    time cost: 0.56    Infeasible
+total: 7 start: 6 meet: 6 key_start: 1    time cost: 0.61    Infeasible
+total: 7 start: 6 meet: 6 key_start: 2    time cost: 0.62    Infeasible
+total: 7 start: 6 meet: 6 key_start: 3    time cost: 0.59    Infeasible
+total: 7 start: 6 meet: 6 key_start: 4    time cost: 0.63    Infeasible
+total: 7 start: 6 meet: 6 key_start: 5    time cost: 0.72    Infeasible
+total: 7 start: 6 meet: 6 key_start: 6    time cost: 0.67    Infeasible
+
+
+total search time: 4512.45
+solution count: 143

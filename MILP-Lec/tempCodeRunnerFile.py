@@ -1,2 +1,0 @@
-
-NMat = NRow * NCol
