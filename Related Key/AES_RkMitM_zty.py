@@ -754,12 +754,3 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         return (total_round, start_round, match_round, key_start_round), 1, str(solution)
     else:
         return (total_round, start_round, match_round, key_start_round), 0, 'Infeasible'
-
-
-#for key in range(0, 8):
-    #continue
-    #solve(key_size=128, total_round=8, start_round=4, match_round=1, key_start_round=key, dir='./' )
-#solve(key_size=128, total_round=7, start_round=4, match_round=1, key_start_round=-1, dir='./' )
-#solve(key_size=256, total_round=9, start_round=1, match_round=7, key_start_round=1, dir='./')
-#solve(key_size=256, total_round=9, start_round=3, match_round=6, key_start_round=0, dir='./' )
-#solve(key_size=192, total_round=9, start_round=3, match_round=8, key_start_round=3, dir='./' )
