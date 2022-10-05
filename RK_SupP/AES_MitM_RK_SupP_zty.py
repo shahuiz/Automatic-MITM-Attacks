@@ -5,6 +5,7 @@ from string import Template
 import numpy as np
 import re
 import os
+import math
 
 # AES parameters
 NROW = 4
@@ -66,18 +67,27 @@ def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_df]
     m.addMConstr(XOR_A, list(enum), '>=', -XOR_B)
 
-# generate MC rule 
-def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
+# generate MC rule with SupP versions
+def gen_SupP_fwd_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
-    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
-    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
+    m.addConstr(gp.quicksum(out_b) == NROW * in_col_x)
 
     m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
     m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
     m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
-
-    m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
     m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - fwd == 0)
+    
+    m.update()
+
+def gen_SupP_bwd_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, bwd: gp.Var):
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
+    m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - bwd == 0)
+
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
+    m.addConstr(gp.quicksum(out_r) == NROW * in_col_y)
+    
     m.update()
 
 # generate matching rules, for easy calculation of dm
@@ -105,67 +115,88 @@ def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g
     m.update()
 
 # key expansion function
-def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, K_b: np.ndarray, K_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
+def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, fKeyS_b, fKeyS_r, bKeyS_b, bKeyS_r, fK_b: np.ndarray, fK_r: np.ndarray, bK_b: np.ndarray, bK_r: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
     # set key parameters
     Nk = key_size // 32
-    Nr = total_r
     Nb = 4
-    
-    # set territory marker bwd and fwd 
-    bwd = start_r * Nb
-    fwd = start_r * Nb + Nk
-    
-    ini_j = 0   # keep track of what column has been read from the initial setting
-    for w in range(Nb*(Nr+1)):
-        # deal with index for the whiten key
-        if w >= Nb*Nr:
-            r, j = -1, w%4
-            wi= w - Nb*(Nr+1) 
-        else:
-            r, j = w//4, w%4
-            wi = w
+    Nr = math.ceil((total_r + 1)*Nb / Nk)
+
+    for r in range(Nr):
         # initial state
-        if wi >= bwd and wi < fwd: 
-            print("start",r,j, 'from ini',ini_j)
-            for i in ROW:
-                m.addConstr(K_b[r, i, j] + K_r[r, i, j] >= 1)
-                m.addConstr(K_ini_b[i, ini_j] == K_b[r, i, j])
-                m.addConstr(K_ini_r[i, ini_j] == K_r[r, i, j])
-                m.addConstr(key_cost_bwd[r,i,j] == 0)
-                m.addConstr(key_cost_fwd[r,i,j] == 0)
-            ini_j += 1
+        if r == start_r: 
+            for j in range(Nk):
+                print("start",r,j)
+                for i in ROW:
+                    m.addConstr(fKeyS_b[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
+                    m.addConstr(fKeyS_r[r, i, j] == K_ini_r[i, j])
+                    m.addConstr(bKeyS_b[r, i, j] == K_ini_b[i, j])
+                    m.addConstr(bKeyS_r[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
+
+                    m.addConstr(key_cost_bwd[r,i,j] == 0)
+                    m.addConstr(key_cost_fwd[r,i,j] == 0)
+            continue
         # fwd direction
-        elif wi >= fwd:            
-            pr, pj = (wi-1)//NCOL, (wi-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 2:    # rotation
-                temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
-                print('after rot', temp_b,'\n', temp_r)
-            else:               
-                temp_b, temp_r = K_b[pr,:,pj], K_r[pr,:,pj] 
-            
-            qr, qj = (wi-Nk)//NCOL, (wi-Nk)%NCOL      # compute round and column params for w[i-Nk]
-            for i in ROW:
-                gen_XOR_rule(m, in1_b=K_b[qr,i,qj], in1_r=K_r[qr,i,qj], in2_b=temp_b[i], in2_r=temp_r[i], out_b=K_b[r,i,j], out_r=K_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
-                m.addConstr(key_cost_fwd[r,i,j] == 0)
-            print("fwd", r,j,' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
+        elif r > start_r:
+            for j in range(Nk):            
+                if j == 0:    # rotation
+                    pr, pj = r-1, Nk-1
+                    fTemp_b, fTemp_r = np.roll(fKeyS_b[pr,:,pj], -1), np.roll(fKeyS_r[pr,:,pj], -1)
+                    bTemp_b, bTemp_r = np.roll(bKeyS_b[pr,:,pj], -1), np.roll(bKeyS_r[pr,:,pj], -1)
+                    print('after rot:\nfwd\n', fTemp_b,'\n', fTemp_r, 'bwd\n', bTemp_b, bTemp_r)
+                else:               
+                    pr, pj = r, j-1
+                    fTemp_b, fTemp_r = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj] 
+                    bTemp_b, bTemp_r = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj] 
+                qr, qj = r-1, j      # compute round and column params for w[i-Nk]
+                for i in ROW:
+                    # since the state is superpositioned, the XOR rule works backward: need to reverse the cost
+                    gen_XOR_rule(m, in1_b=fKeyS_r[qr,i,qj], in1_r=fKeyS_b[qr,i,qj], in2_b=fTemp_r[i], in2_r=fTemp_b[i], out_b=fKeyS_r[r,i,j], out_r=fKeyS_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, in1_b=bKeyS_b[qr,i,qj], in1_r=bKeyS_r[qr,i,qj], in2_b=bTemp_b[i], in2_r=bTemp_r[i], out_b=bKeyS_b[r,i,j], out_r=bKeyS_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                
+                # if the state is outside the range, then force the cost as 0
+                if r*Nk+j >= total_r*Nb:
+                    for i in ROW:
+                        m.addConstr(key_cost_fwd[r,i,j] == 0)
+                        m.addConstr(key_cost_bwd[r,i,j] == 0)
+                print("fwd", r,j,' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
             continue
         # bwd direction
-        elif wi < bwd:  
-            pr, pj = (wi+Nk-1)//NCOL, (wi+Nk-1)%NCOL        # compute round and column params for temp
-            if wi % Nk == 2:    # rotation
-                temp_b, temp_r = np.roll(K_b[pr,:,pj],-1), np.roll(K_r[pr,:,pj],-1)
-                print('after rot', temp_b,'\n', temp_r)
-            else:               
-                temp_b, temp_r = K_b[pr,:,pj], K_r[pr,:,pj] 
-            qr, qj = (wi+Nk)//NCOL, (wi+Nk)%NCOL      # compute round and column params for w[i-Nk]
-            for i in ROW:
-                gen_XOR_rule(m, in1_b=K_r[qr,i,qj], in1_r=K_b[qr,i,qj], in2_b=temp_r[i], in2_r=temp_b[i], out_b=K_r[r,i,j], out_r=K_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
-                m.addConstr(key_cost_bwd[r,i,j] == 0)
-            print("bwd", r,j, ' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
-            continue
+        elif r < start_r:  
+            for j in range(Nk):
+                if j == 0:    # rotation
+                    pr, pj = r, Nk-1
+                    fTemp_b, fTemp_r = np.roll(fKeyS_b[pr,:,pj], -1), np.roll(fKeyS_r[pr,:,pj], -1)
+                    bTemp_b, bTemp_r = np.roll(bKeyS_b[pr,:,pj], -1), np.roll(bKeyS_r[pr,:,pj], -1)
+                    print('after rot:\nfwd\n', fTemp_b,'\n', fTemp_r, 'bwd\n', bTemp_b, bTemp_r)
+                else:               
+                    pr, pj = r+1, j-1
+                    fTemp_b, fTemp_r = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj] 
+                    bTemp_b, bTemp_r = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj] 
+                qr, qj = r+1, j      # compute round and column params for w[i-Nk]
+                for i in ROW:
+                    gen_XOR_rule(m, in1_b=fKeyS_r[qr,i,qj], in1_r=fKeyS_b[qr,i,qj], in2_b=fTemp_r[i], in2_r=fTemp_b[i], out_b=fKeyS_r[r,i,j], out_r=fKeyS_b[r,i,j], cost_df= key_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, in1_b=bKeyS_b[qr,i,qj], in1_r=bKeyS_r[qr,i,qj], in2_b=bTemp_b[i], in2_r=bTemp_r[i], out_b=bKeyS_b[r,i,j], out_r=bKeyS_r[r,i,j], cost_df= key_cost_bwd[r,i,j])
+                print("bwd", r,j, ' from temp:', pr, pj, 'w[i-Nk]:', qr, qj)
         else:
-            raise Exception("Irregular Behavior at key expantion")
+            raise Exception("Irregular Behavior at encryption")
         m.update()
+
+    # Match the value to the key states used in the add key state
+    KeyS_r = 0
+    KeyS_j = 0
+    for r in range(-1, total_r):
+        for j in COL:
+            print(r,j,'in KeyS',KeyS_r,KeyS_j)
+            for i in ROW:
+                m.addConstr(fK_b[r,i,j] == fKeyS_b[KeyS_r,i,KeyS_j])
+                m.addConstr(fK_r[r,i,j] == fKeyS_r[KeyS_r,i,KeyS_j])
+                m.addConstr(bK_b[r,i,j] == bKeyS_b[KeyS_r,i,KeyS_j])
+                m.addConstr(bK_r[r,i,j] == bKeyS_r[KeyS_r,i,KeyS_j])
+            
+            KeyS_j += 1
+            if KeyS_j % Nk == 0:
+                KeyS_r += 1
+                KeyS_j = 0
 
 # write solution (if there is 0/1/multiple solutions)
 def writeSol(m: gp.Model, path):
@@ -378,10 +409,10 @@ def displaySol(m:gp.Model, path):
         f.write(header + '\n')
         nr = (r+1)%total_round
         
-        f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'AK#%d' %r +TAB*2+'K#%d ' %r +'\n')
+        line1 = ''
+        line2 = ''
         for i in ROW:
-            SB, MC, fMC, bMC, fAK, bAK, fKEY, bKEY, fSB, bSB, SBN, KEY = '','','','','','','','','','','',''
-            
+            SB, MC, fMC, bMC, fAK, bAK, fKEY, bKEY, fSB, bSB, SBN, KEY = '','','','','','','','','','','','' 
             for j in COL:
                 SB+=color(SB_b[r,i,j], SB_r[r,i,j])
                 MC+=color(MC_b[r,i,j], MC_r[r,i,j])
@@ -398,8 +429,13 @@ def displaySol(m:gp.Model, path):
                 bSB+=color(bSB_b[nr,i,j], bSB_r[nr,i,j])
                 SBN+=color(SB_b[nr,i,j], SB_r[nr,i,j])
 
-            f.write(SB + TAB*2 + MC + TAB*2+ fMC + TAB*2 + fAK + TAB*2 + fKEY + TAB*2 + fSB + TAB*2 + SBN + '\n' + '\n')
-            f.write(TAB+ TAB*2 + TAB+ TAB*2+ bMC + TAB*2 + bAK + TAB*2 + bKEY + TAB*2 + bSB + TAB*2 + TAB + '\n')   
+            line1 += SB + TAB*2 + MC + TAB*2+ fMC + TAB*2 + fAK + TAB*2 + fKEY + TAB*2 + fSB + TAB*2 + SBN + TAB*2 + KEY + '\n'
+            line2 += TAB+ TAB*2 + TAB+ TAB*2+ bMC + TAB*2 + bAK + TAB*2 + bKEY + TAB*2 + bSB + '\n' 
+        
+        f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'fMC#%d   ' %r + TAB +'fAK#%d   '%r +TAB+'fKEY#%d  '%r +TAB+ 'fSB#%d   '%nr +TAB+ 'SB#%d'%nr+ TAB*2 + 'K#%d '%r+ '\n')
+        f.write(line1 + '\n')
+        f.write(TAB*3           +TAB*3            +'bMC#%d   ' %r + TAB +'bAK#%d   '%r +TAB+'bKEY#%d  '%r +TAB+ 'bSB#%d   '%nr + '\n')
+        f.write(line2 + '\n')
         
         if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
             f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[r,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
@@ -416,7 +452,7 @@ def displaySol(m:gp.Model, path):
                 Meet_B = ''
                 for j in COL:
                     MC+=color(MC_b[r,i,j], MC_r[r,i,j])
-                    Meet_B+=color(Meet_bwd_b[r,i,j], Meet_bwd_r[r,i,j])
+                    Meet_B+=color(Meet_bwd_b[i,j], Meet_bwd_r[i,j])
                 f.write(MC+TAB*2+Meet_B+'\n') 
             #f.write('Meet_signed: ' + str(meet_s[:]) + '\n')
             f.write('Degree of Matching:' + str(meet[:]) + '\n'*2)
@@ -426,8 +462,7 @@ def displaySol(m:gp.Model, path):
     f.write("r%d  " %r + '\n')
     f.write(6*TAB +'AT  '+ TAB*2 + 'K#-1' + '\n')
     for i in ROW:
-        KEY = ''
-        fAT = ''
+        KEY, fAT, bAT = '', '', ''
         for j in COL:
             KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
             fAT +=color(fAK_b[r,i,j], fAK_r[r,i,j])
@@ -504,7 +539,9 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     m = gp.Model('AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (key_size, total_round, start_round, match_round, key_start_round))
     
     # Calculate Nk for key schedule
+    Nb = NCOL
     Nk = key_size // NBYTE
+    Nr = math.ceil((total_round + 1)*Nb / Nk)
     
     # assign forward and backward rounds, excluding match round and last round
     if start_round < match_round:
@@ -522,6 +559,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     # add constriants for grey indicators
     for i in ROW:
         for j in COL:
+            m.addConstr(E_ini_b[i,j] + E_ini_r[i,j] >= 1)
             m.addConstr(E_ini_g[i,j] == gp.and_(E_ini_b[i,j], E_ini_r[i,j]))
 
     # define vars to track the start state of Key states (K)  
@@ -530,7 +568,8 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     K_ini_g = np.asarray(m.addVars(NROW, Nk, vtype=GRB.BINARY, name='K_ini_g').values()).reshape((NROW, Nk))
     # add constraints for grey indicators
     for i in ROW:
-        for j in range(Nk):        
+        for j in range(Nk):  
+            m.addConstr(K_ini_b[i,j] + K_ini_r[i,j] >= 1)      
             m.addConstr(K_ini_g[i,j] == gp.and_(K_ini_b[i,j], K_ini_r[i,j]))
 
     # define vars storing the SB state at each round with encoding scheme
@@ -608,17 +647,11 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
                 m.addConstr(bS_g[r,i,j] == gp.and_(bS_b[r,i,j], bS_r[r,i,j]))
                 m.addConstr(bS_w[r,i,j] + bS_b[r,i,j] + bS_r[r,i,j] - bS_g[r,i,j] == 1) 
        
-    # define vars storing the key state at each round with encoding scheme, add 1 more entry to store the whitening key
-    K_b = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='K_b').values()).reshape((total_round + 1, NROW, NCOL))
-    K_r = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='K_r').values()).reshape((total_round + 1, NROW, NCOL))
-    K_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='K_g').values()).reshape((total_round + 1, NROW, NCOL))
-    K_w = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='K_w').values()).reshape((total_round + 1, NROW, NCOL))
-    # add constraints for grey and white indicators
-    for r in range(total_round+1):
-        for i in ROW:
-            for j in COL:
-                m.addConstr(K_g[r,i,j] == gp.and_(K_b[r,i,j], K_r[r,i,j]))
-                m.addConstr(K_w[r,i,j] + K_b[r,i,j] + K_r[r,i,j] - K_g[r,i,j] == 1)
+    # define vars storing the key state in key schedule
+    fKeyS_b = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKeyS_b').values()).reshape((Nr, NROW, Nk))
+    fKeyS_r = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKeyS_r').values()).reshape((Nr, NROW, Nk))
+    bKeyS_b = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKeyS_b').values()).reshape((Nr, NROW, Nk))
+    bKeyS_r = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKeyS_r').values()).reshape((Nr, NROW, Nk))
     
     # define Key states with superposition, fK for KEY in fwd direction, bK for KEY in bwd direction
     fK_b = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_b').values()).reshape((total_round + 1, NROW, NCOL))
@@ -632,7 +665,6 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
 
     # seperate the key state into supperposition
     for r in range(total_round + 1):
-        gen_ENT_SupP_rule(m, K_b[r,:,:],K_r[r,:,:], fK_b[r,:,:], fK_r[r,:,:], bK_b[r,:,:], bK_r[r,:,:])
         for i in ROW:
             for j in COL: 
                 m.addConstr(fK_g[r,i,j] == gp.and_(fK_b[r,i,j], fK_r[r,i,j]))
@@ -681,8 +713,8 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     xor_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_Cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
 
     # define auxiliary vars trackin cost of df in the key expansion process, unpossible combinations are set to zeros
-    key_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_Cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
-    key_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='Key_Cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
+    key_cost_fwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((Nr, NROW, Nk))
+    key_cost_bwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((Nr, NROW, Nk))
     
     # Define final states for meet in the middle
     Meet_fwd_b = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_fwd_b').values()).reshape((NROW, NCOL))
@@ -707,7 +739,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
 
 #### Main Procedure ####
     # add constriants according to the key expansion algorithm
-    key_expansion(m, key_size, total_round, key_start_round, K_ini_b, K_ini_r, K_b, K_r, key_cost_fwd, key_cost_bwd)
+    key_expansion(m, key_size, total_round, key_start_round, K_ini_b, K_ini_r, fKeyS_b, fKeyS_r, bKeyS_b, bKeyS_r, fK_b, fK_r, bK_b, bK_r, key_cost_fwd, key_cost_bwd)
 
     # initialize the enc states, avoid unknown to maximize performance
     for i in ROW:
@@ -727,18 +759,17 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
             for i in ROW:
                 for j in COL:
                     # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
-                    gen_XOR_rule(m, fM_b[r,i,j], fM_r[r,i,j], fK_b[r,i,j], fK_r[r,i,j], fA_b[r,i,j], fA_r[r,i,j], xor_cost_bwd[r,i,j])
-                    gen_XOR_rule(m, bM_b[r,i,j], bM_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, fM_r[r,i,j], fM_b[r,i,j], fK_r[r,i,j], fK_b[r,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, bM_b[r,i,j], bM_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[r,i,j])
                     # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
-                    gen_XOR_rule(m, fA_b[r,i,j], fA_r[r,i,j], fK_b[nr,i,j], fK_r[nr,i,j], fS_b[0,i,j], fS_r[0,i,j], xor_cost_bwd[r,i,j])
-                    gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bS_b[0,i,j], bS_r[0,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, fA_r[r,i,j], fA_b[r,i,j], fK_r[nr,i,j], fK_b[nr,i,j], fS_r[0,i,j], fS_b[0,i,j], xor_cost_fwd[nr,i,j])
+                    gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bS_b[0,i,j], bS_r[0,i,j], xor_cost_bwd[nr,i,j])
             # Exit SupP at Meet_fwd
             gen_EXT_SupP_rule(m, fS_b[0,:,:], fS_r[0,:,:], bS_b[0,:,:], bS_r[0,:,:], Meet_fwd_b[:,:], Meet_fwd_r[:,:]) 
-
             # calculate degree of match
             tempMeet = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempMeet').values()).reshape((NROW, NCOL))
-            for j in ROW:
-                for i in COL:
+            for j in COL:
+                for i in ROW:
                     m.addConstr(tempMeet[i,j] == gp.or_(Meet_fwd_w[i,j], S_w[0,i,j]))
                 m.addConstr(meet[j] == NROW - gp.quicksum(tempMeet[:,j]))
                 m.addConstr(meet_signed[j] == 0)
@@ -748,23 +779,20 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         # match round
         if r == match_round:
             print('mat', r)
-            # Enter SupP at current round MC state
-            #gen_ENT_SupP_rule(m, M_b[r,:,:], M_r[r,:,:], fM_b[r,:,:], fM_r[r,:,:], bM_b[r,:,:], bM_r[r,:,:])
-            
             # Enter SupP at next round SB state
             gen_ENT_SupP_rule(m, S_b[nr,:,:], S_r[nr,:,:], fS_b[nr,:,:], fS_r[nr,:,:], bS_b[nr,:,:], bS_r[nr,:,:])
             # (reverse) AddKey with SupP    
             for i in ROW:
                 for j in COL:
-                    gen_XOR_rule(m, fS_b[nr,i,j], fS_r[nr,i,j], fK_b[r,i,j], fK_r[r,i,j], fA_b[r,i,j], fA_r[r,i,j], xor_cost_bwd[r,i,j])
-                    gen_XOR_rule(m, bS_b[nr,i,j], bS_r[nr,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, fS_r[nr,i,j], fS_b[nr,i,j], fK_r[r,i,j], fK_b[r,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, bS_b[nr,i,j], bS_r[nr,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[r,i,j])
             # Exit SupP to Meet_bwd
             gen_EXT_SupP_rule(m, fA_b[r,:,:], fA_r[r,:,:], bA_b[r,:,:], bA_r[r,:,:], Meet_bwd_b[:,:], Meet_bwd_r[:,:])
-            
             # meet-in-the-middle for M(Meet_fwd) and Meet_bwd
             for j in COL:
                 gen_match_rule(m, M_b[r,:,j], M_r[r,:,j], M_g[r,:,j], Meet_bwd_b[:,j], Meet_bwd_r[:,j], Meet_bwd_g[:,j], meet_signed[j], meet[j])
             continue
+        
         # last round
         if r == total_round - 1:
             print('lastr', r)
@@ -778,11 +806,11 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
                 for i in ROW:
                     for j in COL:
                         # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
-                        gen_XOR_rule(m, fM_b[r,i,j], fM_r[r,i,j], fK_b[r,i,j], fK_r[r,i,j], fA_b[r,i,j], fA_r[r,i,j], xor_cost_bwd[r,i,j])
-                        gen_XOR_rule(m, bM_b[r,i,j], bM_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_fwd[r,i,j])
+                        gen_XOR_rule(m, fM_r[r,i,j], fM_b[r,i,j], fK_r[r,i,j], fK_b[r,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[r,i,j])
+                        gen_XOR_rule(m, bM_b[r,i,j], bM_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[r,i,j])
                         # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, fA_b[r,i,j], fA_r[r,i,j], fK_b[nr,i,j], fK_r[nr,i,j], fS_b[0,i,j], fS_r[0,i,j], xor_cost_bwd[nr,i,j])
-                        gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bS_b[0,i,j], bS_r[0,i,j], xor_cost_fwd[nr,i,j])
+                        gen_XOR_rule(m, fA_r[r,i,j], fA_b[r,i,j], fK_r[nr,i,j], fK_b[nr,i,j], fS_r[0,i,j], fS_b[0,i,j], xor_cost_fwd[nr,i,j])
+                        gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bS_b[0,i,j], bS_r[0,i,j], xor_cost_bwd[nr,i,j])
                 # Exit SupP at round 0 SB state
                 gen_EXT_SupP_rule(m, fS_b[0,:,:], fS_r[0,:,:], bS_b[0,:,:], bS_r[0,:,:], S_b[0,:,:], S_r[0,:,:])  
             elif r in bwd:  # enter last round in bwd direction
@@ -791,16 +819,15 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
                 for i in ROW:
                     for j in COL:
                         # add whitening key: AK[tr-1](storing AT) =  SB[0] XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, fS_b[0,i,j], fS_r[0,i,j], fK_b[nr,i,j], fK_r[nr,i,j], fA_b[r,i,j], fA_r[r,i,j], xor_cost_bwd[nr,i,j])
-                        gen_XOR_rule(m, bS_b[0,i,j], bS_r[0,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_fwd[nr,i,j])
+                        gen_XOR_rule(m, fS_r[0,i,j], fS_b[0,i,j], fK_r[nr,i,j], fK_b[nr,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[nr,i,j])
+                        gen_XOR_rule(m, bS_b[0,i,j], bS_r[0,i,j], bK_b[nr,i,j], bK_r[nr,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[nr,i,j])
                         # add last round key: MC[lr] == id(MC[lr]) = AK[lr](storing AT) XOR KEY[lr]
-                        gen_XOR_rule(m, fA_b[r,i,j], fA_r[r,i,j], fK_b[r,i,j], fK_r[r,i,j], fM_b[r,i,j], fM_r[r,i,j], xor_cost_bwd[r,i,j])
-                        gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bM_b[r,i,j], bM_r[r,i,j], xor_cost_fwd[r,i,j])
+                        gen_XOR_rule(m, fA_r[r,i,j], fA_b[r,i,j], fK_r[r,i,j], fK_b[r,i,j], fM_r[r,i,j], fM_b[r,i,j], xor_cost_fwd[r,i,j])
+                        gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bM_b[r,i,j], bM_r[r,i,j], xor_cost_bwd[r,i,j])
                 # Ext SupP feed the outcome to current MC state
                 gen_EXT_SupP_rule(m, fM_b[r,:,:], fM_r[r,:,:], bM_b[r,:,:], bM_r[r,:,:], M_b[r,:,:], M_r[r,:,:])
-            else:
-                raise Exception("Irregular Behavior at last round")
             continue 
+        
         # forward direction
         if r in fwd:
             print('fwd', r)
@@ -808,13 +835,13 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
             gen_ENT_SupP_rule(m, M_b[r,:,:], M_r[r,:,:], fM_b[r,:,:], fM_r[r,:,:], bM_b[r,:,:], bM_r[r,:,:])
             # MixCol with SupP
             for j in COL:
-                gen_MC_rule(m, fM_b[r,:,j], fM_r[r,:,j], fM_col_u[r,j], fM_col_x[r,j], fM_col_y[r,j], fA_b[r,:,j], fA_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
-                gen_MC_rule(m, bM_b[r,:,j], bM_r[r,:,j], bM_col_u[r,j], bM_col_x[r,j], bM_col_y[r,j], bA_b[r,:,j], bA_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
+                gen_SupP_fwd_MC_rule(m, fM_b[r,:,j], fM_r[r,:,j], fM_col_u[r,j], fM_col_x[r,j], fM_col_y[r,j], fA_b[r,:,j], fA_r[r,:,j], mc_cost_fwd[r,j])
+                gen_SupP_bwd_MC_rule(m, bM_b[r,:,j], bM_r[r,:,j], bM_col_u[r,j], bM_col_x[r,j], bM_col_y[r,j], bA_b[r,:,j], bA_r[r,:,j], mc_cost_bwd[r,j])
             # AddKey with SupP    
             for i in ROW:
                 for j in COL:
-                    gen_XOR_rule(m, fA_b[r,i,j], fA_r[r,i,j], fK_b[r,i,j], fK_r[r,i,j], fS_b[nr,i,j], fS_r[nr,i,j], xor_cost_bwd[r,i,j])
-                    gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bS_b[nr,i,j], bS_r[nr,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, fA_r[r,i,j], fA_b[r,i,j], fK_r[r,i,j], fK_b[r,i,j], fS_r[nr,i,j], fS_b[nr,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bS_b[nr,i,j], bS_r[nr,i,j], xor_cost_bwd[r,i,j])
             # Ext SupP feed the outcome to next SB state
             gen_EXT_SupP_rule(m, fS_b[nr,:,:], fS_r[nr,:,:], bS_b[nr,:,:], bS_r[nr,:,:], S_b[nr,:,:], S_r[nr,:,:])
             continue
@@ -827,12 +854,12 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
             # (reverse) AddKey with SupP    
             for i in ROW:
                 for j in COL:
-                    gen_XOR_rule(m, fS_b[nr,i,j], fS_r[nr,i,j], fK_b[r,i,j], fK_r[r,i,j], fA_b[r,i,j], fA_r[r,i,j], xor_cost_bwd[r,i,j])
-                    gen_XOR_rule(m, bS_b[nr,i,j], bS_r[nr,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, fS_r[nr,i,j], fS_b[nr,i,j], fK_r[r,i,j], fK_b[r,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[r,i,j])
+                    gen_XOR_rule(m, bS_b[nr,i,j], bS_r[nr,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[r,i,j])
             # (reverse) MixCol with SupP
             for j in COL:
-                gen_MC_rule(m, fA_b[r,:,j], fA_r[r,:,j], fA_col_u[r,j], fA_col_x[r,j], fA_col_y[r,j], fM_b[r,:,j], fM_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
-                gen_MC_rule(m, bA_b[r,:,j], bA_r[r,:,j], bA_col_u[r,j], bA_col_x[r,j], bA_col_y[r,j], bM_b[r,:,j], bM_r[r,:,j], mc_cost_fwd[r,j], mc_cost_bwd[r,j])
+                gen_SupP_fwd_MC_rule(m, fA_b[r,:,j], fA_r[r,:,j], fA_col_u[r,j], fA_col_x[r,j], fA_col_y[r,j], fM_b[r,:,j], fM_r[r,:,j], mc_cost_fwd[r,j])
+                gen_SupP_bwd_MC_rule(m, bA_b[r,:,j], bA_r[r,:,j], bA_col_u[r,j], bA_col_x[r,j], bA_col_y[r,j], bM_b[r,:,j], bM_r[r,:,j], mc_cost_bwd[r,j])
             # Ext SupP feed the outcome to current MC state
             gen_EXT_SupP_rule(m, fM_b[r,:,:], fM_r[r,:,:], bM_b[r,:,:], bM_r[r,:,:], M_b[r,:,:], M_r[r,:,:])
             continue
@@ -855,5 +882,5 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     else:
         return (total_round, start_round, match_round, key_start_round), 0, 'Infeasible'
 
-solve(192, 9, 2, 8, 2, dir='./RK_SupP/trails/')
-#solve(128, 8, 4, 1, 5, dir='./RK_SupP/trails/')
+#solve(192, 9, 3, 8, 3, dir='./RK_SupP/trails/')
+solve(128, 8, 4, 1, 5, dir='./RK_SupP/trails/')

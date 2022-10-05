@@ -1,0 +1,223 @@
+KEY_SCHEDULE_0
+bbggbg   b
+ggggbb   g
+bbgggg   b
+bbggbb   g
+
+gggggg   g
+rrrggg   r
+ggggrr   g
+gggggg   g
+
+
+KeyExp costs fwdDf: 
+[[0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0.]]
+
+
+KEY_SCHEDULE_1
+bgggbb   b
+ggggbb   g
+bggggg   b
+bgggbb   b
+
+gggggg   g
+rrgggg   r
+ggggrr   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_2
+ggggbb   g
+ggggbg   g
+gggggg   g
+ggggbg   b
+
+gggggg   g
+rggggg   r
+ggggrr   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_3
+ggggbb   b
+ggggbb   g
+gggggg   b
+bbbbbb   b
+
+gggggg   r
+rrrrrr   r
+ggggrr   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_4
+bbbbbb   b
+ggggbb   b
+bbbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+ggggrr   g
+gggggg   r
+
+
+
+
+KEY_SCHEDULE_5
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+ggggrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_6
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+K#-1
+bbgg
+gggg
+bbgg
+bbgg
+
+gggg
+rrrg
+gggg
+gggg
+
+
+K#0
+bgbg
+bbgg
+ggbg
+bbbg
+
+gggg
+ggrr
+rrgg
+gggg
+
+
+K#1
+ggbb
+ggbb
+gggg
+ggbb
+
+gggg
+gggg
+ggrr
+gggg
+
+
+K#2
+gggg
+gggg
+gggg
+gggg
+
+gggg
+rggg
+gggg
+gggg
+
+
+K#3
+bbgg
+bggg
+gggg
+bgbb
+
+gggg
+ggrr
+rrgg
+gggg
+
+
+K#4
+ggbb
+ggbb
+gggg
+bbbb
+
+gggg
+rrrr
+ggrr
+gggg
+
+
+K#5
+bbbb
+gggg
+bbbb
+bbbb
+
+rrrr
+rrrr
+gggg
+gggg
+
+
+K#6
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+rrgg
+ggrr
+
+
+K#7
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+ggrr
+rrrr
+
+
+K#8
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
