@@ -33,20 +33,14 @@ def gen_ENT_SupP_rule(m: gp.Model, X_b, X_r, fX_b, fX_r, bX_b, bX_r):
 
 # generate rules when the states exit SupP
 def gen_EXT_SupP_rule(m: gp.Model, fX_b, fX_r, bX_b, bX_r, X_b, X_r):
-    A = np.asarray([[-1, 0, -1, 0, 1, 0],
-    [0, 0, 1, 0, -1, 0],
-    [0, -1, 0, -1, 0, 1],
-    [0, 0, 0, 1, 0, -1],
-    [1, 0, 0, 0, -1, 0],
-    [0, 1, 0, 0, 0, -1],
-    [0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 1]])
-
-    B = np.asarray([1,0,1,0,0,0,0,0])
+    # truth table: (1,0) + (1,1) or (1,0) -> (1,0)
+    #              (0,1) + (1,1) or (0,1) -> (0,1)
+    #              (1,1) + (1,1) -> (1,1)
+    #              otherwise -> (0,0)
     for i in ROW:
         for j in COL:
-            enum = [fX_b[i,j], fX_r[i,j], bX_b[i,j], bX_r[i,j], X_b[i,j], X_r[i,j]]
-            m.addMConstr(A, list(enum), '>=', -B)
+            m.addConstr(X_b[i,j] == gp.and_(fX_b[i,j], bX_b[i,j]))
+            m.addConstr(X_r[i,j] == gp.and_(fX_r[i,j], bX_r[i,j]))
 
 # generate XOR rule for forward computations, if backward, switch the input of blue and red
 def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_df: gp.Var):
@@ -274,12 +268,15 @@ def displaySol(m:gp.Model, path):
     bAK_b = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     bAK_r = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     
-    KEY_b= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
-    KEY_r= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     fKEY_b= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     fKEY_r= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     bKEY_b= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     bKEY_r= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+
+    fKEYS_b= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
+    fKEYS_r= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
+    bKEYS_b= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
+    bKEYS_r= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     
     Key_cost_fwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     Key_cost_bwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
@@ -328,18 +325,37 @@ def displaySol(m:gp.Model, path):
                 MC_b[ri, i, j] = SB_b[ri, i, (j + i)%NCOL]
                 MC_r[ri, i, j] = SB_r[ri, i, (j + i)%NCOL]
 
+    
+    KeyS_r = 0
+    KeyS_j = 0
+    for r in range(-1, total_round):
+        for j in COL:
+            print(r,j,'in KeyS',KeyS_r,KeyS_j)
+            for i in ROW:
+                fKEY_b[r,i,j] = Sol["fKeyS_b[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                fKEY_r[r,i,j] = Sol["fKeyS_r[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                bKEY_b[r,i,j] = Sol["bKeyS_b[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                bKEY_r[r,i,j] = Sol["bKeyS_r[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+            
+            KeyS_j += 1
+            if KeyS_j % Nk == 0:
+                KeyS_r += 1
+                KeyS_j = 0
+    
+    for r in range(Nr):
+        for i in ROW:
+            for j in range(Nk):
+                fKEYS_b[r,i,j] = Sol["fKeyS_b[%d,%d,%d]" %(r,i,j)]
+                fKEYS_r[r,i,j] = Sol["fKeyS_r[%d,%d,%d]" %(r,i,j)]
+                bKEYS_b[r,i,j] = Sol["bKeyS_b[%d,%d,%d]" %(r,i,j)]
+                bKEYS_r[r,i,j] = Sol["bKeyS_r[%d,%d,%d]" %(r,i,j)]
+
+                Key_cost_fwd[r,i,j] = Sol["Key_cost_fwd[%d,%d,%d]" %(r,i,j)]
+                Key_cost_bwd[r,i,j] = Sol["Key_cost_bwd[%d,%d,%d]" %(r,i,j)]
+    
     for r in range(total_round+1):
         for i in ROW:
             for j in COL:
-                KEY_b[r,i,j]=Sol["K_b[%d,%d,%d]" %(r,i,j)]
-                KEY_r[r,i,j]=Sol["K_r[%d,%d,%d]" %(r,i,j)]
-                fKEY_b[r,i,j]=Sol["fK_b[%d,%d,%d]" %(r,i,j)]
-                fKEY_r[r,i,j]=Sol["fK_r[%d,%d,%d]" %(r,i,j)]
-                bKEY_b[r,i,j]=Sol["bK_b[%d,%d,%d]" %(r,i,j)]
-                bKEY_r[r,i,j]=Sol["bK_r[%d,%d,%d]" %(r,i,j)]
-
-                Key_cost_fwd[r,i,j]=Sol["Key_Cost_fwd[%d,%d,%d]" %(r,i,j)]
-                Key_cost_bwd[r,i,j]=Sol["Key_Cost_bwd[%d,%d,%d]" %(r,i,j)]
                 xor_cost_fwd[r,i,j] = Sol["XOR_Cost_fwd[%d,%d,%d]" %(r,i,j)]
                 xor_cost_bwd[r,i,j] = Sol["XOR_Cost_bwd[%d,%d,%d]" %(r,i,j)]
     
@@ -423,16 +439,15 @@ def displaySol(m:gp.Model, path):
                 
                 fKEY+=color(fKEY_b[r,i,j], fKEY_r[r,i,j])
                 bKEY+=color(bKEY_b[r,i,j], bKEY_r[r,i,j])
-                KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
 
                 fSB+=color(fSB_b[nr,i,j], fSB_r[nr,i,j])
                 bSB+=color(bSB_b[nr,i,j], bSB_r[nr,i,j])
                 SBN+=color(SB_b[nr,i,j], SB_r[nr,i,j])
 
-            line1 += SB + TAB*2 + MC + TAB*2+ fMC + TAB*2 + fAK + TAB*2 + fKEY + TAB*2 + fSB + TAB*2 + SBN + TAB*2 + KEY + '\n'
+            line1 += SB + TAB*2 + MC + TAB*2+ fMC + TAB*2 + fAK + TAB*2 + fKEY + TAB*2 + fSB + TAB*2 + SBN + '\n'
             line2 += TAB+ TAB*2 + TAB+ TAB*2+ bMC + TAB*2 + bAK + TAB*2 + bKEY + TAB*2 + bSB + '\n' 
         
-        f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'fMC#%d   ' %r + TAB +'fAK#%d   '%r +TAB+'fKEY#%d  '%r +TAB+ 'fSB#%d   '%nr +TAB+ 'SB#%d'%nr+ TAB*2 + 'K#%d '%r+ '\n')
+        f.write('SB#%d'%r +TAB*2+'MC#%d' %r +TAB*2+'fMC#%d   ' %r + TAB +'fAK#%d   '%r +TAB+'fKEY#%d  '%r +TAB+ 'fSB#%d   '%nr +TAB+ 'SB#%d'%nr+ '\n')
         f.write(line1 + '\n')
         f.write(TAB*3           +TAB*3            +'bMC#%d   ' %r + TAB +'bAK#%d   '%r +TAB+'bKEY#%d  '%r +TAB+ 'bSB#%d   '%nr + '\n')
         f.write(line2 + '\n')
@@ -464,7 +479,6 @@ def displaySol(m:gp.Model, path):
     for i in ROW:
         KEY, fAT, bAT = '', '', ''
         for j in COL:
-            KEY+=color(KEY_b[r,i,j], KEY_r[r,i,j])
             fAT +=color(fAK_b[r,i,j], fAK_r[r,i,j])
             bAT +=color(bAK_b[r,i,j], bAK_r[r,i,j])
         f.write(6*TAB + fAT+ TAB*2 + KEY + '\n'*2)
@@ -491,42 +505,41 @@ def displaySol(m:gp.Model, path):
             f.write(6*TAB + AT+ TAB*2 + SB + '\n')
 
     f.write('\n'+'Key Schedule: starts at r'+str(key_start)+'\n')
-
-    for w in range(-Nb, Nb*Nr, Nk):
-        lr = w // NCOL
-        lj = w % NCOL
-        
-        if lj > 0:
-            f.write('K'+str(lr)+'R' + '+'+'K'+str(lr+1) + ' rot' + '\n')
-        else:
-            f.write('K'+str(lr) + '+' + 'K'+str(lr+1)+'L' + ' rot' + '\n')
-        
-        cost_fwd = np.empty(shape=(NROW, Nk))
-        cost_bwd = np.empty(shape=(NROW, Nk))
-        ji = -1
-        for wi in range(w, w+Nk):
-            r = wi // NCOL
-            j = wi % NCOL
-            ji += 1
-            for i in ROW:
-                cost_fwd[i, ji] = Key_cost_fwd[r,i,j]
-                cost_bwd[i, ji] = Key_cost_bwd[r,i,j]
-        
+    
+    for r in range(Nr):
+        f.write('KEY_SCHEDULE_'+str(r)+'\n')
+        line1 = ''
+        line2 = ''
         for i in ROW:
-            line = ''
-            for wi in range(w, w+Nk):
-                r = wi // NCOL
-                j = wi % NCOL
-                line += color(KEY_b[r,i,j], KEY_r[r,i,j])
-                if wi == w+Nk-1:
-                    line += '   ' + color(KEY_b[r,(i+1)%NCOL,j], KEY_r[r,(i+1)%NCOL,j])
-                elif j ==3:
-                    line += '|'
-            f.write(line+'\n')
-        if cost_fwd[:,:].any():
-            f.write('KeyExp costs fwdDf: ' + '\n' + str(cost_fwd[:,:]) + '\n')
-        if cost_bwd[:,:].any():
-            f.write('KeyExp costs bwdDf: ' + '\n' + str(cost_bwd[:,:]) + '\n')
+            for j in range(Nk):
+                line1 += color(fKEYS_b[r,i,j], fKEYS_r[r,i,j])
+                line2 += color(bKEYS_b[r,i,j], bKEYS_r[r,i,j])
+                if j == Nk-1:
+                    line1 += '   ' + color(fKEYS_b[r,(i+1)%NCOL,j], fKEYS_r[r,(i+1)%NCOL,j])
+                    line2 += '   ' + color(bKEYS_b[r,(i+1)%NCOL,j], bKEYS_r[r,(i+1)%NCOL,j])
+            line1+='\n'
+            line2+='\n'
+        f.write(line1+'\n'+line2)
+        f.write('\n'*2)
+
+        if Key_cost_fwd[r,:,:].any():
+            f.write('KeyExp costs fwdDf: ' + '\n' + str(Key_cost_fwd[r,:,:]) + '\n')
+        if Key_cost_bwd[r,:,:].any():
+            f.write('KeyExp costs bwdDf: ' + '\n' + str(Key_cost_bwd[r,:,:]) + '\n')
+        f.write('\n'*2)   
+    
+    for r in range(-1, total_round):
+        continue
+        f.write('K#'+ str(r) + '\n')
+        line1 = ''
+        line2 = ''
+        for i in ROW:
+            for j in COL:
+                line1 += color(fKEY_b[r,i,j], fKEY_r[r,i,j])
+                line2 += color(bKEY_b[r,i,j], bKEY_r[r,i,j])
+            line1+='\n'
+            line2+='\n'
+        f.write(line1+'\n'+line2)
         f.write('\n'*2)
     f.close()
 
@@ -584,7 +597,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
                 m.addConstr(S_g[r,i,j] == gp.and_(S_b[r,i,j], S_r[r,i,j]))
                 m.addConstr(S_w[r,i,j] + S_b[r,i,j] + S_r[r,i,j] - S_g[r,i,j] == 1)
 
-    # define alias storing the MC state at each round with encoding scheme
+    # create alias storing the MC state at each round with encoding scheme
     M_b = np.ndarray(shape= (total_round, NROW, NCOL), dtype= gp.Var)
     M_r = np.ndarray(shape= (total_round, NROW, NCOL), dtype= gp.Var)
     M_g = np.ndarray(shape= (total_round, NROW, NCOL), dtype= gp.Var)
@@ -647,30 +660,33 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
                 m.addConstr(bS_g[r,i,j] == gp.and_(bS_b[r,i,j], bS_r[r,i,j]))
                 m.addConstr(bS_w[r,i,j] + bS_b[r,i,j] + bS_r[r,i,j] - bS_g[r,i,j] == 1) 
        
-    # define vars storing the key state in key schedule
+    # define vars storing the key state in key schedule, in total Nr rounds, with shape NROW*Nk
     fKeyS_b = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKeyS_b').values()).reshape((Nr, NROW, Nk))
     fKeyS_r = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKeyS_r').values()).reshape((Nr, NROW, Nk))
     bKeyS_b = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKeyS_b').values()).reshape((Nr, NROW, Nk))
     bKeyS_r = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKeyS_r').values()).reshape((Nr, NROW, Nk))
     
-    # define Key states with superposition, fK for KEY in fwd direction, bK for KEY in bwd direction
-    fK_b = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_b').values()).reshape((total_round + 1, NROW, NCOL))
-    fK_r = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_r').values()).reshape((total_round + 1, NROW, NCOL))
-    fK_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_g').values()).reshape((total_round + 1, NROW, NCOL))
-    fK_w = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_w').values()).reshape((total_round + 1, NROW, NCOL))
-    bK_b = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='bK_b').values()).reshape((total_round + 1, NROW, NCOL))
-    bK_r = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='bK_r').values()).reshape((total_round + 1, NROW, NCOL))
-    bK_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='bK_g').values()).reshape((total_round + 1, NROW, NCOL))
-    bK_w = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='bK_w').values()).reshape((total_round + 1, NROW, NCOL))
-
-    # seperate the key state into supperposition
-    for r in range(total_round + 1):
-        for i in ROW:
-            for j in COL: 
-                m.addConstr(fK_g[r,i,j] == gp.and_(fK_b[r,i,j], fK_r[r,i,j]))
-                m.addConstr(fK_w[r,i,j] + fK_b[r,i,j] + fK_r[r,i,j] - fK_g[r,i,j] == 1)
-                m.addConstr(bK_g[r,i,j] == gp.and_(bK_b[r,i,j], bK_r[r,i,j]))
-                m.addConstr(bK_w[r,i,j] + bK_b[r,i,j] + bK_r[r,i,j] - bK_g[r,i,j] == 1)
+    # create alias storing the round keys with SupP
+    fK_b = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
+    fK_r = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
+    bK_b = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
+    bK_r = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
+    # match the states in key schedule to round keys alias
+    KeyS_r = 0
+    KeyS_j = 0
+    for r in range(-1, total_round):
+        for j in COL:
+            print(r,j,'in KeyS',KeyS_r,KeyS_j)
+            for i in ROW:
+                fK_b[r,i,j] = fKeyS_b[KeyS_r,i,KeyS_j]
+                fK_r[r,i,j] = fKeyS_r[KeyS_r,i,KeyS_j]
+                bK_b[r,i,j] = bKeyS_b[KeyS_r,i,KeyS_j]
+                bK_r[r,i,j] = bKeyS_r[KeyS_r,i,KeyS_j]
+            
+            KeyS_j += 1
+            if KeyS_j % Nk == 0:
+                KeyS_r += 1
+                KeyS_j = 0
 
     # define vars for columnwise encoding for MixCol input, including MC(fwd) and AK(bwd)
     fM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_u').values()).reshape((total_round, NCOL))
@@ -882,5 +898,6 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     else:
         return (total_round, start_round, match_round, key_start_round), 0, 'Infeasible'
 
-#solve(192, 9, 3, 8, 3, dir='./RK_SupP/trails/')
-solve(128, 8, 4, 1, 5, dir='./RK_SupP/trails/')
+solve(192, 9, 3, 8, 3, dir='./RK_SupP/trails/')
+#solve(128, 8, 4, 1, 5, dir='./RK_SupP/trails/')
+#displaySol(m, path=dir)

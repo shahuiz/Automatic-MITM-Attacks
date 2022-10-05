@@ -1,0 +1,271 @@
+Model:
+    Total: 8
+    Start at: r4
+    Meet at: r1
+    KEY start at: r5
+
+Initialization:
+    ENC FWD: 4
+    ENC BWD: 12
+    KEY FWD: 16
+    KEY BWD: 0
+
+Solution:
+    Obj= min{DF_b=8, DF_r=8, Match=8} = 8
+
+Visualization:
+r0  fwd --->
+SB#0        MC#0        fMC#0       fAK#0       fKEY#0      fSB#1       SB#1
+bggg        bggg        bggg        bggb        bbbb        bbbb        bbbb
+bbgg        bggb        bggb        bggb        bbbb        bbbb        bbbb
+ggbg        bggg        bggg        bggb        bbbb        bbbb        bbbb
+ggbb        bggb        bggb        bggb        bbbb        bbbb        bbbb
+
+                        bMC#0       bAK#0       bKEY#0      bSB#1   
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+
+
+r1  mat -><-
+SB#1        MC#1        fMC#1       fAK#1       fKEY#1      fSB#2       SB#2
+bbbb        bbbb        bbbb        bwgb        bbgb        bwgb        bwrb
+bbbb        bbbb        bbbb        bwwg        bbbg        bwwg        bwwr
+bbbb        bbbb        bbbb        wbgw        bbgb        wbgw        wbrw
+bbbb        bbbb        bbbb        wwbw        bbbb        wwbw        wwbw
+
+                        bMC#1       bAK#1       bKEY#1      bSB#2   
+                        bbbb        gwrg        gggg        gwrg
+                        bbbb        gwwr        gggg        gwwr
+                        bbbb        wgrw        gggg        wgrw
+                        bbbb        wwgw        gggg        wwgw
+
+
+Match:
+MC          SB#2
+bbbb        bwrb
+bbbb        bwwr
+bbbb        wbrw
+bbbb        wwbw
+Degree of Matching:[2 1 3 2]
+
+r2  bwd <---
+SB#2        MC#2        fMC#2       fAK#2       fKEY#2      fSB#3       SB#3
+bwrb        bwrb        bwgb        bwbb        bbbb        bwgb        bwrb
+bwwr        wwrb        bwgb        bbbb        bbbb        gbgb        rbrb
+wbrw        rwwb        gwbb        bwbb        bbbb        gwbb        rwbb
+wwbw        wwwb        bwbb        bwbb        bbbb        gwgb        rwrb
+
+                        bMC#2       bAK#2       bKEY#2      bSB#3   
+                        gwrg        gwrg        gggg        gwrg
+                        rwrg        rgrg        gggg        rgrg
+                        rwrg        rwgg        gggg        rwgg
+                        rwrg        rwrg        gggg        rwrg
+
+MixCol costs fwdDf: [1 0 2 0]    bwdDf: [1 0 0 0]
+
+r3  bwd <---
+SB#3        MC#3        fMC#3       fAK#3       fKEY#3      fSB#4       SB#4
+bwrb        bwrb        bbgb        bbbb        bbbb        bggg        brrr
+rbrb        brbr        bgbg        bbbb        bbbb        bggg        brrr
+rwbb        bbrw        bbgb        bbbb        bbbb        bggg        brrr
+rwrb        brwr        bgbg        bbbb        bbbb        bggg        brrr
+
+                        bMC#3       bAK#3       bKEY#3      bSB#4   
+                        grrg        grrr        gggg        grrr
+                        grgr        grrr        gggg        grrr
+                        ggrr        grrr        gggg        grrr
+                        grrr        grrr        gggg        grrr
+
+MixCol costs fwdDf: [0 2 2 2]    bwdDf: [0 1 1 1]
+
+r4  fwd --->        ENC_start
+SB#4        MC#4        fMC#4       fAK#4       fKEY#4      fSB#5       SB#5
+brrr        brrr        bggg        bbbb        bbbb        bbbb        wwww
+brrr        rrrb        gggb        bbbb        bbbb        bbbb        wwww
+brrr        rrbr        ggbg        bbbb        bbbb        bbbb        wwww
+brrr        rbrr        gbgg        bbbb        bbbb        bbbb        wwww
+
+                        bMC#4       bAK#4       bKEY#4      bSB#5   
+                        grrr        rrrr        gggg        rrrr
+                        rrrg        rrrr        gggg        rrrr
+                        rrgr        rrrr        gggg        rrrr
+                        rgrr        rrrr        gggg        rrrr
+
+
+r5  fwd --->
+SB#5        MC#5        fMC#5       fAK#5       fKEY#5      fSB#6       SB#6
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+
+                        bMC#5       bAK#5       bKEY#5      bSB#6   
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r6  fwd --->
+SB#6        MC#6        fMC#6       fAK#6       fKEY#6      fSB#7       SB#7
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+
+                        bMC#6       bAK#6       bKEY#6      bSB#7   
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r7  fwd --->
+SB#7        MC#7        fMC#7       fAK#7       fKEY#7      fSB#0       SB#0
+wwww        wwww        wwww        wwww        bbbb        wwww        bggg
+wwww        wwww        wwww        wwww        bbbb        wwww        bbgg
+wwww        wwww        wwww        wwww        bbbb        wwww        ggbg
+wwww        wwww        wwww        wwww        bbbb        wwww        ggbb
+
+                        bMC#7       bAK#7       bKEY#7      bSB#0   
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r-1  
+                        AT          K#-1
+                        wwww        
+
+                        wwww
+                        wwww        
+
+                        wwww
+                        wwww        
+
+                        wwww
+                        wwww        
+
+                        wwww
+
+Key Schedule: starts at r5
+KEY_SCHEDULE_0
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_1
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_2
+bbgb   g
+bbbg   b
+bbgb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+KeyExp costs fwdDf: 
+[[0 0 1 0]
+ [0 0 0 1]
+ [0 0 1 0]
+ [0 0 0 0]]
+
+
+KEY_SCHEDULE_3
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_4
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_5
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_6
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+
+KEY_SCHEDULE_7
+bbbb   b
+bbbb   b
+bbbb   b
+bbbb   b
+
+gggg   g
+gggg   g
+gggg   g
+gggg   g
+
+
+
+

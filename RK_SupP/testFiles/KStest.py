@@ -142,10 +142,10 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         for j in COL:
             print(r,j,'in KeyS',KeyS_r,KeyS_j)
             for i in ROW:
-                m.addConstr(fK_b[r,i,j] == fKeyS_b[KeyS_r,i,KeyS_j])
-                m.addConstr(fK_r[r,i,j] == fKeyS_r[KeyS_r,i,KeyS_j])
-                m.addConstr(bK_b[r,i,j] == bKeyS_b[KeyS_r,i,KeyS_j])
-                m.addConstr(bK_r[r,i,j] == bKeyS_r[KeyS_r,i,KeyS_j])
+                fK_b[r,i,j] = fKeyS_b[KeyS_r,i,KeyS_j]
+                fK_r[r,i,j] = fKeyS_r[KeyS_r,i,KeyS_j]
+                bK_b[r,i,j] = bKeyS_b[KeyS_r,i,KeyS_j]
+                bK_r[r,i,j] = bKeyS_r[KeyS_r,i,KeyS_j]
             
             KeyS_j += 1
             if KeyS_j % Nk == 0:
@@ -242,10 +242,27 @@ for line in solFile:
 for r in range(10):
     for i in ROW:
         for j in COL:
+            continue
             fK_b[r,i,j]=Sol["fK_b[%d,%d,%d]" %(r,i,j)]
             fK_r[r,i,j]=Sol["fK_r[%d,%d,%d]" %(r,i,j)]
             bK_b[r,i,j]=Sol["bK_b[%d,%d,%d]" %(r,i,j)]
             bK_r[r,i,j]=Sol["bK_r[%d,%d,%d]" %(r,i,j)]
+
+KeyS_r = 0
+KeyS_j = 0
+for r in range(-1, total_round):
+        for j in COL:
+            print(r,j,'in KeyS',KeyS_r,KeyS_j)
+            for i in ROW:
+                fK_b[r,i,j] = Sol["fKeyS_b[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                fK_r[r,i,j] = Sol["fKeyS_r[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                bK_b[r,i,j] = Sol["bKeyS_b[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+                bK_r[r,i,j] = Sol["bKeyS_r[%d,%d,%d]" %(KeyS_r,i,KeyS_j)]
+            
+            KeyS_j += 1
+            if KeyS_j % Nk == 0:
+                KeyS_r += 1
+                KeyS_j = 0
 
 for r in range(Nr):
     for i in ROW:

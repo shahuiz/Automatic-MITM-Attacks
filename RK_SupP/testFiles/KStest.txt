@@ -1,8 +1,8 @@
 KEY_SCHEDULE_0
-bbggbg   b
+bbggbb   b
 ggggbb   g
 bbgggg   b
-bbggbb   g
+bbggbb   b
 
 gggggg   g
 rrrggg   r
@@ -10,11 +10,6 @@ ggggrr   g
 gggggg   g
 
 
-KeyExp costs fwdDf: 
-[[0. 0. 0. 0. 0. 1.]
- [0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0.]]
 
 
 KEY_SCHEDULE_1
@@ -114,7 +109,7 @@ gggg
 
 
 K#0
-bgbg
+bbbg
 bbgg
 ggbg
 bbbg
