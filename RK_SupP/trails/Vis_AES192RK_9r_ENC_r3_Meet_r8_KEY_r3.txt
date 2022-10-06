@@ -1,0 +1,262 @@
+Model:
+    Total: 9
+    Start at: r3
+    Meet at: r8
+    KEY start at: r3
+
+Initialization:
+    ENC FWD: 0
+    ENC BWD: 16
+    KEY FWD: 24
+    KEY BWD: 0
+
+Solution:
+    Obj= min{DF_b=16, DF_r=16, Match=16} = 16
+
+Visualization:
+r0  bwd <---
+SB#0        MC#0        fMC#0       fAK#0       fKEY#0      fSB#1       SB#1
+rrrr        rrrr        rrrr        rrrr        bbbb        wwww        wwww
+rrrr        rrrr        rrrr        rrrr        bbbb        wwww        wwww
+rrrr        rrrr        rrrr        rrrr        bbbb        wwww        wwww
+rrrr        rrrr        rrrr        rrrr        bbbb        wwww        wwww
+
+                        bMC#0       bAK#0       bKEY#0      bSB#1   
+                        rrrr        rrrr        gggg        wwww
+                        rrrr        rrrr        gggg        wwww
+                        rrrr        rrrr        gggg        wwww
+                        rrrr        rrrr        gggg        wwww
+
+
+r1  bwd <---
+SB#1        MC#1        fMC#1       fAK#1       fKEY#1      fSB#2       SB#2
+wwww        wwww        wrww        rrrr        bbbb        wwww        wwww
+wwww        wwww        wrww        rrbb        bbbb        wwww        wwww
+wwww        wwww        wrww        wrrr        bbbb        wwww        wwww
+wwww        wwww        wrww        rrrr        bbbb        wwww        wwww
+
+                        bMC#1       bAK#1       bKEY#1      bSB#2   
+                        wwww        brwb        gggg        wwww
+                        wwww        rbbb        gggg        wwww
+                        wwww        bbbb        gggg        wwww
+                        wwww        bbbw        gggg        wwww
+
+
+r2  bwd <---
+SB#2        MC#2        fMC#2       fAK#2       fKEY#2      fSB#3       SB#3
+wwww        wwww        wwww        rrrr        bbbb        gggg        rrrr
+wwww        wwww        wwww        wrrb        bbbb        gggg        rrrr
+wwww        wwww        wwww        rwrr        bbbb        gggg        rrrr
+wwww        wwww        wwww        rrbr        bbbb        gggg        rrrr
+
+                        bMC#2       bAK#2       bKEY#2      bSB#3   
+                        wwww        wwrb        gggg        rrrr
+                        wwww        bbbb        gggg        rrrr
+                        wwww        bbbb        gggg        rrrr
+                        wwww        bbbr        gggg        rrrr
+
+
+r3  fwd --->        ENC_start
+SB#3        MC#3        fMC#3       fAK#3       fKEY#3      fSB#4       SB#4
+rrrr        rrrr        gggg        gggg        bbbb        wwww        wwww
+rrrr        rrrr        gggg        gggg        bbbb        rrrr        rrrr
+rrrr        rrrr        gggg        gggg        bbbb        wwww        wwww
+rrrr        rrrr        gggg        gggg        bbbb        wwww        wwww
+
+                        bMC#3       bAK#3       bKEY#3      bSB#4   
+                        rrrr        rrrr        gggg        wwww
+                        rrrr        rrrr        gggg        rrrr
+                        rrrr        rrrr        gggg        wwww
+                        rrrr        rrrr        gggg        wwww
+
+
+r4  fwd --->
+SB#4        MC#4        fMC#4       fAK#4       fKEY#4      fSB#5       SB#5
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+rrrr        rrrr        gggg        wwww        bbbb        rrrr        rrrr
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+
+                        bMC#4       bAK#4       bKEY#4      bSB#5   
+                        wwww        wwww        gggg        wwww
+                        rrrr        wwww        gggg        rrrr
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r5  fwd --->
+SB#5        MC#5        fMC#5       fAK#5       fKEY#5      fSB#6       SB#6
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+rrrr        rrrr        gggg        wwww        bbbb        rrrr        rrrr
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+
+                        bMC#5       bAK#5       bKEY#5      bSB#6   
+                        wwww        wwww        gggg        wwww
+                        rrrr        wwww        gggg        rrrr
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r6  fwd --->
+SB#6        MC#6        fMC#6       fAK#6       fKEY#6      fSB#7       SB#7
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+rrrr        rrrr        gggg        wwww        bbbb        rrrr        rrrr
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+wwww        wwww        wwww        wwww        bbbb        wwww        wwww
+
+                        bMC#6       bAK#6       bKEY#6      bSB#7   
+                        wwww        wwww        gggg        wwww
+                        rrrr        wwww        gggg        rrrr
+                        wwww        wwww        gggg        wwww
+                        wwww        wwww        gggg        wwww
+
+
+r7  fwd --->
+SB#7        MC#7        fMC#7       fAK#7       fKEY#7      fSB#8       SB#8
+wwww        wwww        wwww        wwww        bbbb        bbbb        bbbb
+rrrr        rrrr        gggg        wwww        bbbb        bbbb        bbbb
+wwww        wwww        wwww        wwww        bbbb        bbbb        bbbb
+wwww        wwww        wwww        wwww        bbbb        bbbb        bbbb
+
+                        bMC#7       bAK#7       bKEY#7      bSB#8   
+                        wwww        wwww        gggg        bbbb
+                        rrrr        wwww        gggg        bbbb
+                        wwww        wwww        gggg        bbbb
+                        wwww        wwww        gggg        bbbb
+
+
+r8  mat -><-
+SB#8        MC#8        fMC#8       fAK#8       fKEY#8      fSB#0       SB#0
+bbbb        bbbb        bbbb        bbbb        bbbb        bgbb        rrrr
+bbbb        bbbb        bbbb        bbbb        bbbb        bbgg        rrrr
+bbbb        bbbb        bbbb        bbbb        bbbb        gbgb        rrrr
+bbbb        bbbb        bbbb        bbbb        bbbb        bggg        rrrr
+
+                        bMC#8       bAK#8       bKEY#8      bSB#0   
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+                        gggg        gggg        gggg        gggg
+
+
+r-1  
+                        AT          K#-1
+                        bbbb        
+
+                        gggg
+                        bbbb        
+
+                        gggg
+                        bbbb        
+
+                        gggg
+                        bbbb        
+
+                        gggg
+MAT -><-
+                        AT^K        SB#0
+                                
+                                
+                                
+                                
+
+Key Schedule: starts at r3
+KEY_SCHEDULE_0
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_1
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_2
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_3
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_4
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_5
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+
+KEY_SCHEDULE_6
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+gggggg   g
+gggggg   g
+gggggg   g
+gggggg   g
+
+
+
+

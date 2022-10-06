@@ -64,6 +64,19 @@ def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r
 # generate MC rule with SupP versions
 def gen_SupP_fwd_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
+
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
+
+    m.addConstr(gp.quicksum(out_b) - NROW * in_col_x - fwd == 0)
+    m.addConstr(gp.quicksum(out_r) == NROW * in_col_y)
+    m.update()
+    
+    return
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
     m.addConstr(gp.quicksum(out_b) == NROW * in_col_x)
 
     m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
@@ -74,6 +87,19 @@ def gen_SupP_fwd_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col
     m.update()
 
 def gen_SupP_bwd_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, bwd: gp.Var):
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
+
+    m.addConstr(NROW*in_col_u + gp.quicksum(out_r) <= NROW)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - NBRANCH*in_col_y <= 2*NROW - NBRANCH)
+    m.addConstr(gp.quicksum(in_r) + gp.quicksum(out_r) - 2*NROW*in_col_y >= 0)
+
+    m.addConstr(gp.quicksum(out_b) == NROW * in_col_x)
+    m.addConstr(gp.quicksum(out_r) - NROW * in_col_y - bwd == 0)
+    m.update()
+    
+    return
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
     m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - NBRANCH*in_col_x <= 2*NROW - NBRANCH)
     m.addConstr(gp.quicksum(in_b) + gp.quicksum(out_b) - 2*NROW*in_col_x >= 0)
@@ -245,9 +271,9 @@ def displaySol(m:gp.Model, path):
         bwd = list(range(match_round + 1, enc_start))
         fwd = list(range(enc_start, total_round)) + list(range(0, match_round))
 
-    Nk= key_size // 32
-    Nr = total_round
-    Nb = 4
+    Nb = NCOL
+    Nk = key_size // NBYTE
+    Nr = math.ceil((total_round + 1)*Nb / Nk)
         
     SB_b = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     SB_r = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
@@ -278,8 +304,8 @@ def displaySol(m:gp.Model, path):
     bKEYS_b= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     bKEYS_r= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     
-    Key_cost_fwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
-    Key_cost_bwd= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    Key_cost_fwd= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
+    Key_cost_bwd= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     xor_cost_fwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     xor_cost_bwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     mc_cost_fwd = np.ndarray(shape=(total_round, NCOL), dtype=int)
@@ -811,6 +837,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         
         # last round
         if r == total_round - 1:
+            #continue
             print('lastr', r)
             # MC of last round is skipped, hence no cost in df
             for j in COL:
@@ -846,16 +873,19 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         
         # forward direction
         if r in fwd:
+            #continue
             print('fwd', r)
             # Enter SupP at current round MC state
             gen_ENT_SupP_rule(m, M_b[r,:,:], M_r[r,:,:], fM_b[r,:,:], fM_r[r,:,:], bM_b[r,:,:], bM_r[r,:,:])
             # MixCol with SupP
             for j in COL:
+                #continue
                 gen_SupP_fwd_MC_rule(m, fM_b[r,:,j], fM_r[r,:,j], fM_col_u[r,j], fM_col_x[r,j], fM_col_y[r,j], fA_b[r,:,j], fA_r[r,:,j], mc_cost_fwd[r,j])
                 gen_SupP_bwd_MC_rule(m, bM_b[r,:,j], bM_r[r,:,j], bM_col_u[r,j], bM_col_x[r,j], bM_col_y[r,j], bA_b[r,:,j], bA_r[r,:,j], mc_cost_bwd[r,j])
             # AddKey with SupP    
             for i in ROW:
                 for j in COL:
+                    continue
                     gen_XOR_rule(m, fA_r[r,i,j], fA_b[r,i,j], fK_r[r,i,j], fK_b[r,i,j], fS_r[nr,i,j], fS_b[nr,i,j], xor_cost_fwd[r,i,j])
                     gen_XOR_rule(m, bA_b[r,i,j], bA_r[r,i,j], bK_b[r,i,j], bK_r[r,i,j], bS_b[nr,i,j], bS_r[nr,i,j], xor_cost_bwd[r,i,j])
             # Ext SupP feed the outcome to next SB state
@@ -870,10 +900,12 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
             # (reverse) AddKey with SupP    
             for i in ROW:
                 for j in COL:
+                    continue
                     gen_XOR_rule(m, fS_r[nr,i,j], fS_b[nr,i,j], fK_r[r,i,j], fK_b[r,i,j], fA_r[r,i,j], fA_b[r,i,j], xor_cost_fwd[r,i,j])
                     gen_XOR_rule(m, bS_b[nr,i,j], bS_r[nr,i,j], bK_b[r,i,j], bK_r[r,i,j], bA_b[r,i,j], bA_r[r,i,j], xor_cost_bwd[r,i,j])
             # (reverse) MixCol with SupP
             for j in COL:
+                #continue
                 gen_SupP_fwd_MC_rule(m, fA_b[r,:,j], fA_r[r,:,j], fA_col_u[r,j], fA_col_x[r,j], fA_col_y[r,j], fM_b[r,:,j], fM_r[r,:,j], mc_cost_fwd[r,j])
                 gen_SupP_bwd_MC_rule(m, bA_b[r,:,j], bA_r[r,:,j], bA_col_u[r,j], bA_col_x[r,j], bA_col_y[r,j], bM_b[r,:,j], bM_r[r,:,j], mc_cost_bwd[r,j])
             # Ext SupP feed the outcome to current MC state
