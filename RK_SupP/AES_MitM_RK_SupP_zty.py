@@ -18,7 +18,7 @@ COL = range(NCOL)
 TAB = ' ' * 4
 
 # generate rules when the state enters SupP
-def gen_ENT_SupP_rule(m: gp.Model, X_b, X_r, fX_b, fX_r, bX_b, bX_r):
+def gen_ENT_SupP_rule(m: gp.Model, X_b: gp.Var, X_r: gp.Var, fX_b: gp.Var, fX_r: gp.Var, bX_b: gp.Var, bX_r: gp.Var):
     # seperate MC states into superposition: MC[b,r] -> MC_fwd[b,r] + MC_bwd[b,r]
     # truth table: (1,0)->(1,0)+(1,1); 
     #              (0,1)->(1,1)+(0,1); 
@@ -31,7 +31,7 @@ def gen_ENT_SupP_rule(m: gp.Model, X_b, X_r, fX_b, fX_r, bX_b, bX_r):
     m.addConstr(bX_r == gp.or_(X_b, X_r))
 
 # generate rules when the states exit SupP
-def gen_EXT_SupP_rule(m: gp.Model, fX_b, fX_r, bX_b, bX_r, X_b, X_r):
+def gen_EXT_SupP_rule(m: gp.Model, fX_b: gp.Var, fX_r: gp.Var, bX_b: gp.Var, bX_r: gp.Var, X_b: gp.Var, X_r: gp.Var):
     # truth table: (1,0) + (1,1) or (1,0) -> (1,0)
     #              (0,1) + (1,1) or (0,1) -> (0,1)
     #              (1,1) + (1,1) -> (1,1)
@@ -182,6 +182,7 @@ def writeSol(m: gp.Model, path):
             gv = m.getVars()
             names = m.getAttr('VarName', gv)
             for i in range(m.SolCount):
+                print('SOL', i)
                 m.params.SolutionNumber = i
                 xn = m.getAttr('Xn', gv)
                 lines = ["{} {}".format(v1, v2) for v1, v2 in zip(names, xn)]
@@ -426,6 +427,10 @@ def displaySol(m:gp.Model, path):
                 fSB+=color(fSB_b[nr,i,j], fSB_r[nr,i,j])
                 bSB+=color(bSB_b[nr,i,j], bSB_r[nr,i,j])
                 SBN+=color(SB_b[nr,i,j], SB_r[nr,i,j])
+            
+            if r == total_round - 1:
+                fAK = '////'
+                bAK = '////'
 
             line1 += SB + TAB*2 + MC + TAB*2+ fMC + TAB*2 + fAK + TAB*2 + fKEY + TAB*2 + fSB + TAB*2 + SBN + '\n'
             line2 += TAB+ TAB*2 + TAB+ TAB*2+ bMC + TAB*2 + bAK + TAB*2 + bKEY + TAB*2 + bSB + '\n' 
@@ -444,7 +449,7 @@ def displaySol(m:gp.Model, path):
         f.write('\n')
         
         if r == match_round and match_round != total_round - 1:
-            f.write('Match:'+'\n'+ 'MC  ' +TAB*2+ 'SB#%d' % (r+1) +'\n')
+            f.write('Match Thru MC:'+'\n'+ 'MC#%d' %r +TAB*2+ 'Meet_BWD' +'\n')
             for i in ROW:
                 MC = ''
                 Meet_B = ''
@@ -452,40 +457,48 @@ def displaySol(m:gp.Model, path):
                     MC+=color(MC_b[r,i,j], MC_r[r,i,j])
                     Meet_B+=color(Meet_bwd_b[i,j], Meet_bwd_r[i,j])
                 f.write(MC+TAB*2+Meet_B+'\n') 
-            #f.write('Meet_signed: ' + str(meet_s[:]) + '\n')
             f.write('Degree of Matching:' + str(meet[:]) + '\n'*2)
 
     # process whiten key
     r = -1
-    f.write("r%d  " %r + '\n')
-    f.write(6*TAB +'AT  '+ TAB*2 + 'K#-1' + '\n')
+    nr = 0
+    line1 = ''
+    line2 = ''
     for i in ROW:
-        KEY, fAT, bAT = '', '', ''
+        fKEY, bKEY, fAT, bAT, fNSB, bNSB, NSB = '', '', '', '', '', '', ''
         for j in COL:
             fAT +=color(fAK_b[r,i,j], fAK_r[r,i,j])
             bAT +=color(bAK_b[r,i,j], bAK_r[r,i,j])
-        f.write(6*TAB + fAT+ TAB*2 + KEY + '\n'*2)
-        f.write(6*TAB + bAT + '\n')
+            fKEY +=color(fKEY_b[r,i,j], fKEY_r[r,i,j])
+            bKEY +=color(bKEY_b[r,i,j], bKEY_r[r,i,j])
+            fNSB += color(fSB_b[0,i,j], fSB_r[0,i,j])
+            bNSB += color(bSB_b[0,i,j], bSB_r[0,i,j])
+            NSB += color(SB_b[nr,i,j], SB_r[nr,i,j])
+        if match_round == total_round -1:
+                NSB = '////'
+        line1 += 9*TAB + fAT+ TAB*2 + fKEY + '\n'
+        line2 += 9*TAB + bAT+ TAB*2 + bKEY + '\n'
+    f.write(TAB*9 +'fAT     ' +TAB+'fKEY#%d  '%r +TAB+ 'fSB#%d   '%nr +TAB+ 'SB#%d' %nr + '\n')
+    f.write(line1 + '\n')
+    f.write(TAB*9 +'bAT     ' +TAB+'bKEY#%d  '%r +TAB+ 'bSB#%d   '%nr + '\n')
+    f.write(line2 + '\n')
     
-    tr = r + total_round
-    if mc_cost_fwd[tr,:].any() or mc_cost_bwd[tr,:].any():
-        f.write('MixCol costs fwdDf: '+ str(mc_cost_fwd[tr,:]) + TAB+ 'bwdDf: ' +str(mc_cost_bwd[r,:])+ '\n')
+    tr = total_round
     if xor_cost_fwd[tr,:,:].any():
             f.write('AddKey costs fwdDf: ' + '\n' + str(xor_cost_fwd[tr,:,:]) + '\n')
     if xor_cost_bwd[tr,:,:].any():
             f.write('AddKey costs bwdDf: ' + '\n' + str(xor_cost_bwd[tr,:,:]) + '\n')
     
     if match_round == total_round - 1:
-        f.write("MAT -><-" + '\n')
-        f.write(6*TAB +'AT^K'+ TAB*2 + 'SB#0' + '\n')
+        f.write('\n' + "Identity Match:" + '\n')
+        f.write('Meet_FWD'+ TAB + 'SB#0' + '\n')
         for i in ROW:
             SB = ''
-            AT = ''
+            MF = ''
             for j in COL:
-                continue
                 SB +=color(SB_b[0,i,j], SB_r[0,i,j])
-                AT +=color(tempAT_b[i,j], tempAT_r[i,j])
-            f.write(6*TAB + AT+ TAB*2 + SB + '\n')
+                MF +=color(Meet_fwd_b[i,j], Meet_fwd_r[i,j])
+            f.write(MF+ TAB*2 + SB + '\n')
 
     f.write('\n'+'Key Schedule: starts at r'+str(key_start)+'\n')
     
@@ -548,6 +561,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
         fwd = list(range(start_round, total_round)) + list(range(0, match_round))
 
 #### Define Variables ####
+    # define a constant zero, to force cost of df as 0
     CONST0 = m.addVar(vtype = GRB.BINARY, name='Const0')
     m.addConstr(CONST0 == 0)
 
@@ -743,11 +757,14 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     key_expansion(m, key_size, total_round, key_start_round, K_ini_b, K_ini_r, fKeyS_b, fKeyS_r, bKeyS_b, bKeyS_r, CONST0, key_cost_fwd, key_cost_bwd)
 
     # initialize the enc states, avoid unknown to maximize performance
+
     for i in ROW:
         for j in COL:
+            m.addConstr(E_ini_r[i, j] == 1) #test
+            m.addConstr(E_ini_b[i, j] == 0) #test
             m.addConstr(S_b[start_round, i, j] + S_r[start_round, i, j] >= 1)
-            m.addConstr(E_ini_b[i, j] == S_b[start_round, i, j] )
-            m.addConstr(E_ini_r[i, j] == S_r[start_round, i, j] )
+            m.addConstr(E_ini_b[i, j] == S_b[start_round, i, j])
+            m.addConstr(E_ini_r[i, j] == S_r[start_round, i, j])
 
     # add constriants according to the encryption algorithm
     for r in range(total_round):
