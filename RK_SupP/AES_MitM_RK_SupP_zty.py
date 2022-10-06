@@ -752,6 +752,7 @@ def solve(key_size:int, total_round:int, start_round:int, match_round:int, key_s
     # add constriants according to the encryption algorithm
     for r in range(total_round):
         nr = r + 1   # alias for next round
+        
         # special case: meet at last round
         if r == match_round and match_round == total_round - 1:
             print('mat lastr', r)
