@@ -1,72 +1,72 @@
-\ Model AES192RK_9r_ENC_r3_Meet_r8_KEY_r3
+\ Model AES192RK_9r_ENC_r2_Meet_r8_KEY_r4
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Maximize
   0 fM_col_u[0,0] + 0 fM_col_u[0,1] + 0 fM_col_u[0,2] + 0 fM_col_u[0,3]
    + 0 fM_col_u[1,0] + 0 fM_col_u[1,1] + 0 fM_col_u[1,2] + 0 fM_col_u[1,3]
-   + 0 fM_col_u[2,0] + 0 fM_col_u[2,1] + 0 fM_col_u[2,2] + 0 fM_col_u[2,3]
    + 0 fM_col_u[8,0] + 0 fM_col_u[8,1] + 0 fM_col_u[8,2] + 0 fM_col_u[8,3]
    + 0 fM_col_v[0,0] + 0 fM_col_v[0,1] + 0 fM_col_v[0,2] + 0 fM_col_v[0,3]
    + 0 fM_col_v[1,0] + 0 fM_col_v[1,1] + 0 fM_col_v[1,2] + 0 fM_col_v[1,3]
-   + 0 fM_col_v[2,0] + 0 fM_col_v[2,1] + 0 fM_col_v[2,2] + 0 fM_col_v[2,3]
    + 0 fM_col_v[8,0] + 0 fM_col_v[8,1] + 0 fM_col_v[8,2] + 0 fM_col_v[8,3]
    + 0 fM_col_w[0,0] + 0 fM_col_w[0,1] + 0 fM_col_w[0,2] + 0 fM_col_w[0,3]
    + 0 fM_col_w[1,0] + 0 fM_col_w[1,1] + 0 fM_col_w[1,2] + 0 fM_col_w[1,3]
-   + 0 fM_col_w[2,0] + 0 fM_col_w[2,1] + 0 fM_col_w[2,2] + 0 fM_col_w[2,3]
    + 0 fM_col_w[8,0] + 0 fM_col_w[8,1] + 0 fM_col_w[8,2] + 0 fM_col_w[8,3]
    + 0 bM_col_u[0,0] + 0 bM_col_u[0,1] + 0 bM_col_u[0,2] + 0 bM_col_u[0,3]
    + 0 bM_col_u[1,0] + 0 bM_col_u[1,1] + 0 bM_col_u[1,2] + 0 bM_col_u[1,3]
-   + 0 bM_col_u[2,0] + 0 bM_col_u[2,1] + 0 bM_col_u[2,2] + 0 bM_col_u[2,3]
    + 0 bM_col_u[8,0] + 0 bM_col_u[8,1] + 0 bM_col_u[8,2] + 0 bM_col_u[8,3]
    + 0 bM_col_v[0,0] + 0 bM_col_v[0,1] + 0 bM_col_v[0,2] + 0 bM_col_v[0,3]
    + 0 bM_col_v[1,0] + 0 bM_col_v[1,1] + 0 bM_col_v[1,2] + 0 bM_col_v[1,3]
-   + 0 bM_col_v[2,0] + 0 bM_col_v[2,1] + 0 bM_col_v[2,2] + 0 bM_col_v[2,3]
    + 0 bM_col_v[8,0] + 0 bM_col_v[8,1] + 0 bM_col_v[8,2] + 0 bM_col_v[8,3]
    + 0 bM_col_w[0,0] + 0 bM_col_w[0,1] + 0 bM_col_w[0,2] + 0 bM_col_w[0,3]
    + 0 bM_col_w[1,0] + 0 bM_col_w[1,1] + 0 bM_col_w[1,2] + 0 bM_col_w[1,3]
-   + 0 bM_col_w[2,0] + 0 bM_col_w[2,1] + 0 bM_col_w[2,2] + 0 bM_col_w[2,3]
    + 0 bM_col_w[8,0] + 0 bM_col_w[8,1] + 0 bM_col_w[8,2] + 0 bM_col_w[8,3]
+   + 0 fA_col_u[2,0] + 0 fA_col_u[2,1] + 0 fA_col_u[2,2] + 0 fA_col_u[2,3]
    + 0 fA_col_u[3,0] + 0 fA_col_u[3,1] + 0 fA_col_u[3,2] + 0 fA_col_u[3,3]
    + 0 fA_col_u[4,0] + 0 fA_col_u[4,1] + 0 fA_col_u[4,2] + 0 fA_col_u[4,3]
    + 0 fA_col_u[5,0] + 0 fA_col_u[5,1] + 0 fA_col_u[5,2] + 0 fA_col_u[5,3]
    + 0 fA_col_u[6,0] + 0 fA_col_u[6,1] + 0 fA_col_u[6,2] + 0 fA_col_u[6,3]
    + 0 fA_col_u[7,0] + 0 fA_col_u[7,1] + 0 fA_col_u[7,2] + 0 fA_col_u[7,3]
    + 0 fA_col_u[8,0] + 0 fA_col_u[8,1] + 0 fA_col_u[8,2] + 0 fA_col_u[8,3]
+   + 0 fA_col_v[2,0] + 0 fA_col_v[2,1] + 0 fA_col_v[2,2] + 0 fA_col_v[2,3]
    + 0 fA_col_v[3,0] + 0 fA_col_v[3,1] + 0 fA_col_v[3,2] + 0 fA_col_v[3,3]
    + 0 fA_col_v[4,0] + 0 fA_col_v[4,1] + 0 fA_col_v[4,2] + 0 fA_col_v[4,3]
    + 0 fA_col_v[5,0] + 0 fA_col_v[5,1] + 0 fA_col_v[5,2] + 0 fA_col_v[5,3]
    + 0 fA_col_v[6,0] + 0 fA_col_v[6,1] + 0 fA_col_v[6,2] + 0 fA_col_v[6,3]
    + 0 fA_col_v[7,0] + 0 fA_col_v[7,1] + 0 fA_col_v[7,2] + 0 fA_col_v[7,3]
    + 0 fA_col_v[8,0] + 0 fA_col_v[8,1] + 0 fA_col_v[8,2] + 0 fA_col_v[8,3]
+   + 0 fA_col_w[2,0] + 0 fA_col_w[2,1] + 0 fA_col_w[2,2] + 0 fA_col_w[2,3]
    + 0 fA_col_w[3,0] + 0 fA_col_w[3,1] + 0 fA_col_w[3,2] + 0 fA_col_w[3,3]
    + 0 fA_col_w[4,0] + 0 fA_col_w[4,1] + 0 fA_col_w[4,2] + 0 fA_col_w[4,3]
    + 0 fA_col_w[5,0] + 0 fA_col_w[5,1] + 0 fA_col_w[5,2] + 0 fA_col_w[5,3]
    + 0 fA_col_w[6,0] + 0 fA_col_w[6,1] + 0 fA_col_w[6,2] + 0 fA_col_w[6,3]
    + 0 fA_col_w[7,0] + 0 fA_col_w[7,1] + 0 fA_col_w[7,2] + 0 fA_col_w[7,3]
    + 0 fA_col_w[8,0] + 0 fA_col_w[8,1] + 0 fA_col_w[8,2] + 0 fA_col_w[8,3]
+   + 0 bA_col_u[2,0] + 0 bA_col_u[2,1] + 0 bA_col_u[2,2] + 0 bA_col_u[2,3]
    + 0 bA_col_u[3,0] + 0 bA_col_u[3,1] + 0 bA_col_u[3,2] + 0 bA_col_u[3,3]
    + 0 bA_col_u[4,0] + 0 bA_col_u[4,1] + 0 bA_col_u[4,2] + 0 bA_col_u[4,3]
    + 0 bA_col_u[5,0] + 0 bA_col_u[5,1] + 0 bA_col_u[5,2] + 0 bA_col_u[5,3]
    + 0 bA_col_u[6,0] + 0 bA_col_u[6,1] + 0 bA_col_u[6,2] + 0 bA_col_u[6,3]
    + 0 bA_col_u[7,0] + 0 bA_col_u[7,1] + 0 bA_col_u[7,2] + 0 bA_col_u[7,3]
    + 0 bA_col_u[8,0] + 0 bA_col_u[8,1] + 0 bA_col_u[8,2] + 0 bA_col_u[8,3]
+   + 0 bA_col_v[2,0] + 0 bA_col_v[2,1] + 0 bA_col_v[2,2] + 0 bA_col_v[2,3]
    + 0 bA_col_v[3,0] + 0 bA_col_v[3,1] + 0 bA_col_v[3,2] + 0 bA_col_v[3,3]
    + 0 bA_col_v[4,0] + 0 bA_col_v[4,1] + 0 bA_col_v[4,2] + 0 bA_col_v[4,3]
    + 0 bA_col_v[5,0] + 0 bA_col_v[5,1] + 0 bA_col_v[5,2] + 0 bA_col_v[5,3]
    + 0 bA_col_v[6,0] + 0 bA_col_v[6,1] + 0 bA_col_v[6,2] + 0 bA_col_v[6,3]
    + 0 bA_col_v[7,0] + 0 bA_col_v[7,1] + 0 bA_col_v[7,2] + 0 bA_col_v[7,3]
    + 0 bA_col_v[8,0] + 0 bA_col_v[8,1] + 0 bA_col_v[8,2] + 0 bA_col_v[8,3]
+   + 0 bA_col_w[2,0] + 0 bA_col_w[2,1] + 0 bA_col_w[2,2] + 0 bA_col_w[2,3]
    + 0 bA_col_w[3,0] + 0 bA_col_w[3,1] + 0 bA_col_w[3,2] + 0 bA_col_w[3,3]
    + 0 bA_col_w[4,0] + 0 bA_col_w[4,1] + 0 bA_col_w[4,2] + 0 bA_col_w[4,3]
    + 0 bA_col_w[5,0] + 0 bA_col_w[5,1] + 0 bA_col_w[5,2] + 0 bA_col_w[5,3]
    + 0 bA_col_w[6,0] + 0 bA_col_w[6,1] + 0 bA_col_w[6,2] + 0 bA_col_w[6,3]
    + 0 bA_col_w[7,0] + 0 bA_col_w[7,1] + 0 bA_col_w[7,2] + 0 bA_col_w[7,3]
    + 0 bA_col_w[8,0] + 0 bA_col_w[8,1] + 0 bA_col_w[8,2] + 0 bA_col_w[8,3]
-   + 0 Ksub_b[3,0] + 0 Ksub_b[3,1] + 0 Ksub_b[3,2] + 0 Ksub_b[3,3]
-   + 0 Ksub_r[3,0] + 0 Ksub_r[3,1] + 0 Ksub_r[3,2] + 0 Ksub_r[3,3]
-   + 0 fKsub_b[3,0] + 0 fKsub_b[3,1] + 0 fKsub_b[3,2] + 0 fKsub_b[3,3]
-   + 0 fKsub_r[3,0] + 0 fKsub_r[3,1] + 0 fKsub_r[3,2] + 0 fKsub_r[3,3]
-   + 0 bKsub_b[3,0] + 0 bKsub_b[3,1] + 0 bKsub_b[3,2] + 0 bKsub_b[3,3]
-   + 0 bKsub_r[3,0] + 0 bKsub_r[3,1] + 0 bKsub_r[3,2] + 0 bKsub_r[3,3]
+   + 0 Ksub_b[4,0] + 0 Ksub_b[4,1] + 0 Ksub_b[4,2] + 0 Ksub_b[4,3]
+   + 0 Ksub_r[4,0] + 0 Ksub_r[4,1] + 0 Ksub_r[4,2] + 0 Ksub_r[4,3]
+   + 0 fKsub_b[4,0] + 0 fKsub_b[4,1] + 0 fKsub_b[4,2] + 0 fKsub_b[4,3]
+   + 0 fKsub_r[4,0] + 0 fKsub_r[4,1] + 0 fKsub_r[4,2] + 0 fKsub_r[4,3]
+   + 0 bKsub_b[4,0] + 0 bKsub_b[4,1] + 0 bKsub_b[4,2] + 0 bKsub_b[4,3]
+   + 0 bKsub_r[4,0] + 0 bKsub_r[4,1] + 0 bKsub_r[4,2] + 0 bKsub_r[4,3]
    + Obj
 Subject To
  R0: Const0 = 0
@@ -2790,638 +2790,638 @@ Subject To
  R2542: Const0 - bKS_y[2,3,5] + bKS_y[3,3,5] >= 0
  R2543: - Const0 + bKS_x[2,3,5] - Key_cost_bwd[2,3,5] >= 0
  R2544: - Const0 + bKS_y[2,3,5] - Key_cost_bwd[2,3,5] >= 0
- R2545: - K_ini_y[0,0] + fKS_y[3,0,0] = 0
- R2546: - K_ini_x[0,0] + bKS_x[3,0,0] = 0
- R2547: Key_cost_bwd[3,0,0] = 0
- R2548: Key_cost_fwd[3,0,0] = 0
- R2549: - K_ini_y[1,0] + fKS_y[3,1,0] = 0
- R2550: - K_ini_x[1,0] + bKS_x[3,1,0] = 0
- R2551: Key_cost_bwd[3,1,0] = 0
- R2552: Key_cost_fwd[3,1,0] = 0
- R2553: - K_ini_y[2,0] + fKS_y[3,2,0] = 0
- R2554: - K_ini_x[2,0] + bKS_x[3,2,0] = 0
- R2555: Key_cost_bwd[3,2,0] = 0
- R2556: Key_cost_fwd[3,2,0] = 0
- R2557: - K_ini_y[3,0] + fKS_y[3,3,0] = 0
- R2558: - K_ini_x[3,0] + bKS_x[3,3,0] = 0
- R2559: Key_cost_bwd[3,3,0] = 0
- R2560: Key_cost_fwd[3,3,0] = 0
- R2561: - K_ini_y[0,1] + fKS_y[3,0,1] = 0
- R2562: - K_ini_x[0,1] + bKS_x[3,0,1] = 0
- R2563: Key_cost_bwd[3,0,1] = 0
- R2564: Key_cost_fwd[3,0,1] = 0
- R2565: - K_ini_y[1,1] + fKS_y[3,1,1] = 0
- R2566: - K_ini_x[1,1] + bKS_x[3,1,1] = 0
- R2567: Key_cost_bwd[3,1,1] = 0
- R2568: Key_cost_fwd[3,1,1] = 0
- R2569: - K_ini_y[2,1] + fKS_y[3,2,1] = 0
- R2570: - K_ini_x[2,1] + bKS_x[3,2,1] = 0
- R2571: Key_cost_bwd[3,2,1] = 0
- R2572: Key_cost_fwd[3,2,1] = 0
- R2573: - K_ini_y[3,1] + fKS_y[3,3,1] = 0
- R2574: - K_ini_x[3,1] + bKS_x[3,3,1] = 0
- R2575: Key_cost_bwd[3,3,1] = 0
- R2576: Key_cost_fwd[3,3,1] = 0
- R2577: - K_ini_y[0,2] + fKS_y[3,0,2] = 0
- R2578: - K_ini_x[0,2] + bKS_x[3,0,2] = 0
- R2579: Key_cost_bwd[3,0,2] = 0
- R2580: Key_cost_fwd[3,0,2] = 0
- R2581: - K_ini_y[1,2] + fKS_y[3,1,2] = 0
- R2582: - K_ini_x[1,2] + bKS_x[3,1,2] = 0
- R2583: Key_cost_bwd[3,1,2] = 0
- R2584: Key_cost_fwd[3,1,2] = 0
- R2585: - K_ini_y[2,2] + fKS_y[3,2,2] = 0
- R2586: - K_ini_x[2,2] + bKS_x[3,2,2] = 0
- R2587: Key_cost_bwd[3,2,2] = 0
- R2588: Key_cost_fwd[3,2,2] = 0
- R2589: - K_ini_y[3,2] + fKS_y[3,3,2] = 0
- R2590: - K_ini_x[3,2] + bKS_x[3,3,2] = 0
- R2591: Key_cost_bwd[3,3,2] = 0
- R2592: Key_cost_fwd[3,3,2] = 0
- R2593: - K_ini_y[0,3] + fKS_y[3,0,3] = 0
- R2594: - K_ini_x[0,3] + bKS_x[3,0,3] = 0
- R2595: Key_cost_bwd[3,0,3] = 0
- R2596: Key_cost_fwd[3,0,3] = 0
- R2597: - K_ini_y[1,3] + fKS_y[3,1,3] = 0
- R2598: - K_ini_x[1,3] + bKS_x[3,1,3] = 0
- R2599: Key_cost_bwd[3,1,3] = 0
- R2600: Key_cost_fwd[3,1,3] = 0
- R2601: - K_ini_y[2,3] + fKS_y[3,2,3] = 0
- R2602: - K_ini_x[2,3] + bKS_x[3,2,3] = 0
- R2603: Key_cost_bwd[3,2,3] = 0
- R2604: Key_cost_fwd[3,2,3] = 0
- R2605: - K_ini_y[3,3] + fKS_y[3,3,3] = 0
- R2606: - K_ini_x[3,3] + bKS_x[3,3,3] = 0
- R2607: Key_cost_bwd[3,3,3] = 0
- R2608: Key_cost_fwd[3,3,3] = 0
- R2609: - K_ini_y[0,4] + fKS_y[3,0,4] = 0
- R2610: - K_ini_x[0,4] + bKS_x[3,0,4] = 0
- R2611: Key_cost_bwd[3,0,4] = 0
- R2612: Key_cost_fwd[3,0,4] = 0
- R2613: - K_ini_y[1,4] + fKS_y[3,1,4] = 0
- R2614: - K_ini_x[1,4] + bKS_x[3,1,4] = 0
- R2615: Key_cost_bwd[3,1,4] = 0
- R2616: Key_cost_fwd[3,1,4] = 0
- R2617: - K_ini_y[2,4] + fKS_y[3,2,4] = 0
- R2618: - K_ini_x[2,4] + bKS_x[3,2,4] = 0
- R2619: Key_cost_bwd[3,2,4] = 0
- R2620: Key_cost_fwd[3,2,4] = 0
- R2621: - K_ini_y[3,4] + fKS_y[3,3,4] = 0
- R2622: - K_ini_x[3,4] + bKS_x[3,3,4] = 0
- R2623: Key_cost_bwd[3,3,4] = 0
- R2624: Key_cost_fwd[3,3,4] = 0
- R2625: - K_ini_y[0,5] + fKS_y[3,0,5] = 0
- R2626: - K_ini_x[0,5] + bKS_x[3,0,5] = 0
- R2627: Key_cost_bwd[3,0,5] = 0
- R2628: Key_cost_fwd[3,0,5] = 0
- R2629: - K_ini_y[1,5] + fKS_y[3,1,5] = 0
- R2630: - K_ini_x[1,5] + bKS_x[3,1,5] = 0
- R2631: Key_cost_bwd[3,1,5] = 0
- R2632: Key_cost_fwd[3,1,5] = 0
- R2633: - K_ini_y[2,5] + fKS_y[3,2,5] = 0
- R2634: - K_ini_x[2,5] + bKS_x[3,2,5] = 0
- R2635: Key_cost_bwd[3,2,5] = 0
- R2636: Key_cost_fwd[3,2,5] = 0
- R2637: - K_ini_y[3,5] + fKS_y[3,3,5] = 0
- R2638: - K_ini_x[3,5] + bKS_x[3,3,5] = 0
- R2639: Key_cost_bwd[3,3,5] = 0
- R2640: Key_cost_fwd[3,3,5] = 0
- R2641: - Ksub_r[4,0] + fKsub_r[4,0] = 0
- R2642: - Ksub_b[4,0] + bKsub_b[4,0] = 0
- R2643: - Ksub_r[4,1] + fKsub_r[4,1] = 0
- R2644: - Ksub_b[4,1] + bKsub_b[4,1] = 0
- R2645: - Ksub_r[4,2] + fKsub_r[4,2] = 0
- R2646: - Ksub_b[4,2] + bKsub_b[4,2] = 0
- R2647: - Ksub_r[4,3] + fKsub_r[4,3] = 0
- R2648: - Ksub_b[4,3] + bKsub_b[4,3] = 0
- R2649: Key_cost_fwd[4,0,0] >= 0
- R2650: Const0 >= 0
- R2651: - 2 Const0 - fKS_x[3,0,0] + fKS_x[4,0,0] - fKsub_b[4,0] >= -1
- R2652: Const0 - fKS_x[4,0,0] + fKsub_b[4,0] >= 0
- R2653: - fKS_y[3,0,0] + fKS_y[4,0,0] - 2 Key_cost_fwd[4,0,0]
-   - fKsub_r[4,0] >= -1
- R2654: - fKS_y[4,0,0] + Key_cost_fwd[4,0,0] + fKsub_r[4,0] >= 0
- R2655: Const0 + fKS_x[3,0,0] - fKS_x[4,0,0] >= 0
- R2656: fKS_y[3,0,0] - fKS_y[4,0,0] + Key_cost_fwd[4,0,0] >= 0
- R2657: - Const0 + fKS_x[4,0,0] - Key_cost_fwd[4,0,0] >= 0
- R2658: - Const0 + fKS_y[4,0,0] - Key_cost_fwd[4,0,0] >= 0
- R2659: Const0 >= 0
- R2660: Key_cost_bwd[4,0,0] >= 0
- R2661: - bKS_x[3,0,0] + bKS_x[4,0,0] - 2 Key_cost_bwd[4,0,0]
-   - bKsub_b[4,0] >= -1
- R2662: - bKS_x[4,0,0] + Key_cost_bwd[4,0,0] + bKsub_b[4,0] >= 0
- R2663: - 2 Const0 - bKS_y[3,0,0] + bKS_y[4,0,0] - bKsub_r[4,0] >= -1
- R2664: Const0 - bKS_y[4,0,0] + bKsub_r[4,0] >= 0
- R2665: bKS_x[3,0,0] - bKS_x[4,0,0] + Key_cost_bwd[4,0,0] >= 0
- R2666: Const0 + bKS_y[3,0,0] - bKS_y[4,0,0] >= 0
- R2667: - Const0 + bKS_x[4,0,0] - Key_cost_bwd[4,0,0] >= 0
- R2668: - Const0 + bKS_y[4,0,0] - Key_cost_bwd[4,0,0] >= 0
- R2669: Key_cost_fwd[4,1,0] >= 0
- R2670: Const0 >= 0
- R2671: - 2 Const0 - fKS_x[3,1,0] + fKS_x[4,1,0] - fKsub_b[4,1] >= -1
- R2672: Const0 - fKS_x[4,1,0] + fKsub_b[4,1] >= 0
- R2673: - fKS_y[3,1,0] + fKS_y[4,1,0] - 2 Key_cost_fwd[4,1,0]
-   - fKsub_r[4,1] >= -1
- R2674: - fKS_y[4,1,0] + Key_cost_fwd[4,1,0] + fKsub_r[4,1] >= 0
- R2675: Const0 + fKS_x[3,1,0] - fKS_x[4,1,0] >= 0
- R2676: fKS_y[3,1,0] - fKS_y[4,1,0] + Key_cost_fwd[4,1,0] >= 0
- R2677: - Const0 + fKS_x[4,1,0] - Key_cost_fwd[4,1,0] >= 0
- R2678: - Const0 + fKS_y[4,1,0] - Key_cost_fwd[4,1,0] >= 0
- R2679: Const0 >= 0
- R2680: Key_cost_bwd[4,1,0] >= 0
- R2681: - bKS_x[3,1,0] + bKS_x[4,1,0] - 2 Key_cost_bwd[4,1,0]
-   - bKsub_b[4,1] >= -1
- R2682: - bKS_x[4,1,0] + Key_cost_bwd[4,1,0] + bKsub_b[4,1] >= 0
- R2683: - 2 Const0 - bKS_y[3,1,0] + bKS_y[4,1,0] - bKsub_r[4,1] >= -1
- R2684: Const0 - bKS_y[4,1,0] + bKsub_r[4,1] >= 0
- R2685: bKS_x[3,1,0] - bKS_x[4,1,0] + Key_cost_bwd[4,1,0] >= 0
- R2686: Const0 + bKS_y[3,1,0] - bKS_y[4,1,0] >= 0
- R2687: - Const0 + bKS_x[4,1,0] - Key_cost_bwd[4,1,0] >= 0
- R2688: - Const0 + bKS_y[4,1,0] - Key_cost_bwd[4,1,0] >= 0
- R2689: Key_cost_fwd[4,2,0] >= 0
- R2690: Const0 >= 0
- R2691: - 2 Const0 - fKS_x[3,2,0] + fKS_x[4,2,0] - fKsub_b[4,2] >= -1
- R2692: Const0 - fKS_x[4,2,0] + fKsub_b[4,2] >= 0
- R2693: - fKS_y[3,2,0] + fKS_y[4,2,0] - 2 Key_cost_fwd[4,2,0]
-   - fKsub_r[4,2] >= -1
- R2694: - fKS_y[4,2,0] + Key_cost_fwd[4,2,0] + fKsub_r[4,2] >= 0
- R2695: Const0 + fKS_x[3,2,0] - fKS_x[4,2,0] >= 0
- R2696: fKS_y[3,2,0] - fKS_y[4,2,0] + Key_cost_fwd[4,2,0] >= 0
- R2697: - Const0 + fKS_x[4,2,0] - Key_cost_fwd[4,2,0] >= 0
- R2698: - Const0 + fKS_y[4,2,0] - Key_cost_fwd[4,2,0] >= 0
- R2699: Const0 >= 0
- R2700: Key_cost_bwd[4,2,0] >= 0
- R2701: - bKS_x[3,2,0] + bKS_x[4,2,0] - 2 Key_cost_bwd[4,2,0]
-   - bKsub_b[4,2] >= -1
- R2702: - bKS_x[4,2,0] + Key_cost_bwd[4,2,0] + bKsub_b[4,2] >= 0
- R2703: - 2 Const0 - bKS_y[3,2,0] + bKS_y[4,2,0] - bKsub_r[4,2] >= -1
- R2704: Const0 - bKS_y[4,2,0] + bKsub_r[4,2] >= 0
- R2705: bKS_x[3,2,0] - bKS_x[4,2,0] + Key_cost_bwd[4,2,0] >= 0
- R2706: Const0 + bKS_y[3,2,0] - bKS_y[4,2,0] >= 0
- R2707: - Const0 + bKS_x[4,2,0] - Key_cost_bwd[4,2,0] >= 0
- R2708: - Const0 + bKS_y[4,2,0] - Key_cost_bwd[4,2,0] >= 0
- R2709: Key_cost_fwd[4,3,0] >= 0
- R2710: Const0 >= 0
- R2711: - 2 Const0 - fKS_x[3,3,0] + fKS_x[4,3,0] - fKsub_b[4,3] >= -1
- R2712: Const0 - fKS_x[4,3,0] + fKsub_b[4,3] >= 0
- R2713: - fKS_y[3,3,0] + fKS_y[4,3,0] - 2 Key_cost_fwd[4,3,0]
-   - fKsub_r[4,3] >= -1
- R2714: - fKS_y[4,3,0] + Key_cost_fwd[4,3,0] + fKsub_r[4,3] >= 0
- R2715: Const0 + fKS_x[3,3,0] - fKS_x[4,3,0] >= 0
- R2716: fKS_y[3,3,0] - fKS_y[4,3,0] + Key_cost_fwd[4,3,0] >= 0
- R2717: - Const0 + fKS_x[4,3,0] - Key_cost_fwd[4,3,0] >= 0
- R2718: - Const0 + fKS_y[4,3,0] - Key_cost_fwd[4,3,0] >= 0
- R2719: Const0 >= 0
- R2720: Key_cost_bwd[4,3,0] >= 0
- R2721: - bKS_x[3,3,0] + bKS_x[4,3,0] - 2 Key_cost_bwd[4,3,0]
-   - bKsub_b[4,3] >= -1
- R2722: - bKS_x[4,3,0] + Key_cost_bwd[4,3,0] + bKsub_b[4,3] >= 0
- R2723: - 2 Const0 - bKS_y[3,3,0] + bKS_y[4,3,0] - bKsub_r[4,3] >= -1
- R2724: Const0 - bKS_y[4,3,0] + bKsub_r[4,3] >= 0
- R2725: bKS_x[3,3,0] - bKS_x[4,3,0] + Key_cost_bwd[4,3,0] >= 0
- R2726: Const0 + bKS_y[3,3,0] - bKS_y[4,3,0] >= 0
- R2727: - Const0 + bKS_x[4,3,0] - Key_cost_bwd[4,3,0] >= 0
- R2728: - Const0 + bKS_y[4,3,0] - Key_cost_bwd[4,3,0] >= 0
- R2729: Key_cost_fwd[4,0,1] >= 0
- R2730: Const0 >= 0
- R2731: - 2 Const0 - fKS_x[3,0,1] - fKS_x[4,0,0] + fKS_x[4,0,1] >= -1
- R2732: Const0 + fKS_x[4,0,0] - fKS_x[4,0,1] >= 0
- R2733: - fKS_y[3,0,1] - fKS_y[4,0,0] + fKS_y[4,0,1]
-   - 2 Key_cost_fwd[4,0,1] >= -1
- R2734: fKS_y[4,0,0] - fKS_y[4,0,1] + Key_cost_fwd[4,0,1] >= 0
- R2735: Const0 + fKS_x[3,0,1] - fKS_x[4,0,1] >= 0
- R2736: fKS_y[3,0,1] - fKS_y[4,0,1] + Key_cost_fwd[4,0,1] >= 0
- R2737: - Const0 + fKS_x[4,0,1] - Key_cost_fwd[4,0,1] >= 0
- R2738: - Const0 + fKS_y[4,0,1] - Key_cost_fwd[4,0,1] >= 0
- R2739: Const0 >= 0
- R2740: Key_cost_bwd[4,0,1] >= 0
- R2741: - bKS_x[3,0,1] - bKS_x[4,0,0] + bKS_x[4,0,1]
-   - 2 Key_cost_bwd[4,0,1] >= -1
- R2742: bKS_x[4,0,0] - bKS_x[4,0,1] + Key_cost_bwd[4,0,1] >= 0
- R2743: - 2 Const0 - bKS_y[3,0,1] - bKS_y[4,0,0] + bKS_y[4,0,1] >= -1
- R2744: Const0 + bKS_y[4,0,0] - bKS_y[4,0,1] >= 0
- R2745: bKS_x[3,0,1] - bKS_x[4,0,1] + Key_cost_bwd[4,0,1] >= 0
- R2746: Const0 + bKS_y[3,0,1] - bKS_y[4,0,1] >= 0
- R2747: - Const0 + bKS_x[4,0,1] - Key_cost_bwd[4,0,1] >= 0
- R2748: - Const0 + bKS_y[4,0,1] - Key_cost_bwd[4,0,1] >= 0
- R2749: Key_cost_fwd[4,1,1] >= 0
- R2750: Const0 >= 0
- R2751: - 2 Const0 - fKS_x[3,1,1] - fKS_x[4,1,0] + fKS_x[4,1,1] >= -1
- R2752: Const0 + fKS_x[4,1,0] - fKS_x[4,1,1] >= 0
- R2753: - fKS_y[3,1,1] - fKS_y[4,1,0] + fKS_y[4,1,1]
-   - 2 Key_cost_fwd[4,1,1] >= -1
- R2754: fKS_y[4,1,0] - fKS_y[4,1,1] + Key_cost_fwd[4,1,1] >= 0
- R2755: Const0 + fKS_x[3,1,1] - fKS_x[4,1,1] >= 0
- R2756: fKS_y[3,1,1] - fKS_y[4,1,1] + Key_cost_fwd[4,1,1] >= 0
- R2757: - Const0 + fKS_x[4,1,1] - Key_cost_fwd[4,1,1] >= 0
- R2758: - Const0 + fKS_y[4,1,1] - Key_cost_fwd[4,1,1] >= 0
- R2759: Const0 >= 0
- R2760: Key_cost_bwd[4,1,1] >= 0
- R2761: - bKS_x[3,1,1] - bKS_x[4,1,0] + bKS_x[4,1,1]
-   - 2 Key_cost_bwd[4,1,1] >= -1
- R2762: bKS_x[4,1,0] - bKS_x[4,1,1] + Key_cost_bwd[4,1,1] >= 0
- R2763: - 2 Const0 - bKS_y[3,1,1] - bKS_y[4,1,0] + bKS_y[4,1,1] >= -1
- R2764: Const0 + bKS_y[4,1,0] - bKS_y[4,1,1] >= 0
- R2765: bKS_x[3,1,1] - bKS_x[4,1,1] + Key_cost_bwd[4,1,1] >= 0
- R2766: Const0 + bKS_y[3,1,1] - bKS_y[4,1,1] >= 0
- R2767: - Const0 + bKS_x[4,1,1] - Key_cost_bwd[4,1,1] >= 0
- R2768: - Const0 + bKS_y[4,1,1] - Key_cost_bwd[4,1,1] >= 0
- R2769: Key_cost_fwd[4,2,1] >= 0
- R2770: Const0 >= 0
- R2771: - 2 Const0 - fKS_x[3,2,1] - fKS_x[4,2,0] + fKS_x[4,2,1] >= -1
- R2772: Const0 + fKS_x[4,2,0] - fKS_x[4,2,1] >= 0
- R2773: - fKS_y[3,2,1] - fKS_y[4,2,0] + fKS_y[4,2,1]
-   - 2 Key_cost_fwd[4,2,1] >= -1
- R2774: fKS_y[4,2,0] - fKS_y[4,2,1] + Key_cost_fwd[4,2,1] >= 0
- R2775: Const0 + fKS_x[3,2,1] - fKS_x[4,2,1] >= 0
- R2776: fKS_y[3,2,1] - fKS_y[4,2,1] + Key_cost_fwd[4,2,1] >= 0
- R2777: - Const0 + fKS_x[4,2,1] - Key_cost_fwd[4,2,1] >= 0
- R2778: - Const0 + fKS_y[4,2,1] - Key_cost_fwd[4,2,1] >= 0
- R2779: Const0 >= 0
- R2780: Key_cost_bwd[4,2,1] >= 0
- R2781: - bKS_x[3,2,1] - bKS_x[4,2,0] + bKS_x[4,2,1]
-   - 2 Key_cost_bwd[4,2,1] >= -1
- R2782: bKS_x[4,2,0] - bKS_x[4,2,1] + Key_cost_bwd[4,2,1] >= 0
- R2783: - 2 Const0 - bKS_y[3,2,1] - bKS_y[4,2,0] + bKS_y[4,2,1] >= -1
- R2784: Const0 + bKS_y[4,2,0] - bKS_y[4,2,1] >= 0
- R2785: bKS_x[3,2,1] - bKS_x[4,2,1] + Key_cost_bwd[4,2,1] >= 0
- R2786: Const0 + bKS_y[3,2,1] - bKS_y[4,2,1] >= 0
- R2787: - Const0 + bKS_x[4,2,1] - Key_cost_bwd[4,2,1] >= 0
- R2788: - Const0 + bKS_y[4,2,1] - Key_cost_bwd[4,2,1] >= 0
- R2789: Key_cost_fwd[4,3,1] >= 0
- R2790: Const0 >= 0
- R2791: - 2 Const0 - fKS_x[3,3,1] - fKS_x[4,3,0] + fKS_x[4,3,1] >= -1
- R2792: Const0 + fKS_x[4,3,0] - fKS_x[4,3,1] >= 0
- R2793: - fKS_y[3,3,1] - fKS_y[4,3,0] + fKS_y[4,3,1]
-   - 2 Key_cost_fwd[4,3,1] >= -1
- R2794: fKS_y[4,3,0] - fKS_y[4,3,1] + Key_cost_fwd[4,3,1] >= 0
- R2795: Const0 + fKS_x[3,3,1] - fKS_x[4,3,1] >= 0
- R2796: fKS_y[3,3,1] - fKS_y[4,3,1] + Key_cost_fwd[4,3,1] >= 0
- R2797: - Const0 + fKS_x[4,3,1] - Key_cost_fwd[4,3,1] >= 0
- R2798: - Const0 + fKS_y[4,3,1] - Key_cost_fwd[4,3,1] >= 0
- R2799: Const0 >= 0
- R2800: Key_cost_bwd[4,3,1] >= 0
- R2801: - bKS_x[3,3,1] - bKS_x[4,3,0] + bKS_x[4,3,1]
-   - 2 Key_cost_bwd[4,3,1] >= -1
- R2802: bKS_x[4,3,0] - bKS_x[4,3,1] + Key_cost_bwd[4,3,1] >= 0
- R2803: - 2 Const0 - bKS_y[3,3,1] - bKS_y[4,3,0] + bKS_y[4,3,1] >= -1
- R2804: Const0 + bKS_y[4,3,0] - bKS_y[4,3,1] >= 0
- R2805: bKS_x[3,3,1] - bKS_x[4,3,1] + Key_cost_bwd[4,3,1] >= 0
- R2806: Const0 + bKS_y[3,3,1] - bKS_y[4,3,1] >= 0
- R2807: - Const0 + bKS_x[4,3,1] - Key_cost_bwd[4,3,1] >= 0
- R2808: - Const0 + bKS_y[4,3,1] - Key_cost_bwd[4,3,1] >= 0
- R2809: Key_cost_fwd[4,0,2] >= 0
- R2810: Const0 >= 0
- R2811: - 2 Const0 - fKS_x[3,0,2] - fKS_x[4,0,1] + fKS_x[4,0,2] >= -1
- R2812: Const0 + fKS_x[4,0,1] - fKS_x[4,0,2] >= 0
- R2813: - fKS_y[3,0,2] - fKS_y[4,0,1] + fKS_y[4,0,2]
-   - 2 Key_cost_fwd[4,0,2] >= -1
- R2814: fKS_y[4,0,1] - fKS_y[4,0,2] + Key_cost_fwd[4,0,2] >= 0
- R2815: Const0 + fKS_x[3,0,2] - fKS_x[4,0,2] >= 0
- R2816: fKS_y[3,0,2] - fKS_y[4,0,2] + Key_cost_fwd[4,0,2] >= 0
- R2817: - Const0 + fKS_x[4,0,2] - Key_cost_fwd[4,0,2] >= 0
- R2818: - Const0 + fKS_y[4,0,2] - Key_cost_fwd[4,0,2] >= 0
- R2819: Const0 >= 0
- R2820: Key_cost_bwd[4,0,2] >= 0
- R2821: - bKS_x[3,0,2] - bKS_x[4,0,1] + bKS_x[4,0,2]
-   - 2 Key_cost_bwd[4,0,2] >= -1
- R2822: bKS_x[4,0,1] - bKS_x[4,0,2] + Key_cost_bwd[4,0,2] >= 0
- R2823: - 2 Const0 - bKS_y[3,0,2] - bKS_y[4,0,1] + bKS_y[4,0,2] >= -1
- R2824: Const0 + bKS_y[4,0,1] - bKS_y[4,0,2] >= 0
- R2825: bKS_x[3,0,2] - bKS_x[4,0,2] + Key_cost_bwd[4,0,2] >= 0
- R2826: Const0 + bKS_y[3,0,2] - bKS_y[4,0,2] >= 0
- R2827: - Const0 + bKS_x[4,0,2] - Key_cost_bwd[4,0,2] >= 0
- R2828: - Const0 + bKS_y[4,0,2] - Key_cost_bwd[4,0,2] >= 0
- R2829: Key_cost_fwd[4,1,2] >= 0
- R2830: Const0 >= 0
- R2831: - 2 Const0 - fKS_x[3,1,2] - fKS_x[4,1,1] + fKS_x[4,1,2] >= -1
- R2832: Const0 + fKS_x[4,1,1] - fKS_x[4,1,2] >= 0
- R2833: - fKS_y[3,1,2] - fKS_y[4,1,1] + fKS_y[4,1,2]
-   - 2 Key_cost_fwd[4,1,2] >= -1
- R2834: fKS_y[4,1,1] - fKS_y[4,1,2] + Key_cost_fwd[4,1,2] >= 0
- R2835: Const0 + fKS_x[3,1,2] - fKS_x[4,1,2] >= 0
- R2836: fKS_y[3,1,2] - fKS_y[4,1,2] + Key_cost_fwd[4,1,2] >= 0
- R2837: - Const0 + fKS_x[4,1,2] - Key_cost_fwd[4,1,2] >= 0
- R2838: - Const0 + fKS_y[4,1,2] - Key_cost_fwd[4,1,2] >= 0
- R2839: Const0 >= 0
- R2840: Key_cost_bwd[4,1,2] >= 0
- R2841: - bKS_x[3,1,2] - bKS_x[4,1,1] + bKS_x[4,1,2]
-   - 2 Key_cost_bwd[4,1,2] >= -1
- R2842: bKS_x[4,1,1] - bKS_x[4,1,2] + Key_cost_bwd[4,1,2] >= 0
- R2843: - 2 Const0 - bKS_y[3,1,2] - bKS_y[4,1,1] + bKS_y[4,1,2] >= -1
- R2844: Const0 + bKS_y[4,1,1] - bKS_y[4,1,2] >= 0
- R2845: bKS_x[3,1,2] - bKS_x[4,1,2] + Key_cost_bwd[4,1,2] >= 0
- R2846: Const0 + bKS_y[3,1,2] - bKS_y[4,1,2] >= 0
- R2847: - Const0 + bKS_x[4,1,2] - Key_cost_bwd[4,1,2] >= 0
- R2848: - Const0 + bKS_y[4,1,2] - Key_cost_bwd[4,1,2] >= 0
- R2849: Key_cost_fwd[4,2,2] >= 0
- R2850: Const0 >= 0
- R2851: - 2 Const0 - fKS_x[3,2,2] - fKS_x[4,2,1] + fKS_x[4,2,2] >= -1
- R2852: Const0 + fKS_x[4,2,1] - fKS_x[4,2,2] >= 0
- R2853: - fKS_y[3,2,2] - fKS_y[4,2,1] + fKS_y[4,2,2]
-   - 2 Key_cost_fwd[4,2,2] >= -1
- R2854: fKS_y[4,2,1] - fKS_y[4,2,2] + Key_cost_fwd[4,2,2] >= 0
- R2855: Const0 + fKS_x[3,2,2] - fKS_x[4,2,2] >= 0
- R2856: fKS_y[3,2,2] - fKS_y[4,2,2] + Key_cost_fwd[4,2,2] >= 0
- R2857: - Const0 + fKS_x[4,2,2] - Key_cost_fwd[4,2,2] >= 0
- R2858: - Const0 + fKS_y[4,2,2] - Key_cost_fwd[4,2,2] >= 0
- R2859: Const0 >= 0
- R2860: Key_cost_bwd[4,2,2] >= 0
- R2861: - bKS_x[3,2,2] - bKS_x[4,2,1] + bKS_x[4,2,2]
-   - 2 Key_cost_bwd[4,2,2] >= -1
- R2862: bKS_x[4,2,1] - bKS_x[4,2,2] + Key_cost_bwd[4,2,2] >= 0
- R2863: - 2 Const0 - bKS_y[3,2,2] - bKS_y[4,2,1] + bKS_y[4,2,2] >= -1
- R2864: Const0 + bKS_y[4,2,1] - bKS_y[4,2,2] >= 0
- R2865: bKS_x[3,2,2] - bKS_x[4,2,2] + Key_cost_bwd[4,2,2] >= 0
- R2866: Const0 + bKS_y[3,2,2] - bKS_y[4,2,2] >= 0
- R2867: - Const0 + bKS_x[4,2,2] - Key_cost_bwd[4,2,2] >= 0
- R2868: - Const0 + bKS_y[4,2,2] - Key_cost_bwd[4,2,2] >= 0
- R2869: Key_cost_fwd[4,3,2] >= 0
- R2870: Const0 >= 0
- R2871: - 2 Const0 - fKS_x[3,3,2] - fKS_x[4,3,1] + fKS_x[4,3,2] >= -1
- R2872: Const0 + fKS_x[4,3,1] - fKS_x[4,3,2] >= 0
- R2873: - fKS_y[3,3,2] - fKS_y[4,3,1] + fKS_y[4,3,2]
-   - 2 Key_cost_fwd[4,3,2] >= -1
- R2874: fKS_y[4,3,1] - fKS_y[4,3,2] + Key_cost_fwd[4,3,2] >= 0
- R2875: Const0 + fKS_x[3,3,2] - fKS_x[4,3,2] >= 0
- R2876: fKS_y[3,3,2] - fKS_y[4,3,2] + Key_cost_fwd[4,3,2] >= 0
- R2877: - Const0 + fKS_x[4,3,2] - Key_cost_fwd[4,3,2] >= 0
- R2878: - Const0 + fKS_y[4,3,2] - Key_cost_fwd[4,3,2] >= 0
- R2879: Const0 >= 0
- R2880: Key_cost_bwd[4,3,2] >= 0
- R2881: - bKS_x[3,3,2] - bKS_x[4,3,1] + bKS_x[4,3,2]
-   - 2 Key_cost_bwd[4,3,2] >= -1
- R2882: bKS_x[4,3,1] - bKS_x[4,3,2] + Key_cost_bwd[4,3,2] >= 0
- R2883: - 2 Const0 - bKS_y[3,3,2] - bKS_y[4,3,1] + bKS_y[4,3,2] >= -1
- R2884: Const0 + bKS_y[4,3,1] - bKS_y[4,3,2] >= 0
- R2885: bKS_x[3,3,2] - bKS_x[4,3,2] + Key_cost_bwd[4,3,2] >= 0
- R2886: Const0 + bKS_y[3,3,2] - bKS_y[4,3,2] >= 0
- R2887: - Const0 + bKS_x[4,3,2] - Key_cost_bwd[4,3,2] >= 0
- R2888: - Const0 + bKS_y[4,3,2] - Key_cost_bwd[4,3,2] >= 0
- R2889: Key_cost_fwd[4,0,3] >= 0
- R2890: Const0 >= 0
- R2891: - 2 Const0 - fKS_x[3,0,3] - fKS_x[4,0,2] + fKS_x[4,0,3] >= -1
- R2892: Const0 + fKS_x[4,0,2] - fKS_x[4,0,3] >= 0
- R2893: - fKS_y[3,0,3] - fKS_y[4,0,2] + fKS_y[4,0,3]
-   - 2 Key_cost_fwd[4,0,3] >= -1
- R2894: fKS_y[4,0,2] - fKS_y[4,0,3] + Key_cost_fwd[4,0,3] >= 0
- R2895: Const0 + fKS_x[3,0,3] - fKS_x[4,0,3] >= 0
- R2896: fKS_y[3,0,3] - fKS_y[4,0,3] + Key_cost_fwd[4,0,3] >= 0
- R2897: - Const0 + fKS_x[4,0,3] - Key_cost_fwd[4,0,3] >= 0
- R2898: - Const0 + fKS_y[4,0,3] - Key_cost_fwd[4,0,3] >= 0
- R2899: Const0 >= 0
- R2900: Key_cost_bwd[4,0,3] >= 0
- R2901: - bKS_x[3,0,3] - bKS_x[4,0,2] + bKS_x[4,0,3]
-   - 2 Key_cost_bwd[4,0,3] >= -1
- R2902: bKS_x[4,0,2] - bKS_x[4,0,3] + Key_cost_bwd[4,0,3] >= 0
- R2903: - 2 Const0 - bKS_y[3,0,3] - bKS_y[4,0,2] + bKS_y[4,0,3] >= -1
- R2904: Const0 + bKS_y[4,0,2] - bKS_y[4,0,3] >= 0
- R2905: bKS_x[3,0,3] - bKS_x[4,0,3] + Key_cost_bwd[4,0,3] >= 0
- R2906: Const0 + bKS_y[3,0,3] - bKS_y[4,0,3] >= 0
- R2907: - Const0 + bKS_x[4,0,3] - Key_cost_bwd[4,0,3] >= 0
- R2908: - Const0 + bKS_y[4,0,3] - Key_cost_bwd[4,0,3] >= 0
- R2909: Key_cost_fwd[4,1,3] >= 0
- R2910: Const0 >= 0
- R2911: - 2 Const0 - fKS_x[3,1,3] - fKS_x[4,1,2] + fKS_x[4,1,3] >= -1
- R2912: Const0 + fKS_x[4,1,2] - fKS_x[4,1,3] >= 0
- R2913: - fKS_y[3,1,3] - fKS_y[4,1,2] + fKS_y[4,1,3]
-   - 2 Key_cost_fwd[4,1,3] >= -1
- R2914: fKS_y[4,1,2] - fKS_y[4,1,3] + Key_cost_fwd[4,1,3] >= 0
- R2915: Const0 + fKS_x[3,1,3] - fKS_x[4,1,3] >= 0
- R2916: fKS_y[3,1,3] - fKS_y[4,1,3] + Key_cost_fwd[4,1,3] >= 0
- R2917: - Const0 + fKS_x[4,1,3] - Key_cost_fwd[4,1,3] >= 0
- R2918: - Const0 + fKS_y[4,1,3] - Key_cost_fwd[4,1,3] >= 0
- R2919: Const0 >= 0
- R2920: Key_cost_bwd[4,1,3] >= 0
- R2921: - bKS_x[3,1,3] - bKS_x[4,1,2] + bKS_x[4,1,3]
-   - 2 Key_cost_bwd[4,1,3] >= -1
- R2922: bKS_x[4,1,2] - bKS_x[4,1,3] + Key_cost_bwd[4,1,3] >= 0
- R2923: - 2 Const0 - bKS_y[3,1,3] - bKS_y[4,1,2] + bKS_y[4,1,3] >= -1
- R2924: Const0 + bKS_y[4,1,2] - bKS_y[4,1,3] >= 0
- R2925: bKS_x[3,1,3] - bKS_x[4,1,3] + Key_cost_bwd[4,1,3] >= 0
- R2926: Const0 + bKS_y[3,1,3] - bKS_y[4,1,3] >= 0
- R2927: - Const0 + bKS_x[4,1,3] - Key_cost_bwd[4,1,3] >= 0
- R2928: - Const0 + bKS_y[4,1,3] - Key_cost_bwd[4,1,3] >= 0
- R2929: Key_cost_fwd[4,2,3] >= 0
- R2930: Const0 >= 0
- R2931: - 2 Const0 - fKS_x[3,2,3] - fKS_x[4,2,2] + fKS_x[4,2,3] >= -1
- R2932: Const0 + fKS_x[4,2,2] - fKS_x[4,2,3] >= 0
- R2933: - fKS_y[3,2,3] - fKS_y[4,2,2] + fKS_y[4,2,3]
-   - 2 Key_cost_fwd[4,2,3] >= -1
- R2934: fKS_y[4,2,2] - fKS_y[4,2,3] + Key_cost_fwd[4,2,3] >= 0
- R2935: Const0 + fKS_x[3,2,3] - fKS_x[4,2,3] >= 0
- R2936: fKS_y[3,2,3] - fKS_y[4,2,3] + Key_cost_fwd[4,2,3] >= 0
- R2937: - Const0 + fKS_x[4,2,3] - Key_cost_fwd[4,2,3] >= 0
- R2938: - Const0 + fKS_y[4,2,3] - Key_cost_fwd[4,2,3] >= 0
- R2939: Const0 >= 0
- R2940: Key_cost_bwd[4,2,3] >= 0
- R2941: - bKS_x[3,2,3] - bKS_x[4,2,2] + bKS_x[4,2,3]
-   - 2 Key_cost_bwd[4,2,3] >= -1
- R2942: bKS_x[4,2,2] - bKS_x[4,2,3] + Key_cost_bwd[4,2,3] >= 0
- R2943: - 2 Const0 - bKS_y[3,2,3] - bKS_y[4,2,2] + bKS_y[4,2,3] >= -1
- R2944: Const0 + bKS_y[4,2,2] - bKS_y[4,2,3] >= 0
- R2945: bKS_x[3,2,3] - bKS_x[4,2,3] + Key_cost_bwd[4,2,3] >= 0
- R2946: Const0 + bKS_y[3,2,3] - bKS_y[4,2,3] >= 0
- R2947: - Const0 + bKS_x[4,2,3] - Key_cost_bwd[4,2,3] >= 0
- R2948: - Const0 + bKS_y[4,2,3] - Key_cost_bwd[4,2,3] >= 0
- R2949: Key_cost_fwd[4,3,3] >= 0
- R2950: Const0 >= 0
- R2951: - 2 Const0 - fKS_x[3,3,3] - fKS_x[4,3,2] + fKS_x[4,3,3] >= -1
- R2952: Const0 + fKS_x[4,3,2] - fKS_x[4,3,3] >= 0
- R2953: - fKS_y[3,3,3] - fKS_y[4,3,2] + fKS_y[4,3,3]
-   - 2 Key_cost_fwd[4,3,3] >= -1
- R2954: fKS_y[4,3,2] - fKS_y[4,3,3] + Key_cost_fwd[4,3,3] >= 0
- R2955: Const0 + fKS_x[3,3,3] - fKS_x[4,3,3] >= 0
- R2956: fKS_y[3,3,3] - fKS_y[4,3,3] + Key_cost_fwd[4,3,3] >= 0
- R2957: - Const0 + fKS_x[4,3,3] - Key_cost_fwd[4,3,3] >= 0
- R2958: - Const0 + fKS_y[4,3,3] - Key_cost_fwd[4,3,3] >= 0
- R2959: Const0 >= 0
- R2960: Key_cost_bwd[4,3,3] >= 0
- R2961: - bKS_x[3,3,3] - bKS_x[4,3,2] + bKS_x[4,3,3]
-   - 2 Key_cost_bwd[4,3,3] >= -1
- R2962: bKS_x[4,3,2] - bKS_x[4,3,3] + Key_cost_bwd[4,3,3] >= 0
- R2963: - 2 Const0 - bKS_y[3,3,3] - bKS_y[4,3,2] + bKS_y[4,3,3] >= -1
- R2964: Const0 + bKS_y[4,3,2] - bKS_y[4,3,3] >= 0
- R2965: bKS_x[3,3,3] - bKS_x[4,3,3] + Key_cost_bwd[4,3,3] >= 0
- R2966: Const0 + bKS_y[3,3,3] - bKS_y[4,3,3] >= 0
- R2967: - Const0 + bKS_x[4,3,3] - Key_cost_bwd[4,3,3] >= 0
- R2968: - Const0 + bKS_y[4,3,3] - Key_cost_bwd[4,3,3] >= 0
- R2969: Key_cost_fwd[4,0,4] >= 0
- R2970: Const0 >= 0
- R2971: - 2 Const0 - fKS_x[3,0,4] - fKS_x[4,0,3] + fKS_x[4,0,4] >= -1
- R2972: Const0 + fKS_x[4,0,3] - fKS_x[4,0,4] >= 0
- R2973: - fKS_y[3,0,4] - fKS_y[4,0,3] + fKS_y[4,0,4]
-   - 2 Key_cost_fwd[4,0,4] >= -1
- R2974: fKS_y[4,0,3] - fKS_y[4,0,4] + Key_cost_fwd[4,0,4] >= 0
- R2975: Const0 + fKS_x[3,0,4] - fKS_x[4,0,4] >= 0
- R2976: fKS_y[3,0,4] - fKS_y[4,0,4] + Key_cost_fwd[4,0,4] >= 0
- R2977: - Const0 + fKS_x[4,0,4] - Key_cost_fwd[4,0,4] >= 0
- R2978: - Const0 + fKS_y[4,0,4] - Key_cost_fwd[4,0,4] >= 0
- R2979: Const0 >= 0
- R2980: Key_cost_bwd[4,0,4] >= 0
- R2981: - bKS_x[3,0,4] - bKS_x[4,0,3] + bKS_x[4,0,4]
-   - 2 Key_cost_bwd[4,0,4] >= -1
- R2982: bKS_x[4,0,3] - bKS_x[4,0,4] + Key_cost_bwd[4,0,4] >= 0
- R2983: - 2 Const0 - bKS_y[3,0,4] - bKS_y[4,0,3] + bKS_y[4,0,4] >= -1
- R2984: Const0 + bKS_y[4,0,3] - bKS_y[4,0,4] >= 0
- R2985: bKS_x[3,0,4] - bKS_x[4,0,4] + Key_cost_bwd[4,0,4] >= 0
- R2986: Const0 + bKS_y[3,0,4] - bKS_y[4,0,4] >= 0
- R2987: - Const0 + bKS_x[4,0,4] - Key_cost_bwd[4,0,4] >= 0
- R2988: - Const0 + bKS_y[4,0,4] - Key_cost_bwd[4,0,4] >= 0
- R2989: Key_cost_fwd[4,1,4] >= 0
- R2990: Const0 >= 0
- R2991: - 2 Const0 - fKS_x[3,1,4] - fKS_x[4,1,3] + fKS_x[4,1,4] >= -1
- R2992: Const0 + fKS_x[4,1,3] - fKS_x[4,1,4] >= 0
- R2993: - fKS_y[3,1,4] - fKS_y[4,1,3] + fKS_y[4,1,4]
-   - 2 Key_cost_fwd[4,1,4] >= -1
- R2994: fKS_y[4,1,3] - fKS_y[4,1,4] + Key_cost_fwd[4,1,4] >= 0
- R2995: Const0 + fKS_x[3,1,4] - fKS_x[4,1,4] >= 0
- R2996: fKS_y[3,1,4] - fKS_y[4,1,4] + Key_cost_fwd[4,1,4] >= 0
- R2997: - Const0 + fKS_x[4,1,4] - Key_cost_fwd[4,1,4] >= 0
- R2998: - Const0 + fKS_y[4,1,4] - Key_cost_fwd[4,1,4] >= 0
- R2999: Const0 >= 0
- R3000: Key_cost_bwd[4,1,4] >= 0
- R3001: - bKS_x[3,1,4] - bKS_x[4,1,3] + bKS_x[4,1,4]
-   - 2 Key_cost_bwd[4,1,4] >= -1
- R3002: bKS_x[4,1,3] - bKS_x[4,1,4] + Key_cost_bwd[4,1,4] >= 0
- R3003: - 2 Const0 - bKS_y[3,1,4] - bKS_y[4,1,3] + bKS_y[4,1,4] >= -1
- R3004: Const0 + bKS_y[4,1,3] - bKS_y[4,1,4] >= 0
- R3005: bKS_x[3,1,4] - bKS_x[4,1,4] + Key_cost_bwd[4,1,4] >= 0
- R3006: Const0 + bKS_y[3,1,4] - bKS_y[4,1,4] >= 0
- R3007: - Const0 + bKS_x[4,1,4] - Key_cost_bwd[4,1,4] >= 0
- R3008: - Const0 + bKS_y[4,1,4] - Key_cost_bwd[4,1,4] >= 0
- R3009: Key_cost_fwd[4,2,4] >= 0
- R3010: Const0 >= 0
- R3011: - 2 Const0 - fKS_x[3,2,4] - fKS_x[4,2,3] + fKS_x[4,2,4] >= -1
- R3012: Const0 + fKS_x[4,2,3] - fKS_x[4,2,4] >= 0
- R3013: - fKS_y[3,2,4] - fKS_y[4,2,3] + fKS_y[4,2,4]
-   - 2 Key_cost_fwd[4,2,4] >= -1
- R3014: fKS_y[4,2,3] - fKS_y[4,2,4] + Key_cost_fwd[4,2,4] >= 0
- R3015: Const0 + fKS_x[3,2,4] - fKS_x[4,2,4] >= 0
- R3016: fKS_y[3,2,4] - fKS_y[4,2,4] + Key_cost_fwd[4,2,4] >= 0
- R3017: - Const0 + fKS_x[4,2,4] - Key_cost_fwd[4,2,4] >= 0
- R3018: - Const0 + fKS_y[4,2,4] - Key_cost_fwd[4,2,4] >= 0
- R3019: Const0 >= 0
- R3020: Key_cost_bwd[4,2,4] >= 0
- R3021: - bKS_x[3,2,4] - bKS_x[4,2,3] + bKS_x[4,2,4]
-   - 2 Key_cost_bwd[4,2,4] >= -1
- R3022: bKS_x[4,2,3] - bKS_x[4,2,4] + Key_cost_bwd[4,2,4] >= 0
- R3023: - 2 Const0 - bKS_y[3,2,4] - bKS_y[4,2,3] + bKS_y[4,2,4] >= -1
- R3024: Const0 + bKS_y[4,2,3] - bKS_y[4,2,4] >= 0
- R3025: bKS_x[3,2,4] - bKS_x[4,2,4] + Key_cost_bwd[4,2,4] >= 0
- R3026: Const0 + bKS_y[3,2,4] - bKS_y[4,2,4] >= 0
- R3027: - Const0 + bKS_x[4,2,4] - Key_cost_bwd[4,2,4] >= 0
- R3028: - Const0 + bKS_y[4,2,4] - Key_cost_bwd[4,2,4] >= 0
- R3029: Key_cost_fwd[4,3,4] >= 0
- R3030: Const0 >= 0
- R3031: - 2 Const0 - fKS_x[3,3,4] - fKS_x[4,3,3] + fKS_x[4,3,4] >= -1
- R3032: Const0 + fKS_x[4,3,3] - fKS_x[4,3,4] >= 0
- R3033: - fKS_y[3,3,4] - fKS_y[4,3,3] + fKS_y[4,3,4]
-   - 2 Key_cost_fwd[4,3,4] >= -1
- R3034: fKS_y[4,3,3] - fKS_y[4,3,4] + Key_cost_fwd[4,3,4] >= 0
- R3035: Const0 + fKS_x[3,3,4] - fKS_x[4,3,4] >= 0
- R3036: fKS_y[3,3,4] - fKS_y[4,3,4] + Key_cost_fwd[4,3,4] >= 0
- R3037: - Const0 + fKS_x[4,3,4] - Key_cost_fwd[4,3,4] >= 0
- R3038: - Const0 + fKS_y[4,3,4] - Key_cost_fwd[4,3,4] >= 0
- R3039: Const0 >= 0
- R3040: Key_cost_bwd[4,3,4] >= 0
- R3041: - bKS_x[3,3,4] - bKS_x[4,3,3] + bKS_x[4,3,4]
-   - 2 Key_cost_bwd[4,3,4] >= -1
- R3042: bKS_x[4,3,3] - bKS_x[4,3,4] + Key_cost_bwd[4,3,4] >= 0
- R3043: - 2 Const0 - bKS_y[3,3,4] - bKS_y[4,3,3] + bKS_y[4,3,4] >= -1
- R3044: Const0 + bKS_y[4,3,3] - bKS_y[4,3,4] >= 0
- R3045: bKS_x[3,3,4] - bKS_x[4,3,4] + Key_cost_bwd[4,3,4] >= 0
- R3046: Const0 + bKS_y[3,3,4] - bKS_y[4,3,4] >= 0
- R3047: - Const0 + bKS_x[4,3,4] - Key_cost_bwd[4,3,4] >= 0
- R3048: - Const0 + bKS_y[4,3,4] - Key_cost_bwd[4,3,4] >= 0
- R3049: Key_cost_fwd[4,0,5] >= 0
- R3050: Const0 >= 0
- R3051: - 2 Const0 - fKS_x[3,0,5] - fKS_x[4,0,4] + fKS_x[4,0,5] >= -1
- R3052: Const0 + fKS_x[4,0,4] - fKS_x[4,0,5] >= 0
- R3053: - fKS_y[3,0,5] - fKS_y[4,0,4] + fKS_y[4,0,5]
-   - 2 Key_cost_fwd[4,0,5] >= -1
- R3054: fKS_y[4,0,4] - fKS_y[4,0,5] + Key_cost_fwd[4,0,5] >= 0
- R3055: Const0 + fKS_x[3,0,5] - fKS_x[4,0,5] >= 0
- R3056: fKS_y[3,0,5] - fKS_y[4,0,5] + Key_cost_fwd[4,0,5] >= 0
- R3057: - Const0 + fKS_x[4,0,5] - Key_cost_fwd[4,0,5] >= 0
- R3058: - Const0 + fKS_y[4,0,5] - Key_cost_fwd[4,0,5] >= 0
- R3059: Const0 >= 0
- R3060: Key_cost_bwd[4,0,5] >= 0
- R3061: - bKS_x[3,0,5] - bKS_x[4,0,4] + bKS_x[4,0,5]
-   - 2 Key_cost_bwd[4,0,5] >= -1
- R3062: bKS_x[4,0,4] - bKS_x[4,0,5] + Key_cost_bwd[4,0,5] >= 0
- R3063: - 2 Const0 - bKS_y[3,0,5] - bKS_y[4,0,4] + bKS_y[4,0,5] >= -1
- R3064: Const0 + bKS_y[4,0,4] - bKS_y[4,0,5] >= 0
- R3065: bKS_x[3,0,5] - bKS_x[4,0,5] + Key_cost_bwd[4,0,5] >= 0
- R3066: Const0 + bKS_y[3,0,5] - bKS_y[4,0,5] >= 0
- R3067: - Const0 + bKS_x[4,0,5] - Key_cost_bwd[4,0,5] >= 0
- R3068: - Const0 + bKS_y[4,0,5] - Key_cost_bwd[4,0,5] >= 0
- R3069: Key_cost_fwd[4,1,5] >= 0
- R3070: Const0 >= 0
- R3071: - 2 Const0 - fKS_x[3,1,5] - fKS_x[4,1,4] + fKS_x[4,1,5] >= -1
- R3072: Const0 + fKS_x[4,1,4] - fKS_x[4,1,5] >= 0
- R3073: - fKS_y[3,1,5] - fKS_y[4,1,4] + fKS_y[4,1,5]
-   - 2 Key_cost_fwd[4,1,5] >= -1
- R3074: fKS_y[4,1,4] - fKS_y[4,1,5] + Key_cost_fwd[4,1,5] >= 0
- R3075: Const0 + fKS_x[3,1,5] - fKS_x[4,1,5] >= 0
- R3076: fKS_y[3,1,5] - fKS_y[4,1,5] + Key_cost_fwd[4,1,5] >= 0
- R3077: - Const0 + fKS_x[4,1,5] - Key_cost_fwd[4,1,5] >= 0
- R3078: - Const0 + fKS_y[4,1,5] - Key_cost_fwd[4,1,5] >= 0
- R3079: Const0 >= 0
- R3080: Key_cost_bwd[4,1,5] >= 0
- R3081: - bKS_x[3,1,5] - bKS_x[4,1,4] + bKS_x[4,1,5]
-   - 2 Key_cost_bwd[4,1,5] >= -1
- R3082: bKS_x[4,1,4] - bKS_x[4,1,5] + Key_cost_bwd[4,1,5] >= 0
- R3083: - 2 Const0 - bKS_y[3,1,5] - bKS_y[4,1,4] + bKS_y[4,1,5] >= -1
- R3084: Const0 + bKS_y[4,1,4] - bKS_y[4,1,5] >= 0
- R3085: bKS_x[3,1,5] - bKS_x[4,1,5] + Key_cost_bwd[4,1,5] >= 0
- R3086: Const0 + bKS_y[3,1,5] - bKS_y[4,1,5] >= 0
- R3087: - Const0 + bKS_x[4,1,5] - Key_cost_bwd[4,1,5] >= 0
- R3088: - Const0 + bKS_y[4,1,5] - Key_cost_bwd[4,1,5] >= 0
- R3089: Key_cost_fwd[4,2,5] >= 0
- R3090: Const0 >= 0
- R3091: - 2 Const0 - fKS_x[3,2,5] - fKS_x[4,2,4] + fKS_x[4,2,5] >= -1
- R3092: Const0 + fKS_x[4,2,4] - fKS_x[4,2,5] >= 0
- R3093: - fKS_y[3,2,5] - fKS_y[4,2,4] + fKS_y[4,2,5]
-   - 2 Key_cost_fwd[4,2,5] >= -1
- R3094: fKS_y[4,2,4] - fKS_y[4,2,5] + Key_cost_fwd[4,2,5] >= 0
- R3095: Const0 + fKS_x[3,2,5] - fKS_x[4,2,5] >= 0
- R3096: fKS_y[3,2,5] - fKS_y[4,2,5] + Key_cost_fwd[4,2,5] >= 0
- R3097: - Const0 + fKS_x[4,2,5] - Key_cost_fwd[4,2,5] >= 0
- R3098: - Const0 + fKS_y[4,2,5] - Key_cost_fwd[4,2,5] >= 0
- R3099: Const0 >= 0
- R3100: Key_cost_bwd[4,2,5] >= 0
- R3101: - bKS_x[3,2,5] - bKS_x[4,2,4] + bKS_x[4,2,5]
-   - 2 Key_cost_bwd[4,2,5] >= -1
- R3102: bKS_x[4,2,4] - bKS_x[4,2,5] + Key_cost_bwd[4,2,5] >= 0
- R3103: - 2 Const0 - bKS_y[3,2,5] - bKS_y[4,2,4] + bKS_y[4,2,5] >= -1
- R3104: Const0 + bKS_y[4,2,4] - bKS_y[4,2,5] >= 0
- R3105: bKS_x[3,2,5] - bKS_x[4,2,5] + Key_cost_bwd[4,2,5] >= 0
- R3106: Const0 + bKS_y[3,2,5] - bKS_y[4,2,5] >= 0
- R3107: - Const0 + bKS_x[4,2,5] - Key_cost_bwd[4,2,5] >= 0
- R3108: - Const0 + bKS_y[4,2,5] - Key_cost_bwd[4,2,5] >= 0
- R3109: Key_cost_fwd[4,3,5] >= 0
- R3110: Const0 >= 0
- R3111: - 2 Const0 - fKS_x[3,3,5] - fKS_x[4,3,4] + fKS_x[4,3,5] >= -1
- R3112: Const0 + fKS_x[4,3,4] - fKS_x[4,3,5] >= 0
- R3113: - fKS_y[3,3,5] - fKS_y[4,3,4] + fKS_y[4,3,5]
-   - 2 Key_cost_fwd[4,3,5] >= -1
- R3114: fKS_y[4,3,4] - fKS_y[4,3,5] + Key_cost_fwd[4,3,5] >= 0
- R3115: Const0 + fKS_x[3,3,5] - fKS_x[4,3,5] >= 0
- R3116: fKS_y[3,3,5] - fKS_y[4,3,5] + Key_cost_fwd[4,3,5] >= 0
- R3117: - Const0 + fKS_x[4,3,5] - Key_cost_fwd[4,3,5] >= 0
- R3118: - Const0 + fKS_y[4,3,5] - Key_cost_fwd[4,3,5] >= 0
- R3119: Const0 >= 0
- R3120: Key_cost_bwd[4,3,5] >= 0
- R3121: - bKS_x[3,3,5] - bKS_x[4,3,4] + bKS_x[4,3,5]
-   - 2 Key_cost_bwd[4,3,5] >= -1
- R3122: bKS_x[4,3,4] - bKS_x[4,3,5] + Key_cost_bwd[4,3,5] >= 0
- R3123: - 2 Const0 - bKS_y[3,3,5] - bKS_y[4,3,4] + bKS_y[4,3,5] >= -1
- R3124: Const0 + bKS_y[4,3,4] - bKS_y[4,3,5] >= 0
- R3125: bKS_x[3,3,5] - bKS_x[4,3,5] + Key_cost_bwd[4,3,5] >= 0
- R3126: Const0 + bKS_y[3,3,5] - bKS_y[4,3,5] >= 0
- R3127: - Const0 + bKS_x[4,3,5] - Key_cost_bwd[4,3,5] >= 0
- R3128: - Const0 + bKS_y[4,3,5] - Key_cost_bwd[4,3,5] >= 0
+ R2545: - Ksub_r[3,0] + fKsub_r[3,0] = 0
+ R2546: - Ksub_b[3,0] + bKsub_b[3,0] = 0
+ R2547: - Ksub_r[3,1] + fKsub_r[3,1] = 0
+ R2548: - Ksub_b[3,1] + bKsub_b[3,1] = 0
+ R2549: - Ksub_r[3,2] + fKsub_r[3,2] = 0
+ R2550: - Ksub_b[3,2] + bKsub_b[3,2] = 0
+ R2551: - Ksub_r[3,3] + fKsub_r[3,3] = 0
+ R2552: - Ksub_b[3,3] + bKsub_b[3,3] = 0
+ R2553: Key_cost_fwd[3,0,0] >= 0
+ R2554: Const0 >= 0
+ R2555: - 2 Const0 + fKS_x[3,0,0] - fKS_x[4,0,0] - fKsub_b[3,0] >= -1
+ R2556: Const0 - fKS_x[3,0,0] + fKsub_b[3,0] >= 0
+ R2557: fKS_y[3,0,0] - fKS_y[4,0,0] - 2 Key_cost_fwd[3,0,0] - fKsub_r[3,0]
+   >= -1
+ R2558: - fKS_y[3,0,0] + Key_cost_fwd[3,0,0] + fKsub_r[3,0] >= 0
+ R2559: Const0 - fKS_x[3,0,0] + fKS_x[4,0,0] >= 0
+ R2560: - fKS_y[3,0,0] + fKS_y[4,0,0] + Key_cost_fwd[3,0,0] >= 0
+ R2561: - Const0 + fKS_x[3,0,0] - Key_cost_fwd[3,0,0] >= 0
+ R2562: - Const0 + fKS_y[3,0,0] - Key_cost_fwd[3,0,0] >= 0
+ R2563: Const0 >= 0
+ R2564: Key_cost_bwd[3,0,0] >= 0
+ R2565: bKS_x[3,0,0] - bKS_x[4,0,0] - 2 Key_cost_bwd[3,0,0] - bKsub_b[3,0]
+   >= -1
+ R2566: - bKS_x[3,0,0] + Key_cost_bwd[3,0,0] + bKsub_b[3,0] >= 0
+ R2567: - 2 Const0 + bKS_y[3,0,0] - bKS_y[4,0,0] - bKsub_r[3,0] >= -1
+ R2568: Const0 - bKS_y[3,0,0] + bKsub_r[3,0] >= 0
+ R2569: - bKS_x[3,0,0] + bKS_x[4,0,0] + Key_cost_bwd[3,0,0] >= 0
+ R2570: Const0 - bKS_y[3,0,0] + bKS_y[4,0,0] >= 0
+ R2571: - Const0 + bKS_x[3,0,0] - Key_cost_bwd[3,0,0] >= 0
+ R2572: - Const0 + bKS_y[3,0,0] - Key_cost_bwd[3,0,0] >= 0
+ R2573: Key_cost_fwd[3,1,0] >= 0
+ R2574: Const0 >= 0
+ R2575: - 2 Const0 + fKS_x[3,1,0] - fKS_x[4,1,0] - fKsub_b[3,1] >= -1
+ R2576: Const0 - fKS_x[3,1,0] + fKsub_b[3,1] >= 0
+ R2577: fKS_y[3,1,0] - fKS_y[4,1,0] - 2 Key_cost_fwd[3,1,0] - fKsub_r[3,1]
+   >= -1
+ R2578: - fKS_y[3,1,0] + Key_cost_fwd[3,1,0] + fKsub_r[3,1] >= 0
+ R2579: Const0 - fKS_x[3,1,0] + fKS_x[4,1,0] >= 0
+ R2580: - fKS_y[3,1,0] + fKS_y[4,1,0] + Key_cost_fwd[3,1,0] >= 0
+ R2581: - Const0 + fKS_x[3,1,0] - Key_cost_fwd[3,1,0] >= 0
+ R2582: - Const0 + fKS_y[3,1,0] - Key_cost_fwd[3,1,0] >= 0
+ R2583: Const0 >= 0
+ R2584: Key_cost_bwd[3,1,0] >= 0
+ R2585: bKS_x[3,1,0] - bKS_x[4,1,0] - 2 Key_cost_bwd[3,1,0] - bKsub_b[3,1]
+   >= -1
+ R2586: - bKS_x[3,1,0] + Key_cost_bwd[3,1,0] + bKsub_b[3,1] >= 0
+ R2587: - 2 Const0 + bKS_y[3,1,0] - bKS_y[4,1,0] - bKsub_r[3,1] >= -1
+ R2588: Const0 - bKS_y[3,1,0] + bKsub_r[3,1] >= 0
+ R2589: - bKS_x[3,1,0] + bKS_x[4,1,0] + Key_cost_bwd[3,1,0] >= 0
+ R2590: Const0 - bKS_y[3,1,0] + bKS_y[4,1,0] >= 0
+ R2591: - Const0 + bKS_x[3,1,0] - Key_cost_bwd[3,1,0] >= 0
+ R2592: - Const0 + bKS_y[3,1,0] - Key_cost_bwd[3,1,0] >= 0
+ R2593: Key_cost_fwd[3,2,0] >= 0
+ R2594: Const0 >= 0
+ R2595: - 2 Const0 + fKS_x[3,2,0] - fKS_x[4,2,0] - fKsub_b[3,2] >= -1
+ R2596: Const0 - fKS_x[3,2,0] + fKsub_b[3,2] >= 0
+ R2597: fKS_y[3,2,0] - fKS_y[4,2,0] - 2 Key_cost_fwd[3,2,0] - fKsub_r[3,2]
+   >= -1
+ R2598: - fKS_y[3,2,0] + Key_cost_fwd[3,2,0] + fKsub_r[3,2] >= 0
+ R2599: Const0 - fKS_x[3,2,0] + fKS_x[4,2,0] >= 0
+ R2600: - fKS_y[3,2,0] + fKS_y[4,2,0] + Key_cost_fwd[3,2,0] >= 0
+ R2601: - Const0 + fKS_x[3,2,0] - Key_cost_fwd[3,2,0] >= 0
+ R2602: - Const0 + fKS_y[3,2,0] - Key_cost_fwd[3,2,0] >= 0
+ R2603: Const0 >= 0
+ R2604: Key_cost_bwd[3,2,0] >= 0
+ R2605: bKS_x[3,2,0] - bKS_x[4,2,0] - 2 Key_cost_bwd[3,2,0] - bKsub_b[3,2]
+   >= -1
+ R2606: - bKS_x[3,2,0] + Key_cost_bwd[3,2,0] + bKsub_b[3,2] >= 0
+ R2607: - 2 Const0 + bKS_y[3,2,0] - bKS_y[4,2,0] - bKsub_r[3,2] >= -1
+ R2608: Const0 - bKS_y[3,2,0] + bKsub_r[3,2] >= 0
+ R2609: - bKS_x[3,2,0] + bKS_x[4,2,0] + Key_cost_bwd[3,2,0] >= 0
+ R2610: Const0 - bKS_y[3,2,0] + bKS_y[4,2,0] >= 0
+ R2611: - Const0 + bKS_x[3,2,0] - Key_cost_bwd[3,2,0] >= 0
+ R2612: - Const0 + bKS_y[3,2,0] - Key_cost_bwd[3,2,0] >= 0
+ R2613: Key_cost_fwd[3,3,0] >= 0
+ R2614: Const0 >= 0
+ R2615: - 2 Const0 + fKS_x[3,3,0] - fKS_x[4,3,0] - fKsub_b[3,3] >= -1
+ R2616: Const0 - fKS_x[3,3,0] + fKsub_b[3,3] >= 0
+ R2617: fKS_y[3,3,0] - fKS_y[4,3,0] - 2 Key_cost_fwd[3,3,0] - fKsub_r[3,3]
+   >= -1
+ R2618: - fKS_y[3,3,0] + Key_cost_fwd[3,3,0] + fKsub_r[3,3] >= 0
+ R2619: Const0 - fKS_x[3,3,0] + fKS_x[4,3,0] >= 0
+ R2620: - fKS_y[3,3,0] + fKS_y[4,3,0] + Key_cost_fwd[3,3,0] >= 0
+ R2621: - Const0 + fKS_x[3,3,0] - Key_cost_fwd[3,3,0] >= 0
+ R2622: - Const0 + fKS_y[3,3,0] - Key_cost_fwd[3,3,0] >= 0
+ R2623: Const0 >= 0
+ R2624: Key_cost_bwd[3,3,0] >= 0
+ R2625: bKS_x[3,3,0] - bKS_x[4,3,0] - 2 Key_cost_bwd[3,3,0] - bKsub_b[3,3]
+   >= -1
+ R2626: - bKS_x[3,3,0] + Key_cost_bwd[3,3,0] + bKsub_b[3,3] >= 0
+ R2627: - 2 Const0 + bKS_y[3,3,0] - bKS_y[4,3,0] - bKsub_r[3,3] >= -1
+ R2628: Const0 - bKS_y[3,3,0] + bKsub_r[3,3] >= 0
+ R2629: - bKS_x[3,3,0] + bKS_x[4,3,0] + Key_cost_bwd[3,3,0] >= 0
+ R2630: Const0 - bKS_y[3,3,0] + bKS_y[4,3,0] >= 0
+ R2631: - Const0 + bKS_x[3,3,0] - Key_cost_bwd[3,3,0] >= 0
+ R2632: - Const0 + bKS_y[3,3,0] - Key_cost_bwd[3,3,0] >= 0
+ R2633: Key_cost_fwd[3,0,1] >= 0
+ R2634: Const0 >= 0
+ R2635: - 2 Const0 + fKS_x[3,0,1] - fKS_x[4,0,0] - fKS_x[4,0,1] >= -1
+ R2636: Const0 - fKS_x[3,0,1] + fKS_x[4,0,0] >= 0
+ R2637: fKS_y[3,0,1] - fKS_y[4,0,0] - fKS_y[4,0,1] - 2 Key_cost_fwd[3,0,1]
+   >= -1
+ R2638: - fKS_y[3,0,1] + fKS_y[4,0,0] + Key_cost_fwd[3,0,1] >= 0
+ R2639: Const0 - fKS_x[3,0,1] + fKS_x[4,0,1] >= 0
+ R2640: - fKS_y[3,0,1] + fKS_y[4,0,1] + Key_cost_fwd[3,0,1] >= 0
+ R2641: - Const0 + fKS_x[3,0,1] - Key_cost_fwd[3,0,1] >= 0
+ R2642: - Const0 + fKS_y[3,0,1] - Key_cost_fwd[3,0,1] >= 0
+ R2643: Const0 >= 0
+ R2644: Key_cost_bwd[3,0,1] >= 0
+ R2645: bKS_x[3,0,1] - bKS_x[4,0,0] - bKS_x[4,0,1] - 2 Key_cost_bwd[3,0,1]
+   >= -1
+ R2646: - bKS_x[3,0,1] + bKS_x[4,0,0] + Key_cost_bwd[3,0,1] >= 0
+ R2647: - 2 Const0 + bKS_y[3,0,1] - bKS_y[4,0,0] - bKS_y[4,0,1] >= -1
+ R2648: Const0 - bKS_y[3,0,1] + bKS_y[4,0,0] >= 0
+ R2649: - bKS_x[3,0,1] + bKS_x[4,0,1] + Key_cost_bwd[3,0,1] >= 0
+ R2650: Const0 - bKS_y[3,0,1] + bKS_y[4,0,1] >= 0
+ R2651: - Const0 + bKS_x[3,0,1] - Key_cost_bwd[3,0,1] >= 0
+ R2652: - Const0 + bKS_y[3,0,1] - Key_cost_bwd[3,0,1] >= 0
+ R2653: Key_cost_fwd[3,1,1] >= 0
+ R2654: Const0 >= 0
+ R2655: - 2 Const0 + fKS_x[3,1,1] - fKS_x[4,1,0] - fKS_x[4,1,1] >= -1
+ R2656: Const0 - fKS_x[3,1,1] + fKS_x[4,1,0] >= 0
+ R2657: fKS_y[3,1,1] - fKS_y[4,1,0] - fKS_y[4,1,1] - 2 Key_cost_fwd[3,1,1]
+   >= -1
+ R2658: - fKS_y[3,1,1] + fKS_y[4,1,0] + Key_cost_fwd[3,1,1] >= 0
+ R2659: Const0 - fKS_x[3,1,1] + fKS_x[4,1,1] >= 0
+ R2660: - fKS_y[3,1,1] + fKS_y[4,1,1] + Key_cost_fwd[3,1,1] >= 0
+ R2661: - Const0 + fKS_x[3,1,1] - Key_cost_fwd[3,1,1] >= 0
+ R2662: - Const0 + fKS_y[3,1,1] - Key_cost_fwd[3,1,1] >= 0
+ R2663: Const0 >= 0
+ R2664: Key_cost_bwd[3,1,1] >= 0
+ R2665: bKS_x[3,1,1] - bKS_x[4,1,0] - bKS_x[4,1,1] - 2 Key_cost_bwd[3,1,1]
+   >= -1
+ R2666: - bKS_x[3,1,1] + bKS_x[4,1,0] + Key_cost_bwd[3,1,1] >= 0
+ R2667: - 2 Const0 + bKS_y[3,1,1] - bKS_y[4,1,0] - bKS_y[4,1,1] >= -1
+ R2668: Const0 - bKS_y[3,1,1] + bKS_y[4,1,0] >= 0
+ R2669: - bKS_x[3,1,1] + bKS_x[4,1,1] + Key_cost_bwd[3,1,1] >= 0
+ R2670: Const0 - bKS_y[3,1,1] + bKS_y[4,1,1] >= 0
+ R2671: - Const0 + bKS_x[3,1,1] - Key_cost_bwd[3,1,1] >= 0
+ R2672: - Const0 + bKS_y[3,1,1] - Key_cost_bwd[3,1,1] >= 0
+ R2673: Key_cost_fwd[3,2,1] >= 0
+ R2674: Const0 >= 0
+ R2675: - 2 Const0 + fKS_x[3,2,1] - fKS_x[4,2,0] - fKS_x[4,2,1] >= -1
+ R2676: Const0 - fKS_x[3,2,1] + fKS_x[4,2,0] >= 0
+ R2677: fKS_y[3,2,1] - fKS_y[4,2,0] - fKS_y[4,2,1] - 2 Key_cost_fwd[3,2,1]
+   >= -1
+ R2678: - fKS_y[3,2,1] + fKS_y[4,2,0] + Key_cost_fwd[3,2,1] >= 0
+ R2679: Const0 - fKS_x[3,2,1] + fKS_x[4,2,1] >= 0
+ R2680: - fKS_y[3,2,1] + fKS_y[4,2,1] + Key_cost_fwd[3,2,1] >= 0
+ R2681: - Const0 + fKS_x[3,2,1] - Key_cost_fwd[3,2,1] >= 0
+ R2682: - Const0 + fKS_y[3,2,1] - Key_cost_fwd[3,2,1] >= 0
+ R2683: Const0 >= 0
+ R2684: Key_cost_bwd[3,2,1] >= 0
+ R2685: bKS_x[3,2,1] - bKS_x[4,2,0] - bKS_x[4,2,1] - 2 Key_cost_bwd[3,2,1]
+   >= -1
+ R2686: - bKS_x[3,2,1] + bKS_x[4,2,0] + Key_cost_bwd[3,2,1] >= 0
+ R2687: - 2 Const0 + bKS_y[3,2,1] - bKS_y[4,2,0] - bKS_y[4,2,1] >= -1
+ R2688: Const0 - bKS_y[3,2,1] + bKS_y[4,2,0] >= 0
+ R2689: - bKS_x[3,2,1] + bKS_x[4,2,1] + Key_cost_bwd[3,2,1] >= 0
+ R2690: Const0 - bKS_y[3,2,1] + bKS_y[4,2,1] >= 0
+ R2691: - Const0 + bKS_x[3,2,1] - Key_cost_bwd[3,2,1] >= 0
+ R2692: - Const0 + bKS_y[3,2,1] - Key_cost_bwd[3,2,1] >= 0
+ R2693: Key_cost_fwd[3,3,1] >= 0
+ R2694: Const0 >= 0
+ R2695: - 2 Const0 + fKS_x[3,3,1] - fKS_x[4,3,0] - fKS_x[4,3,1] >= -1
+ R2696: Const0 - fKS_x[3,3,1] + fKS_x[4,3,0] >= 0
+ R2697: fKS_y[3,3,1] - fKS_y[4,3,0] - fKS_y[4,3,1] - 2 Key_cost_fwd[3,3,1]
+   >= -1
+ R2698: - fKS_y[3,3,1] + fKS_y[4,3,0] + Key_cost_fwd[3,3,1] >= 0
+ R2699: Const0 - fKS_x[3,3,1] + fKS_x[4,3,1] >= 0
+ R2700: - fKS_y[3,3,1] + fKS_y[4,3,1] + Key_cost_fwd[3,3,1] >= 0
+ R2701: - Const0 + fKS_x[3,3,1] - Key_cost_fwd[3,3,1] >= 0
+ R2702: - Const0 + fKS_y[3,3,1] - Key_cost_fwd[3,3,1] >= 0
+ R2703: Const0 >= 0
+ R2704: Key_cost_bwd[3,3,1] >= 0
+ R2705: bKS_x[3,3,1] - bKS_x[4,3,0] - bKS_x[4,3,1] - 2 Key_cost_bwd[3,3,1]
+   >= -1
+ R2706: - bKS_x[3,3,1] + bKS_x[4,3,0] + Key_cost_bwd[3,3,1] >= 0
+ R2707: - 2 Const0 + bKS_y[3,3,1] - bKS_y[4,3,0] - bKS_y[4,3,1] >= -1
+ R2708: Const0 - bKS_y[3,3,1] + bKS_y[4,3,0] >= 0
+ R2709: - bKS_x[3,3,1] + bKS_x[4,3,1] + Key_cost_bwd[3,3,1] >= 0
+ R2710: Const0 - bKS_y[3,3,1] + bKS_y[4,3,1] >= 0
+ R2711: - Const0 + bKS_x[3,3,1] - Key_cost_bwd[3,3,1] >= 0
+ R2712: - Const0 + bKS_y[3,3,1] - Key_cost_bwd[3,3,1] >= 0
+ R2713: Key_cost_fwd[3,0,2] >= 0
+ R2714: Const0 >= 0
+ R2715: - 2 Const0 + fKS_x[3,0,2] - fKS_x[4,0,1] - fKS_x[4,0,2] >= -1
+ R2716: Const0 - fKS_x[3,0,2] + fKS_x[4,0,1] >= 0
+ R2717: fKS_y[3,0,2] - fKS_y[4,0,1] - fKS_y[4,0,2] - 2 Key_cost_fwd[3,0,2]
+   >= -1
+ R2718: - fKS_y[3,0,2] + fKS_y[4,0,1] + Key_cost_fwd[3,0,2] >= 0
+ R2719: Const0 - fKS_x[3,0,2] + fKS_x[4,0,2] >= 0
+ R2720: - fKS_y[3,0,2] + fKS_y[4,0,2] + Key_cost_fwd[3,0,2] >= 0
+ R2721: - Const0 + fKS_x[3,0,2] - Key_cost_fwd[3,0,2] >= 0
+ R2722: - Const0 + fKS_y[3,0,2] - Key_cost_fwd[3,0,2] >= 0
+ R2723: Const0 >= 0
+ R2724: Key_cost_bwd[3,0,2] >= 0
+ R2725: bKS_x[3,0,2] - bKS_x[4,0,1] - bKS_x[4,0,2] - 2 Key_cost_bwd[3,0,2]
+   >= -1
+ R2726: - bKS_x[3,0,2] + bKS_x[4,0,1] + Key_cost_bwd[3,0,2] >= 0
+ R2727: - 2 Const0 + bKS_y[3,0,2] - bKS_y[4,0,1] - bKS_y[4,0,2] >= -1
+ R2728: Const0 - bKS_y[3,0,2] + bKS_y[4,0,1] >= 0
+ R2729: - bKS_x[3,0,2] + bKS_x[4,0,2] + Key_cost_bwd[3,0,2] >= 0
+ R2730: Const0 - bKS_y[3,0,2] + bKS_y[4,0,2] >= 0
+ R2731: - Const0 + bKS_x[3,0,2] - Key_cost_bwd[3,0,2] >= 0
+ R2732: - Const0 + bKS_y[3,0,2] - Key_cost_bwd[3,0,2] >= 0
+ R2733: Key_cost_fwd[3,1,2] >= 0
+ R2734: Const0 >= 0
+ R2735: - 2 Const0 + fKS_x[3,1,2] - fKS_x[4,1,1] - fKS_x[4,1,2] >= -1
+ R2736: Const0 - fKS_x[3,1,2] + fKS_x[4,1,1] >= 0
+ R2737: fKS_y[3,1,2] - fKS_y[4,1,1] - fKS_y[4,1,2] - 2 Key_cost_fwd[3,1,2]
+   >= -1
+ R2738: - fKS_y[3,1,2] + fKS_y[4,1,1] + Key_cost_fwd[3,1,2] >= 0
+ R2739: Const0 - fKS_x[3,1,2] + fKS_x[4,1,2] >= 0
+ R2740: - fKS_y[3,1,2] + fKS_y[4,1,2] + Key_cost_fwd[3,1,2] >= 0
+ R2741: - Const0 + fKS_x[3,1,2] - Key_cost_fwd[3,1,2] >= 0
+ R2742: - Const0 + fKS_y[3,1,2] - Key_cost_fwd[3,1,2] >= 0
+ R2743: Const0 >= 0
+ R2744: Key_cost_bwd[3,1,2] >= 0
+ R2745: bKS_x[3,1,2] - bKS_x[4,1,1] - bKS_x[4,1,2] - 2 Key_cost_bwd[3,1,2]
+   >= -1
+ R2746: - bKS_x[3,1,2] + bKS_x[4,1,1] + Key_cost_bwd[3,1,2] >= 0
+ R2747: - 2 Const0 + bKS_y[3,1,2] - bKS_y[4,1,1] - bKS_y[4,1,2] >= -1
+ R2748: Const0 - bKS_y[3,1,2] + bKS_y[4,1,1] >= 0
+ R2749: - bKS_x[3,1,2] + bKS_x[4,1,2] + Key_cost_bwd[3,1,2] >= 0
+ R2750: Const0 - bKS_y[3,1,2] + bKS_y[4,1,2] >= 0
+ R2751: - Const0 + bKS_x[3,1,2] - Key_cost_bwd[3,1,2] >= 0
+ R2752: - Const0 + bKS_y[3,1,2] - Key_cost_bwd[3,1,2] >= 0
+ R2753: Key_cost_fwd[3,2,2] >= 0
+ R2754: Const0 >= 0
+ R2755: - 2 Const0 + fKS_x[3,2,2] - fKS_x[4,2,1] - fKS_x[4,2,2] >= -1
+ R2756: Const0 - fKS_x[3,2,2] + fKS_x[4,2,1] >= 0
+ R2757: fKS_y[3,2,2] - fKS_y[4,2,1] - fKS_y[4,2,2] - 2 Key_cost_fwd[3,2,2]
+   >= -1
+ R2758: - fKS_y[3,2,2] + fKS_y[4,2,1] + Key_cost_fwd[3,2,2] >= 0
+ R2759: Const0 - fKS_x[3,2,2] + fKS_x[4,2,2] >= 0
+ R2760: - fKS_y[3,2,2] + fKS_y[4,2,2] + Key_cost_fwd[3,2,2] >= 0
+ R2761: - Const0 + fKS_x[3,2,2] - Key_cost_fwd[3,2,2] >= 0
+ R2762: - Const0 + fKS_y[3,2,2] - Key_cost_fwd[3,2,2] >= 0
+ R2763: Const0 >= 0
+ R2764: Key_cost_bwd[3,2,2] >= 0
+ R2765: bKS_x[3,2,2] - bKS_x[4,2,1] - bKS_x[4,2,2] - 2 Key_cost_bwd[3,2,2]
+   >= -1
+ R2766: - bKS_x[3,2,2] + bKS_x[4,2,1] + Key_cost_bwd[3,2,2] >= 0
+ R2767: - 2 Const0 + bKS_y[3,2,2] - bKS_y[4,2,1] - bKS_y[4,2,2] >= -1
+ R2768: Const0 - bKS_y[3,2,2] + bKS_y[4,2,1] >= 0
+ R2769: - bKS_x[3,2,2] + bKS_x[4,2,2] + Key_cost_bwd[3,2,2] >= 0
+ R2770: Const0 - bKS_y[3,2,2] + bKS_y[4,2,2] >= 0
+ R2771: - Const0 + bKS_x[3,2,2] - Key_cost_bwd[3,2,2] >= 0
+ R2772: - Const0 + bKS_y[3,2,2] - Key_cost_bwd[3,2,2] >= 0
+ R2773: Key_cost_fwd[3,3,2] >= 0
+ R2774: Const0 >= 0
+ R2775: - 2 Const0 + fKS_x[3,3,2] - fKS_x[4,3,1] - fKS_x[4,3,2] >= -1
+ R2776: Const0 - fKS_x[3,3,2] + fKS_x[4,3,1] >= 0
+ R2777: fKS_y[3,3,2] - fKS_y[4,3,1] - fKS_y[4,3,2] - 2 Key_cost_fwd[3,3,2]
+   >= -1
+ R2778: - fKS_y[3,3,2] + fKS_y[4,3,1] + Key_cost_fwd[3,3,2] >= 0
+ R2779: Const0 - fKS_x[3,3,2] + fKS_x[4,3,2] >= 0
+ R2780: - fKS_y[3,3,2] + fKS_y[4,3,2] + Key_cost_fwd[3,3,2] >= 0
+ R2781: - Const0 + fKS_x[3,3,2] - Key_cost_fwd[3,3,2] >= 0
+ R2782: - Const0 + fKS_y[3,3,2] - Key_cost_fwd[3,3,2] >= 0
+ R2783: Const0 >= 0
+ R2784: Key_cost_bwd[3,3,2] >= 0
+ R2785: bKS_x[3,3,2] - bKS_x[4,3,1] - bKS_x[4,3,2] - 2 Key_cost_bwd[3,3,2]
+   >= -1
+ R2786: - bKS_x[3,3,2] + bKS_x[4,3,1] + Key_cost_bwd[3,3,2] >= 0
+ R2787: - 2 Const0 + bKS_y[3,3,2] - bKS_y[4,3,1] - bKS_y[4,3,2] >= -1
+ R2788: Const0 - bKS_y[3,3,2] + bKS_y[4,3,1] >= 0
+ R2789: - bKS_x[3,3,2] + bKS_x[4,3,2] + Key_cost_bwd[3,3,2] >= 0
+ R2790: Const0 - bKS_y[3,3,2] + bKS_y[4,3,2] >= 0
+ R2791: - Const0 + bKS_x[3,3,2] - Key_cost_bwd[3,3,2] >= 0
+ R2792: - Const0 + bKS_y[3,3,2] - Key_cost_bwd[3,3,2] >= 0
+ R2793: Key_cost_fwd[3,0,3] >= 0
+ R2794: Const0 >= 0
+ R2795: - 2 Const0 + fKS_x[3,0,3] - fKS_x[4,0,2] - fKS_x[4,0,3] >= -1
+ R2796: Const0 - fKS_x[3,0,3] + fKS_x[4,0,2] >= 0
+ R2797: fKS_y[3,0,3] - fKS_y[4,0,2] - fKS_y[4,0,3] - 2 Key_cost_fwd[3,0,3]
+   >= -1
+ R2798: - fKS_y[3,0,3] + fKS_y[4,0,2] + Key_cost_fwd[3,0,3] >= 0
+ R2799: Const0 - fKS_x[3,0,3] + fKS_x[4,0,3] >= 0
+ R2800: - fKS_y[3,0,3] + fKS_y[4,0,3] + Key_cost_fwd[3,0,3] >= 0
+ R2801: - Const0 + fKS_x[3,0,3] - Key_cost_fwd[3,0,3] >= 0
+ R2802: - Const0 + fKS_y[3,0,3] - Key_cost_fwd[3,0,3] >= 0
+ R2803: Const0 >= 0
+ R2804: Key_cost_bwd[3,0,3] >= 0
+ R2805: bKS_x[3,0,3] - bKS_x[4,0,2] - bKS_x[4,0,3] - 2 Key_cost_bwd[3,0,3]
+   >= -1
+ R2806: - bKS_x[3,0,3] + bKS_x[4,0,2] + Key_cost_bwd[3,0,3] >= 0
+ R2807: - 2 Const0 + bKS_y[3,0,3] - bKS_y[4,0,2] - bKS_y[4,0,3] >= -1
+ R2808: Const0 - bKS_y[3,0,3] + bKS_y[4,0,2] >= 0
+ R2809: - bKS_x[3,0,3] + bKS_x[4,0,3] + Key_cost_bwd[3,0,3] >= 0
+ R2810: Const0 - bKS_y[3,0,3] + bKS_y[4,0,3] >= 0
+ R2811: - Const0 + bKS_x[3,0,3] - Key_cost_bwd[3,0,3] >= 0
+ R2812: - Const0 + bKS_y[3,0,3] - Key_cost_bwd[3,0,3] >= 0
+ R2813: Key_cost_fwd[3,1,3] >= 0
+ R2814: Const0 >= 0
+ R2815: - 2 Const0 + fKS_x[3,1,3] - fKS_x[4,1,2] - fKS_x[4,1,3] >= -1
+ R2816: Const0 - fKS_x[3,1,3] + fKS_x[4,1,2] >= 0
+ R2817: fKS_y[3,1,3] - fKS_y[4,1,2] - fKS_y[4,1,3] - 2 Key_cost_fwd[3,1,3]
+   >= -1
+ R2818: - fKS_y[3,1,3] + fKS_y[4,1,2] + Key_cost_fwd[3,1,3] >= 0
+ R2819: Const0 - fKS_x[3,1,3] + fKS_x[4,1,3] >= 0
+ R2820: - fKS_y[3,1,3] + fKS_y[4,1,3] + Key_cost_fwd[3,1,3] >= 0
+ R2821: - Const0 + fKS_x[3,1,3] - Key_cost_fwd[3,1,3] >= 0
+ R2822: - Const0 + fKS_y[3,1,3] - Key_cost_fwd[3,1,3] >= 0
+ R2823: Const0 >= 0
+ R2824: Key_cost_bwd[3,1,3] >= 0
+ R2825: bKS_x[3,1,3] - bKS_x[4,1,2] - bKS_x[4,1,3] - 2 Key_cost_bwd[3,1,3]
+   >= -1
+ R2826: - bKS_x[3,1,3] + bKS_x[4,1,2] + Key_cost_bwd[3,1,3] >= 0
+ R2827: - 2 Const0 + bKS_y[3,1,3] - bKS_y[4,1,2] - bKS_y[4,1,3] >= -1
+ R2828: Const0 - bKS_y[3,1,3] + bKS_y[4,1,2] >= 0
+ R2829: - bKS_x[3,1,3] + bKS_x[4,1,3] + Key_cost_bwd[3,1,3] >= 0
+ R2830: Const0 - bKS_y[3,1,3] + bKS_y[4,1,3] >= 0
+ R2831: - Const0 + bKS_x[3,1,3] - Key_cost_bwd[3,1,3] >= 0
+ R2832: - Const0 + bKS_y[3,1,3] - Key_cost_bwd[3,1,3] >= 0
+ R2833: Key_cost_fwd[3,2,3] >= 0
+ R2834: Const0 >= 0
+ R2835: - 2 Const0 + fKS_x[3,2,3] - fKS_x[4,2,2] - fKS_x[4,2,3] >= -1
+ R2836: Const0 - fKS_x[3,2,3] + fKS_x[4,2,2] >= 0
+ R2837: fKS_y[3,2,3] - fKS_y[4,2,2] - fKS_y[4,2,3] - 2 Key_cost_fwd[3,2,3]
+   >= -1
+ R2838: - fKS_y[3,2,3] + fKS_y[4,2,2] + Key_cost_fwd[3,2,3] >= 0
+ R2839: Const0 - fKS_x[3,2,3] + fKS_x[4,2,3] >= 0
+ R2840: - fKS_y[3,2,3] + fKS_y[4,2,3] + Key_cost_fwd[3,2,3] >= 0
+ R2841: - Const0 + fKS_x[3,2,3] - Key_cost_fwd[3,2,3] >= 0
+ R2842: - Const0 + fKS_y[3,2,3] - Key_cost_fwd[3,2,3] >= 0
+ R2843: Const0 >= 0
+ R2844: Key_cost_bwd[3,2,3] >= 0
+ R2845: bKS_x[3,2,3] - bKS_x[4,2,2] - bKS_x[4,2,3] - 2 Key_cost_bwd[3,2,3]
+   >= -1
+ R2846: - bKS_x[3,2,3] + bKS_x[4,2,2] + Key_cost_bwd[3,2,3] >= 0
+ R2847: - 2 Const0 + bKS_y[3,2,3] - bKS_y[4,2,2] - bKS_y[4,2,3] >= -1
+ R2848: Const0 - bKS_y[3,2,3] + bKS_y[4,2,2] >= 0
+ R2849: - bKS_x[3,2,3] + bKS_x[4,2,3] + Key_cost_bwd[3,2,3] >= 0
+ R2850: Const0 - bKS_y[3,2,3] + bKS_y[4,2,3] >= 0
+ R2851: - Const0 + bKS_x[3,2,3] - Key_cost_bwd[3,2,3] >= 0
+ R2852: - Const0 + bKS_y[3,2,3] - Key_cost_bwd[3,2,3] >= 0
+ R2853: Key_cost_fwd[3,3,3] >= 0
+ R2854: Const0 >= 0
+ R2855: - 2 Const0 + fKS_x[3,3,3] - fKS_x[4,3,2] - fKS_x[4,3,3] >= -1
+ R2856: Const0 - fKS_x[3,3,3] + fKS_x[4,3,2] >= 0
+ R2857: fKS_y[3,3,3] - fKS_y[4,3,2] - fKS_y[4,3,3] - 2 Key_cost_fwd[3,3,3]
+   >= -1
+ R2858: - fKS_y[3,3,3] + fKS_y[4,3,2] + Key_cost_fwd[3,3,3] >= 0
+ R2859: Const0 - fKS_x[3,3,3] + fKS_x[4,3,3] >= 0
+ R2860: - fKS_y[3,3,3] + fKS_y[4,3,3] + Key_cost_fwd[3,3,3] >= 0
+ R2861: - Const0 + fKS_x[3,3,3] - Key_cost_fwd[3,3,3] >= 0
+ R2862: - Const0 + fKS_y[3,3,3] - Key_cost_fwd[3,3,3] >= 0
+ R2863: Const0 >= 0
+ R2864: Key_cost_bwd[3,3,3] >= 0
+ R2865: bKS_x[3,3,3] - bKS_x[4,3,2] - bKS_x[4,3,3] - 2 Key_cost_bwd[3,3,3]
+   >= -1
+ R2866: - bKS_x[3,3,3] + bKS_x[4,3,2] + Key_cost_bwd[3,3,3] >= 0
+ R2867: - 2 Const0 + bKS_y[3,3,3] - bKS_y[4,3,2] - bKS_y[4,3,3] >= -1
+ R2868: Const0 - bKS_y[3,3,3] + bKS_y[4,3,2] >= 0
+ R2869: - bKS_x[3,3,3] + bKS_x[4,3,3] + Key_cost_bwd[3,3,3] >= 0
+ R2870: Const0 - bKS_y[3,3,3] + bKS_y[4,3,3] >= 0
+ R2871: - Const0 + bKS_x[3,3,3] - Key_cost_bwd[3,3,3] >= 0
+ R2872: - Const0 + bKS_y[3,3,3] - Key_cost_bwd[3,3,3] >= 0
+ R2873: Key_cost_fwd[3,0,4] >= 0
+ R2874: Const0 >= 0
+ R2875: - 2 Const0 + fKS_x[3,0,4] - fKS_x[4,0,3] - fKS_x[4,0,4] >= -1
+ R2876: Const0 - fKS_x[3,0,4] + fKS_x[4,0,3] >= 0
+ R2877: fKS_y[3,0,4] - fKS_y[4,0,3] - fKS_y[4,0,4] - 2 Key_cost_fwd[3,0,4]
+   >= -1
+ R2878: - fKS_y[3,0,4] + fKS_y[4,0,3] + Key_cost_fwd[3,0,4] >= 0
+ R2879: Const0 - fKS_x[3,0,4] + fKS_x[4,0,4] >= 0
+ R2880: - fKS_y[3,0,4] + fKS_y[4,0,4] + Key_cost_fwd[3,0,4] >= 0
+ R2881: - Const0 + fKS_x[3,0,4] - Key_cost_fwd[3,0,4] >= 0
+ R2882: - Const0 + fKS_y[3,0,4] - Key_cost_fwd[3,0,4] >= 0
+ R2883: Const0 >= 0
+ R2884: Key_cost_bwd[3,0,4] >= 0
+ R2885: bKS_x[3,0,4] - bKS_x[4,0,3] - bKS_x[4,0,4] - 2 Key_cost_bwd[3,0,4]
+   >= -1
+ R2886: - bKS_x[3,0,4] + bKS_x[4,0,3] + Key_cost_bwd[3,0,4] >= 0
+ R2887: - 2 Const0 + bKS_y[3,0,4] - bKS_y[4,0,3] - bKS_y[4,0,4] >= -1
+ R2888: Const0 - bKS_y[3,0,4] + bKS_y[4,0,3] >= 0
+ R2889: - bKS_x[3,0,4] + bKS_x[4,0,4] + Key_cost_bwd[3,0,4] >= 0
+ R2890: Const0 - bKS_y[3,0,4] + bKS_y[4,0,4] >= 0
+ R2891: - Const0 + bKS_x[3,0,4] - Key_cost_bwd[3,0,4] >= 0
+ R2892: - Const0 + bKS_y[3,0,4] - Key_cost_bwd[3,0,4] >= 0
+ R2893: Key_cost_fwd[3,1,4] >= 0
+ R2894: Const0 >= 0
+ R2895: - 2 Const0 + fKS_x[3,1,4] - fKS_x[4,1,3] - fKS_x[4,1,4] >= -1
+ R2896: Const0 - fKS_x[3,1,4] + fKS_x[4,1,3] >= 0
+ R2897: fKS_y[3,1,4] - fKS_y[4,1,3] - fKS_y[4,1,4] - 2 Key_cost_fwd[3,1,4]
+   >= -1
+ R2898: - fKS_y[3,1,4] + fKS_y[4,1,3] + Key_cost_fwd[3,1,4] >= 0
+ R2899: Const0 - fKS_x[3,1,4] + fKS_x[4,1,4] >= 0
+ R2900: - fKS_y[3,1,4] + fKS_y[4,1,4] + Key_cost_fwd[3,1,4] >= 0
+ R2901: - Const0 + fKS_x[3,1,4] - Key_cost_fwd[3,1,4] >= 0
+ R2902: - Const0 + fKS_y[3,1,4] - Key_cost_fwd[3,1,4] >= 0
+ R2903: Const0 >= 0
+ R2904: Key_cost_bwd[3,1,4] >= 0
+ R2905: bKS_x[3,1,4] - bKS_x[4,1,3] - bKS_x[4,1,4] - 2 Key_cost_bwd[3,1,4]
+   >= -1
+ R2906: - bKS_x[3,1,4] + bKS_x[4,1,3] + Key_cost_bwd[3,1,4] >= 0
+ R2907: - 2 Const0 + bKS_y[3,1,4] - bKS_y[4,1,3] - bKS_y[4,1,4] >= -1
+ R2908: Const0 - bKS_y[3,1,4] + bKS_y[4,1,3] >= 0
+ R2909: - bKS_x[3,1,4] + bKS_x[4,1,4] + Key_cost_bwd[3,1,4] >= 0
+ R2910: Const0 - bKS_y[3,1,4] + bKS_y[4,1,4] >= 0
+ R2911: - Const0 + bKS_x[3,1,4] - Key_cost_bwd[3,1,4] >= 0
+ R2912: - Const0 + bKS_y[3,1,4] - Key_cost_bwd[3,1,4] >= 0
+ R2913: Key_cost_fwd[3,2,4] >= 0
+ R2914: Const0 >= 0
+ R2915: - 2 Const0 + fKS_x[3,2,4] - fKS_x[4,2,3] - fKS_x[4,2,4] >= -1
+ R2916: Const0 - fKS_x[3,2,4] + fKS_x[4,2,3] >= 0
+ R2917: fKS_y[3,2,4] - fKS_y[4,2,3] - fKS_y[4,2,4] - 2 Key_cost_fwd[3,2,4]
+   >= -1
+ R2918: - fKS_y[3,2,4] + fKS_y[4,2,3] + Key_cost_fwd[3,2,4] >= 0
+ R2919: Const0 - fKS_x[3,2,4] + fKS_x[4,2,4] >= 0
+ R2920: - fKS_y[3,2,4] + fKS_y[4,2,4] + Key_cost_fwd[3,2,4] >= 0
+ R2921: - Const0 + fKS_x[3,2,4] - Key_cost_fwd[3,2,4] >= 0
+ R2922: - Const0 + fKS_y[3,2,4] - Key_cost_fwd[3,2,4] >= 0
+ R2923: Const0 >= 0
+ R2924: Key_cost_bwd[3,2,4] >= 0
+ R2925: bKS_x[3,2,4] - bKS_x[4,2,3] - bKS_x[4,2,4] - 2 Key_cost_bwd[3,2,4]
+   >= -1
+ R2926: - bKS_x[3,2,4] + bKS_x[4,2,3] + Key_cost_bwd[3,2,4] >= 0
+ R2927: - 2 Const0 + bKS_y[3,2,4] - bKS_y[4,2,3] - bKS_y[4,2,4] >= -1
+ R2928: Const0 - bKS_y[3,2,4] + bKS_y[4,2,3] >= 0
+ R2929: - bKS_x[3,2,4] + bKS_x[4,2,4] + Key_cost_bwd[3,2,4] >= 0
+ R2930: Const0 - bKS_y[3,2,4] + bKS_y[4,2,4] >= 0
+ R2931: - Const0 + bKS_x[3,2,4] - Key_cost_bwd[3,2,4] >= 0
+ R2932: - Const0 + bKS_y[3,2,4] - Key_cost_bwd[3,2,4] >= 0
+ R2933: Key_cost_fwd[3,3,4] >= 0
+ R2934: Const0 >= 0
+ R2935: - 2 Const0 + fKS_x[3,3,4] - fKS_x[4,3,3] - fKS_x[4,3,4] >= -1
+ R2936: Const0 - fKS_x[3,3,4] + fKS_x[4,3,3] >= 0
+ R2937: fKS_y[3,3,4] - fKS_y[4,3,3] - fKS_y[4,3,4] - 2 Key_cost_fwd[3,3,4]
+   >= -1
+ R2938: - fKS_y[3,3,4] + fKS_y[4,3,3] + Key_cost_fwd[3,3,4] >= 0
+ R2939: Const0 - fKS_x[3,3,4] + fKS_x[4,3,4] >= 0
+ R2940: - fKS_y[3,3,4] + fKS_y[4,3,4] + Key_cost_fwd[3,3,4] >= 0
+ R2941: - Const0 + fKS_x[3,3,4] - Key_cost_fwd[3,3,4] >= 0
+ R2942: - Const0 + fKS_y[3,3,4] - Key_cost_fwd[3,3,4] >= 0
+ R2943: Const0 >= 0
+ R2944: Key_cost_bwd[3,3,4] >= 0
+ R2945: bKS_x[3,3,4] - bKS_x[4,3,3] - bKS_x[4,3,4] - 2 Key_cost_bwd[3,3,4]
+   >= -1
+ R2946: - bKS_x[3,3,4] + bKS_x[4,3,3] + Key_cost_bwd[3,3,4] >= 0
+ R2947: - 2 Const0 + bKS_y[3,3,4] - bKS_y[4,3,3] - bKS_y[4,3,4] >= -1
+ R2948: Const0 - bKS_y[3,3,4] + bKS_y[4,3,3] >= 0
+ R2949: - bKS_x[3,3,4] + bKS_x[4,3,4] + Key_cost_bwd[3,3,4] >= 0
+ R2950: Const0 - bKS_y[3,3,4] + bKS_y[4,3,4] >= 0
+ R2951: - Const0 + bKS_x[3,3,4] - Key_cost_bwd[3,3,4] >= 0
+ R2952: - Const0 + bKS_y[3,3,4] - Key_cost_bwd[3,3,4] >= 0
+ R2953: Key_cost_fwd[3,0,5] >= 0
+ R2954: Const0 >= 0
+ R2955: - 2 Const0 + fKS_x[3,0,5] - fKS_x[4,0,4] - fKS_x[4,0,5] >= -1
+ R2956: Const0 - fKS_x[3,0,5] + fKS_x[4,0,4] >= 0
+ R2957: fKS_y[3,0,5] - fKS_y[4,0,4] - fKS_y[4,0,5] - 2 Key_cost_fwd[3,0,5]
+   >= -1
+ R2958: - fKS_y[3,0,5] + fKS_y[4,0,4] + Key_cost_fwd[3,0,5] >= 0
+ R2959: Const0 - fKS_x[3,0,5] + fKS_x[4,0,5] >= 0
+ R2960: - fKS_y[3,0,5] + fKS_y[4,0,5] + Key_cost_fwd[3,0,5] >= 0
+ R2961: - Const0 + fKS_x[3,0,5] - Key_cost_fwd[3,0,5] >= 0
+ R2962: - Const0 + fKS_y[3,0,5] - Key_cost_fwd[3,0,5] >= 0
+ R2963: Const0 >= 0
+ R2964: Key_cost_bwd[3,0,5] >= 0
+ R2965: bKS_x[3,0,5] - bKS_x[4,0,4] - bKS_x[4,0,5] - 2 Key_cost_bwd[3,0,5]
+   >= -1
+ R2966: - bKS_x[3,0,5] + bKS_x[4,0,4] + Key_cost_bwd[3,0,5] >= 0
+ R2967: - 2 Const0 + bKS_y[3,0,5] - bKS_y[4,0,4] - bKS_y[4,0,5] >= -1
+ R2968: Const0 - bKS_y[3,0,5] + bKS_y[4,0,4] >= 0
+ R2969: - bKS_x[3,0,5] + bKS_x[4,0,5] + Key_cost_bwd[3,0,5] >= 0
+ R2970: Const0 - bKS_y[3,0,5] + bKS_y[4,0,5] >= 0
+ R2971: - Const0 + bKS_x[3,0,5] - Key_cost_bwd[3,0,5] >= 0
+ R2972: - Const0 + bKS_y[3,0,5] - Key_cost_bwd[3,0,5] >= 0
+ R2973: Key_cost_fwd[3,1,5] >= 0
+ R2974: Const0 >= 0
+ R2975: - 2 Const0 + fKS_x[3,1,5] - fKS_x[4,1,4] - fKS_x[4,1,5] >= -1
+ R2976: Const0 - fKS_x[3,1,5] + fKS_x[4,1,4] >= 0
+ R2977: fKS_y[3,1,5] - fKS_y[4,1,4] - fKS_y[4,1,5] - 2 Key_cost_fwd[3,1,5]
+   >= -1
+ R2978: - fKS_y[3,1,5] + fKS_y[4,1,4] + Key_cost_fwd[3,1,5] >= 0
+ R2979: Const0 - fKS_x[3,1,5] + fKS_x[4,1,5] >= 0
+ R2980: - fKS_y[3,1,5] + fKS_y[4,1,5] + Key_cost_fwd[3,1,5] >= 0
+ R2981: - Const0 + fKS_x[3,1,5] - Key_cost_fwd[3,1,5] >= 0
+ R2982: - Const0 + fKS_y[3,1,5] - Key_cost_fwd[3,1,5] >= 0
+ R2983: Const0 >= 0
+ R2984: Key_cost_bwd[3,1,5] >= 0
+ R2985: bKS_x[3,1,5] - bKS_x[4,1,4] - bKS_x[4,1,5] - 2 Key_cost_bwd[3,1,5]
+   >= -1
+ R2986: - bKS_x[3,1,5] + bKS_x[4,1,4] + Key_cost_bwd[3,1,5] >= 0
+ R2987: - 2 Const0 + bKS_y[3,1,5] - bKS_y[4,1,4] - bKS_y[4,1,5] >= -1
+ R2988: Const0 - bKS_y[3,1,5] + bKS_y[4,1,4] >= 0
+ R2989: - bKS_x[3,1,5] + bKS_x[4,1,5] + Key_cost_bwd[3,1,5] >= 0
+ R2990: Const0 - bKS_y[3,1,5] + bKS_y[4,1,5] >= 0
+ R2991: - Const0 + bKS_x[3,1,5] - Key_cost_bwd[3,1,5] >= 0
+ R2992: - Const0 + bKS_y[3,1,5] - Key_cost_bwd[3,1,5] >= 0
+ R2993: Key_cost_fwd[3,2,5] >= 0
+ R2994: Const0 >= 0
+ R2995: - 2 Const0 + fKS_x[3,2,5] - fKS_x[4,2,4] - fKS_x[4,2,5] >= -1
+ R2996: Const0 - fKS_x[3,2,5] + fKS_x[4,2,4] >= 0
+ R2997: fKS_y[3,2,5] - fKS_y[4,2,4] - fKS_y[4,2,5] - 2 Key_cost_fwd[3,2,5]
+   >= -1
+ R2998: - fKS_y[3,2,5] + fKS_y[4,2,4] + Key_cost_fwd[3,2,5] >= 0
+ R2999: Const0 - fKS_x[3,2,5] + fKS_x[4,2,5] >= 0
+ R3000: - fKS_y[3,2,5] + fKS_y[4,2,5] + Key_cost_fwd[3,2,5] >= 0
+ R3001: - Const0 + fKS_x[3,2,5] - Key_cost_fwd[3,2,5] >= 0
+ R3002: - Const0 + fKS_y[3,2,5] - Key_cost_fwd[3,2,5] >= 0
+ R3003: Const0 >= 0
+ R3004: Key_cost_bwd[3,2,5] >= 0
+ R3005: bKS_x[3,2,5] - bKS_x[4,2,4] - bKS_x[4,2,5] - 2 Key_cost_bwd[3,2,5]
+   >= -1
+ R3006: - bKS_x[3,2,5] + bKS_x[4,2,4] + Key_cost_bwd[3,2,5] >= 0
+ R3007: - 2 Const0 + bKS_y[3,2,5] - bKS_y[4,2,4] - bKS_y[4,2,5] >= -1
+ R3008: Const0 - bKS_y[3,2,5] + bKS_y[4,2,4] >= 0
+ R3009: - bKS_x[3,2,5] + bKS_x[4,2,5] + Key_cost_bwd[3,2,5] >= 0
+ R3010: Const0 - bKS_y[3,2,5] + bKS_y[4,2,5] >= 0
+ R3011: - Const0 + bKS_x[3,2,5] - Key_cost_bwd[3,2,5] >= 0
+ R3012: - Const0 + bKS_y[3,2,5] - Key_cost_bwd[3,2,5] >= 0
+ R3013: Key_cost_fwd[3,3,5] >= 0
+ R3014: Const0 >= 0
+ R3015: - 2 Const0 + fKS_x[3,3,5] - fKS_x[4,3,4] - fKS_x[4,3,5] >= -1
+ R3016: Const0 - fKS_x[3,3,5] + fKS_x[4,3,4] >= 0
+ R3017: fKS_y[3,3,5] - fKS_y[4,3,4] - fKS_y[4,3,5] - 2 Key_cost_fwd[3,3,5]
+   >= -1
+ R3018: - fKS_y[3,3,5] + fKS_y[4,3,4] + Key_cost_fwd[3,3,5] >= 0
+ R3019: Const0 - fKS_x[3,3,5] + fKS_x[4,3,5] >= 0
+ R3020: - fKS_y[3,3,5] + fKS_y[4,3,5] + Key_cost_fwd[3,3,5] >= 0
+ R3021: - Const0 + fKS_x[3,3,5] - Key_cost_fwd[3,3,5] >= 0
+ R3022: - Const0 + fKS_y[3,3,5] - Key_cost_fwd[3,3,5] >= 0
+ R3023: Const0 >= 0
+ R3024: Key_cost_bwd[3,3,5] >= 0
+ R3025: bKS_x[3,3,5] - bKS_x[4,3,4] - bKS_x[4,3,5] - 2 Key_cost_bwd[3,3,5]
+   >= -1
+ R3026: - bKS_x[3,3,5] + bKS_x[4,3,4] + Key_cost_bwd[3,3,5] >= 0
+ R3027: - 2 Const0 + bKS_y[3,3,5] - bKS_y[4,3,4] - bKS_y[4,3,5] >= -1
+ R3028: Const0 - bKS_y[3,3,5] + bKS_y[4,3,4] >= 0
+ R3029: - bKS_x[3,3,5] + bKS_x[4,3,5] + Key_cost_bwd[3,3,5] >= 0
+ R3030: Const0 - bKS_y[3,3,5] + bKS_y[4,3,5] >= 0
+ R3031: - Const0 + bKS_x[3,3,5] - Key_cost_bwd[3,3,5] >= 0
+ R3032: - Const0 + bKS_y[3,3,5] - Key_cost_bwd[3,3,5] >= 0
+ R3033: - K_ini_y[0,0] + fKS_y[4,0,0] = 0
+ R3034: - K_ini_x[0,0] + bKS_x[4,0,0] = 0
+ R3035: Key_cost_bwd[4,0,0] = 0
+ R3036: Key_cost_fwd[4,0,0] = 0
+ R3037: - K_ini_y[1,0] + fKS_y[4,1,0] = 0
+ R3038: - K_ini_x[1,0] + bKS_x[4,1,0] = 0
+ R3039: Key_cost_bwd[4,1,0] = 0
+ R3040: Key_cost_fwd[4,1,0] = 0
+ R3041: - K_ini_y[2,0] + fKS_y[4,2,0] = 0
+ R3042: - K_ini_x[2,0] + bKS_x[4,2,0] = 0
+ R3043: Key_cost_bwd[4,2,0] = 0
+ R3044: Key_cost_fwd[4,2,0] = 0
+ R3045: - K_ini_y[3,0] + fKS_y[4,3,0] = 0
+ R3046: - K_ini_x[3,0] + bKS_x[4,3,0] = 0
+ R3047: Key_cost_bwd[4,3,0] = 0
+ R3048: Key_cost_fwd[4,3,0] = 0
+ R3049: - K_ini_y[0,1] + fKS_y[4,0,1] = 0
+ R3050: - K_ini_x[0,1] + bKS_x[4,0,1] = 0
+ R3051: Key_cost_bwd[4,0,1] = 0
+ R3052: Key_cost_fwd[4,0,1] = 0
+ R3053: - K_ini_y[1,1] + fKS_y[4,1,1] = 0
+ R3054: - K_ini_x[1,1] + bKS_x[4,1,1] = 0
+ R3055: Key_cost_bwd[4,1,1] = 0
+ R3056: Key_cost_fwd[4,1,1] = 0
+ R3057: - K_ini_y[2,1] + fKS_y[4,2,1] = 0
+ R3058: - K_ini_x[2,1] + bKS_x[4,2,1] = 0
+ R3059: Key_cost_bwd[4,2,1] = 0
+ R3060: Key_cost_fwd[4,2,1] = 0
+ R3061: - K_ini_y[3,1] + fKS_y[4,3,1] = 0
+ R3062: - K_ini_x[3,1] + bKS_x[4,3,1] = 0
+ R3063: Key_cost_bwd[4,3,1] = 0
+ R3064: Key_cost_fwd[4,3,1] = 0
+ R3065: - K_ini_y[0,2] + fKS_y[4,0,2] = 0
+ R3066: - K_ini_x[0,2] + bKS_x[4,0,2] = 0
+ R3067: Key_cost_bwd[4,0,2] = 0
+ R3068: Key_cost_fwd[4,0,2] = 0
+ R3069: - K_ini_y[1,2] + fKS_y[4,1,2] = 0
+ R3070: - K_ini_x[1,2] + bKS_x[4,1,2] = 0
+ R3071: Key_cost_bwd[4,1,2] = 0
+ R3072: Key_cost_fwd[4,1,2] = 0
+ R3073: - K_ini_y[2,2] + fKS_y[4,2,2] = 0
+ R3074: - K_ini_x[2,2] + bKS_x[4,2,2] = 0
+ R3075: Key_cost_bwd[4,2,2] = 0
+ R3076: Key_cost_fwd[4,2,2] = 0
+ R3077: - K_ini_y[3,2] + fKS_y[4,3,2] = 0
+ R3078: - K_ini_x[3,2] + bKS_x[4,3,2] = 0
+ R3079: Key_cost_bwd[4,3,2] = 0
+ R3080: Key_cost_fwd[4,3,2] = 0
+ R3081: - K_ini_y[0,3] + fKS_y[4,0,3] = 0
+ R3082: - K_ini_x[0,3] + bKS_x[4,0,3] = 0
+ R3083: Key_cost_bwd[4,0,3] = 0
+ R3084: Key_cost_fwd[4,0,3] = 0
+ R3085: - K_ini_y[1,3] + fKS_y[4,1,3] = 0
+ R3086: - K_ini_x[1,3] + bKS_x[4,1,3] = 0
+ R3087: Key_cost_bwd[4,1,3] = 0
+ R3088: Key_cost_fwd[4,1,3] = 0
+ R3089: - K_ini_y[2,3] + fKS_y[4,2,3] = 0
+ R3090: - K_ini_x[2,3] + bKS_x[4,2,3] = 0
+ R3091: Key_cost_bwd[4,2,3] = 0
+ R3092: Key_cost_fwd[4,2,3] = 0
+ R3093: - K_ini_y[3,3] + fKS_y[4,3,3] = 0
+ R3094: - K_ini_x[3,3] + bKS_x[4,3,3] = 0
+ R3095: Key_cost_bwd[4,3,3] = 0
+ R3096: Key_cost_fwd[4,3,3] = 0
+ R3097: - K_ini_y[0,4] + fKS_y[4,0,4] = 0
+ R3098: - K_ini_x[0,4] + bKS_x[4,0,4] = 0
+ R3099: Key_cost_bwd[4,0,4] = 0
+ R3100: Key_cost_fwd[4,0,4] = 0
+ R3101: - K_ini_y[1,4] + fKS_y[4,1,4] = 0
+ R3102: - K_ini_x[1,4] + bKS_x[4,1,4] = 0
+ R3103: Key_cost_bwd[4,1,4] = 0
+ R3104: Key_cost_fwd[4,1,4] = 0
+ R3105: - K_ini_y[2,4] + fKS_y[4,2,4] = 0
+ R3106: - K_ini_x[2,4] + bKS_x[4,2,4] = 0
+ R3107: Key_cost_bwd[4,2,4] = 0
+ R3108: Key_cost_fwd[4,2,4] = 0
+ R3109: - K_ini_y[3,4] + fKS_y[4,3,4] = 0
+ R3110: - K_ini_x[3,4] + bKS_x[4,3,4] = 0
+ R3111: Key_cost_bwd[4,3,4] = 0
+ R3112: Key_cost_fwd[4,3,4] = 0
+ R3113: - K_ini_y[0,5] + fKS_y[4,0,5] = 0
+ R3114: - K_ini_x[0,5] + bKS_x[4,0,5] = 0
+ R3115: Key_cost_bwd[4,0,5] = 0
+ R3116: Key_cost_fwd[4,0,5] = 0
+ R3117: - K_ini_y[1,5] + fKS_y[4,1,5] = 0
+ R3118: - K_ini_x[1,5] + bKS_x[4,1,5] = 0
+ R3119: Key_cost_bwd[4,1,5] = 0
+ R3120: Key_cost_fwd[4,1,5] = 0
+ R3121: - K_ini_y[2,5] + fKS_y[4,2,5] = 0
+ R3122: - K_ini_x[2,5] + bKS_x[4,2,5] = 0
+ R3123: Key_cost_bwd[4,2,5] = 0
+ R3124: Key_cost_fwd[4,2,5] = 0
+ R3125: - K_ini_y[3,5] + fKS_y[4,3,5] = 0
+ R3126: - K_ini_x[3,5] + bKS_x[4,3,5] = 0
+ R3127: Key_cost_bwd[4,3,5] = 0
+ R3128: Key_cost_fwd[4,3,5] = 0
  R3129: - Ksub_r[5,0] + fKsub_r[5,0] = 0
  R3130: - Ksub_b[5,0] + bKsub_b[5,0] = 0
  R3131: - Ksub_r[5,1] + fKsub_r[5,1] = 0
@@ -4544,84 +4544,84 @@ Subject To
  R4152: Key_cost_bwd[6,3,5] = 0
  R4153: E_ini_y[0,0] = 1
  R4154: E_ini_x[0,0] = 0
- R4155: S_x[3,0,0] + S_y[3,0,0] >= 1
- R4156: E_ini_x[0,0] - S_x[3,0,0] = 0
- R4157: E_ini_y[0,0] - S_y[3,0,0] = 0
+ R4155: S_x[2,0,0] + S_y[2,0,0] >= 1
+ R4156: E_ini_x[0,0] - S_x[2,0,0] = 0
+ R4157: E_ini_y[0,0] - S_y[2,0,0] = 0
  R4158: E_ini_y[0,1] = 1
  R4159: E_ini_x[0,1] = 0
- R4160: S_x[3,0,1] + S_y[3,0,1] >= 1
- R4161: E_ini_x[0,1] - S_x[3,0,1] = 0
- R4162: E_ini_y[0,1] - S_y[3,0,1] = 0
+ R4160: S_x[2,0,1] + S_y[2,0,1] >= 1
+ R4161: E_ini_x[0,1] - S_x[2,0,1] = 0
+ R4162: E_ini_y[0,1] - S_y[2,0,1] = 0
  R4163: E_ini_y[0,2] = 1
  R4164: E_ini_x[0,2] = 0
- R4165: S_x[3,0,2] + S_y[3,0,2] >= 1
- R4166: E_ini_x[0,2] - S_x[3,0,2] = 0
- R4167: E_ini_y[0,2] - S_y[3,0,2] = 0
+ R4165: S_x[2,0,2] + S_y[2,0,2] >= 1
+ R4166: E_ini_x[0,2] - S_x[2,0,2] = 0
+ R4167: E_ini_y[0,2] - S_y[2,0,2] = 0
  R4168: E_ini_y[0,3] = 1
  R4169: E_ini_x[0,3] = 0
- R4170: S_x[3,0,3] + S_y[3,0,3] >= 1
- R4171: E_ini_x[0,3] - S_x[3,0,3] = 0
- R4172: E_ini_y[0,3] - S_y[3,0,3] = 0
+ R4170: S_x[2,0,3] + S_y[2,0,3] >= 1
+ R4171: E_ini_x[0,3] - S_x[2,0,3] = 0
+ R4172: E_ini_y[0,3] - S_y[2,0,3] = 0
  R4173: E_ini_y[1,0] = 1
  R4174: E_ini_x[1,0] = 0
- R4175: S_x[3,1,0] + S_y[3,1,0] >= 1
- R4176: E_ini_x[1,0] - S_x[3,1,0] = 0
- R4177: E_ini_y[1,0] - S_y[3,1,0] = 0
+ R4175: S_x[2,1,0] + S_y[2,1,0] >= 1
+ R4176: E_ini_x[1,0] - S_x[2,1,0] = 0
+ R4177: E_ini_y[1,0] - S_y[2,1,0] = 0
  R4178: E_ini_y[1,1] = 1
  R4179: E_ini_x[1,1] = 0
- R4180: S_x[3,1,1] + S_y[3,1,1] >= 1
- R4181: E_ini_x[1,1] - S_x[3,1,1] = 0
- R4182: E_ini_y[1,1] - S_y[3,1,1] = 0
+ R4180: S_x[2,1,1] + S_y[2,1,1] >= 1
+ R4181: E_ini_x[1,1] - S_x[2,1,1] = 0
+ R4182: E_ini_y[1,1] - S_y[2,1,1] = 0
  R4183: E_ini_y[1,2] = 1
  R4184: E_ini_x[1,2] = 0
- R4185: S_x[3,1,2] + S_y[3,1,2] >= 1
- R4186: E_ini_x[1,2] - S_x[3,1,2] = 0
- R4187: E_ini_y[1,2] - S_y[3,1,2] = 0
+ R4185: S_x[2,1,2] + S_y[2,1,2] >= 1
+ R4186: E_ini_x[1,2] - S_x[2,1,2] = 0
+ R4187: E_ini_y[1,2] - S_y[2,1,2] = 0
  R4188: E_ini_y[1,3] = 1
  R4189: E_ini_x[1,3] = 0
- R4190: S_x[3,1,3] + S_y[3,1,3] >= 1
- R4191: E_ini_x[1,3] - S_x[3,1,3] = 0
- R4192: E_ini_y[1,3] - S_y[3,1,3] = 0
+ R4190: S_x[2,1,3] + S_y[2,1,3] >= 1
+ R4191: E_ini_x[1,3] - S_x[2,1,3] = 0
+ R4192: E_ini_y[1,3] - S_y[2,1,3] = 0
  R4193: E_ini_y[2,0] = 1
  R4194: E_ini_x[2,0] = 0
- R4195: S_x[3,2,0] + S_y[3,2,0] >= 1
- R4196: E_ini_x[2,0] - S_x[3,2,0] = 0
- R4197: E_ini_y[2,0] - S_y[3,2,0] = 0
+ R4195: S_x[2,2,0] + S_y[2,2,0] >= 1
+ R4196: E_ini_x[2,0] - S_x[2,2,0] = 0
+ R4197: E_ini_y[2,0] - S_y[2,2,0] = 0
  R4198: E_ini_y[2,1] = 1
  R4199: E_ini_x[2,1] = 0
- R4200: S_x[3,2,1] + S_y[3,2,1] >= 1
- R4201: E_ini_x[2,1] - S_x[3,2,1] = 0
- R4202: E_ini_y[2,1] - S_y[3,2,1] = 0
+ R4200: S_x[2,2,1] + S_y[2,2,1] >= 1
+ R4201: E_ini_x[2,1] - S_x[2,2,1] = 0
+ R4202: E_ini_y[2,1] - S_y[2,2,1] = 0
  R4203: E_ini_y[2,2] = 1
  R4204: E_ini_x[2,2] = 0
- R4205: S_x[3,2,2] + S_y[3,2,2] >= 1
- R4206: E_ini_x[2,2] - S_x[3,2,2] = 0
- R4207: E_ini_y[2,2] - S_y[3,2,2] = 0
+ R4205: S_x[2,2,2] + S_y[2,2,2] >= 1
+ R4206: E_ini_x[2,2] - S_x[2,2,2] = 0
+ R4207: E_ini_y[2,2] - S_y[2,2,2] = 0
  R4208: E_ini_y[2,3] = 1
  R4209: E_ini_x[2,3] = 0
- R4210: S_x[3,2,3] + S_y[3,2,3] >= 1
- R4211: E_ini_x[2,3] - S_x[3,2,3] = 0
- R4212: E_ini_y[2,3] - S_y[3,2,3] = 0
+ R4210: S_x[2,2,3] + S_y[2,2,3] >= 1
+ R4211: E_ini_x[2,3] - S_x[2,2,3] = 0
+ R4212: E_ini_y[2,3] - S_y[2,2,3] = 0
  R4213: E_ini_y[3,0] = 1
  R4214: E_ini_x[3,0] = 0
- R4215: S_x[3,3,0] + S_y[3,3,0] >= 1
- R4216: E_ini_x[3,0] - S_x[3,3,0] = 0
- R4217: E_ini_y[3,0] - S_y[3,3,0] = 0
+ R4215: S_x[2,3,0] + S_y[2,3,0] >= 1
+ R4216: E_ini_x[3,0] - S_x[2,3,0] = 0
+ R4217: E_ini_y[3,0] - S_y[2,3,0] = 0
  R4218: E_ini_y[3,1] = 1
  R4219: E_ini_x[3,1] = 0
- R4220: S_x[3,3,1] + S_y[3,3,1] >= 1
- R4221: E_ini_x[3,1] - S_x[3,3,1] = 0
- R4222: E_ini_y[3,1] - S_y[3,3,1] = 0
+ R4220: S_x[2,3,1] + S_y[2,3,1] >= 1
+ R4221: E_ini_x[3,1] - S_x[2,3,1] = 0
+ R4222: E_ini_y[3,1] - S_y[2,3,1] = 0
  R4223: E_ini_y[3,2] = 1
  R4224: E_ini_x[3,2] = 0
- R4225: S_x[3,3,2] + S_y[3,3,2] >= 1
- R4226: E_ini_x[3,2] - S_x[3,3,2] = 0
- R4227: E_ini_y[3,2] - S_y[3,3,2] = 0
+ R4225: S_x[2,3,2] + S_y[2,3,2] >= 1
+ R4226: E_ini_x[3,2] - S_x[2,3,2] = 0
+ R4227: E_ini_y[3,2] - S_y[2,3,2] = 0
  R4228: E_ini_y[3,3] = 1
  R4229: E_ini_x[3,3] = 0
- R4230: S_x[3,3,3] + S_y[3,3,3] >= 1
- R4231: E_ini_x[3,3] - S_x[3,3,3] = 0
- R4232: E_ini_y[3,3] - S_y[3,3,3] = 0
+ R4230: S_x[2,3,3] + S_y[2,3,3] >= 1
+ R4231: E_ini_x[3,3] - S_x[2,3,3] = 0
+ R4232: E_ini_y[3,3] - S_y[2,3,3] = 0
  R4233: - S_y[1,0,0] + fS_y[1,0,0] = 0
  R4234: - S_x[1,0,0] + bS_x[1,0,0] = 0
  R4235: - S_y[1,0,1] + fS_y[1,0,1] = 0
@@ -5646,518 +5646,518 @@ Subject To
    - 4 bA_col_v[1,3] - MC_Cost_bwd[1,3] = 0
  R5064: - Const0 + bM_y[1,0,3] + bM_y[1,1,3] + bM_y[1,2,3] + bM_y[1,3,3]
    - 4 bA_col_w[1,3] = 0
- R5065: - S_y[3,0,0] + fS_y[3,0,0] = 0
- R5066: - S_x[3,0,0] + bS_x[3,0,0] = 0
- R5067: - S_y[3,0,1] + fS_y[3,0,1] = 0
- R5068: - S_x[3,0,1] + bS_x[3,0,1] = 0
- R5069: - S_y[3,0,2] + fS_y[3,0,2] = 0
- R5070: - S_x[3,0,2] + bS_x[3,0,2] = 0
- R5071: - S_y[3,0,3] + fS_y[3,0,3] = 0
- R5072: - S_x[3,0,3] + bS_x[3,0,3] = 0
- R5073: - S_y[3,1,0] + fS_y[3,1,0] = 0
- R5074: - S_x[3,1,0] + bS_x[3,1,0] = 0
- R5075: - S_y[3,1,1] + fS_y[3,1,1] = 0
- R5076: - S_x[3,1,1] + bS_x[3,1,1] = 0
- R5077: - S_y[3,1,2] + fS_y[3,1,2] = 0
- R5078: - S_x[3,1,2] + bS_x[3,1,2] = 0
- R5079: - S_y[3,1,3] + fS_y[3,1,3] = 0
- R5080: - S_x[3,1,3] + bS_x[3,1,3] = 0
- R5081: - S_y[3,2,0] + fS_y[3,2,0] = 0
- R5082: - S_x[3,2,0] + bS_x[3,2,0] = 0
- R5083: - S_y[3,2,1] + fS_y[3,2,1] = 0
- R5084: - S_x[3,2,1] + bS_x[3,2,1] = 0
- R5085: - S_y[3,2,2] + fS_y[3,2,2] = 0
- R5086: - S_x[3,2,2] + bS_x[3,2,2] = 0
- R5087: - S_y[3,2,3] + fS_y[3,2,3] = 0
- R5088: - S_x[3,2,3] + bS_x[3,2,3] = 0
- R5089: - S_y[3,3,0] + fS_y[3,3,0] = 0
- R5090: - S_x[3,3,0] + bS_x[3,3,0] = 0
- R5091: - S_y[3,3,1] + fS_y[3,3,1] = 0
- R5092: - S_x[3,3,1] + bS_x[3,3,1] = 0
- R5093: - S_y[3,3,2] + fS_y[3,3,2] = 0
- R5094: - S_x[3,3,2] + bS_x[3,3,2] = 0
- R5095: - S_y[3,3,3] + fS_y[3,3,3] = 0
- R5096: - S_x[3,3,3] + bS_x[3,3,3] = 0
- R5097: XOR_Cost_fwd[2,0,0] >= 0
- R5098: Const0 >= 0
- R5099: - 2 Const0 + fA_x[2,0,0] - fS_x[3,0,0] - fKS_x[2,0,0] >= -1
- R5100: Const0 - fA_x[2,0,0] + fKS_x[2,0,0] >= 0
- R5101: fA_y[2,0,0] - fS_y[3,0,0] - fKS_y[2,0,0] - 2 XOR_Cost_fwd[2,0,0]
+ R5065: - S_y[2,0,0] + fM_y[2,0,0] = 0
+ R5066: - S_x[2,0,0] + bM_x[2,0,0] = 0
+ R5067: - S_y[2,0,1] + fM_y[2,0,1] = 0
+ R5068: - S_x[2,0,1] + bM_x[2,0,1] = 0
+ R5069: - S_y[2,0,2] + fM_y[2,0,2] = 0
+ R5070: - S_x[2,0,2] + bM_x[2,0,2] = 0
+ R5071: - S_y[2,0,3] + fM_y[2,0,3] = 0
+ R5072: - S_x[2,0,3] + bM_x[2,0,3] = 0
+ R5073: - S_y[2,1,1] + fM_y[2,1,0] = 0
+ R5074: - S_x[2,1,1] + bM_x[2,1,0] = 0
+ R5075: - S_y[2,1,2] + fM_y[2,1,1] = 0
+ R5076: - S_x[2,1,2] + bM_x[2,1,1] = 0
+ R5077: - S_y[2,1,3] + fM_y[2,1,2] = 0
+ R5078: - S_x[2,1,3] + bM_x[2,1,2] = 0
+ R5079: - S_y[2,1,0] + fM_y[2,1,3] = 0
+ R5080: - S_x[2,1,0] + bM_x[2,1,3] = 0
+ R5081: - S_y[2,2,2] + fM_y[2,2,0] = 0
+ R5082: - S_x[2,2,2] + bM_x[2,2,0] = 0
+ R5083: - S_y[2,2,3] + fM_y[2,2,1] = 0
+ R5084: - S_x[2,2,3] + bM_x[2,2,1] = 0
+ R5085: - S_y[2,2,0] + fM_y[2,2,2] = 0
+ R5086: - S_x[2,2,0] + bM_x[2,2,2] = 0
+ R5087: - S_y[2,2,1] + fM_y[2,2,3] = 0
+ R5088: - S_x[2,2,1] + bM_x[2,2,3] = 0
+ R5089: - S_y[2,3,3] + fM_y[2,3,0] = 0
+ R5090: - S_x[2,3,3] + bM_x[2,3,0] = 0
+ R5091: - S_y[2,3,0] + fM_y[2,3,1] = 0
+ R5092: - S_x[2,3,0] + bM_x[2,3,1] = 0
+ R5093: - S_y[2,3,1] + fM_y[2,3,2] = 0
+ R5094: - S_x[2,3,1] + bM_x[2,3,2] = 0
+ R5095: - S_y[2,3,2] + fM_y[2,3,3] = 0
+ R5096: - S_x[2,3,2] + bM_x[2,3,3] = 0
+ R5097: fA_x[2,0,0] + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0]
+   + 4 fM_col_u[2,0] <= 4
+ R5098: fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0] + fA_x[2,0,0]
+   + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0] - 5 fM_col_v[2,0] <= 3
+ R5099: fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0] + fA_x[2,0,0]
+   + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0] - 8 fM_col_v[2,0] >= 0
+ R5100: fA_y[2,0,0] + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0]
+   + 4 fM_col_u[2,0] <= 4
+ R5101: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0] + fA_y[2,0,0]
+   + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0] - 5 fM_col_w[2,0] <= 3
+ R5102: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0] + fA_y[2,0,0]
+   + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0] - 8 fM_col_w[2,0] >= 0
+ R5103: - Const0 + fA_x[2,0,0] + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0]
+   - 4 fM_col_v[2,0] = 0
+ R5104: fA_y[2,0,0] + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0]
+   - 4 fM_col_w[2,0] - MC_Cost_fwd[2,0] = 0
+ R5105: bA_x[2,0,0] + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0]
+   + 4 bM_col_u[2,0] <= 4
+ R5106: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0] + bA_x[2,0,0]
+   + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0] - 5 bM_col_v[2,0] <= 3
+ R5107: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0] + bA_x[2,0,0]
+   + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0] - 8 bM_col_v[2,0] >= 0
+ R5108: bA_y[2,0,0] + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0]
+   + 4 bM_col_u[2,0] <= 4
+ R5109: bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0] + bA_y[2,0,0]
+   + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0] - 5 bM_col_w[2,0] <= 3
+ R5110: bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0] + bA_y[2,0,0]
+   + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0] - 8 bM_col_w[2,0] >= 0
+ R5111: bA_x[2,0,0] + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0]
+   - 4 bM_col_v[2,0] - MC_Cost_bwd[2,0] = 0
+ R5112: - Const0 + bA_y[2,0,0] + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0]
+   - 4 bM_col_w[2,0] = 0
+ R5113: fA_x[2,0,1] + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1]
+   + 4 fM_col_u[2,1] <= 4
+ R5114: fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1] + fA_x[2,0,1]
+   + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1] - 5 fM_col_v[2,1] <= 3
+ R5115: fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1] + fA_x[2,0,1]
+   + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1] - 8 fM_col_v[2,1] >= 0
+ R5116: fA_y[2,0,1] + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1]
+   + 4 fM_col_u[2,1] <= 4
+ R5117: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1] + fA_y[2,0,1]
+   + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1] - 5 fM_col_w[2,1] <= 3
+ R5118: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1] + fA_y[2,0,1]
+   + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1] - 8 fM_col_w[2,1] >= 0
+ R5119: - Const0 + fA_x[2,0,1] + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1]
+   - 4 fM_col_v[2,1] = 0
+ R5120: fA_y[2,0,1] + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1]
+   - 4 fM_col_w[2,1] - MC_Cost_fwd[2,1] = 0
+ R5121: bA_x[2,0,1] + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1]
+   + 4 bM_col_u[2,1] <= 4
+ R5122: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1] + bA_x[2,0,1]
+   + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1] - 5 bM_col_v[2,1] <= 3
+ R5123: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1] + bA_x[2,0,1]
+   + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1] - 8 bM_col_v[2,1] >= 0
+ R5124: bA_y[2,0,1] + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1]
+   + 4 bM_col_u[2,1] <= 4
+ R5125: bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1] + bA_y[2,0,1]
+   + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1] - 5 bM_col_w[2,1] <= 3
+ R5126: bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1] + bA_y[2,0,1]
+   + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1] - 8 bM_col_w[2,1] >= 0
+ R5127: bA_x[2,0,1] + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1]
+   - 4 bM_col_v[2,1] - MC_Cost_bwd[2,1] = 0
+ R5128: - Const0 + bA_y[2,0,1] + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1]
+   - 4 bM_col_w[2,1] = 0
+ R5129: fA_x[2,0,2] + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2]
+   + 4 fM_col_u[2,2] <= 4
+ R5130: fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2] + fA_x[2,0,2]
+   + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2] - 5 fM_col_v[2,2] <= 3
+ R5131: fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2] + fA_x[2,0,2]
+   + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2] - 8 fM_col_v[2,2] >= 0
+ R5132: fA_y[2,0,2] + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2]
+   + 4 fM_col_u[2,2] <= 4
+ R5133: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2] + fA_y[2,0,2]
+   + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2] - 5 fM_col_w[2,2] <= 3
+ R5134: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2] + fA_y[2,0,2]
+   + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2] - 8 fM_col_w[2,2] >= 0
+ R5135: - Const0 + fA_x[2,0,2] + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2]
+   - 4 fM_col_v[2,2] = 0
+ R5136: fA_y[2,0,2] + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2]
+   - 4 fM_col_w[2,2] - MC_Cost_fwd[2,2] = 0
+ R5137: bA_x[2,0,2] + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2]
+   + 4 bM_col_u[2,2] <= 4
+ R5138: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2] + bA_x[2,0,2]
+   + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2] - 5 bM_col_v[2,2] <= 3
+ R5139: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2] + bA_x[2,0,2]
+   + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2] - 8 bM_col_v[2,2] >= 0
+ R5140: bA_y[2,0,2] + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2]
+   + 4 bM_col_u[2,2] <= 4
+ R5141: bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2] + bA_y[2,0,2]
+   + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2] - 5 bM_col_w[2,2] <= 3
+ R5142: bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2] + bA_y[2,0,2]
+   + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2] - 8 bM_col_w[2,2] >= 0
+ R5143: bA_x[2,0,2] + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2]
+   - 4 bM_col_v[2,2] - MC_Cost_bwd[2,2] = 0
+ R5144: - Const0 + bA_y[2,0,2] + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2]
+   - 4 bM_col_w[2,2] = 0
+ R5145: fA_x[2,0,3] + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3]
+   + 4 fM_col_u[2,3] <= 4
+ R5146: fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3] + fA_x[2,0,3]
+   + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3] - 5 fM_col_v[2,3] <= 3
+ R5147: fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3] + fA_x[2,0,3]
+   + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3] - 8 fM_col_v[2,3] >= 0
+ R5148: fA_y[2,0,3] + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3]
+   + 4 fM_col_u[2,3] <= 4
+ R5149: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3] + fA_y[2,0,3]
+   + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3] - 5 fM_col_w[2,3] <= 3
+ R5150: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3] + fA_y[2,0,3]
+   + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3] - 8 fM_col_w[2,3] >= 0
+ R5151: - Const0 + fA_x[2,0,3] + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3]
+   - 4 fM_col_v[2,3] = 0
+ R5152: fA_y[2,0,3] + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3]
+   - 4 fM_col_w[2,3] - MC_Cost_fwd[2,3] = 0
+ R5153: bA_x[2,0,3] + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3]
+   + 4 bM_col_u[2,3] <= 4
+ R5154: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3] + bA_x[2,0,3]
+   + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3] - 5 bM_col_v[2,3] <= 3
+ R5155: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3] + bA_x[2,0,3]
+   + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3] - 8 bM_col_v[2,3] >= 0
+ R5156: bA_y[2,0,3] + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3]
+   + 4 bM_col_u[2,3] <= 4
+ R5157: bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3] + bA_y[2,0,3]
+   + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3] - 5 bM_col_w[2,3] <= 3
+ R5158: bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3] + bA_y[2,0,3]
+   + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3] - 8 bM_col_w[2,3] >= 0
+ R5159: bA_x[2,0,3] + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3]
+   - 4 bM_col_v[2,3] - MC_Cost_bwd[2,3] = 0
+ R5160: - Const0 + bA_y[2,0,3] + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3]
+   - 4 bM_col_w[2,3] = 0
+ R5161: XOR_Cost_fwd[2,0,0] >= 0
+ R5162: Const0 >= 0
+ R5163: - 2 Const0 - fA_x[2,0,0] + fS_x[3,0,0] - fKS_x[2,0,0] >= -1
+ R5164: Const0 - fS_x[3,0,0] + fKS_x[2,0,0] >= 0
+ R5165: - fA_y[2,0,0] + fS_y[3,0,0] - fKS_y[2,0,0] - 2 XOR_Cost_fwd[2,0,0]
    >= -1
- R5102: - fA_y[2,0,0] + fKS_y[2,0,0] + XOR_Cost_fwd[2,0,0] >= 0
- R5103: Const0 - fA_x[2,0,0] + fS_x[3,0,0] >= 0
- R5104: - fA_y[2,0,0] + fS_y[3,0,0] + XOR_Cost_fwd[2,0,0] >= 0
- R5105: - Const0 + fA_x[2,0,0] - XOR_Cost_fwd[2,0,0] >= 0
- R5106: - Const0 + fA_y[2,0,0] - XOR_Cost_fwd[2,0,0] >= 0
- R5107: Const0 >= 0
- R5108: XOR_Cost_bwd[2,0,0] >= 0
- R5109: bA_x[2,0,0] - bS_x[3,0,0] - bKS_x[2,0,0] - 2 XOR_Cost_bwd[2,0,0]
+ R5166: - fS_y[3,0,0] + fKS_y[2,0,0] + XOR_Cost_fwd[2,0,0] >= 0
+ R5167: Const0 + fA_x[2,0,0] - fS_x[3,0,0] >= 0
+ R5168: fA_y[2,0,0] - fS_y[3,0,0] + XOR_Cost_fwd[2,0,0] >= 0
+ R5169: - Const0 + fS_x[3,0,0] - XOR_Cost_fwd[2,0,0] >= 0
+ R5170: - Const0 + fS_y[3,0,0] - XOR_Cost_fwd[2,0,0] >= 0
+ R5171: Const0 >= 0
+ R5172: XOR_Cost_bwd[2,0,0] >= 0
+ R5173: - bA_x[2,0,0] + bS_x[3,0,0] - bKS_x[2,0,0] - 2 XOR_Cost_bwd[2,0,0]
    >= -1
- R5110: - bA_x[2,0,0] + bKS_x[2,0,0] + XOR_Cost_bwd[2,0,0] >= 0
- R5111: - 2 Const0 + bA_y[2,0,0] - bS_y[3,0,0] - bKS_y[2,0,0] >= -1
- R5112: Const0 - bA_y[2,0,0] + bKS_y[2,0,0] >= 0
- R5113: - bA_x[2,0,0] + bS_x[3,0,0] + XOR_Cost_bwd[2,0,0] >= 0
- R5114: Const0 - bA_y[2,0,0] + bS_y[3,0,0] >= 0
- R5115: - Const0 + bA_x[2,0,0] - XOR_Cost_bwd[2,0,0] >= 0
- R5116: - Const0 + bA_y[2,0,0] - XOR_Cost_bwd[2,0,0] >= 0
- R5117: XOR_Cost_fwd[2,0,1] >= 0
- R5118: Const0 >= 0
- R5119: - 2 Const0 + fA_x[2,0,1] - fS_x[3,0,1] - fKS_x[2,0,1] >= -1
- R5120: Const0 - fA_x[2,0,1] + fKS_x[2,0,1] >= 0
- R5121: fA_y[2,0,1] - fS_y[3,0,1] - fKS_y[2,0,1] - 2 XOR_Cost_fwd[2,0,1]
+ R5174: - bS_x[3,0,0] + bKS_x[2,0,0] + XOR_Cost_bwd[2,0,0] >= 0
+ R5175: - 2 Const0 - bA_y[2,0,0] + bS_y[3,0,0] - bKS_y[2,0,0] >= -1
+ R5176: Const0 - bS_y[3,0,0] + bKS_y[2,0,0] >= 0
+ R5177: bA_x[2,0,0] - bS_x[3,0,0] + XOR_Cost_bwd[2,0,0] >= 0
+ R5178: Const0 + bA_y[2,0,0] - bS_y[3,0,0] >= 0
+ R5179: - Const0 + bS_x[3,0,0] - XOR_Cost_bwd[2,0,0] >= 0
+ R5180: - Const0 + bS_y[3,0,0] - XOR_Cost_bwd[2,0,0] >= 0
+ R5181: XOR_Cost_fwd[2,0,1] >= 0
+ R5182: Const0 >= 0
+ R5183: - 2 Const0 - fA_x[2,0,1] + fS_x[3,0,1] - fKS_x[2,0,1] >= -1
+ R5184: Const0 - fS_x[3,0,1] + fKS_x[2,0,1] >= 0
+ R5185: - fA_y[2,0,1] + fS_y[3,0,1] - fKS_y[2,0,1] - 2 XOR_Cost_fwd[2,0,1]
    >= -1
- R5122: - fA_y[2,0,1] + fKS_y[2,0,1] + XOR_Cost_fwd[2,0,1] >= 0
- R5123: Const0 - fA_x[2,0,1] + fS_x[3,0,1] >= 0
- R5124: - fA_y[2,0,1] + fS_y[3,0,1] + XOR_Cost_fwd[2,0,1] >= 0
- R5125: - Const0 + fA_x[2,0,1] - XOR_Cost_fwd[2,0,1] >= 0
- R5126: - Const0 + fA_y[2,0,1] - XOR_Cost_fwd[2,0,1] >= 0
- R5127: Const0 >= 0
- R5128: XOR_Cost_bwd[2,0,1] >= 0
- R5129: bA_x[2,0,1] - bS_x[3,0,1] - bKS_x[2,0,1] - 2 XOR_Cost_bwd[2,0,1]
+ R5186: - fS_y[3,0,1] + fKS_y[2,0,1] + XOR_Cost_fwd[2,0,1] >= 0
+ R5187: Const0 + fA_x[2,0,1] - fS_x[3,0,1] >= 0
+ R5188: fA_y[2,0,1] - fS_y[3,0,1] + XOR_Cost_fwd[2,0,1] >= 0
+ R5189: - Const0 + fS_x[3,0,1] - XOR_Cost_fwd[2,0,1] >= 0
+ R5190: - Const0 + fS_y[3,0,1] - XOR_Cost_fwd[2,0,1] >= 0
+ R5191: Const0 >= 0
+ R5192: XOR_Cost_bwd[2,0,1] >= 0
+ R5193: - bA_x[2,0,1] + bS_x[3,0,1] - bKS_x[2,0,1] - 2 XOR_Cost_bwd[2,0,1]
    >= -1
- R5130: - bA_x[2,0,1] + bKS_x[2,0,1] + XOR_Cost_bwd[2,0,1] >= 0
- R5131: - 2 Const0 + bA_y[2,0,1] - bS_y[3,0,1] - bKS_y[2,0,1] >= -1
- R5132: Const0 - bA_y[2,0,1] + bKS_y[2,0,1] >= 0
- R5133: - bA_x[2,0,1] + bS_x[3,0,1] + XOR_Cost_bwd[2,0,1] >= 0
- R5134: Const0 - bA_y[2,0,1] + bS_y[3,0,1] >= 0
- R5135: - Const0 + bA_x[2,0,1] - XOR_Cost_bwd[2,0,1] >= 0
- R5136: - Const0 + bA_y[2,0,1] - XOR_Cost_bwd[2,0,1] >= 0
- R5137: XOR_Cost_fwd[2,0,2] >= 0
- R5138: Const0 >= 0
- R5139: - 2 Const0 + fA_x[2,0,2] - fS_x[3,0,2] - fKS_x[2,0,2] >= -1
- R5140: Const0 - fA_x[2,0,2] + fKS_x[2,0,2] >= 0
- R5141: fA_y[2,0,2] - fS_y[3,0,2] - fKS_y[2,0,2] - 2 XOR_Cost_fwd[2,0,2]
+ R5194: - bS_x[3,0,1] + bKS_x[2,0,1] + XOR_Cost_bwd[2,0,1] >= 0
+ R5195: - 2 Const0 - bA_y[2,0,1] + bS_y[3,0,1] - bKS_y[2,0,1] >= -1
+ R5196: Const0 - bS_y[3,0,1] + bKS_y[2,0,1] >= 0
+ R5197: bA_x[2,0,1] - bS_x[3,0,1] + XOR_Cost_bwd[2,0,1] >= 0
+ R5198: Const0 + bA_y[2,0,1] - bS_y[3,0,1] >= 0
+ R5199: - Const0 + bS_x[3,0,1] - XOR_Cost_bwd[2,0,1] >= 0
+ R5200: - Const0 + bS_y[3,0,1] - XOR_Cost_bwd[2,0,1] >= 0
+ R5201: XOR_Cost_fwd[2,0,2] >= 0
+ R5202: Const0 >= 0
+ R5203: - 2 Const0 - fA_x[2,0,2] + fS_x[3,0,2] - fKS_x[2,0,2] >= -1
+ R5204: Const0 - fS_x[3,0,2] + fKS_x[2,0,2] >= 0
+ R5205: - fA_y[2,0,2] + fS_y[3,0,2] - fKS_y[2,0,2] - 2 XOR_Cost_fwd[2,0,2]
    >= -1
- R5142: - fA_y[2,0,2] + fKS_y[2,0,2] + XOR_Cost_fwd[2,0,2] >= 0
- R5143: Const0 - fA_x[2,0,2] + fS_x[3,0,2] >= 0
- R5144: - fA_y[2,0,2] + fS_y[3,0,2] + XOR_Cost_fwd[2,0,2] >= 0
- R5145: - Const0 + fA_x[2,0,2] - XOR_Cost_fwd[2,0,2] >= 0
- R5146: - Const0 + fA_y[2,0,2] - XOR_Cost_fwd[2,0,2] >= 0
- R5147: Const0 >= 0
- R5148: XOR_Cost_bwd[2,0,2] >= 0
- R5149: bA_x[2,0,2] - bS_x[3,0,2] - bKS_x[2,0,2] - 2 XOR_Cost_bwd[2,0,2]
+ R5206: - fS_y[3,0,2] + fKS_y[2,0,2] + XOR_Cost_fwd[2,0,2] >= 0
+ R5207: Const0 + fA_x[2,0,2] - fS_x[3,0,2] >= 0
+ R5208: fA_y[2,0,2] - fS_y[3,0,2] + XOR_Cost_fwd[2,0,2] >= 0
+ R5209: - Const0 + fS_x[3,0,2] - XOR_Cost_fwd[2,0,2] >= 0
+ R5210: - Const0 + fS_y[3,0,2] - XOR_Cost_fwd[2,0,2] >= 0
+ R5211: Const0 >= 0
+ R5212: XOR_Cost_bwd[2,0,2] >= 0
+ R5213: - bA_x[2,0,2] + bS_x[3,0,2] - bKS_x[2,0,2] - 2 XOR_Cost_bwd[2,0,2]
    >= -1
- R5150: - bA_x[2,0,2] + bKS_x[2,0,2] + XOR_Cost_bwd[2,0,2] >= 0
- R5151: - 2 Const0 + bA_y[2,0,2] - bS_y[3,0,2] - bKS_y[2,0,2] >= -1
- R5152: Const0 - bA_y[2,0,2] + bKS_y[2,0,2] >= 0
- R5153: - bA_x[2,0,2] + bS_x[3,0,2] + XOR_Cost_bwd[2,0,2] >= 0
- R5154: Const0 - bA_y[2,0,2] + bS_y[3,0,2] >= 0
- R5155: - Const0 + bA_x[2,0,2] - XOR_Cost_bwd[2,0,2] >= 0
- R5156: - Const0 + bA_y[2,0,2] - XOR_Cost_bwd[2,0,2] >= 0
- R5157: XOR_Cost_fwd[2,0,3] >= 0
- R5158: Const0 >= 0
- R5159: - 2 Const0 + fA_x[2,0,3] - fS_x[3,0,3] - fKS_x[2,0,3] >= -1
- R5160: Const0 - fA_x[2,0,3] + fKS_x[2,0,3] >= 0
- R5161: fA_y[2,0,3] - fS_y[3,0,3] - fKS_y[2,0,3] - 2 XOR_Cost_fwd[2,0,3]
+ R5214: - bS_x[3,0,2] + bKS_x[2,0,2] + XOR_Cost_bwd[2,0,2] >= 0
+ R5215: - 2 Const0 - bA_y[2,0,2] + bS_y[3,0,2] - bKS_y[2,0,2] >= -1
+ R5216: Const0 - bS_y[3,0,2] + bKS_y[2,0,2] >= 0
+ R5217: bA_x[2,0,2] - bS_x[3,0,2] + XOR_Cost_bwd[2,0,2] >= 0
+ R5218: Const0 + bA_y[2,0,2] - bS_y[3,0,2] >= 0
+ R5219: - Const0 + bS_x[3,0,2] - XOR_Cost_bwd[2,0,2] >= 0
+ R5220: - Const0 + bS_y[3,0,2] - XOR_Cost_bwd[2,0,2] >= 0
+ R5221: XOR_Cost_fwd[2,0,3] >= 0
+ R5222: Const0 >= 0
+ R5223: - 2 Const0 - fA_x[2,0,3] + fS_x[3,0,3] - fKS_x[2,0,3] >= -1
+ R5224: Const0 - fS_x[3,0,3] + fKS_x[2,0,3] >= 0
+ R5225: - fA_y[2,0,3] + fS_y[3,0,3] - fKS_y[2,0,3] - 2 XOR_Cost_fwd[2,0,3]
    >= -1
- R5162: - fA_y[2,0,3] + fKS_y[2,0,3] + XOR_Cost_fwd[2,0,3] >= 0
- R5163: Const0 - fA_x[2,0,3] + fS_x[3,0,3] >= 0
- R5164: - fA_y[2,0,3] + fS_y[3,0,3] + XOR_Cost_fwd[2,0,3] >= 0
- R5165: - Const0 + fA_x[2,0,3] - XOR_Cost_fwd[2,0,3] >= 0
- R5166: - Const0 + fA_y[2,0,3] - XOR_Cost_fwd[2,0,3] >= 0
- R5167: Const0 >= 0
- R5168: XOR_Cost_bwd[2,0,3] >= 0
- R5169: bA_x[2,0,3] - bS_x[3,0,3] - bKS_x[2,0,3] - 2 XOR_Cost_bwd[2,0,3]
+ R5226: - fS_y[3,0,3] + fKS_y[2,0,3] + XOR_Cost_fwd[2,0,3] >= 0
+ R5227: Const0 + fA_x[2,0,3] - fS_x[3,0,3] >= 0
+ R5228: fA_y[2,0,3] - fS_y[3,0,3] + XOR_Cost_fwd[2,0,3] >= 0
+ R5229: - Const0 + fS_x[3,0,3] - XOR_Cost_fwd[2,0,3] >= 0
+ R5230: - Const0 + fS_y[3,0,3] - XOR_Cost_fwd[2,0,3] >= 0
+ R5231: Const0 >= 0
+ R5232: XOR_Cost_bwd[2,0,3] >= 0
+ R5233: - bA_x[2,0,3] + bS_x[3,0,3] - bKS_x[2,0,3] - 2 XOR_Cost_bwd[2,0,3]
    >= -1
- R5170: - bA_x[2,0,3] + bKS_x[2,0,3] + XOR_Cost_bwd[2,0,3] >= 0
- R5171: - 2 Const0 + bA_y[2,0,3] - bS_y[3,0,3] - bKS_y[2,0,3] >= -1
- R5172: Const0 - bA_y[2,0,3] + bKS_y[2,0,3] >= 0
- R5173: - bA_x[2,0,3] + bS_x[3,0,3] + XOR_Cost_bwd[2,0,3] >= 0
- R5174: Const0 - bA_y[2,0,3] + bS_y[3,0,3] >= 0
- R5175: - Const0 + bA_x[2,0,3] - XOR_Cost_bwd[2,0,3] >= 0
- R5176: - Const0 + bA_y[2,0,3] - XOR_Cost_bwd[2,0,3] >= 0
- R5177: XOR_Cost_fwd[2,1,0] >= 0
- R5178: Const0 >= 0
- R5179: - 2 Const0 + fA_x[2,1,0] - fS_x[3,1,0] - fKS_x[2,1,0] >= -1
- R5180: Const0 - fA_x[2,1,0] + fKS_x[2,1,0] >= 0
- R5181: fA_y[2,1,0] - fS_y[3,1,0] - fKS_y[2,1,0] - 2 XOR_Cost_fwd[2,1,0]
+ R5234: - bS_x[3,0,3] + bKS_x[2,0,3] + XOR_Cost_bwd[2,0,3] >= 0
+ R5235: - 2 Const0 - bA_y[2,0,3] + bS_y[3,0,3] - bKS_y[2,0,3] >= -1
+ R5236: Const0 - bS_y[3,0,3] + bKS_y[2,0,3] >= 0
+ R5237: bA_x[2,0,3] - bS_x[3,0,3] + XOR_Cost_bwd[2,0,3] >= 0
+ R5238: Const0 + bA_y[2,0,3] - bS_y[3,0,3] >= 0
+ R5239: - Const0 + bS_x[3,0,3] - XOR_Cost_bwd[2,0,3] >= 0
+ R5240: - Const0 + bS_y[3,0,3] - XOR_Cost_bwd[2,0,3] >= 0
+ R5241: XOR_Cost_fwd[2,1,0] >= 0
+ R5242: Const0 >= 0
+ R5243: - 2 Const0 - fA_x[2,1,0] + fS_x[3,1,0] - fKS_x[2,1,0] >= -1
+ R5244: Const0 - fS_x[3,1,0] + fKS_x[2,1,0] >= 0
+ R5245: - fA_y[2,1,0] + fS_y[3,1,0] - fKS_y[2,1,0] - 2 XOR_Cost_fwd[2,1,0]
    >= -1
- R5182: - fA_y[2,1,0] + fKS_y[2,1,0] + XOR_Cost_fwd[2,1,0] >= 0
- R5183: Const0 - fA_x[2,1,0] + fS_x[3,1,0] >= 0
- R5184: - fA_y[2,1,0] + fS_y[3,1,0] + XOR_Cost_fwd[2,1,0] >= 0
- R5185: - Const0 + fA_x[2,1,0] - XOR_Cost_fwd[2,1,0] >= 0
- R5186: - Const0 + fA_y[2,1,0] - XOR_Cost_fwd[2,1,0] >= 0
- R5187: Const0 >= 0
- R5188: XOR_Cost_bwd[2,1,0] >= 0
- R5189: bA_x[2,1,0] - bS_x[3,1,0] - bKS_x[2,1,0] - 2 XOR_Cost_bwd[2,1,0]
+ R5246: - fS_y[3,1,0] + fKS_y[2,1,0] + XOR_Cost_fwd[2,1,0] >= 0
+ R5247: Const0 + fA_x[2,1,0] - fS_x[3,1,0] >= 0
+ R5248: fA_y[2,1,0] - fS_y[3,1,0] + XOR_Cost_fwd[2,1,0] >= 0
+ R5249: - Const0 + fS_x[3,1,0] - XOR_Cost_fwd[2,1,0] >= 0
+ R5250: - Const0 + fS_y[3,1,0] - XOR_Cost_fwd[2,1,0] >= 0
+ R5251: Const0 >= 0
+ R5252: XOR_Cost_bwd[2,1,0] >= 0
+ R5253: - bA_x[2,1,0] + bS_x[3,1,0] - bKS_x[2,1,0] - 2 XOR_Cost_bwd[2,1,0]
    >= -1
- R5190: - bA_x[2,1,0] + bKS_x[2,1,0] + XOR_Cost_bwd[2,1,0] >= 0
- R5191: - 2 Const0 + bA_y[2,1,0] - bS_y[3,1,0] - bKS_y[2,1,0] >= -1
- R5192: Const0 - bA_y[2,1,0] + bKS_y[2,1,0] >= 0
- R5193: - bA_x[2,1,0] + bS_x[3,1,0] + XOR_Cost_bwd[2,1,0] >= 0
- R5194: Const0 - bA_y[2,1,0] + bS_y[3,1,0] >= 0
- R5195: - Const0 + bA_x[2,1,0] - XOR_Cost_bwd[2,1,0] >= 0
- R5196: - Const0 + bA_y[2,1,0] - XOR_Cost_bwd[2,1,0] >= 0
- R5197: XOR_Cost_fwd[2,1,1] >= 0
- R5198: Const0 >= 0
- R5199: - 2 Const0 + fA_x[2,1,1] - fS_x[3,1,1] - fKS_x[2,1,1] >= -1
- R5200: Const0 - fA_x[2,1,1] + fKS_x[2,1,1] >= 0
- R5201: fA_y[2,1,1] - fS_y[3,1,1] - fKS_y[2,1,1] - 2 XOR_Cost_fwd[2,1,1]
+ R5254: - bS_x[3,1,0] + bKS_x[2,1,0] + XOR_Cost_bwd[2,1,0] >= 0
+ R5255: - 2 Const0 - bA_y[2,1,0] + bS_y[3,1,0] - bKS_y[2,1,0] >= -1
+ R5256: Const0 - bS_y[3,1,0] + bKS_y[2,1,0] >= 0
+ R5257: bA_x[2,1,0] - bS_x[3,1,0] + XOR_Cost_bwd[2,1,0] >= 0
+ R5258: Const0 + bA_y[2,1,0] - bS_y[3,1,0] >= 0
+ R5259: - Const0 + bS_x[3,1,0] - XOR_Cost_bwd[2,1,0] >= 0
+ R5260: - Const0 + bS_y[3,1,0] - XOR_Cost_bwd[2,1,0] >= 0
+ R5261: XOR_Cost_fwd[2,1,1] >= 0
+ R5262: Const0 >= 0
+ R5263: - 2 Const0 - fA_x[2,1,1] + fS_x[3,1,1] - fKS_x[2,1,1] >= -1
+ R5264: Const0 - fS_x[3,1,1] + fKS_x[2,1,1] >= 0
+ R5265: - fA_y[2,1,1] + fS_y[3,1,1] - fKS_y[2,1,1] - 2 XOR_Cost_fwd[2,1,1]
    >= -1
- R5202: - fA_y[2,1,1] + fKS_y[2,1,1] + XOR_Cost_fwd[2,1,1] >= 0
- R5203: Const0 - fA_x[2,1,1] + fS_x[3,1,1] >= 0
- R5204: - fA_y[2,1,1] + fS_y[3,1,1] + XOR_Cost_fwd[2,1,1] >= 0
- R5205: - Const0 + fA_x[2,1,1] - XOR_Cost_fwd[2,1,1] >= 0
- R5206: - Const0 + fA_y[2,1,1] - XOR_Cost_fwd[2,1,1] >= 0
- R5207: Const0 >= 0
- R5208: XOR_Cost_bwd[2,1,1] >= 0
- R5209: bA_x[2,1,1] - bS_x[3,1,1] - bKS_x[2,1,1] - 2 XOR_Cost_bwd[2,1,1]
+ R5266: - fS_y[3,1,1] + fKS_y[2,1,1] + XOR_Cost_fwd[2,1,1] >= 0
+ R5267: Const0 + fA_x[2,1,1] - fS_x[3,1,1] >= 0
+ R5268: fA_y[2,1,1] - fS_y[3,1,1] + XOR_Cost_fwd[2,1,1] >= 0
+ R5269: - Const0 + fS_x[3,1,1] - XOR_Cost_fwd[2,1,1] >= 0
+ R5270: - Const0 + fS_y[3,1,1] - XOR_Cost_fwd[2,1,1] >= 0
+ R5271: Const0 >= 0
+ R5272: XOR_Cost_bwd[2,1,1] >= 0
+ R5273: - bA_x[2,1,1] + bS_x[3,1,1] - bKS_x[2,1,1] - 2 XOR_Cost_bwd[2,1,1]
    >= -1
- R5210: - bA_x[2,1,1] + bKS_x[2,1,1] + XOR_Cost_bwd[2,1,1] >= 0
- R5211: - 2 Const0 + bA_y[2,1,1] - bS_y[3,1,1] - bKS_y[2,1,1] >= -1
- R5212: Const0 - bA_y[2,1,1] + bKS_y[2,1,1] >= 0
- R5213: - bA_x[2,1,1] + bS_x[3,1,1] + XOR_Cost_bwd[2,1,1] >= 0
- R5214: Const0 - bA_y[2,1,1] + bS_y[3,1,1] >= 0
- R5215: - Const0 + bA_x[2,1,1] - XOR_Cost_bwd[2,1,1] >= 0
- R5216: - Const0 + bA_y[2,1,1] - XOR_Cost_bwd[2,1,1] >= 0
- R5217: XOR_Cost_fwd[2,1,2] >= 0
- R5218: Const0 >= 0
- R5219: - 2 Const0 + fA_x[2,1,2] - fS_x[3,1,2] - fKS_x[2,1,2] >= -1
- R5220: Const0 - fA_x[2,1,2] + fKS_x[2,1,2] >= 0
- R5221: fA_y[2,1,2] - fS_y[3,1,2] - fKS_y[2,1,2] - 2 XOR_Cost_fwd[2,1,2]
+ R5274: - bS_x[3,1,1] + bKS_x[2,1,1] + XOR_Cost_bwd[2,1,1] >= 0
+ R5275: - 2 Const0 - bA_y[2,1,1] + bS_y[3,1,1] - bKS_y[2,1,1] >= -1
+ R5276: Const0 - bS_y[3,1,1] + bKS_y[2,1,1] >= 0
+ R5277: bA_x[2,1,1] - bS_x[3,1,1] + XOR_Cost_bwd[2,1,1] >= 0
+ R5278: Const0 + bA_y[2,1,1] - bS_y[3,1,1] >= 0
+ R5279: - Const0 + bS_x[3,1,1] - XOR_Cost_bwd[2,1,1] >= 0
+ R5280: - Const0 + bS_y[3,1,1] - XOR_Cost_bwd[2,1,1] >= 0
+ R5281: XOR_Cost_fwd[2,1,2] >= 0
+ R5282: Const0 >= 0
+ R5283: - 2 Const0 - fA_x[2,1,2] + fS_x[3,1,2] - fKS_x[2,1,2] >= -1
+ R5284: Const0 - fS_x[3,1,2] + fKS_x[2,1,2] >= 0
+ R5285: - fA_y[2,1,2] + fS_y[3,1,2] - fKS_y[2,1,2] - 2 XOR_Cost_fwd[2,1,2]
    >= -1
- R5222: - fA_y[2,1,2] + fKS_y[2,1,2] + XOR_Cost_fwd[2,1,2] >= 0
- R5223: Const0 - fA_x[2,1,2] + fS_x[3,1,2] >= 0
- R5224: - fA_y[2,1,2] + fS_y[3,1,2] + XOR_Cost_fwd[2,1,2] >= 0
- R5225: - Const0 + fA_x[2,1,2] - XOR_Cost_fwd[2,1,2] >= 0
- R5226: - Const0 + fA_y[2,1,2] - XOR_Cost_fwd[2,1,2] >= 0
- R5227: Const0 >= 0
- R5228: XOR_Cost_bwd[2,1,2] >= 0
- R5229: bA_x[2,1,2] - bS_x[3,1,2] - bKS_x[2,1,2] - 2 XOR_Cost_bwd[2,1,2]
+ R5286: - fS_y[3,1,2] + fKS_y[2,1,2] + XOR_Cost_fwd[2,1,2] >= 0
+ R5287: Const0 + fA_x[2,1,2] - fS_x[3,1,2] >= 0
+ R5288: fA_y[2,1,2] - fS_y[3,1,2] + XOR_Cost_fwd[2,1,2] >= 0
+ R5289: - Const0 + fS_x[3,1,2] - XOR_Cost_fwd[2,1,2] >= 0
+ R5290: - Const0 + fS_y[3,1,2] - XOR_Cost_fwd[2,1,2] >= 0
+ R5291: Const0 >= 0
+ R5292: XOR_Cost_bwd[2,1,2] >= 0
+ R5293: - bA_x[2,1,2] + bS_x[3,1,2] - bKS_x[2,1,2] - 2 XOR_Cost_bwd[2,1,2]
    >= -1
- R5230: - bA_x[2,1,2] + bKS_x[2,1,2] + XOR_Cost_bwd[2,1,2] >= 0
- R5231: - 2 Const0 + bA_y[2,1,2] - bS_y[3,1,2] - bKS_y[2,1,2] >= -1
- R5232: Const0 - bA_y[2,1,2] + bKS_y[2,1,2] >= 0
- R5233: - bA_x[2,1,2] + bS_x[3,1,2] + XOR_Cost_bwd[2,1,2] >= 0
- R5234: Const0 - bA_y[2,1,2] + bS_y[3,1,2] >= 0
- R5235: - Const0 + bA_x[2,1,2] - XOR_Cost_bwd[2,1,2] >= 0
- R5236: - Const0 + bA_y[2,1,2] - XOR_Cost_bwd[2,1,2] >= 0
- R5237: XOR_Cost_fwd[2,1,3] >= 0
- R5238: Const0 >= 0
- R5239: - 2 Const0 + fA_x[2,1,3] - fS_x[3,1,3] - fKS_x[2,1,3] >= -1
- R5240: Const0 - fA_x[2,1,3] + fKS_x[2,1,3] >= 0
- R5241: fA_y[2,1,3] - fS_y[3,1,3] - fKS_y[2,1,3] - 2 XOR_Cost_fwd[2,1,3]
+ R5294: - bS_x[3,1,2] + bKS_x[2,1,2] + XOR_Cost_bwd[2,1,2] >= 0
+ R5295: - 2 Const0 - bA_y[2,1,2] + bS_y[3,1,2] - bKS_y[2,1,2] >= -1
+ R5296: Const0 - bS_y[3,1,2] + bKS_y[2,1,2] >= 0
+ R5297: bA_x[2,1,2] - bS_x[3,1,2] + XOR_Cost_bwd[2,1,2] >= 0
+ R5298: Const0 + bA_y[2,1,2] - bS_y[3,1,2] >= 0
+ R5299: - Const0 + bS_x[3,1,2] - XOR_Cost_bwd[2,1,2] >= 0
+ R5300: - Const0 + bS_y[3,1,2] - XOR_Cost_bwd[2,1,2] >= 0
+ R5301: XOR_Cost_fwd[2,1,3] >= 0
+ R5302: Const0 >= 0
+ R5303: - 2 Const0 - fA_x[2,1,3] + fS_x[3,1,3] - fKS_x[2,1,3] >= -1
+ R5304: Const0 - fS_x[3,1,3] + fKS_x[2,1,3] >= 0
+ R5305: - fA_y[2,1,3] + fS_y[3,1,3] - fKS_y[2,1,3] - 2 XOR_Cost_fwd[2,1,3]
    >= -1
- R5242: - fA_y[2,1,3] + fKS_y[2,1,3] + XOR_Cost_fwd[2,1,3] >= 0
- R5243: Const0 - fA_x[2,1,3] + fS_x[3,1,3] >= 0
- R5244: - fA_y[2,1,3] + fS_y[3,1,3] + XOR_Cost_fwd[2,1,3] >= 0
- R5245: - Const0 + fA_x[2,1,3] - XOR_Cost_fwd[2,1,3] >= 0
- R5246: - Const0 + fA_y[2,1,3] - XOR_Cost_fwd[2,1,3] >= 0
- R5247: Const0 >= 0
- R5248: XOR_Cost_bwd[2,1,3] >= 0
- R5249: bA_x[2,1,3] - bS_x[3,1,3] - bKS_x[2,1,3] - 2 XOR_Cost_bwd[2,1,3]
+ R5306: - fS_y[3,1,3] + fKS_y[2,1,3] + XOR_Cost_fwd[2,1,3] >= 0
+ R5307: Const0 + fA_x[2,1,3] - fS_x[3,1,3] >= 0
+ R5308: fA_y[2,1,3] - fS_y[3,1,3] + XOR_Cost_fwd[2,1,3] >= 0
+ R5309: - Const0 + fS_x[3,1,3] - XOR_Cost_fwd[2,1,3] >= 0
+ R5310: - Const0 + fS_y[3,1,3] - XOR_Cost_fwd[2,1,3] >= 0
+ R5311: Const0 >= 0
+ R5312: XOR_Cost_bwd[2,1,3] >= 0
+ R5313: - bA_x[2,1,3] + bS_x[3,1,3] - bKS_x[2,1,3] - 2 XOR_Cost_bwd[2,1,3]
    >= -1
- R5250: - bA_x[2,1,3] + bKS_x[2,1,3] + XOR_Cost_bwd[2,1,3] >= 0
- R5251: - 2 Const0 + bA_y[2,1,3] - bS_y[3,1,3] - bKS_y[2,1,3] >= -1
- R5252: Const0 - bA_y[2,1,3] + bKS_y[2,1,3] >= 0
- R5253: - bA_x[2,1,3] + bS_x[3,1,3] + XOR_Cost_bwd[2,1,3] >= 0
- R5254: Const0 - bA_y[2,1,3] + bS_y[3,1,3] >= 0
- R5255: - Const0 + bA_x[2,1,3] - XOR_Cost_bwd[2,1,3] >= 0
- R5256: - Const0 + bA_y[2,1,3] - XOR_Cost_bwd[2,1,3] >= 0
- R5257: XOR_Cost_fwd[2,2,0] >= 0
- R5258: Const0 >= 0
- R5259: - 2 Const0 + fA_x[2,2,0] - fS_x[3,2,0] - fKS_x[2,2,0] >= -1
- R5260: Const0 - fA_x[2,2,0] + fKS_x[2,2,0] >= 0
- R5261: fA_y[2,2,0] - fS_y[3,2,0] - fKS_y[2,2,0] - 2 XOR_Cost_fwd[2,2,0]
+ R5314: - bS_x[3,1,3] + bKS_x[2,1,3] + XOR_Cost_bwd[2,1,3] >= 0
+ R5315: - 2 Const0 - bA_y[2,1,3] + bS_y[3,1,3] - bKS_y[2,1,3] >= -1
+ R5316: Const0 - bS_y[3,1,3] + bKS_y[2,1,3] >= 0
+ R5317: bA_x[2,1,3] - bS_x[3,1,3] + XOR_Cost_bwd[2,1,3] >= 0
+ R5318: Const0 + bA_y[2,1,3] - bS_y[3,1,3] >= 0
+ R5319: - Const0 + bS_x[3,1,3] - XOR_Cost_bwd[2,1,3] >= 0
+ R5320: - Const0 + bS_y[3,1,3] - XOR_Cost_bwd[2,1,3] >= 0
+ R5321: XOR_Cost_fwd[2,2,0] >= 0
+ R5322: Const0 >= 0
+ R5323: - 2 Const0 - fA_x[2,2,0] + fS_x[3,2,0] - fKS_x[2,2,0] >= -1
+ R5324: Const0 - fS_x[3,2,0] + fKS_x[2,2,0] >= 0
+ R5325: - fA_y[2,2,0] + fS_y[3,2,0] - fKS_y[2,2,0] - 2 XOR_Cost_fwd[2,2,0]
    >= -1
- R5262: - fA_y[2,2,0] + fKS_y[2,2,0] + XOR_Cost_fwd[2,2,0] >= 0
- R5263: Const0 - fA_x[2,2,0] + fS_x[3,2,0] >= 0
- R5264: - fA_y[2,2,0] + fS_y[3,2,0] + XOR_Cost_fwd[2,2,0] >= 0
- R5265: - Const0 + fA_x[2,2,0] - XOR_Cost_fwd[2,2,0] >= 0
- R5266: - Const0 + fA_y[2,2,0] - XOR_Cost_fwd[2,2,0] >= 0
- R5267: Const0 >= 0
- R5268: XOR_Cost_bwd[2,2,0] >= 0
- R5269: bA_x[2,2,0] - bS_x[3,2,0] - bKS_x[2,2,0] - 2 XOR_Cost_bwd[2,2,0]
+ R5326: - fS_y[3,2,0] + fKS_y[2,2,0] + XOR_Cost_fwd[2,2,0] >= 0
+ R5327: Const0 + fA_x[2,2,0] - fS_x[3,2,0] >= 0
+ R5328: fA_y[2,2,0] - fS_y[3,2,0] + XOR_Cost_fwd[2,2,0] >= 0
+ R5329: - Const0 + fS_x[3,2,0] - XOR_Cost_fwd[2,2,0] >= 0
+ R5330: - Const0 + fS_y[3,2,0] - XOR_Cost_fwd[2,2,0] >= 0
+ R5331: Const0 >= 0
+ R5332: XOR_Cost_bwd[2,2,0] >= 0
+ R5333: - bA_x[2,2,0] + bS_x[3,2,0] - bKS_x[2,2,0] - 2 XOR_Cost_bwd[2,2,0]
    >= -1
- R5270: - bA_x[2,2,0] + bKS_x[2,2,0] + XOR_Cost_bwd[2,2,0] >= 0
- R5271: - 2 Const0 + bA_y[2,2,0] - bS_y[3,2,0] - bKS_y[2,2,0] >= -1
- R5272: Const0 - bA_y[2,2,0] + bKS_y[2,2,0] >= 0
- R5273: - bA_x[2,2,0] + bS_x[3,2,0] + XOR_Cost_bwd[2,2,0] >= 0
- R5274: Const0 - bA_y[2,2,0] + bS_y[3,2,0] >= 0
- R5275: - Const0 + bA_x[2,2,0] - XOR_Cost_bwd[2,2,0] >= 0
- R5276: - Const0 + bA_y[2,2,0] - XOR_Cost_bwd[2,2,0] >= 0
- R5277: XOR_Cost_fwd[2,2,1] >= 0
- R5278: Const0 >= 0
- R5279: - 2 Const0 + fA_x[2,2,1] - fS_x[3,2,1] - fKS_x[2,2,1] >= -1
- R5280: Const0 - fA_x[2,2,1] + fKS_x[2,2,1] >= 0
- R5281: fA_y[2,2,1] - fS_y[3,2,1] - fKS_y[2,2,1] - 2 XOR_Cost_fwd[2,2,1]
+ R5334: - bS_x[3,2,0] + bKS_x[2,2,0] + XOR_Cost_bwd[2,2,0] >= 0
+ R5335: - 2 Const0 - bA_y[2,2,0] + bS_y[3,2,0] - bKS_y[2,2,0] >= -1
+ R5336: Const0 - bS_y[3,2,0] + bKS_y[2,2,0] >= 0
+ R5337: bA_x[2,2,0] - bS_x[3,2,0] + XOR_Cost_bwd[2,2,0] >= 0
+ R5338: Const0 + bA_y[2,2,0] - bS_y[3,2,0] >= 0
+ R5339: - Const0 + bS_x[3,2,0] - XOR_Cost_bwd[2,2,0] >= 0
+ R5340: - Const0 + bS_y[3,2,0] - XOR_Cost_bwd[2,2,0] >= 0
+ R5341: XOR_Cost_fwd[2,2,1] >= 0
+ R5342: Const0 >= 0
+ R5343: - 2 Const0 - fA_x[2,2,1] + fS_x[3,2,1] - fKS_x[2,2,1] >= -1
+ R5344: Const0 - fS_x[3,2,1] + fKS_x[2,2,1] >= 0
+ R5345: - fA_y[2,2,1] + fS_y[3,2,1] - fKS_y[2,2,1] - 2 XOR_Cost_fwd[2,2,1]
    >= -1
- R5282: - fA_y[2,2,1] + fKS_y[2,2,1] + XOR_Cost_fwd[2,2,1] >= 0
- R5283: Const0 - fA_x[2,2,1] + fS_x[3,2,1] >= 0
- R5284: - fA_y[2,2,1] + fS_y[3,2,1] + XOR_Cost_fwd[2,2,1] >= 0
- R5285: - Const0 + fA_x[2,2,1] - XOR_Cost_fwd[2,2,1] >= 0
- R5286: - Const0 + fA_y[2,2,1] - XOR_Cost_fwd[2,2,1] >= 0
- R5287: Const0 >= 0
- R5288: XOR_Cost_bwd[2,2,1] >= 0
- R5289: bA_x[2,2,1] - bS_x[3,2,1] - bKS_x[2,2,1] - 2 XOR_Cost_bwd[2,2,1]
+ R5346: - fS_y[3,2,1] + fKS_y[2,2,1] + XOR_Cost_fwd[2,2,1] >= 0
+ R5347: Const0 + fA_x[2,2,1] - fS_x[3,2,1] >= 0
+ R5348: fA_y[2,2,1] - fS_y[3,2,1] + XOR_Cost_fwd[2,2,1] >= 0
+ R5349: - Const0 + fS_x[3,2,1] - XOR_Cost_fwd[2,2,1] >= 0
+ R5350: - Const0 + fS_y[3,2,1] - XOR_Cost_fwd[2,2,1] >= 0
+ R5351: Const0 >= 0
+ R5352: XOR_Cost_bwd[2,2,1] >= 0
+ R5353: - bA_x[2,2,1] + bS_x[3,2,1] - bKS_x[2,2,1] - 2 XOR_Cost_bwd[2,2,1]
    >= -1
- R5290: - bA_x[2,2,1] + bKS_x[2,2,1] + XOR_Cost_bwd[2,2,1] >= 0
- R5291: - 2 Const0 + bA_y[2,2,1] - bS_y[3,2,1] - bKS_y[2,2,1] >= -1
- R5292: Const0 - bA_y[2,2,1] + bKS_y[2,2,1] >= 0
- R5293: - bA_x[2,2,1] + bS_x[3,2,1] + XOR_Cost_bwd[2,2,1] >= 0
- R5294: Const0 - bA_y[2,2,1] + bS_y[3,2,1] >= 0
- R5295: - Const0 + bA_x[2,2,1] - XOR_Cost_bwd[2,2,1] >= 0
- R5296: - Const0 + bA_y[2,2,1] - XOR_Cost_bwd[2,2,1] >= 0
- R5297: XOR_Cost_fwd[2,2,2] >= 0
- R5298: Const0 >= 0
- R5299: - 2 Const0 + fA_x[2,2,2] - fS_x[3,2,2] - fKS_x[2,2,2] >= -1
- R5300: Const0 - fA_x[2,2,2] + fKS_x[2,2,2] >= 0
- R5301: fA_y[2,2,2] - fS_y[3,2,2] - fKS_y[2,2,2] - 2 XOR_Cost_fwd[2,2,2]
+ R5354: - bS_x[3,2,1] + bKS_x[2,2,1] + XOR_Cost_bwd[2,2,1] >= 0
+ R5355: - 2 Const0 - bA_y[2,2,1] + bS_y[3,2,1] - bKS_y[2,2,1] >= -1
+ R5356: Const0 - bS_y[3,2,1] + bKS_y[2,2,1] >= 0
+ R5357: bA_x[2,2,1] - bS_x[3,2,1] + XOR_Cost_bwd[2,2,1] >= 0
+ R5358: Const0 + bA_y[2,2,1] - bS_y[3,2,1] >= 0
+ R5359: - Const0 + bS_x[3,2,1] - XOR_Cost_bwd[2,2,1] >= 0
+ R5360: - Const0 + bS_y[3,2,1] - XOR_Cost_bwd[2,2,1] >= 0
+ R5361: XOR_Cost_fwd[2,2,2] >= 0
+ R5362: Const0 >= 0
+ R5363: - 2 Const0 - fA_x[2,2,2] + fS_x[3,2,2] - fKS_x[2,2,2] >= -1
+ R5364: Const0 - fS_x[3,2,2] + fKS_x[2,2,2] >= 0
+ R5365: - fA_y[2,2,2] + fS_y[3,2,2] - fKS_y[2,2,2] - 2 XOR_Cost_fwd[2,2,2]
    >= -1
- R5302: - fA_y[2,2,2] + fKS_y[2,2,2] + XOR_Cost_fwd[2,2,2] >= 0
- R5303: Const0 - fA_x[2,2,2] + fS_x[3,2,2] >= 0
- R5304: - fA_y[2,2,2] + fS_y[3,2,2] + XOR_Cost_fwd[2,2,2] >= 0
- R5305: - Const0 + fA_x[2,2,2] - XOR_Cost_fwd[2,2,2] >= 0
- R5306: - Const0 + fA_y[2,2,2] - XOR_Cost_fwd[2,2,2] >= 0
- R5307: Const0 >= 0
- R5308: XOR_Cost_bwd[2,2,2] >= 0
- R5309: bA_x[2,2,2] - bS_x[3,2,2] - bKS_x[2,2,2] - 2 XOR_Cost_bwd[2,2,2]
+ R5366: - fS_y[3,2,2] + fKS_y[2,2,2] + XOR_Cost_fwd[2,2,2] >= 0
+ R5367: Const0 + fA_x[2,2,2] - fS_x[3,2,2] >= 0
+ R5368: fA_y[2,2,2] - fS_y[3,2,2] + XOR_Cost_fwd[2,2,2] >= 0
+ R5369: - Const0 + fS_x[3,2,2] - XOR_Cost_fwd[2,2,2] >= 0
+ R5370: - Const0 + fS_y[3,2,2] - XOR_Cost_fwd[2,2,2] >= 0
+ R5371: Const0 >= 0
+ R5372: XOR_Cost_bwd[2,2,2] >= 0
+ R5373: - bA_x[2,2,2] + bS_x[3,2,2] - bKS_x[2,2,2] - 2 XOR_Cost_bwd[2,2,2]
    >= -1
- R5310: - bA_x[2,2,2] + bKS_x[2,2,2] + XOR_Cost_bwd[2,2,2] >= 0
- R5311: - 2 Const0 + bA_y[2,2,2] - bS_y[3,2,2] - bKS_y[2,2,2] >= -1
- R5312: Const0 - bA_y[2,2,2] + bKS_y[2,2,2] >= 0
- R5313: - bA_x[2,2,2] + bS_x[3,2,2] + XOR_Cost_bwd[2,2,2] >= 0
- R5314: Const0 - bA_y[2,2,2] + bS_y[3,2,2] >= 0
- R5315: - Const0 + bA_x[2,2,2] - XOR_Cost_bwd[2,2,2] >= 0
- R5316: - Const0 + bA_y[2,2,2] - XOR_Cost_bwd[2,2,2] >= 0
- R5317: XOR_Cost_fwd[2,2,3] >= 0
- R5318: Const0 >= 0
- R5319: - 2 Const0 + fA_x[2,2,3] - fS_x[3,2,3] - fKS_x[2,2,3] >= -1
- R5320: Const0 - fA_x[2,2,3] + fKS_x[2,2,3] >= 0
- R5321: fA_y[2,2,3] - fS_y[3,2,3] - fKS_y[2,2,3] - 2 XOR_Cost_fwd[2,2,3]
+ R5374: - bS_x[3,2,2] + bKS_x[2,2,2] + XOR_Cost_bwd[2,2,2] >= 0
+ R5375: - 2 Const0 - bA_y[2,2,2] + bS_y[3,2,2] - bKS_y[2,2,2] >= -1
+ R5376: Const0 - bS_y[3,2,2] + bKS_y[2,2,2] >= 0
+ R5377: bA_x[2,2,2] - bS_x[3,2,2] + XOR_Cost_bwd[2,2,2] >= 0
+ R5378: Const0 + bA_y[2,2,2] - bS_y[3,2,2] >= 0
+ R5379: - Const0 + bS_x[3,2,2] - XOR_Cost_bwd[2,2,2] >= 0
+ R5380: - Const0 + bS_y[3,2,2] - XOR_Cost_bwd[2,2,2] >= 0
+ R5381: XOR_Cost_fwd[2,2,3] >= 0
+ R5382: Const0 >= 0
+ R5383: - 2 Const0 - fA_x[2,2,3] + fS_x[3,2,3] - fKS_x[2,2,3] >= -1
+ R5384: Const0 - fS_x[3,2,3] + fKS_x[2,2,3] >= 0
+ R5385: - fA_y[2,2,3] + fS_y[3,2,3] - fKS_y[2,2,3] - 2 XOR_Cost_fwd[2,2,3]
    >= -1
- R5322: - fA_y[2,2,3] + fKS_y[2,2,3] + XOR_Cost_fwd[2,2,3] >= 0
- R5323: Const0 - fA_x[2,2,3] + fS_x[3,2,3] >= 0
- R5324: - fA_y[2,2,3] + fS_y[3,2,3] + XOR_Cost_fwd[2,2,3] >= 0
- R5325: - Const0 + fA_x[2,2,3] - XOR_Cost_fwd[2,2,3] >= 0
- R5326: - Const0 + fA_y[2,2,3] - XOR_Cost_fwd[2,2,3] >= 0
- R5327: Const0 >= 0
- R5328: XOR_Cost_bwd[2,2,3] >= 0
- R5329: bA_x[2,2,3] - bS_x[3,2,3] - bKS_x[2,2,3] - 2 XOR_Cost_bwd[2,2,3]
+ R5386: - fS_y[3,2,3] + fKS_y[2,2,3] + XOR_Cost_fwd[2,2,3] >= 0
+ R5387: Const0 + fA_x[2,2,3] - fS_x[3,2,3] >= 0
+ R5388: fA_y[2,2,3] - fS_y[3,2,3] + XOR_Cost_fwd[2,2,3] >= 0
+ R5389: - Const0 + fS_x[3,2,3] - XOR_Cost_fwd[2,2,3] >= 0
+ R5390: - Const0 + fS_y[3,2,3] - XOR_Cost_fwd[2,2,3] >= 0
+ R5391: Const0 >= 0
+ R5392: XOR_Cost_bwd[2,2,3] >= 0
+ R5393: - bA_x[2,2,3] + bS_x[3,2,3] - bKS_x[2,2,3] - 2 XOR_Cost_bwd[2,2,3]
    >= -1
- R5330: - bA_x[2,2,3] + bKS_x[2,2,3] + XOR_Cost_bwd[2,2,3] >= 0
- R5331: - 2 Const0 + bA_y[2,2,3] - bS_y[3,2,3] - bKS_y[2,2,3] >= -1
- R5332: Const0 - bA_y[2,2,3] + bKS_y[2,2,3] >= 0
- R5333: - bA_x[2,2,3] + bS_x[3,2,3] + XOR_Cost_bwd[2,2,3] >= 0
- R5334: Const0 - bA_y[2,2,3] + bS_y[3,2,3] >= 0
- R5335: - Const0 + bA_x[2,2,3] - XOR_Cost_bwd[2,2,3] >= 0
- R5336: - Const0 + bA_y[2,2,3] - XOR_Cost_bwd[2,2,3] >= 0
- R5337: XOR_Cost_fwd[2,3,0] >= 0
- R5338: Const0 >= 0
- R5339: - 2 Const0 + fA_x[2,3,0] - fS_x[3,3,0] - fKS_x[2,3,0] >= -1
- R5340: Const0 - fA_x[2,3,0] + fKS_x[2,3,0] >= 0
- R5341: fA_y[2,3,0] - fS_y[3,3,0] - fKS_y[2,3,0] - 2 XOR_Cost_fwd[2,3,0]
+ R5394: - bS_x[3,2,3] + bKS_x[2,2,3] + XOR_Cost_bwd[2,2,3] >= 0
+ R5395: - 2 Const0 - bA_y[2,2,3] + bS_y[3,2,3] - bKS_y[2,2,3] >= -1
+ R5396: Const0 - bS_y[3,2,3] + bKS_y[2,2,3] >= 0
+ R5397: bA_x[2,2,3] - bS_x[3,2,3] + XOR_Cost_bwd[2,2,3] >= 0
+ R5398: Const0 + bA_y[2,2,3] - bS_y[3,2,3] >= 0
+ R5399: - Const0 + bS_x[3,2,3] - XOR_Cost_bwd[2,2,3] >= 0
+ R5400: - Const0 + bS_y[3,2,3] - XOR_Cost_bwd[2,2,3] >= 0
+ R5401: XOR_Cost_fwd[2,3,0] >= 0
+ R5402: Const0 >= 0
+ R5403: - 2 Const0 - fA_x[2,3,0] + fS_x[3,3,0] - fKS_x[2,3,0] >= -1
+ R5404: Const0 - fS_x[3,3,0] + fKS_x[2,3,0] >= 0
+ R5405: - fA_y[2,3,0] + fS_y[3,3,0] - fKS_y[2,3,0] - 2 XOR_Cost_fwd[2,3,0]
    >= -1
- R5342: - fA_y[2,3,0] + fKS_y[2,3,0] + XOR_Cost_fwd[2,3,0] >= 0
- R5343: Const0 - fA_x[2,3,0] + fS_x[3,3,0] >= 0
- R5344: - fA_y[2,3,0] + fS_y[3,3,0] + XOR_Cost_fwd[2,3,0] >= 0
- R5345: - Const0 + fA_x[2,3,0] - XOR_Cost_fwd[2,3,0] >= 0
- R5346: - Const0 + fA_y[2,3,0] - XOR_Cost_fwd[2,3,0] >= 0
- R5347: Const0 >= 0
- R5348: XOR_Cost_bwd[2,3,0] >= 0
- R5349: bA_x[2,3,0] - bS_x[3,3,0] - bKS_x[2,3,0] - 2 XOR_Cost_bwd[2,3,0]
+ R5406: - fS_y[3,3,0] + fKS_y[2,3,0] + XOR_Cost_fwd[2,3,0] >= 0
+ R5407: Const0 + fA_x[2,3,0] - fS_x[3,3,0] >= 0
+ R5408: fA_y[2,3,0] - fS_y[3,3,0] + XOR_Cost_fwd[2,3,0] >= 0
+ R5409: - Const0 + fS_x[3,3,0] - XOR_Cost_fwd[2,3,0] >= 0
+ R5410: - Const0 + fS_y[3,3,0] - XOR_Cost_fwd[2,3,0] >= 0
+ R5411: Const0 >= 0
+ R5412: XOR_Cost_bwd[2,3,0] >= 0
+ R5413: - bA_x[2,3,0] + bS_x[3,3,0] - bKS_x[2,3,0] - 2 XOR_Cost_bwd[2,3,0]
    >= -1
- R5350: - bA_x[2,3,0] + bKS_x[2,3,0] + XOR_Cost_bwd[2,3,0] >= 0
- R5351: - 2 Const0 + bA_y[2,3,0] - bS_y[3,3,0] - bKS_y[2,3,0] >= -1
- R5352: Const0 - bA_y[2,3,0] + bKS_y[2,3,0] >= 0
- R5353: - bA_x[2,3,0] + bS_x[3,3,0] + XOR_Cost_bwd[2,3,0] >= 0
- R5354: Const0 - bA_y[2,3,0] + bS_y[3,3,0] >= 0
- R5355: - Const0 + bA_x[2,3,0] - XOR_Cost_bwd[2,3,0] >= 0
- R5356: - Const0 + bA_y[2,3,0] - XOR_Cost_bwd[2,3,0] >= 0
- R5357: XOR_Cost_fwd[2,3,1] >= 0
- R5358: Const0 >= 0
- R5359: - 2 Const0 + fA_x[2,3,1] - fS_x[3,3,1] - fKS_x[2,3,1] >= -1
- R5360: Const0 - fA_x[2,3,1] + fKS_x[2,3,1] >= 0
- R5361: fA_y[2,3,1] - fS_y[3,3,1] - fKS_y[2,3,1] - 2 XOR_Cost_fwd[2,3,1]
+ R5414: - bS_x[3,3,0] + bKS_x[2,3,0] + XOR_Cost_bwd[2,3,0] >= 0
+ R5415: - 2 Const0 - bA_y[2,3,0] + bS_y[3,3,0] - bKS_y[2,3,0] >= -1
+ R5416: Const0 - bS_y[3,3,0] + bKS_y[2,3,0] >= 0
+ R5417: bA_x[2,3,0] - bS_x[3,3,0] + XOR_Cost_bwd[2,3,0] >= 0
+ R5418: Const0 + bA_y[2,3,0] - bS_y[3,3,0] >= 0
+ R5419: - Const0 + bS_x[3,3,0] - XOR_Cost_bwd[2,3,0] >= 0
+ R5420: - Const0 + bS_y[3,3,0] - XOR_Cost_bwd[2,3,0] >= 0
+ R5421: XOR_Cost_fwd[2,3,1] >= 0
+ R5422: Const0 >= 0
+ R5423: - 2 Const0 - fA_x[2,3,1] + fS_x[3,3,1] - fKS_x[2,3,1] >= -1
+ R5424: Const0 - fS_x[3,3,1] + fKS_x[2,3,1] >= 0
+ R5425: - fA_y[2,3,1] + fS_y[3,3,1] - fKS_y[2,3,1] - 2 XOR_Cost_fwd[2,3,1]
    >= -1
- R5362: - fA_y[2,3,1] + fKS_y[2,3,1] + XOR_Cost_fwd[2,3,1] >= 0
- R5363: Const0 - fA_x[2,3,1] + fS_x[3,3,1] >= 0
- R5364: - fA_y[2,3,1] + fS_y[3,3,1] + XOR_Cost_fwd[2,3,1] >= 0
- R5365: - Const0 + fA_x[2,3,1] - XOR_Cost_fwd[2,3,1] >= 0
- R5366: - Const0 + fA_y[2,3,1] - XOR_Cost_fwd[2,3,1] >= 0
- R5367: Const0 >= 0
- R5368: XOR_Cost_bwd[2,3,1] >= 0
- R5369: bA_x[2,3,1] - bS_x[3,3,1] - bKS_x[2,3,1] - 2 XOR_Cost_bwd[2,3,1]
+ R5426: - fS_y[3,3,1] + fKS_y[2,3,1] + XOR_Cost_fwd[2,3,1] >= 0
+ R5427: Const0 + fA_x[2,3,1] - fS_x[3,3,1] >= 0
+ R5428: fA_y[2,3,1] - fS_y[3,3,1] + XOR_Cost_fwd[2,3,1] >= 0
+ R5429: - Const0 + fS_x[3,3,1] - XOR_Cost_fwd[2,3,1] >= 0
+ R5430: - Const0 + fS_y[3,3,1] - XOR_Cost_fwd[2,3,1] >= 0
+ R5431: Const0 >= 0
+ R5432: XOR_Cost_bwd[2,3,1] >= 0
+ R5433: - bA_x[2,3,1] + bS_x[3,3,1] - bKS_x[2,3,1] - 2 XOR_Cost_bwd[2,3,1]
    >= -1
- R5370: - bA_x[2,3,1] + bKS_x[2,3,1] + XOR_Cost_bwd[2,3,1] >= 0
- R5371: - 2 Const0 + bA_y[2,3,1] - bS_y[3,3,1] - bKS_y[2,3,1] >= -1
- R5372: Const0 - bA_y[2,3,1] + bKS_y[2,3,1] >= 0
- R5373: - bA_x[2,3,1] + bS_x[3,3,1] + XOR_Cost_bwd[2,3,1] >= 0
- R5374: Const0 - bA_y[2,3,1] + bS_y[3,3,1] >= 0
- R5375: - Const0 + bA_x[2,3,1] - XOR_Cost_bwd[2,3,1] >= 0
- R5376: - Const0 + bA_y[2,3,1] - XOR_Cost_bwd[2,3,1] >= 0
- R5377: XOR_Cost_fwd[2,3,2] >= 0
- R5378: Const0 >= 0
- R5379: - 2 Const0 + fA_x[2,3,2] - fS_x[3,3,2] - fKS_x[2,3,2] >= -1
- R5380: Const0 - fA_x[2,3,2] + fKS_x[2,3,2] >= 0
- R5381: fA_y[2,3,2] - fS_y[3,3,2] - fKS_y[2,3,2] - 2 XOR_Cost_fwd[2,3,2]
+ R5434: - bS_x[3,3,1] + bKS_x[2,3,1] + XOR_Cost_bwd[2,3,1] >= 0
+ R5435: - 2 Const0 - bA_y[2,3,1] + bS_y[3,3,1] - bKS_y[2,3,1] >= -1
+ R5436: Const0 - bS_y[3,3,1] + bKS_y[2,3,1] >= 0
+ R5437: bA_x[2,3,1] - bS_x[3,3,1] + XOR_Cost_bwd[2,3,1] >= 0
+ R5438: Const0 + bA_y[2,3,1] - bS_y[3,3,1] >= 0
+ R5439: - Const0 + bS_x[3,3,1] - XOR_Cost_bwd[2,3,1] >= 0
+ R5440: - Const0 + bS_y[3,3,1] - XOR_Cost_bwd[2,3,1] >= 0
+ R5441: XOR_Cost_fwd[2,3,2] >= 0
+ R5442: Const0 >= 0
+ R5443: - 2 Const0 - fA_x[2,3,2] + fS_x[3,3,2] - fKS_x[2,3,2] >= -1
+ R5444: Const0 - fS_x[3,3,2] + fKS_x[2,3,2] >= 0
+ R5445: - fA_y[2,3,2] + fS_y[3,3,2] - fKS_y[2,3,2] - 2 XOR_Cost_fwd[2,3,2]
    >= -1
- R5382: - fA_y[2,3,2] + fKS_y[2,3,2] + XOR_Cost_fwd[2,3,2] >= 0
- R5383: Const0 - fA_x[2,3,2] + fS_x[3,3,2] >= 0
- R5384: - fA_y[2,3,2] + fS_y[3,3,2] + XOR_Cost_fwd[2,3,2] >= 0
- R5385: - Const0 + fA_x[2,3,2] - XOR_Cost_fwd[2,3,2] >= 0
- R5386: - Const0 + fA_y[2,3,2] - XOR_Cost_fwd[2,3,2] >= 0
- R5387: Const0 >= 0
- R5388: XOR_Cost_bwd[2,3,2] >= 0
- R5389: bA_x[2,3,2] - bS_x[3,3,2] - bKS_x[2,3,2] - 2 XOR_Cost_bwd[2,3,2]
+ R5446: - fS_y[3,3,2] + fKS_y[2,3,2] + XOR_Cost_fwd[2,3,2] >= 0
+ R5447: Const0 + fA_x[2,3,2] - fS_x[3,3,2] >= 0
+ R5448: fA_y[2,3,2] - fS_y[3,3,2] + XOR_Cost_fwd[2,3,2] >= 0
+ R5449: - Const0 + fS_x[3,3,2] - XOR_Cost_fwd[2,3,2] >= 0
+ R5450: - Const0 + fS_y[3,3,2] - XOR_Cost_fwd[2,3,2] >= 0
+ R5451: Const0 >= 0
+ R5452: XOR_Cost_bwd[2,3,2] >= 0
+ R5453: - bA_x[2,3,2] + bS_x[3,3,2] - bKS_x[2,3,2] - 2 XOR_Cost_bwd[2,3,2]
    >= -1
- R5390: - bA_x[2,3,2] + bKS_x[2,3,2] + XOR_Cost_bwd[2,3,2] >= 0
- R5391: - 2 Const0 + bA_y[2,3,2] - bS_y[3,3,2] - bKS_y[2,3,2] >= -1
- R5392: Const0 - bA_y[2,3,2] + bKS_y[2,3,2] >= 0
- R5393: - bA_x[2,3,2] + bS_x[3,3,2] + XOR_Cost_bwd[2,3,2] >= 0
- R5394: Const0 - bA_y[2,3,2] + bS_y[3,3,2] >= 0
- R5395: - Const0 + bA_x[2,3,2] - XOR_Cost_bwd[2,3,2] >= 0
- R5396: - Const0 + bA_y[2,3,2] - XOR_Cost_bwd[2,3,2] >= 0
- R5397: XOR_Cost_fwd[2,3,3] >= 0
- R5398: Const0 >= 0
- R5399: - 2 Const0 + fA_x[2,3,3] - fS_x[3,3,3] - fKS_x[2,3,3] >= -1
- R5400: Const0 - fA_x[2,3,3] + fKS_x[2,3,3] >= 0
- R5401: fA_y[2,3,3] - fS_y[3,3,3] - fKS_y[2,3,3] - 2 XOR_Cost_fwd[2,3,3]
+ R5454: - bS_x[3,3,2] + bKS_x[2,3,2] + XOR_Cost_bwd[2,3,2] >= 0
+ R5455: - 2 Const0 - bA_y[2,3,2] + bS_y[3,3,2] - bKS_y[2,3,2] >= -1
+ R5456: Const0 - bS_y[3,3,2] + bKS_y[2,3,2] >= 0
+ R5457: bA_x[2,3,2] - bS_x[3,3,2] + XOR_Cost_bwd[2,3,2] >= 0
+ R5458: Const0 + bA_y[2,3,2] - bS_y[3,3,2] >= 0
+ R5459: - Const0 + bS_x[3,3,2] - XOR_Cost_bwd[2,3,2] >= 0
+ R5460: - Const0 + bS_y[3,3,2] - XOR_Cost_bwd[2,3,2] >= 0
+ R5461: XOR_Cost_fwd[2,3,3] >= 0
+ R5462: Const0 >= 0
+ R5463: - 2 Const0 - fA_x[2,3,3] + fS_x[3,3,3] - fKS_x[2,3,3] >= -1
+ R5464: Const0 - fS_x[3,3,3] + fKS_x[2,3,3] >= 0
+ R5465: - fA_y[2,3,3] + fS_y[3,3,3] - fKS_y[2,3,3] - 2 XOR_Cost_fwd[2,3,3]
    >= -1
- R5402: - fA_y[2,3,3] + fKS_y[2,3,3] + XOR_Cost_fwd[2,3,3] >= 0
- R5403: Const0 - fA_x[2,3,3] + fS_x[3,3,3] >= 0
- R5404: - fA_y[2,3,3] + fS_y[3,3,3] + XOR_Cost_fwd[2,3,3] >= 0
- R5405: - Const0 + fA_x[2,3,3] - XOR_Cost_fwd[2,3,3] >= 0
- R5406: - Const0 + fA_y[2,3,3] - XOR_Cost_fwd[2,3,3] >= 0
- R5407: Const0 >= 0
- R5408: XOR_Cost_bwd[2,3,3] >= 0
- R5409: bA_x[2,3,3] - bS_x[3,3,3] - bKS_x[2,3,3] - 2 XOR_Cost_bwd[2,3,3]
+ R5466: - fS_y[3,3,3] + fKS_y[2,3,3] + XOR_Cost_fwd[2,3,3] >= 0
+ R5467: Const0 + fA_x[2,3,3] - fS_x[3,3,3] >= 0
+ R5468: fA_y[2,3,3] - fS_y[3,3,3] + XOR_Cost_fwd[2,3,3] >= 0
+ R5469: - Const0 + fS_x[3,3,3] - XOR_Cost_fwd[2,3,3] >= 0
+ R5470: - Const0 + fS_y[3,3,3] - XOR_Cost_fwd[2,3,3] >= 0
+ R5471: Const0 >= 0
+ R5472: XOR_Cost_bwd[2,3,3] >= 0
+ R5473: - bA_x[2,3,3] + bS_x[3,3,3] - bKS_x[2,3,3] - 2 XOR_Cost_bwd[2,3,3]
    >= -1
- R5410: - bA_x[2,3,3] + bKS_x[2,3,3] + XOR_Cost_bwd[2,3,3] >= 0
- R5411: - 2 Const0 + bA_y[2,3,3] - bS_y[3,3,3] - bKS_y[2,3,3] >= -1
- R5412: Const0 - bA_y[2,3,3] + bKS_y[2,3,3] >= 0
- R5413: - bA_x[2,3,3] + bS_x[3,3,3] + XOR_Cost_bwd[2,3,3] >= 0
- R5414: Const0 - bA_y[2,3,3] + bS_y[3,3,3] >= 0
- R5415: - Const0 + bA_x[2,3,3] - XOR_Cost_bwd[2,3,3] >= 0
- R5416: - Const0 + bA_y[2,3,3] - XOR_Cost_bwd[2,3,3] >= 0
- R5417: fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0]
-   + 4 fA_col_u[2,0] <= 4
- R5418: fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0] + fA_x[2,0,0]
-   + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0] - 5 fA_col_v[2,0] <= 3
- R5419: fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0] + fA_x[2,0,0]
-   + fA_x[2,1,0] + fA_x[2,2,0] + fA_x[2,3,0] - 8 fA_col_v[2,0] >= 0
- R5420: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0]
-   + 4 fA_col_u[2,0] <= 4
- R5421: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0] + fA_y[2,0,0]
-   + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0] - 5 fA_col_w[2,0] <= 3
- R5422: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0] + fA_y[2,0,0]
-   + fA_y[2,1,0] + fA_y[2,2,0] + fA_y[2,3,0] - 8 fA_col_w[2,0] >= 0
- R5423: - Const0 + fM_x[2,0,0] + fM_x[2,1,0] + fM_x[2,2,0] + fM_x[2,3,0]
-   - 4 fA_col_v[2,0] = 0
- R5424: fM_y[2,0,0] + fM_y[2,1,0] + fM_y[2,2,0] + fM_y[2,3,0]
-   - 4 fA_col_w[2,0] - MC_Cost_fwd[2,0] = 0
- R5425: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0]
-   + 4 bA_col_u[2,0] <= 4
- R5426: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0] + bA_x[2,0,0]
-   + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0] - 5 bA_col_v[2,0] <= 3
- R5427: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0] + bA_x[2,0,0]
-   + bA_x[2,1,0] + bA_x[2,2,0] + bA_x[2,3,0] - 8 bA_col_v[2,0] >= 0
- R5428: bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0]
-   + 4 bA_col_u[2,0] <= 4
- R5429: bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0] + bA_y[2,0,0]
-   + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0] - 5 bA_col_w[2,0] <= 3
- R5430: bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0] + bA_y[2,0,0]
-   + bA_y[2,1,0] + bA_y[2,2,0] + bA_y[2,3,0] - 8 bA_col_w[2,0] >= 0
- R5431: bM_x[2,0,0] + bM_x[2,1,0] + bM_x[2,2,0] + bM_x[2,3,0]
-   - 4 bA_col_v[2,0] - MC_Cost_bwd[2,0] = 0
- R5432: - Const0 + bM_y[2,0,0] + bM_y[2,1,0] + bM_y[2,2,0] + bM_y[2,3,0]
-   - 4 bA_col_w[2,0] = 0
- R5433: fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1]
-   + 4 fA_col_u[2,1] <= 4
- R5434: fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1] + fA_x[2,0,1]
-   + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1] - 5 fA_col_v[2,1] <= 3
- R5435: fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1] + fA_x[2,0,1]
-   + fA_x[2,1,1] + fA_x[2,2,1] + fA_x[2,3,1] - 8 fA_col_v[2,1] >= 0
- R5436: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1]
-   + 4 fA_col_u[2,1] <= 4
- R5437: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1] + fA_y[2,0,1]
-   + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1] - 5 fA_col_w[2,1] <= 3
- R5438: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1] + fA_y[2,0,1]
-   + fA_y[2,1,1] + fA_y[2,2,1] + fA_y[2,3,1] - 8 fA_col_w[2,1] >= 0
- R5439: - Const0 + fM_x[2,0,1] + fM_x[2,1,1] + fM_x[2,2,1] + fM_x[2,3,1]
-   - 4 fA_col_v[2,1] = 0
- R5440: fM_y[2,0,1] + fM_y[2,1,1] + fM_y[2,2,1] + fM_y[2,3,1]
-   - 4 fA_col_w[2,1] - MC_Cost_fwd[2,1] = 0
- R5441: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1]
-   + 4 bA_col_u[2,1] <= 4
- R5442: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1] + bA_x[2,0,1]
-   + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1] - 5 bA_col_v[2,1] <= 3
- R5443: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1] + bA_x[2,0,1]
-   + bA_x[2,1,1] + bA_x[2,2,1] + bA_x[2,3,1] - 8 bA_col_v[2,1] >= 0
- R5444: bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1]
-   + 4 bA_col_u[2,1] <= 4
- R5445: bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1] + bA_y[2,0,1]
-   + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1] - 5 bA_col_w[2,1] <= 3
- R5446: bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1] + bA_y[2,0,1]
-   + bA_y[2,1,1] + bA_y[2,2,1] + bA_y[2,3,1] - 8 bA_col_w[2,1] >= 0
- R5447: bM_x[2,0,1] + bM_x[2,1,1] + bM_x[2,2,1] + bM_x[2,3,1]
-   - 4 bA_col_v[2,1] - MC_Cost_bwd[2,1] = 0
- R5448: - Const0 + bM_y[2,0,1] + bM_y[2,1,1] + bM_y[2,2,1] + bM_y[2,3,1]
-   - 4 bA_col_w[2,1] = 0
- R5449: fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2]
-   + 4 fA_col_u[2,2] <= 4
- R5450: fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2] + fA_x[2,0,2]
-   + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2] - 5 fA_col_v[2,2] <= 3
- R5451: fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2] + fA_x[2,0,2]
-   + fA_x[2,1,2] + fA_x[2,2,2] + fA_x[2,3,2] - 8 fA_col_v[2,2] >= 0
- R5452: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2]
-   + 4 fA_col_u[2,2] <= 4
- R5453: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2] + fA_y[2,0,2]
-   + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2] - 5 fA_col_w[2,2] <= 3
- R5454: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2] + fA_y[2,0,2]
-   + fA_y[2,1,2] + fA_y[2,2,2] + fA_y[2,3,2] - 8 fA_col_w[2,2] >= 0
- R5455: - Const0 + fM_x[2,0,2] + fM_x[2,1,2] + fM_x[2,2,2] + fM_x[2,3,2]
-   - 4 fA_col_v[2,2] = 0
- R5456: fM_y[2,0,2] + fM_y[2,1,2] + fM_y[2,2,2] + fM_y[2,3,2]
-   - 4 fA_col_w[2,2] - MC_Cost_fwd[2,2] = 0
- R5457: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2]
-   + 4 bA_col_u[2,2] <= 4
- R5458: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2] + bA_x[2,0,2]
-   + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2] - 5 bA_col_v[2,2] <= 3
- R5459: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2] + bA_x[2,0,2]
-   + bA_x[2,1,2] + bA_x[2,2,2] + bA_x[2,3,2] - 8 bA_col_v[2,2] >= 0
- R5460: bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2]
-   + 4 bA_col_u[2,2] <= 4
- R5461: bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2] + bA_y[2,0,2]
-   + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2] - 5 bA_col_w[2,2] <= 3
- R5462: bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2] + bA_y[2,0,2]
-   + bA_y[2,1,2] + bA_y[2,2,2] + bA_y[2,3,2] - 8 bA_col_w[2,2] >= 0
- R5463: bM_x[2,0,2] + bM_x[2,1,2] + bM_x[2,2,2] + bM_x[2,3,2]
-   - 4 bA_col_v[2,2] - MC_Cost_bwd[2,2] = 0
- R5464: - Const0 + bM_y[2,0,2] + bM_y[2,1,2] + bM_y[2,2,2] + bM_y[2,3,2]
-   - 4 bA_col_w[2,2] = 0
- R5465: fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3]
-   + 4 fA_col_u[2,3] <= 4
- R5466: fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3] + fA_x[2,0,3]
-   + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3] - 5 fA_col_v[2,3] <= 3
- R5467: fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3] + fA_x[2,0,3]
-   + fA_x[2,1,3] + fA_x[2,2,3] + fA_x[2,3,3] - 8 fA_col_v[2,3] >= 0
- R5468: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3]
-   + 4 fA_col_u[2,3] <= 4
- R5469: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3] + fA_y[2,0,3]
-   + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3] - 5 fA_col_w[2,3] <= 3
- R5470: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3] + fA_y[2,0,3]
-   + fA_y[2,1,3] + fA_y[2,2,3] + fA_y[2,3,3] - 8 fA_col_w[2,3] >= 0
- R5471: - Const0 + fM_x[2,0,3] + fM_x[2,1,3] + fM_x[2,2,3] + fM_x[2,3,3]
-   - 4 fA_col_v[2,3] = 0
- R5472: fM_y[2,0,3] + fM_y[2,1,3] + fM_y[2,2,3] + fM_y[2,3,3]
-   - 4 fA_col_w[2,3] - MC_Cost_fwd[2,3] = 0
- R5473: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3]
-   + 4 bA_col_u[2,3] <= 4
- R5474: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3] + bA_x[2,0,3]
-   + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3] - 5 bA_col_v[2,3] <= 3
- R5475: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3] + bA_x[2,0,3]
-   + bA_x[2,1,3] + bA_x[2,2,3] + bA_x[2,3,3] - 8 bA_col_v[2,3] >= 0
- R5476: bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3]
-   + 4 bA_col_u[2,3] <= 4
- R5477: bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3] + bA_y[2,0,3]
-   + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3] - 5 bA_col_w[2,3] <= 3
- R5478: bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3] + bA_y[2,0,3]
-   + bA_y[2,1,3] + bA_y[2,2,3] + bA_y[2,3,3] - 8 bA_col_w[2,3] >= 0
- R5479: bM_x[2,0,3] + bM_x[2,1,3] + bM_x[2,2,3] + bM_x[2,3,3]
-   - 4 bA_col_v[2,3] - MC_Cost_bwd[2,3] = 0
- R5480: - Const0 + bM_y[2,0,3] + bM_y[2,1,3] + bM_y[2,2,3] + bM_y[2,3,3]
-   - 4 bA_col_w[2,3] = 0
+ R5474: - bS_x[3,3,3] + bKS_x[2,3,3] + XOR_Cost_bwd[2,3,3] >= 0
+ R5475: - 2 Const0 - bA_y[2,3,3] + bS_y[3,3,3] - bKS_y[2,3,3] >= -1
+ R5476: Const0 - bS_y[3,3,3] + bKS_y[2,3,3] >= 0
+ R5477: bA_x[2,3,3] - bS_x[3,3,3] + XOR_Cost_bwd[2,3,3] >= 0
+ R5478: Const0 + bA_y[2,3,3] - bS_y[3,3,3] >= 0
+ R5479: - Const0 + bS_x[3,3,3] - XOR_Cost_bwd[2,3,3] >= 0
+ R5480: - Const0 + bS_y[3,3,3] - XOR_Cost_bwd[2,3,3] >= 0
  R5481: - S_y[3,0,0] + fM_y[3,0,0] = 0
  R5482: - S_x[3,0,0] + bM_x[3,0,0] = 0
  R5483: - S_y[3,0,1] + fM_y[3,0,1] = 0
@@ -13057,70 +13057,70 @@ General Constraints
  GC1557: Ksub_r[2,3] = AND ( fKS_y[2,0,5] , bKS_y[2,0,5] )
  GC1558: fKsub_b[2,3] = OR ( Ksub_b[2,3] , Ksub_r[2,3] )
  GC1559: bKsub_r[2,3] = OR ( Ksub_b[2,3] , Ksub_r[2,3] )
- GC1560: fKS_x[3,0,0] = OR ( K_ini_x[0,0] , K_ini_y[0,0] )
- GC1561: bKS_y[3,0,0] = OR ( K_ini_x[0,0] , K_ini_y[0,0] )
- GC1562: fKS_x[3,1,0] = OR ( K_ini_x[1,0] , K_ini_y[1,0] )
- GC1563: bKS_y[3,1,0] = OR ( K_ini_x[1,0] , K_ini_y[1,0] )
- GC1564: fKS_x[3,2,0] = OR ( K_ini_x[2,0] , K_ini_y[2,0] )
- GC1565: bKS_y[3,2,0] = OR ( K_ini_x[2,0] , K_ini_y[2,0] )
- GC1566: fKS_x[3,3,0] = OR ( K_ini_x[3,0] , K_ini_y[3,0] )
- GC1567: bKS_y[3,3,0] = OR ( K_ini_x[3,0] , K_ini_y[3,0] )
- GC1568: fKS_x[3,0,1] = OR ( K_ini_x[0,1] , K_ini_y[0,1] )
- GC1569: bKS_y[3,0,1] = OR ( K_ini_x[0,1] , K_ini_y[0,1] )
- GC1570: fKS_x[3,1,1] = OR ( K_ini_x[1,1] , K_ini_y[1,1] )
- GC1571: bKS_y[3,1,1] = OR ( K_ini_x[1,1] , K_ini_y[1,1] )
- GC1572: fKS_x[3,2,1] = OR ( K_ini_x[2,1] , K_ini_y[2,1] )
- GC1573: bKS_y[3,2,1] = OR ( K_ini_x[2,1] , K_ini_y[2,1] )
- GC1574: fKS_x[3,3,1] = OR ( K_ini_x[3,1] , K_ini_y[3,1] )
- GC1575: bKS_y[3,3,1] = OR ( K_ini_x[3,1] , K_ini_y[3,1] )
- GC1576: fKS_x[3,0,2] = OR ( K_ini_x[0,2] , K_ini_y[0,2] )
- GC1577: bKS_y[3,0,2] = OR ( K_ini_x[0,2] , K_ini_y[0,2] )
- GC1578: fKS_x[3,1,2] = OR ( K_ini_x[1,2] , K_ini_y[1,2] )
- GC1579: bKS_y[3,1,2] = OR ( K_ini_x[1,2] , K_ini_y[1,2] )
- GC1580: fKS_x[3,2,2] = OR ( K_ini_x[2,2] , K_ini_y[2,2] )
- GC1581: bKS_y[3,2,2] = OR ( K_ini_x[2,2] , K_ini_y[2,2] )
- GC1582: fKS_x[3,3,2] = OR ( K_ini_x[3,2] , K_ini_y[3,2] )
- GC1583: bKS_y[3,3,2] = OR ( K_ini_x[3,2] , K_ini_y[3,2] )
- GC1584: fKS_x[3,0,3] = OR ( K_ini_x[0,3] , K_ini_y[0,3] )
- GC1585: bKS_y[3,0,3] = OR ( K_ini_x[0,3] , K_ini_y[0,3] )
- GC1586: fKS_x[3,1,3] = OR ( K_ini_x[1,3] , K_ini_y[1,3] )
- GC1587: bKS_y[3,1,3] = OR ( K_ini_x[1,3] , K_ini_y[1,3] )
- GC1588: fKS_x[3,2,3] = OR ( K_ini_x[2,3] , K_ini_y[2,3] )
- GC1589: bKS_y[3,2,3] = OR ( K_ini_x[2,3] , K_ini_y[2,3] )
- GC1590: fKS_x[3,3,3] = OR ( K_ini_x[3,3] , K_ini_y[3,3] )
- GC1591: bKS_y[3,3,3] = OR ( K_ini_x[3,3] , K_ini_y[3,3] )
- GC1592: fKS_x[3,0,4] = OR ( K_ini_x[0,4] , K_ini_y[0,4] )
- GC1593: bKS_y[3,0,4] = OR ( K_ini_x[0,4] , K_ini_y[0,4] )
- GC1594: fKS_x[3,1,4] = OR ( K_ini_x[1,4] , K_ini_y[1,4] )
- GC1595: bKS_y[3,1,4] = OR ( K_ini_x[1,4] , K_ini_y[1,4] )
- GC1596: fKS_x[3,2,4] = OR ( K_ini_x[2,4] , K_ini_y[2,4] )
- GC1597: bKS_y[3,2,4] = OR ( K_ini_x[2,4] , K_ini_y[2,4] )
- GC1598: fKS_x[3,3,4] = OR ( K_ini_x[3,4] , K_ini_y[3,4] )
- GC1599: bKS_y[3,3,4] = OR ( K_ini_x[3,4] , K_ini_y[3,4] )
- GC1600: fKS_x[3,0,5] = OR ( K_ini_x[0,5] , K_ini_y[0,5] )
- GC1601: bKS_y[3,0,5] = OR ( K_ini_x[0,5] , K_ini_y[0,5] )
- GC1602: fKS_x[3,1,5] = OR ( K_ini_x[1,5] , K_ini_y[1,5] )
- GC1603: bKS_y[3,1,5] = OR ( K_ini_x[1,5] , K_ini_y[1,5] )
- GC1604: fKS_x[3,2,5] = OR ( K_ini_x[2,5] , K_ini_y[2,5] )
- GC1605: bKS_y[3,2,5] = OR ( K_ini_x[2,5] , K_ini_y[2,5] )
- GC1606: fKS_x[3,3,5] = OR ( K_ini_x[3,5] , K_ini_y[3,5] )
- GC1607: bKS_y[3,3,5] = OR ( K_ini_x[3,5] , K_ini_y[3,5] )
- GC1608: Ksub_b[4,0] = AND ( fKS_x[3,1,5] , bKS_x[3,1,5] )
- GC1609: Ksub_r[4,0] = AND ( fKS_y[3,1,5] , bKS_y[3,1,5] )
- GC1610: fKsub_b[4,0] = OR ( Ksub_b[4,0] , Ksub_r[4,0] )
- GC1611: bKsub_r[4,0] = OR ( Ksub_b[4,0] , Ksub_r[4,0] )
- GC1612: Ksub_b[4,1] = AND ( fKS_x[3,2,5] , bKS_x[3,2,5] )
- GC1613: Ksub_r[4,1] = AND ( fKS_y[3,2,5] , bKS_y[3,2,5] )
- GC1614: fKsub_b[4,1] = OR ( Ksub_b[4,1] , Ksub_r[4,1] )
- GC1615: bKsub_r[4,1] = OR ( Ksub_b[4,1] , Ksub_r[4,1] )
- GC1616: Ksub_b[4,2] = AND ( fKS_x[3,3,5] , bKS_x[3,3,5] )
- GC1617: Ksub_r[4,2] = AND ( fKS_y[3,3,5] , bKS_y[3,3,5] )
- GC1618: fKsub_b[4,2] = OR ( Ksub_b[4,2] , Ksub_r[4,2] )
- GC1619: bKsub_r[4,2] = OR ( Ksub_b[4,2] , Ksub_r[4,2] )
- GC1620: Ksub_b[4,3] = AND ( fKS_x[3,0,5] , bKS_x[3,0,5] )
- GC1621: Ksub_r[4,3] = AND ( fKS_y[3,0,5] , bKS_y[3,0,5] )
- GC1622: fKsub_b[4,3] = OR ( Ksub_b[4,3] , Ksub_r[4,3] )
- GC1623: bKsub_r[4,3] = OR ( Ksub_b[4,3] , Ksub_r[4,3] )
+ GC1560: Ksub_b[3,0] = AND ( fKS_x[3,1,5] , bKS_x[3,1,5] )
+ GC1561: Ksub_r[3,0] = AND ( fKS_y[3,1,5] , bKS_y[3,1,5] )
+ GC1562: fKsub_b[3,0] = OR ( Ksub_b[3,0] , Ksub_r[3,0] )
+ GC1563: bKsub_r[3,0] = OR ( Ksub_b[3,0] , Ksub_r[3,0] )
+ GC1564: Ksub_b[3,1] = AND ( fKS_x[3,2,5] , bKS_x[3,2,5] )
+ GC1565: Ksub_r[3,1] = AND ( fKS_y[3,2,5] , bKS_y[3,2,5] )
+ GC1566: fKsub_b[3,1] = OR ( Ksub_b[3,1] , Ksub_r[3,1] )
+ GC1567: bKsub_r[3,1] = OR ( Ksub_b[3,1] , Ksub_r[3,1] )
+ GC1568: Ksub_b[3,2] = AND ( fKS_x[3,3,5] , bKS_x[3,3,5] )
+ GC1569: Ksub_r[3,2] = AND ( fKS_y[3,3,5] , bKS_y[3,3,5] )
+ GC1570: fKsub_b[3,2] = OR ( Ksub_b[3,2] , Ksub_r[3,2] )
+ GC1571: bKsub_r[3,2] = OR ( Ksub_b[3,2] , Ksub_r[3,2] )
+ GC1572: Ksub_b[3,3] = AND ( fKS_x[3,0,5] , bKS_x[3,0,5] )
+ GC1573: Ksub_r[3,3] = AND ( fKS_y[3,0,5] , bKS_y[3,0,5] )
+ GC1574: fKsub_b[3,3] = OR ( Ksub_b[3,3] , Ksub_r[3,3] )
+ GC1575: bKsub_r[3,3] = OR ( Ksub_b[3,3] , Ksub_r[3,3] )
+ GC1576: fKS_x[4,0,0] = OR ( K_ini_x[0,0] , K_ini_y[0,0] )
+ GC1577: bKS_y[4,0,0] = OR ( K_ini_x[0,0] , K_ini_y[0,0] )
+ GC1578: fKS_x[4,1,0] = OR ( K_ini_x[1,0] , K_ini_y[1,0] )
+ GC1579: bKS_y[4,1,0] = OR ( K_ini_x[1,0] , K_ini_y[1,0] )
+ GC1580: fKS_x[4,2,0] = OR ( K_ini_x[2,0] , K_ini_y[2,0] )
+ GC1581: bKS_y[4,2,0] = OR ( K_ini_x[2,0] , K_ini_y[2,0] )
+ GC1582: fKS_x[4,3,0] = OR ( K_ini_x[3,0] , K_ini_y[3,0] )
+ GC1583: bKS_y[4,3,0] = OR ( K_ini_x[3,0] , K_ini_y[3,0] )
+ GC1584: fKS_x[4,0,1] = OR ( K_ini_x[0,1] , K_ini_y[0,1] )
+ GC1585: bKS_y[4,0,1] = OR ( K_ini_x[0,1] , K_ini_y[0,1] )
+ GC1586: fKS_x[4,1,1] = OR ( K_ini_x[1,1] , K_ini_y[1,1] )
+ GC1587: bKS_y[4,1,1] = OR ( K_ini_x[1,1] , K_ini_y[1,1] )
+ GC1588: fKS_x[4,2,1] = OR ( K_ini_x[2,1] , K_ini_y[2,1] )
+ GC1589: bKS_y[4,2,1] = OR ( K_ini_x[2,1] , K_ini_y[2,1] )
+ GC1590: fKS_x[4,3,1] = OR ( K_ini_x[3,1] , K_ini_y[3,1] )
+ GC1591: bKS_y[4,3,1] = OR ( K_ini_x[3,1] , K_ini_y[3,1] )
+ GC1592: fKS_x[4,0,2] = OR ( K_ini_x[0,2] , K_ini_y[0,2] )
+ GC1593: bKS_y[4,0,2] = OR ( K_ini_x[0,2] , K_ini_y[0,2] )
+ GC1594: fKS_x[4,1,2] = OR ( K_ini_x[1,2] , K_ini_y[1,2] )
+ GC1595: bKS_y[4,1,2] = OR ( K_ini_x[1,2] , K_ini_y[1,2] )
+ GC1596: fKS_x[4,2,2] = OR ( K_ini_x[2,2] , K_ini_y[2,2] )
+ GC1597: bKS_y[4,2,2] = OR ( K_ini_x[2,2] , K_ini_y[2,2] )
+ GC1598: fKS_x[4,3,2] = OR ( K_ini_x[3,2] , K_ini_y[3,2] )
+ GC1599: bKS_y[4,3,2] = OR ( K_ini_x[3,2] , K_ini_y[3,2] )
+ GC1600: fKS_x[4,0,3] = OR ( K_ini_x[0,3] , K_ini_y[0,3] )
+ GC1601: bKS_y[4,0,3] = OR ( K_ini_x[0,3] , K_ini_y[0,3] )
+ GC1602: fKS_x[4,1,3] = OR ( K_ini_x[1,3] , K_ini_y[1,3] )
+ GC1603: bKS_y[4,1,3] = OR ( K_ini_x[1,3] , K_ini_y[1,3] )
+ GC1604: fKS_x[4,2,3] = OR ( K_ini_x[2,3] , K_ini_y[2,3] )
+ GC1605: bKS_y[4,2,3] = OR ( K_ini_x[2,3] , K_ini_y[2,3] )
+ GC1606: fKS_x[4,3,3] = OR ( K_ini_x[3,3] , K_ini_y[3,3] )
+ GC1607: bKS_y[4,3,3] = OR ( K_ini_x[3,3] , K_ini_y[3,3] )
+ GC1608: fKS_x[4,0,4] = OR ( K_ini_x[0,4] , K_ini_y[0,4] )
+ GC1609: bKS_y[4,0,4] = OR ( K_ini_x[0,4] , K_ini_y[0,4] )
+ GC1610: fKS_x[4,1,4] = OR ( K_ini_x[1,4] , K_ini_y[1,4] )
+ GC1611: bKS_y[4,1,4] = OR ( K_ini_x[1,4] , K_ini_y[1,4] )
+ GC1612: fKS_x[4,2,4] = OR ( K_ini_x[2,4] , K_ini_y[2,4] )
+ GC1613: bKS_y[4,2,4] = OR ( K_ini_x[2,4] , K_ini_y[2,4] )
+ GC1614: fKS_x[4,3,4] = OR ( K_ini_x[3,4] , K_ini_y[3,4] )
+ GC1615: bKS_y[4,3,4] = OR ( K_ini_x[3,4] , K_ini_y[3,4] )
+ GC1616: fKS_x[4,0,5] = OR ( K_ini_x[0,5] , K_ini_y[0,5] )
+ GC1617: bKS_y[4,0,5] = OR ( K_ini_x[0,5] , K_ini_y[0,5] )
+ GC1618: fKS_x[4,1,5] = OR ( K_ini_x[1,5] , K_ini_y[1,5] )
+ GC1619: bKS_y[4,1,5] = OR ( K_ini_x[1,5] , K_ini_y[1,5] )
+ GC1620: fKS_x[4,2,5] = OR ( K_ini_x[2,5] , K_ini_y[2,5] )
+ GC1621: bKS_y[4,2,5] = OR ( K_ini_x[2,5] , K_ini_y[2,5] )
+ GC1622: fKS_x[4,3,5] = OR ( K_ini_x[3,5] , K_ini_y[3,5] )
+ GC1623: bKS_y[4,3,5] = OR ( K_ini_x[3,5] , K_ini_y[3,5] )
  GC1624: Ksub_b[5,0] = AND ( fKS_x[4,1,5] , bKS_x[4,1,5] )
  GC1625: Ksub_r[5,0] = AND ( fKS_y[4,1,5] , bKS_y[4,1,5] )
  GC1626: fKsub_b[5,0] = OR ( Ksub_b[5,0] , Ksub_r[5,0] )
@@ -13281,70 +13281,70 @@ General Constraints
  GC1781: S_y[1,3,1] = AND ( fM_y[1,3,2] , bM_y[1,3,2] )
  GC1782: S_x[1,3,2] = AND ( fM_x[1,3,3] , bM_x[1,3,3] )
  GC1783: S_y[1,3,2] = AND ( fM_y[1,3,3] , bM_y[1,3,3] )
- GC1784: fS_x[3,0,0] = OR ( S_x[3,0,0] , S_y[3,0,0] )
- GC1785: bS_y[3,0,0] = OR ( S_x[3,0,0] , S_y[3,0,0] )
- GC1786: fS_x[3,0,1] = OR ( S_x[3,0,1] , S_y[3,0,1] )
- GC1787: bS_y[3,0,1] = OR ( S_x[3,0,1] , S_y[3,0,1] )
- GC1788: fS_x[3,0,2] = OR ( S_x[3,0,2] , S_y[3,0,2] )
- GC1789: bS_y[3,0,2] = OR ( S_x[3,0,2] , S_y[3,0,2] )
- GC1790: fS_x[3,0,3] = OR ( S_x[3,0,3] , S_y[3,0,3] )
- GC1791: bS_y[3,0,3] = OR ( S_x[3,0,3] , S_y[3,0,3] )
- GC1792: fS_x[3,1,0] = OR ( S_x[3,1,0] , S_y[3,1,0] )
- GC1793: bS_y[3,1,0] = OR ( S_x[3,1,0] , S_y[3,1,0] )
- GC1794: fS_x[3,1,1] = OR ( S_x[3,1,1] , S_y[3,1,1] )
- GC1795: bS_y[3,1,1] = OR ( S_x[3,1,1] , S_y[3,1,1] )
- GC1796: fS_x[3,1,2] = OR ( S_x[3,1,2] , S_y[3,1,2] )
- GC1797: bS_y[3,1,2] = OR ( S_x[3,1,2] , S_y[3,1,2] )
- GC1798: fS_x[3,1,3] = OR ( S_x[3,1,3] , S_y[3,1,3] )
- GC1799: bS_y[3,1,3] = OR ( S_x[3,1,3] , S_y[3,1,3] )
- GC1800: fS_x[3,2,0] = OR ( S_x[3,2,0] , S_y[3,2,0] )
- GC1801: bS_y[3,2,0] = OR ( S_x[3,2,0] , S_y[3,2,0] )
- GC1802: fS_x[3,2,1] = OR ( S_x[3,2,1] , S_y[3,2,1] )
- GC1803: bS_y[3,2,1] = OR ( S_x[3,2,1] , S_y[3,2,1] )
- GC1804: fS_x[3,2,2] = OR ( S_x[3,2,2] , S_y[3,2,2] )
- GC1805: bS_y[3,2,2] = OR ( S_x[3,2,2] , S_y[3,2,2] )
- GC1806: fS_x[3,2,3] = OR ( S_x[3,2,3] , S_y[3,2,3] )
- GC1807: bS_y[3,2,3] = OR ( S_x[3,2,3] , S_y[3,2,3] )
- GC1808: fS_x[3,3,0] = OR ( S_x[3,3,0] , S_y[3,3,0] )
- GC1809: bS_y[3,3,0] = OR ( S_x[3,3,0] , S_y[3,3,0] )
- GC1810: fS_x[3,3,1] = OR ( S_x[3,3,1] , S_y[3,3,1] )
- GC1811: bS_y[3,3,1] = OR ( S_x[3,3,1] , S_y[3,3,1] )
- GC1812: fS_x[3,3,2] = OR ( S_x[3,3,2] , S_y[3,3,2] )
- GC1813: bS_y[3,3,2] = OR ( S_x[3,3,2] , S_y[3,3,2] )
- GC1814: fS_x[3,3,3] = OR ( S_x[3,3,3] , S_y[3,3,3] )
- GC1815: bS_y[3,3,3] = OR ( S_x[3,3,3] , S_y[3,3,3] )
- GC1816: S_x[2,0,0] = AND ( fM_x[2,0,0] , bM_x[2,0,0] )
- GC1817: S_y[2,0,0] = AND ( fM_y[2,0,0] , bM_y[2,0,0] )
- GC1818: S_x[2,0,1] = AND ( fM_x[2,0,1] , bM_x[2,0,1] )
- GC1819: S_y[2,0,1] = AND ( fM_y[2,0,1] , bM_y[2,0,1] )
- GC1820: S_x[2,0,2] = AND ( fM_x[2,0,2] , bM_x[2,0,2] )
- GC1821: S_y[2,0,2] = AND ( fM_y[2,0,2] , bM_y[2,0,2] )
- GC1822: S_x[2,0,3] = AND ( fM_x[2,0,3] , bM_x[2,0,3] )
- GC1823: S_y[2,0,3] = AND ( fM_y[2,0,3] , bM_y[2,0,3] )
- GC1824: S_x[2,1,1] = AND ( fM_x[2,1,0] , bM_x[2,1,0] )
- GC1825: S_y[2,1,1] = AND ( fM_y[2,1,0] , bM_y[2,1,0] )
- GC1826: S_x[2,1,2] = AND ( fM_x[2,1,1] , bM_x[2,1,1] )
- GC1827: S_y[2,1,2] = AND ( fM_y[2,1,1] , bM_y[2,1,1] )
- GC1828: S_x[2,1,3] = AND ( fM_x[2,1,2] , bM_x[2,1,2] )
- GC1829: S_y[2,1,3] = AND ( fM_y[2,1,2] , bM_y[2,1,2] )
- GC1830: S_x[2,1,0] = AND ( fM_x[2,1,3] , bM_x[2,1,3] )
- GC1831: S_y[2,1,0] = AND ( fM_y[2,1,3] , bM_y[2,1,3] )
- GC1832: S_x[2,2,2] = AND ( fM_x[2,2,0] , bM_x[2,2,0] )
- GC1833: S_y[2,2,2] = AND ( fM_y[2,2,0] , bM_y[2,2,0] )
- GC1834: S_x[2,2,3] = AND ( fM_x[2,2,1] , bM_x[2,2,1] )
- GC1835: S_y[2,2,3] = AND ( fM_y[2,2,1] , bM_y[2,2,1] )
- GC1836: S_x[2,2,0] = AND ( fM_x[2,2,2] , bM_x[2,2,2] )
- GC1837: S_y[2,2,0] = AND ( fM_y[2,2,2] , bM_y[2,2,2] )
- GC1838: S_x[2,2,1] = AND ( fM_x[2,2,3] , bM_x[2,2,3] )
- GC1839: S_y[2,2,1] = AND ( fM_y[2,2,3] , bM_y[2,2,3] )
- GC1840: S_x[2,3,3] = AND ( fM_x[2,3,0] , bM_x[2,3,0] )
- GC1841: S_y[2,3,3] = AND ( fM_y[2,3,0] , bM_y[2,3,0] )
- GC1842: S_x[2,3,0] = AND ( fM_x[2,3,1] , bM_x[2,3,1] )
- GC1843: S_y[2,3,0] = AND ( fM_y[2,3,1] , bM_y[2,3,1] )
- GC1844: S_x[2,3,1] = AND ( fM_x[2,3,2] , bM_x[2,3,2] )
- GC1845: S_y[2,3,1] = AND ( fM_y[2,3,2] , bM_y[2,3,2] )
- GC1846: S_x[2,3,2] = AND ( fM_x[2,3,3] , bM_x[2,3,3] )
- GC1847: S_y[2,3,2] = AND ( fM_y[2,3,3] , bM_y[2,3,3] )
+ GC1784: fM_x[2,0,0] = OR ( S_x[2,0,0] , S_y[2,0,0] )
+ GC1785: bM_y[2,0,0] = OR ( S_x[2,0,0] , S_y[2,0,0] )
+ GC1786: fM_x[2,0,1] = OR ( S_x[2,0,1] , S_y[2,0,1] )
+ GC1787: bM_y[2,0,1] = OR ( S_x[2,0,1] , S_y[2,0,1] )
+ GC1788: fM_x[2,0,2] = OR ( S_x[2,0,2] , S_y[2,0,2] )
+ GC1789: bM_y[2,0,2] = OR ( S_x[2,0,2] , S_y[2,0,2] )
+ GC1790: fM_x[2,0,3] = OR ( S_x[2,0,3] , S_y[2,0,3] )
+ GC1791: bM_y[2,0,3] = OR ( S_x[2,0,3] , S_y[2,0,3] )
+ GC1792: fM_x[2,1,0] = OR ( S_x[2,1,1] , S_y[2,1,1] )
+ GC1793: bM_y[2,1,0] = OR ( S_x[2,1,1] , S_y[2,1,1] )
+ GC1794: fM_x[2,1,1] = OR ( S_x[2,1,2] , S_y[2,1,2] )
+ GC1795: bM_y[2,1,1] = OR ( S_x[2,1,2] , S_y[2,1,2] )
+ GC1796: fM_x[2,1,2] = OR ( S_x[2,1,3] , S_y[2,1,3] )
+ GC1797: bM_y[2,1,2] = OR ( S_x[2,1,3] , S_y[2,1,3] )
+ GC1798: fM_x[2,1,3] = OR ( S_x[2,1,0] , S_y[2,1,0] )
+ GC1799: bM_y[2,1,3] = OR ( S_x[2,1,0] , S_y[2,1,0] )
+ GC1800: fM_x[2,2,0] = OR ( S_x[2,2,2] , S_y[2,2,2] )
+ GC1801: bM_y[2,2,0] = OR ( S_x[2,2,2] , S_y[2,2,2] )
+ GC1802: fM_x[2,2,1] = OR ( S_x[2,2,3] , S_y[2,2,3] )
+ GC1803: bM_y[2,2,1] = OR ( S_x[2,2,3] , S_y[2,2,3] )
+ GC1804: fM_x[2,2,2] = OR ( S_x[2,2,0] , S_y[2,2,0] )
+ GC1805: bM_y[2,2,2] = OR ( S_x[2,2,0] , S_y[2,2,0] )
+ GC1806: fM_x[2,2,3] = OR ( S_x[2,2,1] , S_y[2,2,1] )
+ GC1807: bM_y[2,2,3] = OR ( S_x[2,2,1] , S_y[2,2,1] )
+ GC1808: fM_x[2,3,0] = OR ( S_x[2,3,3] , S_y[2,3,3] )
+ GC1809: bM_y[2,3,0] = OR ( S_x[2,3,3] , S_y[2,3,3] )
+ GC1810: fM_x[2,3,1] = OR ( S_x[2,3,0] , S_y[2,3,0] )
+ GC1811: bM_y[2,3,1] = OR ( S_x[2,3,0] , S_y[2,3,0] )
+ GC1812: fM_x[2,3,2] = OR ( S_x[2,3,1] , S_y[2,3,1] )
+ GC1813: bM_y[2,3,2] = OR ( S_x[2,3,1] , S_y[2,3,1] )
+ GC1814: fM_x[2,3,3] = OR ( S_x[2,3,2] , S_y[2,3,2] )
+ GC1815: bM_y[2,3,3] = OR ( S_x[2,3,2] , S_y[2,3,2] )
+ GC1816: S_x[3,0,0] = AND ( fS_x[3,0,0] , bS_x[3,0,0] )
+ GC1817: S_y[3,0,0] = AND ( fS_y[3,0,0] , bS_y[3,0,0] )
+ GC1818: S_x[3,0,1] = AND ( fS_x[3,0,1] , bS_x[3,0,1] )
+ GC1819: S_y[3,0,1] = AND ( fS_y[3,0,1] , bS_y[3,0,1] )
+ GC1820: S_x[3,0,2] = AND ( fS_x[3,0,2] , bS_x[3,0,2] )
+ GC1821: S_y[3,0,2] = AND ( fS_y[3,0,2] , bS_y[3,0,2] )
+ GC1822: S_x[3,0,3] = AND ( fS_x[3,0,3] , bS_x[3,0,3] )
+ GC1823: S_y[3,0,3] = AND ( fS_y[3,0,3] , bS_y[3,0,3] )
+ GC1824: S_x[3,1,0] = AND ( fS_x[3,1,0] , bS_x[3,1,0] )
+ GC1825: S_y[3,1,0] = AND ( fS_y[3,1,0] , bS_y[3,1,0] )
+ GC1826: S_x[3,1,1] = AND ( fS_x[3,1,1] , bS_x[3,1,1] )
+ GC1827: S_y[3,1,1] = AND ( fS_y[3,1,1] , bS_y[3,1,1] )
+ GC1828: S_x[3,1,2] = AND ( fS_x[3,1,2] , bS_x[3,1,2] )
+ GC1829: S_y[3,1,2] = AND ( fS_y[3,1,2] , bS_y[3,1,2] )
+ GC1830: S_x[3,1,3] = AND ( fS_x[3,1,3] , bS_x[3,1,3] )
+ GC1831: S_y[3,1,3] = AND ( fS_y[3,1,3] , bS_y[3,1,3] )
+ GC1832: S_x[3,2,0] = AND ( fS_x[3,2,0] , bS_x[3,2,0] )
+ GC1833: S_y[3,2,0] = AND ( fS_y[3,2,0] , bS_y[3,2,0] )
+ GC1834: S_x[3,2,1] = AND ( fS_x[3,2,1] , bS_x[3,2,1] )
+ GC1835: S_y[3,2,1] = AND ( fS_y[3,2,1] , bS_y[3,2,1] )
+ GC1836: S_x[3,2,2] = AND ( fS_x[3,2,2] , bS_x[3,2,2] )
+ GC1837: S_y[3,2,2] = AND ( fS_y[3,2,2] , bS_y[3,2,2] )
+ GC1838: S_x[3,2,3] = AND ( fS_x[3,2,3] , bS_x[3,2,3] )
+ GC1839: S_y[3,2,3] = AND ( fS_y[3,2,3] , bS_y[3,2,3] )
+ GC1840: S_x[3,3,0] = AND ( fS_x[3,3,0] , bS_x[3,3,0] )
+ GC1841: S_y[3,3,0] = AND ( fS_y[3,3,0] , bS_y[3,3,0] )
+ GC1842: S_x[3,3,1] = AND ( fS_x[3,3,1] , bS_x[3,3,1] )
+ GC1843: S_y[3,3,1] = AND ( fS_y[3,3,1] , bS_y[3,3,1] )
+ GC1844: S_x[3,3,2] = AND ( fS_x[3,3,2] , bS_x[3,3,2] )
+ GC1845: S_y[3,3,2] = AND ( fS_y[3,3,2] , bS_y[3,3,2] )
+ GC1846: S_x[3,3,3] = AND ( fS_x[3,3,3] , bS_x[3,3,3] )
+ GC1847: S_y[3,3,3] = AND ( fS_y[3,3,3] , bS_y[3,3,3] )
  GC1848: fM_x[3,0,0] = OR ( S_x[3,0,0] , S_y[3,0,0] )
  GC1849: bM_y[3,0,0] = OR ( S_x[3,0,0] , S_y[3,0,0] )
  GC1850: fM_x[3,0,1] = OR ( S_x[3,0,1] , S_y[3,0,1] )
