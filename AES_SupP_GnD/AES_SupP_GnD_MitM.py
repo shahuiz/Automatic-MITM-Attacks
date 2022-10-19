@@ -671,6 +671,10 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             if KeyS_j % Nk == 0:
                 KeyS_r += 1
                 KeyS_j = 0
+    
+    # define positional pointer to address related key problem
+    fKS_p = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.INTEGER, name='fKS_x').values()).reshape((Nr, NROW, Nk))
+    bKS_p = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.INTEGER, name='fKS_y').values()).reshape((Nr, NROW, Nk))
 
     # define vars for columnwise encoding for MixCol input, including MC(fwd) and AK(bwd)
     fM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_u').values()).reshape((total_round, NCOL))
@@ -917,6 +921,6 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_GnD_SupP/runs/')
+solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./AES_SupP_GnD/runs/')
 #solve(key_size=192, total_round=10, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_GnD_SupP/runs/')
 #solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./RK_SupP/runs/')
