@@ -68,18 +68,32 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
     m.update()
 
 # set objective function
-def set_obj(m: gp.Model, ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, ini_key_g: np.ndarray, cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, meet: np.ndarray):
+def set_obj(m: gp.Model, 
+    ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, ini_key_g: np.ndarray, 
+    cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, 
+    fM_Gx: np.ndarray, fM_x: np.ndarray, bM_Gy: np.ndarray, bM_y: np.ndarray, fA_Gx: np.ndarray, fA_x: np.ndarray, bA_Gy: np.ndarray, bA_y: np.ndarray, 
+    M_Gxy: np.ndarray, A_Gxy: np.ndarray, meet: np.ndarray):
+    
     df_b = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_b")
     df_r = m.addVar(lb=1, vtype=GRB.INTEGER, name="DF_r")
     dm = m.addVar(lb=1, vtype=GRB.INTEGER, name="Match")
     obj = m.addVar(lb=1, vtype=GRB.INTEGER, name="Obj")
 
+    GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
+    GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
+    GnD_br = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_br")
+
+    m.addConstr(GnD_b == gp.quicksum(fM_Gx.flatten()) - gp.quicksum(fM_x.flatten()) + gp.quicksum(fA_Gx.flatten()) - gp.quicksum(fA_x.flatten()))
+    m.addConstr(GnD_b == gp.quicksum(bM_Gy.flatten()) - gp.quicksum(bM_y.flatten()) + gp.quicksum(bA_Gy.flatten()) - gp.quicksum(bA_y.flatten())) 
+    m.addConstr(GnD_br == gp.quicksum(M_Gxy.flatten()) + gp.quicksum(A_Gxy.flatten()))
+
     m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(key_cost_fwd.flatten()))
     m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()))
     m.addConstr(dm == gp.quicksum(meet.flatten()))
-    m.addConstr(obj - df_b <= 0)
-    m.addConstr(obj - df_r <= 0)
-    m.addConstr(obj - dm <= 0)
+   
+    m.addConstr(obj <= df_b - GnD_r)
+    m.addConstr(obj <= df_r - GnD_b)
+    m.addConstr(obj <= dm - GnD_b - GnD_r - GnD_br)
     m.setObjective(obj, GRB.MAXIMIZE)
     m.update()
 
@@ -605,7 +619,33 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                 m.addConstr(fS_w[r,i,j] + fS_x[r,i,j] + fS_y[r,i,j] - fS_g[r,i,j] == 1)
                 m.addConstr(bS_g[r,i,j] == gp.and_(bS_x[r,i,j], bS_y[r,i,j]))
                 m.addConstr(bS_w[r,i,j] + bS_x[r,i,j] + bS_y[r,i,j] - bS_g[r,i,j] == 1) 
-       
+
+    # define GnD vars with constraints
+    fM_Gx = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fM_Gb').values()).reshape((total_round, NROW, NCOL))
+    bM_Gy = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bM_Gr').values()).reshape((total_round, NROW, NCOL))
+    M_Gxy = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='M_Gbr').values()).reshape((total_round, NROW, NCOL))
+
+    fA_Gx = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_Gb').values()).reshape((total_round, NROW, NCOL))
+    bA_Gy = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_Gr').values()).reshape((total_round, NROW, NCOL))
+    A_Gxy = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='A_Gbr').values()).reshape((total_round, NROW, NCOL))
+    
+    # GnD rules (WLOG, fwd dir): we have in SupP w=0<=>x=1, w=1<=>x=0
+    # when a cell is not white, it cannot be guessed (w=0 <=> x=1 -> Gx=1)
+    # when a cell is white, it could be guessed (w=1 <=> x=0 ->Gx=0/1)
+    # Hence, we have Gx>=x, whenever Gx>x, the bit is guessed, the cost of df in GnD will be: sum(Gx-x)
+    # In GnD mode, Gx will be used in MC instead of x
+    # if a cell is guessed in BiDr, then the cell in both dir must be white (fXw=bXw=1), and both are guessed to be non-zero value (Gx=Gy=1)
+    for r in range(total_round):
+        for i in ROW:
+            for j in COL: 
+                m.addConstr(fM_Gx[r,i,j] >= fM_x[r,i,j])
+                m.addConstr(bM_Gy[r,i,j] >= bM_y[r,i,j])
+                m.addConstr(M_Gxy[r,i,j] == gp.and_(fM_Gx[r,i,j], bM_Gy[r,i,j], fM_w[r,i,j], bM_w[r,i,j]))
+
+                m.addConstr(fA_Gx[r,i,j] >= fA_x[r,i,j])
+                m.addConstr(bA_Gy[r,i,j] >= bA_y[r,i,j])
+                m.addConstr(A_Gxy[r,i,j] == gp.and_(fA_Gx[r,i,j], bA_Gy[r,i,j], fA_w[r,i,j], bA_w[r,i,j]))
+
     # define vars storing the key state in key schedule (the long key), in total Nr rounds, with shape NROW*Nk
     fKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_x').values()).reshape((Nr, NROW, Nk))
     fKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_y').values()).reshape((Nr, NROW, Nk))
@@ -650,18 +690,18 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # add constraints for u-x-y encoding
     for r in range(total_round):
         for j in COL:
-            m.addConstr(fM_col_v[r,j] == gp.min_(fM_x[r,:,j].tolist()))
+            m.addConstr(fM_col_v[r,j] == gp.min_(fM_Gx[r,:,j].tolist()))
             m.addConstr(fM_col_w[r,j] == gp.min_(fM_y[r,:,j].tolist()))
             m.addConstr(fM_col_u[r,j] == gp.max_(fM_w[r,:,j].tolist()))
             m.addConstr(bM_col_v[r,j] == gp.min_(bM_x[r,:,j].tolist()))
-            m.addConstr(bM_col_w[r,j] == gp.min_(bM_y[r,:,j].tolist()))
+            m.addConstr(bM_col_w[r,j] == gp.min_(bM_Gy[r,:,j].tolist()))
             m.addConstr(bM_col_u[r,j] == gp.max_(bM_w[r,:,j].tolist()))
             
-            m.addConstr(fA_col_v[r,j] == gp.min_(fA_x[r,:,j].tolist()))
+            m.addConstr(fA_col_v[r,j] == gp.min_(fA_Gx[r,:,j].tolist()))
             m.addConstr(fA_col_w[r,j] == gp.min_(fA_y[r,:,j].tolist()))
             m.addConstr(fA_col_u[r,j] == gp.max_(fA_w[r,:,j].tolist()))
             m.addConstr(bA_col_v[r,j] == gp.min_(bA_x[r,:,j].tolist()))
-            m.addConstr(bA_col_w[r,j] == gp.min_(bA_y[r,:,j].tolist()))
+            m.addConstr(bA_col_w[r,j] == gp.min_(bA_Gy[r,:,j].tolist()))
             m.addConstr(bA_col_u[r,j] == gp.max_(bA_w[r,:,j].tolist()))
     
     # define auxiliary vars tracking cost of df at MC operations, cost_fwd is solely for MC, cost_bwd is for XOR_MC
@@ -701,11 +741,16 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # add constriants according to the key expansion algorithm
     key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, bKS_x, bKS_y, CONST0, key_cost_fwd, key_cost_bwd)
 
+    # proposition: fix start state to be all red (WLOG), in compensate of the efficiency
+    for i in ROW:
+        for j in COL:
+            # continue
+            m.addConstr(E_ini_y[i, j] == 1) #test
+            m.addConstr(E_ini_x[i, j] == 0) #test
+
     # initialize the enc states, avoid unknown to maximize performance
     for i in ROW:
         for j in COL:
-            m.addConstr(E_ini_y[i, j] == 1) #test
-            m.addConstr(E_ini_x[i, j] == 0) #test
             m.addConstr(S_x[enc_start_round, i, j] + S_y[enc_start_round, i, j] >= 1)
             m.addConstr(E_ini_x[i, j] == S_x[enc_start_round, i, j])
             m.addConstr(E_ini_y[i, j] == S_y[enc_start_round, i, j])
@@ -799,18 +844,21 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             for i in ROW:
                 for j in COL:
                     ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j])
-            # MixCol with SupP
+            # MixCol with SupP and GnD
             for j in COL:
                 #continue
-                gen_MC_rule(m, fM_x[r,:,j], fM_y[r,:,j], fM_col_u[r,j], fM_col_v[r,j], fM_col_w[r,j], fA_x[r,:,j], fA_y[r,:,j], mc_cost_fwd[r,j], CONST0)
-                gen_MC_rule(m, bM_x[r,:,j], bM_y[r,:,j], bM_col_u[r,j], bM_col_v[r,j], bM_col_w[r,j], bA_x[r,:,j], bA_y[r,:,j], CONST0, mc_cost_bwd[r,j])
+                gen_MC_rule(m, fM_Gx[r,:,j], fM_y[r,:,j], fM_col_u[r,j], fM_col_v[r,j], fM_col_w[r,j], fA_x[r,:,j], fA_y[r,:,j], mc_cost_fwd[r,j], CONST0)
+                gen_MC_rule(m, bM_x[r,:,j], bM_Gy[r,:,j], bM_col_u[r,j], bM_col_v[r,j], bM_col_w[r,j], bA_x[r,:,j], bA_y[r,:,j], CONST0, mc_cost_bwd[r,j])
+                for i in ROW:   # fix unused guess bits
+                    m.addConstr(fA_x[r,i,j] == fA_Gx[r,i,j])
+                    m.addConstr(bA_y[r,i,j] == bA_Gy[r,i,j])
             # AddKey with SupP    
             for i in ROW:
                 for j in COL:
                     #continue
                     gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[r,i,j], fK_y[r,i,j], fS_x[nr,i,j], fS_y[nr,i,j], xor_cost_fwd[r,i,j], CONST0)
                     gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[r,i,j], bK_y[r,i,j], bS_x[nr,i,j], bS_y[nr,i,j], CONST0, xor_cost_bwd[r,i,j])
-            # Ext SupP feed the outcome to next SB state
+            # Ext SupP and feed the outcome to next SB state
             for i in ROW:
                 for j in COL:
                     ext_SupP(m, fS_x[nr,i,j], fS_y[nr,i,j], bS_x[nr,i,j], bS_y[nr,i,j], S_x[nr,i,j], S_y[nr,i,j])
@@ -829,12 +877,15 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     #continue
                     gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
                     gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
-            # (reverse) MixCol with SupP
+            # (reverse) MixCol with SupP and GnD
             for j in COL:
                 #continue
-                gen_MC_rule(m, fA_x[r,:,j], fA_y[r,:,j], fA_col_u[r,j], fA_col_v[r,j], fA_col_w[r,j], fM_x[r,:,j], fM_y[r,:,j], mc_cost_fwd[r,j], CONST0)
-                gen_MC_rule(m, bA_x[r,:,j], bA_y[r,:,j], bA_col_u[r,j], bA_col_v[r,j], bA_col_w[r,j], bM_x[r,:,j], bM_y[r,:,j], CONST0, mc_cost_bwd[r,j])
-            # Ext SupP feed the outcome to current MC state
+                gen_MC_rule(m, fA_Gx[r,:,j], fA_y[r,:,j], fA_col_u[r,j], fA_col_v[r,j], fA_col_w[r,j], fM_x[r,:,j], fM_y[r,:,j], mc_cost_fwd[r,j], CONST0)
+                gen_MC_rule(m, bA_x[r,:,j], bA_Gy[r,:,j], bA_col_u[r,j], bA_col_v[r,j], bA_col_w[r,j], bM_x[r,:,j], bM_y[r,:,j], CONST0, mc_cost_bwd[r,j])
+                for i in ROW:   # fix unused guess bits
+                    m.addConstr(fM_x[r,i,j] == fM_Gx[r,i,j])
+                    m.addConstr(bM_y[r,i,j] == bM_Gy[r,i,j])
+            # Ext SupP and feed the outcome to current MC state
             for i in ROW:
                 for j in COL:
                     ext_SupP(m, fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], M_x[r,i,j], M_y[r,i,j])
@@ -843,14 +894,14 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             raise Exception("Irregular Behavior at encryption")
     
     # set objective function
-    set_obj(m, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet)
+    set_obj(m, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, fM_Gx, fM_x, bM_Gy, bM_y, fA_Gx, fA_x, bA_Gy, bA_y, M_Gxy, A_Gxy, meet)
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    #m.setParam(GRB.Param.BestObjStop, 1.999999999)
     m.setParam(GRB.Param.Cutoff, 1)
     #m.setParam(GRB.Param.PoolObjBound,  2)
-    m.setParam(GRB.Param.Threads, 8)
+    m.setParam(GRB.Param.Threads, 4)
     m.optimize()
     
     if not os.path.exists(path= dir):
@@ -866,5 +917,6 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-#solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_SupP/runs/')
-solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./RK_SupP/runs/')
+solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_GnD_SupP/runs/')
+#solve(key_size=192, total_round=10, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_GnD_SupP/runs/')
+#solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./RK_SupP/runs/')

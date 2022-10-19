@@ -704,8 +704,8 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # initialize the enc states, avoid unknown to maximize performance
     for i in ROW:
         for j in COL:
-            m.addConstr(E_ini_y[i, j] == 1) #test
-            m.addConstr(E_ini_x[i, j] == 0) #test
+            #m.addConstr(E_ini_y[i, j] == 1) #test
+            #m.addConstr(E_ini_x[i, j] == 0) #test
             m.addConstr(S_x[enc_start_round, i, j] + S_y[enc_start_round, i, j] >= 1)
             m.addConstr(E_ini_x[i, j] == S_x[enc_start_round, i, j])
             m.addConstr(E_ini_y[i, j] == S_y[enc_start_round, i, j])
@@ -845,12 +845,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # set objective function
     set_obj(m, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, meet)
     
-    m.setParam(GRB.Param.PoolSearchMode, 2)
-    m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    #m.setParam(GRB.Param.PoolSearchMode, 2)
+    #m.setParam(GRB.Param.PoolSolutions,  1)
+    #m.setParam(GRB.Param.BestObjStop, 1.999999999)
     m.setParam(GRB.Param.Cutoff, 1)
     #m.setParam(GRB.Param.PoolObjBound,  2)
-    m.setParam(GRB.Param.Threads, 8)
+    m.setParam(GRB.Param.Threads, 4)
     m.optimize()
     
     if not os.path.exists(path= dir):
