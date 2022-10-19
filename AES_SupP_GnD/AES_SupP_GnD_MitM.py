@@ -98,28 +98,47 @@ def set_obj(m: gp.Model,
     m.update()
 
 # key expansion function
-def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, fKeyS_b: np.ndarray, fKeyS_r: np.ndarray, bKeyS_b: np.ndarray, bKeyS_r: np.ndarray, CONST_0: gp.Var, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
+def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, fKeyS_b: np.ndarray, fKeyS_r: np.ndarray, fKeyS_g, fKeyS_w, fKeyS_p, bKeyS_b: np.ndarray, bKeyS_r: np.ndarray, bKeyS_g, bKeyS_w, bKeyS_p, CONST_0: gp.Var, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
     # set key parameters
     Nk = key_size // 32
     Nb = 4
     Nr = math.ceil((total_r + 1)*Nb / Nk)
 
+    # auxiliary vars for SubWord operation in key expansion
     Ksub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='Ksub_b').values()).reshape((Nr, NROW))
     Ksub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='Ksub_r').values()).reshape((Nr, NROW))
     fKsub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_b').values()).reshape((Nr, NROW))
     fKsub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_r').values()).reshape((Nr, NROW))
+    fKsub_g = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_g').values()).reshape((Nr, NROW))
+    fKsub_w = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_w').values()).reshape((Nr, NROW))
+
     bKsub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_b').values()).reshape((Nr, NROW))
     bKsub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_r').values()).reshape((Nr, NROW))
+    bKsub_g = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_g').values()).reshape((Nr, NROW))
+    bKsub_w = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_w').values()).reshape((Nr, NROW))
 
+    for r in range(Nr):
+        for i in ROW:
+            m.addConstr(fKsub_g[r,i] == gp.and_(fKsub_b[r,i], fKsub_r[r,i]))
+            m.addConstr(fKsub_w[r,i] + fKsub_b[r,i] + fKsub_r[r,i] - fKsub_g[r,i] == 1)
+            m.addConstr(bKsub_g[r,i] == gp.and_(bKsub_b[r,i], bKsub_r[r,i]))
+            m.addConstr(bKsub_w[r,i] + bKsub_b[r,i] + bKsub_r[r,i] - bKsub_g[r,i] == 1)
+    
+    # key expansion algorithm
     for r in range(Nr):
         # initial state
         if r == start_r: 
             for j in range(Nk):
                 for i in ROW:
-                    m.addConstr(fKeyS_b[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
-                    m.addConstr(fKeyS_r[r, i, j] == K_ini_r[i, j])
-                    m.addConstr(bKeyS_b[r, i, j] == K_ini_b[i, j])
-                    m.addConstr(bKeyS_r[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
+                    m.addConstr(fKeyS_b[r,i,j] == gp.or_(K_ini_b[i,j], K_ini_r[i,j]))
+                    m.addConstr(fKeyS_r[r,i,j] == K_ini_r[i,j])
+                    # position pointer, equals 0 if the cell is grey, equals the position (start from 1) otherwise
+                    m.addConstr(fKeyS_p[r,i,j] == (1-fKeyS_g[r,i,j]) * (1-fKeyS_w[r,i,j]) * (i*Nk+j+1)) 
+
+                    m.addConstr(bKeyS_b[r,i,j] == K_ini_b[i,j])
+                    m.addConstr(bKeyS_r[r,i,j] == gp.or_(K_ini_b[i,j], K_ini_r[i,j]))
+                    # position pointer, equals 0 if the cell is grey, equals the position (start from 1) otherwise
+                    m.addConstr(bKeyS_p[r,i,j] == (1-bKeyS_g[r,i,j]) * (1-bKeyS_w[r,i,j]) * (i*Nk+j+1)) 
 
                     m.addConstr(key_cost_bwd[r,i,j] == 0)
                     m.addConstr(key_cost_fwd[r,i,j] == 0)
@@ -130,8 +149,8 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 if j == 0:
                     # RotWord
                     pr, pj = r-1, Nk-1
-                    fTemp_b, fTemp_r = np.roll(fKeyS_b[pr,:,pj], -1), np.roll(fKeyS_r[pr,:,pj], -1)
-                    bTemp_b, bTemp_r = np.roll(bKeyS_b[pr,:,pj], -1), np.roll(bKeyS_r[pr,:,pj], -1)
+                    fTemp_b, fTemp_r, fTemp_p = np.roll(fKeyS_b[pr,:,pj], -1), np.roll(fKeyS_r[pr,:,pj], -1), np.roll(fKeyS_p[pr,:,pj], -1)
+                    bTemp_b, bTemp_r, bTemp_p = np.roll(bKeyS_b[pr,:,pj], -1), np.roll(bKeyS_r[pr,:,pj], -1), np.roll(bKeyS_p[pr,:,pj], -1)
                     # SubWord
                     for i in ROW:
                         ext_SupP(m, fTemp_b[i], fTemp_r[i], bTemp_b[i], bTemp_r[i], Ksub_b[r,i], Ksub_r[r,i])
@@ -140,8 +159,8 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     bTemp_b, bTemp_r = bKsub_b[r], bKsub_r[r]
                 else:               
                     pr, pj = r, j-1
-                    fTemp_b, fTemp_r = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj] 
-                    bTemp_b, bTemp_r = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj] 
+                    fTemp_b, fTemp_r, fTemp_p = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj], fKeyS_p[pr,:,pj] 
+                    bTemp_b, bTemp_r, bTemp_p = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj], bKeyS_p[pr,:,pj] 
                 qr, qj = r-1, j      # compute round and column params for w[i-Nk]
                 for i in ROW:
                     gen_XOR_rule(m, fKeyS_b[qr,i,qj], fKeyS_r[qr,i,qj], fTemp_b[i], fTemp_r[i], fKeyS_b[r,i,j], fKeyS_r[r,i,j], key_cost_fwd[r,i,j], CONST_0)
@@ -649,8 +668,23 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # define vars storing the key state in key schedule (the long key), in total Nr rounds, with shape NROW*Nk
     fKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_x').values()).reshape((Nr, NROW, Nk))
     fKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_y').values()).reshape((Nr, NROW, Nk))
+    fKS_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_g').values()).reshape((Nr, NROW, Nk))
+    fKS_w = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_w').values()).reshape((Nr, NROW, Nk))
+    
     bKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_x').values()).reshape((Nr, NROW, Nk))
     bKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_y').values()).reshape((Nr, NROW, Nk))
+    bKS_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_g').values()).reshape((Nr, NROW, Nk))
+    bKS_w = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_w').values()).reshape((Nr, NROW, Nk))
+    
+    # add constraints for grey and white indicators
+    for r in range(Nr):
+        for i in ROW:
+            for j in range(Nk):
+                m.addConstr(fKS_g[r,i,j] == gp.and_(fKS_x[r,i,j], fKS_y[r,i,j]))
+                m.addConstr(fKS_w[r,i,j] + fKS_x[r,i,j] + fKS_y[r,i,j] - fKS_g[r,i,j] == 1)
+                m.addConstr(bKS_g[r,i,j] == gp.and_(bKS_x[r,i,j], bKS_y[r,i,j]))
+                m.addConstr(bKS_w[r,i,j] + bKS_x[r,i,j] + bKS_y[r,i,j] - bKS_g[r,i,j] == 1)
+
     # create alias storing the round keys with SupP
     fK_x = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
     fK_y = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
@@ -673,8 +707,8 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                 KeyS_j = 0
     
     # define positional pointer to address related key problem
-    fKS_p = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.INTEGER, name='fKS_x').values()).reshape((Nr, NROW, Nk))
-    bKS_p = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.INTEGER, name='fKS_y').values()).reshape((Nr, NROW, Nk))
+    fKS_p = np.asarray(m.addVars(Nr, NROW, Nk, lb=0, vtype= GRB.INTEGER, name='fKS_p').values()).reshape((Nr, NROW, Nk))
+    bKS_p = np.asarray(m.addVars(Nr, NROW, Nk, lb=0, vtype= GRB.INTEGER, name='fKS_p').values()).reshape((Nr, NROW, Nk))
 
     # define vars for columnwise encoding for MixCol input, including MC(fwd) and AK(bwd)
     fM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_u').values()).reshape((total_round, NCOL))
