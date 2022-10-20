@@ -1,0 +1,218 @@
+KEY_SCHEDULE_0
+ggbbbg   g
+gggggg   g
+ggbbbg   g
+gggggg   g
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_1
+ggbbgg   g
+gggggg   g
+ggbbgg   g
+gggggg   g
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_2
+ggbggg   g
+gggggg   g
+ggbggg   g
+gggggg   g
+
+rrgrrr   r
+rrrrrr   r
+rrgrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_3
+ggbbbb   g
+gggggg   b
+ggbbbb   g
+gggggg   b
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_4
+ggbbbb   b
+bbbbbb   b
+ggbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_5
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+KEY_SCHEDULE_6
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+bbbbbb   b
+
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+rrrrrr   r
+
+
+
+
+K#-1
+ggbb
+gggg
+ggbb
+gggg
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#0
+bggg
+gggg
+bggg
+gggg
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#1
+bbgg
+gggg
+bbgg
+gggg
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#2
+ggbg
+gggg
+ggbg
+gggg
+
+rrgr
+rrrr
+rrgr
+rrrr
+
+
+K#3
+gggg
+gggg
+gggg
+gggg
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#4
+bbbb
+gggg
+bbbb
+gggg
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#5
+ggbb
+bbbb
+ggbb
+bbbb
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#6
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#7
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
+K#8
+bbbb
+bbbb
+bbbb
+bbbb
+
+rrrr
+rrrr
+rrrr
+rrrr
+
+
