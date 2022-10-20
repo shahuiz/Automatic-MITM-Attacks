@@ -866,5 +866,5 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-#solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./RK_SupP/runs/')
-solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./RK_SupP/runs/')
+solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./AES_SupP/runs/')
+#solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./RK_SupP/runs/')
