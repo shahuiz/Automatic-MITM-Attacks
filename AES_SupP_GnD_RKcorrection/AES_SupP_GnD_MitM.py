@@ -70,7 +70,8 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
 # set objective function
 def set_obj(m: gp.Model, 
     ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, ini_key_g: np.ndarray, 
-    cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, 
+    cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, 
+    key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, fKS_eq_g, bKS_eq_g,
     fM_Gx: np.ndarray, fM_x: np.ndarray, bM_Gy: np.ndarray, bM_y: np.ndarray, fA_Gx: np.ndarray, fA_x: np.ndarray, bA_Gy: np.ndarray, bA_y: np.ndarray, 
     M_Gxy: np.ndarray, A_Gxy: np.ndarray, meet: np.ndarray):
     
@@ -87,8 +88,8 @@ def set_obj(m: gp.Model,
     m.addConstr(GnD_b == gp.quicksum(bM_Gy.flatten()) - gp.quicksum(bM_y.flatten()) + gp.quicksum(bA_Gy.flatten()) - gp.quicksum(bA_y.flatten())) 
     m.addConstr(GnD_br == gp.quicksum(M_Gxy.flatten()) + gp.quicksum(A_Gxy.flatten()))
 
-    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(key_cost_fwd.flatten()))
-    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()))
+    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(key_cost_fwd.flatten()) + gp.quicksum(fKS_eq_g.flatten()))
+    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(key_cost_bwd.flatten()) + gp.quicksum(bKS_eq_g.flatten()))
     m.addConstr(dm == gp.quicksum(meet.flatten()))
    
     m.addConstr(obj <= df_b - GnD_r)
@@ -98,19 +99,75 @@ def set_obj(m: gp.Model,
     m.update()
 
 # key expansion function
-def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, fKeyS_b: np.ndarray, fKeyS_r: np.ndarray, bKeyS_b: np.ndarray, bKeyS_r: np.ndarray, CONST_0: gp.Var, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
+def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b: np.ndarray, K_ini_r: np.ndarray, fKeyS_b: np.ndarray, fKeyS_r: np.ndarray, fKeyS_g, fKeyS_eq_g, bKeyS_b: np.ndarray, bKeyS_r: np.ndarray, bKeyS_g, bKeyS_eq_g, CONST_0: gp.Var, key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray):
     # set key parameters
     Nk = key_size // 32
     Nb = 4
     Nr = math.ceil((total_r + 1)*Nb / Nk)
 
+    # define subfunction to find all parents with even appearances in the tree
+    def find_parents(tree:np.ndarray, r:int,i:int,j:int):
+        level = 0               # store the level exploring
+        flag = 1                # store if terminate cond is met
+        indices = [[r,i,j]]     # store explored indices 
+        while flag:
+            for x in range(2**level-1, 2**(level+1)-1):
+                [xr,xi,xj] = indices[x]
+                if xr == start_r:
+                    flag = 0
+                    continue
+                # fwd dir
+                if xr > start_r:
+                    if xj == 0:
+                        pr, pi, pj = xr-1, (xi+1)%Nb, Nk-1
+                    else: 
+                        pr, pi, pj = xr, xi, xj-1
+                    qr, qi, qj = xr-1, xi, xj
+                # bwd dir
+                if xr < start_r:
+                    if j == 0:
+                        pr, pi, pj = xr, (xi+1)%Nb, Nk-1
+                    else: 
+                        pr, pi, pj = xr+1, xi, xj-1
+                    qr, qi, qj = xr+1, xi, xj
+                # if reach start round, terminate terversal after this level
+                indices += [[pr,pi,pj],[qr,qi,qj]]
+                if pr == start_r or qr == start_r:
+                    flag = 0
+            # update current level
+            level+=1
+        
+        # reduce nodes with even appearance (xor with itself is null)
+        parents = []
+        for x in range(2**level-1, 2**(level+1)-1):
+            [xr,xi,xj] = indices[x]
+            count = 0
+            print(tree[xr,xi,xj])
+            for y in range(2**level-1, 2**(level+1)-1):
+                [yr,yi,yj] = indices[y]
+                if tree[xr,xi,xj].sameAs(tree[yr,yi,yj]):
+                    count += 1
+            print (count)
+            if count % 2 == 1:
+                parents+=[tree[xr,xi,xj]]
+        
+        # return iterable, redundancy removed parent node list
+        return list(set(parents))
+
     Ksub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='Ksub_b').values()).reshape((Nr, NROW))
     Ksub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='Ksub_r').values()).reshape((Nr, NROW))
     fKsub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_b').values()).reshape((Nr, NROW))
     fKsub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_r').values()).reshape((Nr, NROW))
+    fKsub_g = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='fKsub_g').values()).reshape((Nr, NROW))
     bKsub_b = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_b').values()).reshape((Nr, NROW))
     bKsub_r = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_r').values()).reshape((Nr, NROW))
-
+    bKsub_g = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_g').values()).reshape((Nr, NROW))
+    for r in range(Nr):
+        for i in ROW:
+            m.addConstr(fKsub_g[r,i] == gp.and_(fKsub_b[r,i], fKsub_r[r,i]))
+            m.addConstr(fKsub_g[r,i] == gp.and_(fKsub_b[r,i], fKsub_r[r,i]))
+    
+    m.update()
     for r in range(Nr):
         # initial state
         if r == start_r: 
@@ -120,7 +177,6 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     m.addConstr(fKeyS_r[r, i, j] == K_ini_r[i, j])
                     m.addConstr(bKeyS_b[r, i, j] == K_ini_b[i, j])
                     m.addConstr(bKeyS_r[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
-
                     m.addConstr(key_cost_bwd[r,i,j] == 0)
                     m.addConstr(key_cost_fwd[r,i,j] == 0)
             continue
@@ -136,17 +192,22 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     for i in ROW:
                         ext_SupP(m, fTemp_b[i], fTemp_r[i], bTemp_b[i], bTemp_r[i], Ksub_b[r,i], Ksub_r[r,i])
                         ent_SupP(m, Ksub_b[r,i], Ksub_r[r,i], fKsub_b[r,i], fKsub_r[r,i], bKsub_b[r,i], bKsub_r[r,i])
-                    fTemp_b, fTemp_r = fKsub_b[r], fKsub_r[r] 
-                    bTemp_b, bTemp_r = bKsub_b[r], bKsub_r[r]
+                    fTemp_b, fTemp_r, fTemp_g = fKsub_b[r], fKsub_r[r], fKsub_g[r] 
+                    bTemp_b, bTemp_r, bTemp_g = bKsub_b[r], bKsub_r[r], bKsub_g[r]
                 else:               
                     pr, pj = r, j-1
-                    fTemp_b, fTemp_r = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj] 
-                    bTemp_b, bTemp_r = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj] 
+                    fTemp_b, fTemp_r, fTemp_g = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj], fKeyS_g[pr,:,pj]
+                    bTemp_b, bTemp_r, bTemp_g = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj], bKeyS_g[pr,:,pj] 
                 qr, qj = r-1, j      # compute round and column params for w[i-Nk]
                 for i in ROW:
                     gen_XOR_rule(m, fKeyS_b[qr,i,qj], fKeyS_r[qr,i,qj], fTemp_b[i], fTemp_r[i], fKeyS_b[r,i,j], fKeyS_r[r,i,j], key_cost_fwd[r,i,j], CONST_0)
                     gen_XOR_rule(m, bKeyS_b[qr,i,qj], bKeyS_r[qr,i,qj], bTemp_b[i], bTemp_r[i], bKeyS_b[r,i,j], bKeyS_r[r,i,j], CONST_0, key_cost_bwd[r,i,j])
-                
+                    # determine if the cell is a grey cell equivalent (can be reduced to the xor of some grey cells)
+                    m.addConstr(fKeyS_eq_g[r,i,j] == gp.min_(find_parents(fKeyS_g,r,i,j)))
+                    m.addConstr(bKeyS_eq_g[r,i,j] == gp.min_(find_parents(bKeyS_g,r,i,j)))
+                    # if the cell is grey equivalent (i.e. eq_g==1), we force the key cost as 1 to output a grey cell as wrote in the XOR rule
+                    m.addConstr(key_cost_fwd[r,i,j] >= fKeyS_eq_g[r,i,j])
+                    m.addConstr(key_cost_bwd[r,i,j] >= bKeyS_eq_g[r,i,j])
                 # if the state is outside the range, then force the cost as 0
                 if r*Nk+j >= total_r*Nb:
                     for i in ROW:
@@ -165,16 +226,23 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     for i in ROW:
                         ext_SupP(m, fTemp_b[i], fTemp_r[i], bTemp_b[i], bTemp_r[i], Ksub_b[r,i], Ksub_r[r,i])
                         ent_SupP(m, Ksub_b[r,i], Ksub_r[r,i], fKsub_b[r,i], fKsub_r[r,i], bKsub_b[r,i], bKsub_r[r,i])
-                    fTemp_b, fTemp_r = fKsub_b[r], fKsub_r[r] 
-                    bTemp_b, bTemp_r = bKsub_b[r], bKsub_r[r] 
+                    fTemp_b, fTemp_r, fTemp_g = fKsub_b[r], fKsub_r[r], fKsub_g[r] 
+                    bTemp_b, bTemp_r, bTemp_g = bKsub_b[r], bKsub_r[r], bKsub_g[r]
                 else:               
                     pr, pj = r+1, j-1
-                    fTemp_b, fTemp_r = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj] 
-                    bTemp_b, bTemp_r = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj] 
+                    fTemp_b, fTemp_r, fTemp_g = fKeyS_b[pr,:,pj], fKeyS_r[pr,:,pj], fKeyS_g[pr,:,pj]
+                    bTemp_b, bTemp_r, bTemp_g = bKeyS_b[pr,:,pj], bKeyS_r[pr,:,pj], bKeyS_g[pr,:,pj]  
                 qr, qj = r+1, j      # compute round and column params for w[i-Nk]
                 for i in ROW:
                     gen_XOR_rule(m, fKeyS_b[qr,i,qj], fKeyS_r[qr,i,qj], fTemp_b[i], fTemp_r[i], fKeyS_b[r,i,j], fKeyS_r[r,i,j], key_cost_fwd[r,i,j], CONST_0)
                     gen_XOR_rule(m, bKeyS_b[qr,i,qj], bKeyS_r[qr,i,qj], bTemp_b[i], bTemp_r[i], bKeyS_b[r,i,j], bKeyS_r[r,i,j], CONST_0, key_cost_bwd[r,i,j])
+                    # determine if the cell is a grey cell equivalent (can be reduced to the xor of some grey cells)
+                    m.addConstr(fKeyS_eq_g[r,i,j] == gp.min_(find_parents(fKeyS_g,r,i,j)))
+                    m.addConstr(bKeyS_eq_g[r,i,j] == gp.min_(find_parents(bKeyS_g,r,i,j)))
+                    # if the cell is grey equivalent (i.e. eq_g==1), we force the key cost as 1 to output a grey cell as wrote in the XOR rule
+                    m.addConstr(key_cost_fwd[r,i,j] >= fKeyS_eq_g[r,i,j])
+                    m.addConstr(key_cost_bwd[r,i,j] >= bKeyS_eq_g[r,i,j])
+        
         else:
             raise Exception("Irregular Behavior at key schedule")
         m.update()
@@ -649,8 +717,20 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # define vars storing the key state in key schedule (the long key), in total Nr rounds, with shape NROW*Nk
     fKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_x').values()).reshape((Nr, NROW, Nk))
     fKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_y').values()).reshape((Nr, NROW, Nk))
+    fKS_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_g').values()).reshape((Nr, NROW, Nk))
+    fKS_eq_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_eq_g').values()).reshape((Nr, NROW, Nk))
     bKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_x').values()).reshape((Nr, NROW, Nk))
     bKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_y').values()).reshape((Nr, NROW, Nk))
+    bKS_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_g').values()).reshape((Nr, NROW, Nk))
+    bKS_eq_g = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='bKS_eq_g').values()).reshape((Nr, NROW, Nk))
+    
+    # define grey cell encodings
+    for r in range(Nr):
+        for i in ROW:
+            for j in range(Nk): 
+                m.addConstr(fKS_g[r,i,j] == gp.and_(fKS_x[r,i,j], fKS_y[r,i,j]))
+                m.addConstr(bKS_g[r,i,j] == gp.and_(bKS_x[r,i,j], bKS_y[r,i,j]))
+    
     # create alias storing the round keys with SupP
     fK_x = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
     fK_y = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
@@ -739,7 +819,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
 #### Main Procedure ####
     # add constriants according to the key expansion algorithm
-    key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, bKS_x, bKS_y, CONST0, key_cost_fwd, key_cost_bwd)
+    key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, fKS_g, fKS_eq_g, bKS_x, bKS_y, bKS_g, bKS_eq_g, CONST0, key_cost_fwd, key_cost_bwd)
 
     # proposition: fix start state to be all red (WLOG), in compensate of the efficiency
     for i in ROW:
@@ -894,12 +974,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             raise Exception("Irregular Behavior at encryption")
     
     # set objective function
-    set_obj(m, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, fM_Gx, fM_x, bM_Gy, bM_y, fA_Gx, fA_x, bA_Gy, bA_y, M_Gxy, A_Gxy, meet)
+    set_obj(m, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, fKS_eq_g, bKS_eq_g, fM_Gx, fM_x, bM_Gy, bM_y, fA_Gx, fA_x, bA_Gy, bA_y, M_Gxy, A_Gxy, meet)
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
     m.setParam(GRB.Param.BestObjStop, 1.999999999)
-    m.setParam(GRB.Param.Cutoff, 1)
+   # m.setParam(GRB.Param.Cutoff, 1)
     #m.setParam(GRB.Param.PoolObjBound,  2)
     m.setParam(GRB.Param.Threads, 4)
     m.optimize()
