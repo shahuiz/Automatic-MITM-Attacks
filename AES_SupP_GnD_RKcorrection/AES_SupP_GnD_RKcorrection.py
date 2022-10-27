@@ -24,18 +24,18 @@ def ent_SupP(m: gp.Model, X_b: gp.Var, X_r: gp.Var, fX_b: gp.Var, fX_r: gp.Var, 
     #              (1,1)->(1,1)+(1,1); 
     #              (0,0)->(0,0)+(0,0);
 
-    m.addConstr(fX_b == gp.or_(X_b, X_r))
+    m.addConstr(fX_b == gp.max_(X_b, X_r))
     m.addConstr(fX_r == X_r)
     m.addConstr(bX_b == X_b)
-    m.addConstr(bX_r == gp.or_(X_b, X_r))
+    m.addConstr(bX_r == gp.max_(X_b, X_r))
 
 def ext_SupP(m: gp.Model, fX_b: gp.Var, fX_r: gp.Var, bX_b: gp.Var, bX_r: gp.Var, X_b: gp.Var, X_r: gp.Var):
     # truth table: (1,0) + (1,1) or (1,0) -> (1,0)
     #              (0,1) + (1,1) or (0,1) -> (0,1)
     #              (1,1) + (1,1) -> (1,1)
     #              otherwise -> (0,0)
-    m.addConstr(X_b == gp.and_(fX_b, bX_b))
-    m.addConstr(X_r == gp.and_(fX_r, bX_r))
+    m.addConstr(X_b == gp.min_(fX_b, bX_b))
+    m.addConstr(X_r == gp.min_(fX_r, bX_r))
 
 def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, cost_fwd: gp.Var, cost_bwd: gp.Var):
     # linear constriants for XOR operations, gennerated by Convex Hull method
@@ -162,7 +162,6 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                 [xr,xi,xj] = indices[x]
                 xnode = KeyS[xr,xi,xj]
             count = 0
-            print(KeyS[xr,xi,xj])
             for y in range(2**level-1, 2**(level+1)-1):
                 if len(indices[y]) == 2:
                     [yr,yi] = indices[y]
@@ -172,9 +171,8 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     ynode = KeyS[yr,yi,yj]
                 if xnode.sameAs(ynode):
                     count += 1
-            print(count)
             if count % 2 == 1:
-                parents+=[xnode]
+                parents += [xnode]
         
         # return iterable, redundancy removed parent node list
         return list(set(parents))
@@ -191,9 +189,9 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
     bKsub_c = np.asarray(m.addVars(Nr, NROW, vtype= GRB.BINARY, name='bKsub_c').values()).reshape((Nr, NROW))
     for r in range(Nr):
         for i in ROW:
-            m.addConstr(fKsub_g[r,i] == gp.and_(fKsub_x[r,i], fKsub_y[r,i]))
+            m.addConstr(fKsub_g[r,i] == gp.min_(fKsub_x[r,i], fKsub_y[r,i]))
             m.addConstr(fKsub_c[r,i] == fKsub_x[r,i] - fKsub_y[r,i])
-            m.addConstr(bKsub_g[r,i] == gp.and_(bKsub_x[r,i], bKsub_y[r,i]))
+            m.addConstr(bKsub_g[r,i] == gp.min_(bKsub_x[r,i], bKsub_y[r,i]))
             m.addConstr(bKsub_c[r,i] == bKsub_y[r,i] - bKsub_x[r,i])
     
     m.update()
@@ -202,10 +200,10 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
         if r == start_r: 
             for j in range(Nk):
                 for i in ROW:
-                    m.addConstr(fKeyS_x[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
+                    m.addConstr(fKeyS_x[r, i, j] == gp.max_(K_ini_b[i, j], K_ini_r[i, j]))
                     m.addConstr(fKeyS_y[r, i, j] == K_ini_r[i, j])
                     m.addConstr(bKeyS_x[r, i, j] == K_ini_b[i, j])
-                    m.addConstr(bKeyS_y[r, i, j] == gp.or_(K_ini_b[i, j], K_ini_r[i, j]))
+                    m.addConstr(bKeyS_y[r, i, j] == gp.max_(K_ini_b[i, j], K_ini_r[i, j]))
                     m.addConstr(key_cost_bwd[r,i,j] == 0)
                     m.addConstr(key_cost_fwd[r,i,j] == 0)
             continue
@@ -239,13 +237,6 @@ def key_expansion(m:gp.Model, key_size:int, total_r: int, start_r: int, K_ini_b:
                     m.addConstr(key_cost_bwd[r,i,j] >= bKeyS_eq_g[r,i,j])
                     m.addConstr(fKeyS_g[r,i,j] >= fKeyS_eq_g[r,i,j])  
                     m.addConstr(bKeyS_g[r,i,j] >= bKeyS_eq_g[r,i,j])
-                # if the state is outside the range, then force the cost as 0
-                if r*Nk+j >= total_r*Nb:
-                    for i in ROW:
-                        continue
-                        m.addConstr(key_cost_fwd[r,i,j] == 0)
-                        m.addConstr(key_cost_bwd[r,i,j] == 0)
-            continue
         # bwd direction
         elif r < start_r:  
             for j in range(Nk):
@@ -654,7 +645,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for i in ROW:
         for j in COL:
             m.addConstr(E_ini_x[i,j] + E_ini_y[i,j] >= 1)
-            m.addConstr(E_ini_g[i,j] == gp.and_(E_ini_x[i,j], E_ini_y[i,j]))
+            m.addConstr(E_ini_g[i,j] == gp.min_(E_ini_x[i,j], E_ini_y[i,j]))
 
     # define vars to track the start state of Key states (K)  
     K_ini_x = np.asarray(m.addVars(NROW, Nk, vtype=GRB.BINARY, name='K_ini_x').values()).reshape((NROW, Nk))
@@ -664,7 +655,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for i in ROW:
         for j in range(Nk):  
             m.addConstr(K_ini_x[i,j] + K_ini_y[i,j] >= 1)      
-            m.addConstr(K_ini_g[i,j] == gp.and_(K_ini_x[i,j], K_ini_y[i,j]))
+            m.addConstr(K_ini_g[i,j] == gp.min_(K_ini_x[i,j], K_ini_y[i,j]))
 
     # define vars storing the SB state at each round with encoding scheme
     S_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='S_x').values()).reshape((total_round, NROW, NCOL))
@@ -675,7 +666,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for r in range(total_round):
         for i in ROW:
             for j in COL:
-                m.addConstr(S_g[r,i,j] == gp.and_(S_x[r,i,j], S_y[r,i,j]))
+                m.addConstr(S_g[r,i,j] == gp.min_(S_x[r,i,j], S_y[r,i,j]))
                 m.addConstr(S_w[r,i,j] + S_x[r,i,j] + S_y[r,i,j] - S_g[r,i,j] == 1)
 
     # create alias storing the MC state at each round with encoding scheme
@@ -726,19 +717,19 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for r in range(total_round):
         for i in ROW:
             for j in COL:             
-                m.addConstr(fM_g[r,i,j] == gp.and_(fM_x[r,i,j], fM_y[r,i,j]))
+                m.addConstr(fM_g[r,i,j] == gp.min_(fM_x[r,i,j], fM_y[r,i,j]))
                 m.addConstr(fM_w[r,i,j] + fM_x[r,i,j] + fM_y[r,i,j] - fM_g[r,i,j] == 1)
-                m.addConstr(bM_g[r,i,j] == gp.and_(bM_x[r,i,j], bM_y[r,i,j]))
+                m.addConstr(bM_g[r,i,j] == gp.min_(bM_x[r,i,j], bM_y[r,i,j]))
                 m.addConstr(bM_w[r,i,j] + bM_x[r,i,j] + bM_y[r,i,j] - bM_g[r,i,j] == 1)
                 
-                m.addConstr(fA_g[r,i,j] == gp.and_(fA_x[r,i,j], fA_y[r,i,j]))
+                m.addConstr(fA_g[r,i,j] == gp.min_(fA_x[r,i,j], fA_y[r,i,j]))
                 m.addConstr(fA_w[r,i,j] + fA_x[r,i,j] + fA_y[r,i,j] - fA_g[r,i,j] == 1)
-                m.addConstr(bA_g[r,i,j] == gp.and_(bA_x[r,i,j], bA_y[r,i,j]))
+                m.addConstr(bA_g[r,i,j] == gp.min_(bA_x[r,i,j], bA_y[r,i,j]))
                 m.addConstr(bA_w[r,i,j] + bA_x[r,i,j] + bA_y[r,i,j] - bA_g[r,i,j] == 1)
 
-                m.addConstr(fS_g[r,i,j] == gp.and_(fS_x[r,i,j], fS_y[r,i,j]))
+                m.addConstr(fS_g[r,i,j] == gp.min_(fS_x[r,i,j], fS_y[r,i,j]))
                 m.addConstr(fS_w[r,i,j] + fS_x[r,i,j] + fS_y[r,i,j] - fS_g[r,i,j] == 1)
-                m.addConstr(bS_g[r,i,j] == gp.and_(bS_x[r,i,j], bS_y[r,i,j]))
+                m.addConstr(bS_g[r,i,j] == gp.min_(bS_x[r,i,j], bS_y[r,i,j]))
                 m.addConstr(bS_w[r,i,j] + bS_x[r,i,j] + bS_y[r,i,j] - bS_g[r,i,j] == 1) 
 
     # define GnD vars with constraints
@@ -761,11 +752,11 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             for j in COL: 
                 m.addConstr(fM_Gx[r,i,j] >= fM_x[r,i,j])
                 m.addConstr(bM_Gy[r,i,j] >= bM_y[r,i,j])
-                m.addConstr(M_Gxy[r,i,j] == gp.and_(fM_Gx[r,i,j], bM_Gy[r,i,j], fM_w[r,i,j], bM_w[r,i,j]))
+                m.addConstr(M_Gxy[r,i,j] == gp.min_(fM_Gx[r,i,j], bM_Gy[r,i,j], fM_w[r,i,j], bM_w[r,i,j]))
 
                 m.addConstr(fA_Gx[r,i,j] >= fA_x[r,i,j])
                 m.addConstr(bA_Gy[r,i,j] >= bA_y[r,i,j])
-                m.addConstr(A_Gxy[r,i,j] == gp.and_(fA_Gx[r,i,j], bA_Gy[r,i,j], fA_w[r,i,j], bA_w[r,i,j]))
+                m.addConstr(A_Gxy[r,i,j] == gp.min_(fA_Gx[r,i,j], bA_Gy[r,i,j], fA_w[r,i,j], bA_w[r,i,j]))
 
     # define vars storing the key state in key schedule (the long key), in total Nr rounds, with shape NROW*Nk
     fKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_x').values()).reshape((Nr, NROW, Nk))
@@ -783,9 +774,9 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for r in range(Nr):
         for i in ROW:
             for j in range(Nk): 
-                m.addConstr(fKS_g[r,i,j] == gp.and_(fKS_x[r,i,j], fKS_y[r,i,j]))
+                m.addConstr(fKS_g[r,i,j] == gp.min_(fKS_x[r,i,j], fKS_y[r,i,j]))
                 m.addConstr(fKS_c[r,i,j] == fKS_x[r,i,j] - fKS_y[r,i,j])
-                m.addConstr(bKS_g[r,i,j] == gp.and_(bKS_x[r,i,j], bKS_y[r,i,j]))
+                m.addConstr(bKS_g[r,i,j] == gp.min_(bKS_x[r,i,j], bKS_y[r,i,j]))
                 m.addConstr(bKS_c[r,i,j] == bKS_y[r,i,j] - bKS_x[r,i,j])
     
     # create alias storing the round keys with SupP
@@ -865,9 +856,9 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # add constriants for grey indicators
     for i in ROW:
         for j in COL:
-            m.addConstr(Meet_fwd_g[i,j] == gp.and_(Meet_fwd_x[i,j], Meet_fwd_y[i,j]))
+            m.addConstr(Meet_fwd_g[i,j] == gp.min_(Meet_fwd_x[i,j], Meet_fwd_y[i,j]))
             m.addConstr(Meet_fwd_w[i,j] + Meet_fwd_x[i,j] + Meet_fwd_y[i,j] - Meet_fwd_g[i,j] == 1)
-            m.addConstr(Meet_bwd_g[i,j] == gp.and_(Meet_bwd_x[i,j], Meet_bwd_y[i,j]))
+            m.addConstr(Meet_bwd_g[i,j] == gp.min_(Meet_bwd_x[i,j], Meet_bwd_y[i,j]))
             m.addConstr(Meet_bwd_w[i,j] + Meet_bwd_x[i,j] + Meet_bwd_y[i,j] - Meet_bwd_g[i,j] == 1)
     
     # define auxiliary vars for computations on degree of matching
@@ -881,14 +872,14 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # proposition: fix start state to be all red (WLOG), in compensate of the efficiency
     for i in ROW:
         for j in COL:
-            # continue
+            #continue
             m.addConstr(E_ini_y[i, j] == 1) #test
             m.addConstr(E_ini_x[i, j] == 0) #test
 
     # test for key schedule
     for i in ROW:
         for j in range(Nk):
-            continue
+            #continue
             if (i==0 and j==2) or (i==2 and j==2):
                 m.addConstr(K_ini_y[i, j] == 0) #test
                 m.addConstr(K_ini_x[i, j] == 1) #test
@@ -926,7 +917,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             tempMeet = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempMeet').values()).reshape((NROW, NCOL))
             for j in COL:
                 for i in ROW:
-                    m.addConstr(tempMeet[i,j] == gp.or_(Meet_fwd_w[i,j], S_w[0,i,j]))
+                    m.addConstr(tempMeet[i,j] == gp.max_(Meet_fwd_w[i,j], S_w[0,i,j]))
                 m.addConstr(meet[j] == NROW - gp.quicksum(tempMeet[:,j]))
                 m.addConstr(meet_signed[j] == 0)
             continue
@@ -1047,8 +1038,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
     m.setParam(GRB.Param.BestObjStop, 2.999999999)
-   # m.setParam(GRB.Param.Cutoff, 1)
-    #m.setParam(GRB.Param.PoolObjBound,  2)
+   #m.setParam(GRB.Param.Cutoff, 1)
     m.setParam(GRB.Param.Threads, 4)
     m.optimize()
     

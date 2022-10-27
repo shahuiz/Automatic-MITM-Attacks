@@ -102,6 +102,6 @@ for r in range(Nr):
             continue
             x[r,i,j] = [r,i,j]
 
-output = find_parents(x, subx, 6, 1, 1)
+output = find_parents(x, subx, 5, 0, 3)
 print(output)
 
