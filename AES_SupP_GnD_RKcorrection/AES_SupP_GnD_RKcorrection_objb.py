@@ -83,9 +83,10 @@ def set_obj(m: gp.Model, Nr, Nb, Nk,
                 m.addConstr(true_key_cost_fwd[r,i,j] == key_cost_fwd[r,i,j] - fKS_eq_g[r,i,j])
                 m.addConstr(true_key_cost_bwd[r,i,j] == key_cost_bwd[r,i,j] - bKS_eq_g[r,i,j])
 
-    df_b = m.addVar(lb=1, ub=8, vtype=GRB.INTEGER, name="DF_b")
-    df_r = m.addVar(lb=1, ub=8, vtype=GRB.INTEGER, name="DF_r")
-    dm = m.addVar(lb=1, ub=16, vtype=GRB.INTEGER, name="Match")
+    # reduce search pool
+    df_b = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_r")
+    dm = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="Match")
     obj = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
@@ -1055,4 +1056,4 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./AES_SupP_GnD_RKCorrection/runs/')
+solve(key_size=192, total_round=9, enc_start_round=2, match_round=8, key_start_round=2, dir='./AES_SupP_GnD_RKCorrection/runs/')

@@ -7,6 +7,7 @@ import numpy as np
 import re
 import os
 import math
+import copy
 
 # AES parameters
 NROW = 4
@@ -19,15 +20,19 @@ COL = range(NCOL)
 TAB = ' ' * 4
 
 def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir):
-    def color(b,r):
-        if b==1 and r==0:
-            return 'b'
-        if b==0 and r==1:
-            return 'r'
-        if b==1 and r==1:
-            return 'g'
-        if b==0 and r==0:
-            return 'w'
+    def draw_gridlines(file):
+        file.write('%' +' draw grid lines:\n')
+        file.write('\\draw (0,0) rectangle (%d,%d);\n'   %(NCOL, NROW))
+        for i in range(1, NROW):
+            file.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
+        for i in range(1, NCOL):
+            file.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
+
+    def draw_cells(W_x, W_y, file):
+        for ri in range(NROW):
+            i = NROW - 1 - ri
+            for j in range(NCOL):
+                file.write(color_fill[W_x[r,i,j], W_y[r,i,j]] + ' (%d,%d) rectangle + (1,1);\n'   %(j, i))
 
     solFile = open(dir + model_name + '_sol_' + str(sol_i) + '.sol', 'r')
     Sol = dict()
@@ -217,41 +222,43 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
 
 
 
-    CM = np.ndarray(shape=(2, 2),dtype='object')
-    CM[0, 0] = '\\fill[\\UW]'
-    CM[0, 1] = '\\fill[\\BW]'
-    CM[1, 0] = '\\fill[\\FW]'
-    CM[1, 1] = '\\fill[\\CW]'
-    if NROW == 4:
-        HO = NROW
-        WO = NCOL
-    else:
-        HO = NROW
-        WO = NCOL // 2
-
+    color_fill = np.ndarray(shape=(2, 2),dtype='object')
+    color_fill[0, 0] = '\\fill[\\UW]'
+    color_fill[0, 1] = '\\fill[\\BW]'
+    color_fill[1, 0] = '\\fill[\\FW]'
+    color_fill[1, 1] = '\\fill[\\CW]'
     
+    if NROW == 4:
+        y_shift = NROW
+        x_shift = NCOL
+    else:
+        y_shift = NROW
+        x_shift = NCOL // 2
+
     
 
     outfile = './x'
-    fid = open(outfile + '.tex', 'w')
-    fid.write(
+    f = open(outfile + '.tex', 'w')
+    
+    # write latex header
+    f.write( '%' + ' Vis_' + model_name + '\n'
         '\\documentclass{standalone}' + '\n'
         '\\usepackage[usenames,dvipsnames]{xcolor}' + '\n'
-        '\\usepackage{amsmath,amssymb,mathtools}' + '\n'
-        '\\usepackage{tikz,calc,pgffor}' + '\n'
+        '\\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor}' + '\n'
         '\\usepackage{xspace}' + '\n'
         '\\usetikzlibrary{crypto.symbols,patterns,calc}' + '\n'
         '\\tikzset{shadows=no}' + '\n'
         '\\input{macro}' + '\n')
-    fid.write('\n\n')
-    fid.write(
+    f.write('\n\n')
+    
+    f.write( '%' + 'document starts' + '\n'
         '\\begin{document}' + '\n' +
         '\\begin{tikzpicture}[scale=0.2, every node/.style={font=\\boldmath\\bf}]' + '\n'
 	    '\\everymath{\\scriptstyle}' + '\n'
 	    '\\tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};' + '\n')
-    fid.write('\n\n')
-    NROW =0
-    NCOL = 0
+    f.write('\n\n')
+
+    # draw solution
     for r in range(total_round):
         mc_cost_fwd_col = 0
         mc_cost_bwd_col = 0
@@ -259,106 +266,170 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
             mc_cost_fwd_col += mc_cost_fwd[r, i]
             mc_cost_bwd_col += mc_cost_fwd[r, i]
         
-        indent = 0
-        ## SB
-        fid.write('\\begin{scope}[yshift =' + str(- r * (NROW + HO))+' cm, xshift =' + str(indent * (NCOL + WO))+' cm]'+'\n')
-        for i in ROW:
-            row = NROW - 1 - i
-            for j in range(NCOL):
-                col = j
-                fid.write(CM[SB_x_v[r,i,j], SB_y_v[r,i,j]] + ' ('+str(col)+','+str(row)+') rectangle +(1,1);'+'\n')
-        fid.write('\\draw (0,0) rectangle (' + str(NCOL) + ',' + str(NROW) + ');' + '\n')
-        for i in range(1, NROW):
-            fid.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
-        for i in range(1, NCOL):
-            fid.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
-        fid.write('\\path (' + str(NCOL//2) + ',' + str(NROW + 0.5) + ') node {\\scriptsize$\\SB^' + str(r) + '$};'+'\n')
-        if r in bwd:
-            fid.write('\\draw[edge, <-] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny SB} node[below] {\\tiny SR} +(' + str(WO) + ',' + '0);' + '\n')
+        if r in fwd:
+            arrow = '->'
         else:
-            fid.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny SB} node[below] {\\tiny SR} +(' + str(WO) + ',' + '0);' + '\n')
-        if r == enc_start_round:
-            fid.write('\\path (' + str(NCOL//2) + ',' + str(-0.8) + ') node {\\scriptsize$(+' + str(ini_d1) + '~\\DoFF,~+' + str(ini_d2) + '~\\DoFB)$};'+'\n')
-            fid.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StENC$};'+'\n')
-        fid.write('\n'+'\\end{scope}'+'\n')
-        fid.write('\n\n')
+            arrow = '<-'
 
+        ## SubByte state
+        slot = 0
+        f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        draw_cells(SB_x, SB_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny SB} node[below] {\\tiny SR} +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        # write enc start sign
+        if r == enc_start_round:
+            f.write('\\path (' + str(NCOL//2) + ',' + str(-0.8) + ') node {\\scriptsize$(+' + str(ini_df_enc_b) + '~\\DoFF,~+' + str(ini_df_enc_r) + '~\\DoFB)$};'+'\n')
+            f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StENC$};'+'\n')
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+
+        # MixCol state
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        draw_cells(MC_x, MC_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny SupP}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
         
+        # SupP MixCol state
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        draw_cells(fMC_x, fMC_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
         
-        indent = indent + 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+        draw_cells(bMC_x, bMC_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        # SupP AddKey state
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        draw_cells(fAK_x, fAK_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+        draw_cells(bAK_x, bAK_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        # SupP SubByte state (next round)
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        original_r = copy.deepcopy(r)
+        r = (r+1)%total_round
+        draw_cells(fSB_x, fSB_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        r = original_r
+        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+        original_r = copy.deepcopy(r)
+        r = (r+1)%total_round
+        draw_cells(bAK_x, bAK_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        r = original_r
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        # SubByte state (next round)
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+        original_r = copy.deepcopy(r)
+        r = (r+1)%total_round
+        draw_cells(SB_x, SB_y, f)
+        draw_gridlines(f)
+        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+        r = original_r
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        continue
+        
+        slot = slot + 1
         ## MC
-        fid.write('\\begin{scope}[yshift =' + str(- r * (NROW + HO))+' cm, xshift =' +str(indent * (NCOL + WO))+' cm]'+'\n')
+        f.write('\\begin{scope}[yshift =' + str(- r * (NROW + y_shift))+' cm, xshift =' +str(slot * (NCOL + x_shift))+' cm]'+'\n')
         for i in range(NROW):
             row = NROW - 1 - i
             for j in range(NCOL):
                 col = j
-                fid.write(CM[MC_x_v[r,i,j], MC_y_v[r,i,j]] + ' ('+str(col)+','+str(row)+') rectangle +(1,1);'+'\n')
-        fid.write('\\draw (0,0) rectangle (' + str(NCOL) + ',' + str(NROW) + ');' + '\n')
+                f.write(color_fill[MC_x_v[r,i,j], MC_y_v[r,i,j]] + ' ('+str(col)+','+str(row)+') rectangle +(1,1);'+'\n')
+        f.write('\\draw (0,0) rectangle (' + str(NCOL) + ',' + str(NROW) + ');' + '\n')
         for i in range(1, NROW):
-            fid.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
+            f.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
         for i in range(1, NCOL):
-            fid.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
-        fid.write('\\path (' + str(NCOL//2) + ',' + str(NROW + 0.5) + ') node {\\scriptsize$\\MC^' + str(r) + '$};'+'\n')
+            f.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
+        f.write('\\path (' + str(NCOL//2) + ',' + str(NROW + 0.5) + ') node {\\scriptsize$\\MC^' + str(r) + '$};'+'\n')
         op = 'MC'
         if r == TR - 1 and WLastMC == 0:
             op = 'I'
         if r in B_r:
-            fid.write('\\draw[edge, <-] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(WO) + ',' + '0);' + '\n')
+            f.write('\\draw[edge, <-] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
         if r in F_r:
-            fid.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(WO) + ',' + '0);' + '\n')
+            f.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
         if r == mat_r:
-            fid.write('\\draw[edge, -] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(WO) + ',' + '0);' + '\n')
-            fid.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') --  +(' + str(WO//2) + ',' + '0);' + '\n')
-            fid.write('\\draw[edge, ->] (' + str(NCOL + WO) + ',' + str(NROW//2) + ') --  +(' + str(-WO//2) + ',' + '0);' + '\n')
+            f.write('\\draw[edge, -] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
+            f.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') --  +(' + str(x_shift//2) + ',' + '0);' + '\n')
+            f.write('\\draw[edge, ->] (' + str(NCOL + x_shift) + ',' + str(NROW//2) + ') --  +(' + str(-x_shift//2) + ',' + '0);' + '\n')
     
-            fid.write('\\path (' + str(NCOL + WO//2) + ',' + str(-0.8) + ') node {\\scriptsize Match};' + '\n')
-            fid.write('\\path (' + str(-2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndFwd$};' + '\n')
-            fid.write('\\path (' + str(NCOL + WO + NCOL + 2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndBwd$};' + '\n')
+            f.write('\\path (' + str(NCOL + x_shift//2) + ',' + str(-0.8) + ') node {\\scriptsize Match};' + '\n')
+            f.write('\\path (' + str(-2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndFwd$};' + '\n')
+            f.write('\\path (' + str(NCOL + x_shift + NCOL + 2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndBwd$};' + '\n')
         else:
-            fid.write('\\path (' + str((NCOL + WO) - WO//2) + ',' + str(-0.8) + ') node {\\scriptsize$ (-' + str(mc_cost_fwd_col) + '~\\DoFF,~-' + str(mc_cost_bwd_col) + '~\\DoFB)$};'+'\n')
-        fid.write('\n'+'\\end{scope}'+'\n')
-        fid.write('\n\n')
+            f.write('\\path (' + str((NCOL + x_shift) - x_shift//2) + ',' + str(-0.8) + ') node {\\scriptsize$ (-' + str(mc_cost_fwd_col) + '~\\DoFF,~-' + str(mc_cost_bwd_col) + '~\\DoFB)$};'+'\n')
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
 
-        indent = indent + 1
-        ## SB r+1
-        fid.write('\\begin{scope}[yshift =' + str(- r * (NROW + HO))+' cm, xshift =' +str(indent * (NCOL + WO))+' cm]'+'\n')
-        for i in range(NROW):
-            row = NROW - 1 - i
-            for j in range(NCOL):
-                col = j
-                fid.write(CM[SB_x_v[(r+1)%TR,i,j], SB_y_v[(r+1)%TR,i,j]] + ' ('+str(col)+','+str(row)+') rectangle +(1,1);'+'\n')
-        fid.write('\\draw (0,0) rectangle (' + str(NCOL) + ',' + str(NROW) + ');' + '\n')
-        for i in range(1, NROW):
-            fid.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
-        for i in range(1, NCOL):
-            fid.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
-        fid.write('\\path (' + str(NCOL//2) + ',' + str(NROW + 0.5) + ') node {\\scriptsize$\\SB^' + str((r+1)%TR) + '$};'+'\n')
-        fid.write('\n'+'\\end{scope}'+'\n')
-        fid.write('\n\n')
-    ## Final
-    fid.write('\\begin{scope}[yshift =' + str(- TR * (NROW + HO) + HO)+' cm, xshift =' +str(2 * (NCOL + WO))+' cm]'+'\n')
-    fid.write(
+    
+    
+    ## Final footnote
+    f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-total_round*(3*NROW+y_shift), 2*(NCOL+x_shift))) 
+    #f.write('\\begin{scope}[yshift =' + str(- total_round * (NROW + y_shift) + y_shift)+' cm, xshift =' +str(2 * (NCOL + x_shift))+' cm]'+'\n')
+    f.write(
         '\\node[draw, thick, rectangle, text width=6.5cm, label={[shift={(-2.8,-0)}]\\footnotesize Config}] at (-7, 0) {' + '\n'
 	    '{\\footnotesize' + '\n'
-	    '$\\bullet~(\\varInitBL,~\\varInitRD)~=~(+' + str(ini_d1) + '~\\DoFF,~+' + str(ini_d2) + '~\\DoFB)~$' + '\\\ \n'
+	    '$\\bullet~(\\varInitBL,~\\varInitRD)~=~(+' + str(ini_df_enc_b) + '~\\DoFF,~+' + str(ini_df_enc_r) + '~\\DoFB)~$' + '\\\ \n'
 	    '$\\bullet~(\\varDoFBL,~\\varDoFRD,~\\varDoM)~=~(+' + 
-        str(int(DoF_BL_v)) + '~\\DoFF,~+' + 
-        str(int(DoF_RD_v)) + '~\\DoFB,~+' + 
-        str(int(DoM_v )) + '~\\DoM)$' + '\n'
+        str(int(DF_b)) + '~\\DoFF,~+' + 
+        str(int(DF_r)) + '~\\DoFB,~+' + 
+        str(int(Match)) + '~\\DoM)$' + '\n'
 	    '}' + '\n'
 	    '};' + '\n'
         )
-
-
-
-    #fid.write('\n'+'\\end{scope}'+'\n')
-    fid.write('\n\n')
-    fid.write('\\end{tikzpicture}'+'\n\n'+'\\end{document}')
-    fid.close()
+    f.write('\n'+'\\end{scope}'+'\n')
+    
+    
+    f.write('\n\n')
+    f.write('\\end{tikzpicture}'+'\n\n'+'\\end{document}')
+    f.close()
     from os import system
     system("pdflatex -output-directory='./' ./" + outfile + ".tex") 
     
-    fid.close()
+    f.close()
 
     return
 
