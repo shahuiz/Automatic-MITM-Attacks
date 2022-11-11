@@ -20,19 +20,38 @@ COL = range(NCOL)
 TAB = ' ' * 4
 
 def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir):
-    def draw_gridlines(file):
+    def draw_gridlines(file, id = 'ENC'):
+        if id == 'ENC':
+            ncol = NCOL
+        elif id == 'KS': 
+            ncol = Nk
+        else: 
+            ncol = 1
+        
         file.write('%' +' draw grid lines:\n')
-        file.write('\\draw (0,0) rectangle (%d,%d);\n'   %(NCOL, NROW))
+        file.write('\\draw (0,0) rectangle (%d,%d);\n'   %(ncol, NROW))
         for i in range(1, NROW):
-            file.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
-        for i in range(1, NCOL):
+            file.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(ncol) + ',' + str(0) + ');' + '\n')
+        for i in range(1, ncol):
             file.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
 
     def draw_cells(W_x, W_y, file):
-        for ri in range(NROW):
-            i = NROW - 1 - ri
-            for j in range(NCOL):
-                file.write(color_fill[W_x[r,i,j], W_y[r,i,j]] + ' (%d,%d) rectangle + (1,1);\n'   %(j, i))
+        if W_x.shape != W_y.shape:
+            return
+        if len(W_x.shape) > 2:
+            nrow = len(W_x[0])
+            ncol = len(W_x[0][0])
+            for ri in range(nrow):
+                i = nrow - 1 - ri
+                for j in range(ncol):
+                    file.write(color_fill[W_x[r,i,j], W_y[r,i,j]] + ' (%d,%d) rectangle + (1,1);\n'   %(j, i))
+        else:
+            nrow = 4
+            ncol = 1
+            for ri in range(nrow):
+                i = nrow - 1 - ri
+                #for j in range(ncol):
+                file.write(color_fill[W_x[r,i], W_y[r,i]] + ' (%d,%d) rectangle + (1,1);\n'   %(0, i))
 
     solFile = open(dir + model_name + '_sol_' + str(sol_i) + '.sol', 'r')
     Sol = dict()
@@ -266,7 +285,7 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
             mc_cost_fwd_col += mc_cost_fwd[r, i]
             mc_cost_bwd_col += mc_cost_fwd[r, i]
         
-        if r in fwd:
+        if r in fwd or r == match_round:
             arrow = '->'
         else:
             arrow = '<-'
@@ -301,7 +320,10 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         draw_cells(fMC_x, fMC_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        if r != total_round -1:
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        else:
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift*3))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
         
@@ -309,105 +331,207 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         draw_cells(bMC_x, bMC_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        if r != total_round - 1:
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        else: 
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift*3))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
-        
+            
         # SupP AddKey state
         slot += 1
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        draw_cells(fAK_x, fAK_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-        draw_cells(bAK_x, bAK_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
+        if r != total_round - 1:
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fAK_x, fAK_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bAK_x, bAK_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
         
         # SupP SubByte state (next round)
         slot += 1
+        if r != total_round - 1:
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            original_r = copy.deepcopy(r)
+            r = (r+1)%total_round
+            draw_cells(fSB_x, fSB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            r = original_r
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            original_r = copy.deepcopy(r)
+            r = (r+1)%total_round
+            draw_cells(bSB_x, bSB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            r = original_r
+            #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+        
+        else: 
+            # AT state
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fAK_x, fAK_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AT$};\n'    %(NCOL//2, NROW+0.5))
+            #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bAK_x, bAK_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AT$};\n'    %(NCOL//2, NROW+0.5))
+            #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Add}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+        
+        # SubByte state (next round)
+        slot += 1
+        if r != total_round - 1:
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            original_r = copy.deepcopy(r)
+            r = (r+1)%total_round
+            draw_cells(SB_x, SB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+            r = original_r
+            #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+        
+        # SupP key state
+        slot += 1
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        original_r = copy.deepcopy(r)
-        r = (r+1)%total_round
-        draw_cells(fSB_x, fSB_y, f)
+        draw_cells(fKEY_x, fKEY_y, f)
         draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
-        r = original_r
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\\path (%f,%f) node {\\scriptsize$\\K^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
         
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-        original_r = copy.deepcopy(r)
-        r = (r+1)%total_round
-        draw_cells(bAK_x, bAK_y, f)
+        draw_cells(bKEY_x, bKEY_y, f)
         draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
-        r = original_r
-        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        
-        # SubByte state (next round)
-        slot += 1
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        original_r = copy.deepcopy(r)
-        r = (r+1)%total_round
-        draw_cells(SB_x, SB_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%d$};\n'    %(NCOL//2, NROW+0.5, r))
-        r = original_r
-        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        
-        continue
-        
-        slot = slot + 1
-        ## MC
-        f.write('\\begin{scope}[yshift =' + str(- r * (NROW + y_shift))+' cm, xshift =' +str(slot * (NCOL + x_shift))+' cm]'+'\n')
-        for i in range(NROW):
-            row = NROW - 1 - i
-            for j in range(NCOL):
-                col = j
-                f.write(color_fill[MC_x_v[r,i,j], MC_y_v[r,i,j]] + ' ('+str(col)+','+str(row)+') rectangle +(1,1);'+'\n')
-        f.write('\\draw (0,0) rectangle (' + str(NCOL) + ',' + str(NROW) + ');' + '\n')
-        for i in range(1, NROW):
-            f.write('\\draw (' + str(0) + ',' + str(i) + ') rectangle (' + str(NCOL) + ',' + str(0) + ');' + '\n')
-        for i in range(1, NCOL):
-            f.write('\\draw (' + str(i) + ',' + str(0) + ') rectangle (' + str(0) + ',' + str(NROW) + ');' + '\n')
-        f.write('\\path (' + str(NCOL//2) + ',' + str(NROW + 0.5) + ') node {\\scriptsize$\\MC^' + str(r) + '$};'+'\n')
-        op = 'MC'
-        if r == TR - 1 and WLastMC == 0:
-            op = 'I'
-        if r in B_r:
-            f.write('\\draw[edge, <-] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
-        if r in F_r:
-            f.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
-        if r == mat_r:
-            f.write('\\draw[edge, -] (' + str(NCOL) + ',' + str(NROW//2) + ') -- node[above] {\\tiny ' + op + '} +(' + str(x_shift) + ',' + '0);' + '\n')
-            f.write('\\draw[edge, ->] (' + str(NCOL) + ',' + str(NROW//2) + ') --  +(' + str(x_shift//2) + ',' + '0);' + '\n')
-            f.write('\\draw[edge, ->] (' + str(NCOL + x_shift) + ',' + str(NROW//2) + ') --  +(' + str(-x_shift//2) + ',' + '0);' + '\n')
-    
-            f.write('\\path (' + str(NCOL + x_shift//2) + ',' + str(-0.8) + ') node {\\scriptsize Match};' + '\n')
-            f.write('\\path (' + str(-2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndFwd$};' + '\n')
-            f.write('\\path (' + str(NCOL + x_shift + NCOL + 2) + ',' + str(0.1) + ') node {\\scriptsize$\\EndBwd$};' + '\n')
-        else:
-            f.write('\\path (' + str((NCOL + x_shift) - x_shift//2) + ',' + str(-0.8) + ') node {\\scriptsize$ (-' + str(mc_cost_fwd_col) + '~\\DoFF,~-' + str(mc_cost_bwd_col) + '~\\DoFB)$};'+'\n')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\K^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
 
+        if r == total_round - 1:
+            # whitening key
+            r = -1
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-total_round*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fKEY_x, fKEY_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\K^{w}F$};\n'    %(NCOL//2, NROW+0.5))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-total_round*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bKEY_x, bKEY_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\K^{w}B$};\n'    %(NCOL//2, NROW+0.5))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            # SupP SB0
+            slot -= 2
+            r = 0
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-total_round*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fSB_x, fSB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny Eval}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-total_round*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bSB_x, bSB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            # SB0
+            slot += 1
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-total_round*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(SB_x, SB_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\SB^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            
+            break
+            
+        continue
+
+    # draw key schedule
+    for r in range(Nr):
+        slot = 7
+        # SupP Key Schedule 
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(Nk+x_shift))) 
+        draw_cells(fKSch_x, fKSch_y, f)
+        draw_gridlines(f, 'KS')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\KS^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySchedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(Nk+x_shift))) 
+        draw_cells(bKSch_x, bKSch_y, f)
+        draw_gridlines(f, 'KS')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\KS^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySschedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+
+        # Ksub
+        slot += 1
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(Nk+x_shift) )) 
+        draw_cells(KSub_x, KSub_y, f)
+        draw_gridlines(f, 'KSub')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\temp^%d$};\n'    %(NCOL//2, NROW+0.5, r))
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySchedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+
+        # SupP Ksub
+        slot += 0.75
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(Nk+x_shift) )) 
+        draw_cells(fKSub_x, fKSub_y, f)
+        draw_gridlines(f, 'KSub')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\temp^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySchedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+        
+        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(Nk+x_shift) )) 
+        draw_cells(bKSub_x, bKSub_y, f)
+        draw_gridlines(f, 'KSub')
+        f.write('\\path (%f,%f) node {\\scriptsize$\\temp^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySschedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        f.write('\n'+'\\end{scope}'+'\n')
+        f.write('\n\n')
+
+        continue
     
     
     ## Final footnote
-    f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-total_round*(3*NROW+y_shift), 2*(NCOL+x_shift))) 
+    f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round+2)*(3*NROW+y_shift), 2*(NCOL+x_shift))) 
     #f.write('\\begin{scope}[yshift =' + str(- total_round * (NROW + y_shift) + y_shift)+' cm, xshift =' +str(2 * (NCOL + x_shift))+' cm]'+'\n')
     f.write(
         '\\node[draw, thick, rectangle, text width=6.5cm, label={[shift={(-2.8,-0)}]\\footnotesize Config}] at (-7, 0) {' + '\n'
