@@ -2,6 +2,7 @@
 \documentclass{standalone}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{xspace}
 \usetikzlibrary{crypto.symbols,patterns,calc}
 \tikzset{shadows=no}
@@ -14,6 +15,8 @@
 \everymath{\scriptstyle}
 \tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};
 
+
+\draw -- (-16,20) -- (99,20) -- (99,-220) -- (-16,-220);
 
 \begin{scope}[yshift = 0.000000 cm, xshift = 0.000000 cm]
 
@@ -74,7 +77,15 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^0$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
 
 \end{scope}
 
@@ -143,6 +154,14 @@
 \end{scope}
 
 
+\begin{scope}[yshift = -8 cm, xshift = 16 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
 \begin{scope}[yshift = 0 cm, xshift = 24 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
@@ -170,8 +189,8 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^0F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
@@ -202,7 +221,13 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^0B$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -8 cm, xshift = 24 cm]
+
 
 \end{scope}
 
@@ -234,7 +259,6 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^1F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
@@ -270,6 +294,22 @@
 \end{scope}
 
 
+\begin{scope}[yshift = 0 cm, xshift = 32 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 40 cm]
+
+\draw[edge, <-] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
 \begin{scope}[yshift = 0 cm, xshift = 40 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
@@ -296,7 +336,7 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^1$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
@@ -328,6 +368,7 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^0F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
@@ -359,11 +400,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^0B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -16.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -20.000000 cm, xshift = 0.000000 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -395,7 +437,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 8 cm]
+\begin{scope}[yshift = -20 cm, xshift = 8 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -422,12 +464,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^1$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 16 cm]
+\begin{scope}[yshift = -20 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 16 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -459,7 +509,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 16 cm]
+\begin{scope}[yshift = -26 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -491,7 +541,15 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 24 cm]
+\begin{scope}[yshift = -28 cm, xshift = 16 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -4 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 24 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -518,12 +576,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^1F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 24 cm]
+\begin{scope}[yshift = -26 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -550,12 +608,18 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^1B$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -28 cm, xshift = 24 cm]
+
 
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 32 cm]
+\begin{scope}[yshift = -20 cm, xshift = 32 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -582,12 +646,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^2F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 32 cm]
+\begin{scope}[yshift = -26 cm, xshift = 32 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -618,7 +681,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 40 cm]
+\begin{scope}[yshift = -20 cm, xshift = 32 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 40 cm]
+
+\draw[edge, <-] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 40 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -644,12 +723,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^2$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 48 cm]
+\begin{scope}[yshift = -20 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -676,11 +755,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^1F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 48 cm]
+\begin{scope}[yshift = -26 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -707,11 +787,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^1B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -32.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -40.000000 cm, xshift = 0.000000 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -743,7 +824,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 8 cm]
+\begin{scope}[yshift = -40 cm, xshift = 8 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -770,12 +851,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^2$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 16 cm]
+\begin{scope}[yshift = -40 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 16 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -807,7 +896,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 16 cm]
+\begin{scope}[yshift = -46 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -839,7 +928,13 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 24 cm]
+\begin{scope}[yshift = -48 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 24 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -866,12 +961,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^2F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 24 cm]
+\begin{scope}[yshift = -46 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -898,12 +993,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^2B$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -48 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -8 ~\DoFB)$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 32 cm]
+\begin{scope}[yshift = -40 cm, xshift = 32 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -930,12 +1033,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^3F$};
-\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 32 cm]
+\begin{scope}[yshift = -46 cm, xshift = 32 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -966,7 +1068,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 40 cm]
+\begin{scope}[yshift = -40 cm, xshift = 32 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 40 cm]
+
+\draw[edge, <-] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 40 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -992,12 +1110,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^3$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 48 cm]
+\begin{scope}[yshift = -40 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1024,11 +1142,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^2F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 48 cm]
+\begin{scope}[yshift = -46 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1055,11 +1174,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^2B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -48.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -60.000000 cm, xshift = 0.000000 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1093,7 +1213,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 8 cm]
+\begin{scope}[yshift = -60 cm, xshift = 8 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1120,12 +1240,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^3$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 16 cm]
+\begin{scope}[yshift = -60 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 16 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1157,7 +1285,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 16 cm]
+\begin{scope}[yshift = -66 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1189,7 +1317,13 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 24 cm]
+\begin{scope}[yshift = -68 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 24 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1216,12 +1350,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^3F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 24 cm]
+\begin{scope}[yshift = -66 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1248,12 +1382,18 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^3B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -68 cm, xshift = 24 cm]
+
 
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 32 cm]
+\begin{scope}[yshift = -60 cm, xshift = 32 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1280,12 +1420,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^4F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 32 cm]
+\begin{scope}[yshift = -66 cm, xshift = 32 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1316,7 +1455,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 40 cm]
+\begin{scope}[yshift = -60 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 40 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 40 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1342,12 +1497,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^4$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 48 cm]
+\begin{scope}[yshift = -60 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1374,11 +1529,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^3F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 48 cm]
+\begin{scope}[yshift = -66 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1405,11 +1561,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^3B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -64.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -80.000000 cm, xshift = 0.000000 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1441,7 +1598,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 8 cm]
+\begin{scope}[yshift = -80 cm, xshift = 8 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1468,12 +1625,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^4$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 16 cm]
+\begin{scope}[yshift = -80 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 16 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1505,7 +1670,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 16 cm]
+\begin{scope}[yshift = -86 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1537,7 +1702,15 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 24 cm]
+\begin{scope}[yshift = -88 cm, xshift = 16 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 24 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1564,12 +1737,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^4F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 24 cm]
+\begin{scope}[yshift = -86 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1596,12 +1769,18 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^4B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -88 cm, xshift = 24 cm]
+
 
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 32 cm]
+\begin{scope}[yshift = -80 cm, xshift = 32 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1628,12 +1807,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^5F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 32 cm]
+\begin{scope}[yshift = -86 cm, xshift = 32 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1664,7 +1842,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 40 cm]
+\begin{scope}[yshift = -80 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 40 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 40 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1690,12 +1884,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^5$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 48 cm]
+\begin{scope}[yshift = -80 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1722,11 +1916,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^4F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 48 cm]
+\begin{scope}[yshift = -86 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1753,11 +1948,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^4B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -80.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -100.000000 cm, xshift = 0.000000 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1789,7 +1985,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 8 cm]
+\begin{scope}[yshift = -100 cm, xshift = 8 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1816,12 +2012,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^5$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 16 cm]
+\begin{scope}[yshift = -100 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 16 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1853,7 +2057,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 16 cm]
+\begin{scope}[yshift = -106 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1885,7 +2089,13 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 24 cm]
+\begin{scope}[yshift = -108 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 24 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1912,12 +2122,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^5F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 24 cm]
+\begin{scope}[yshift = -106 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -1944,12 +2154,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^5B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -108 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -10 ~\DoFB)$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 32 cm]
+\begin{scope}[yshift = -100 cm, xshift = 32 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -1976,12 +2194,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^6F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 32 cm]
+\begin{scope}[yshift = -106 cm, xshift = 32 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2012,7 +2229,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 40 cm]
+\begin{scope}[yshift = -100 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 40 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 40 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2038,12 +2271,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^6$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 48 cm]
+\begin{scope}[yshift = -100 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -2070,11 +2303,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^5F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 48 cm]
+\begin{scope}[yshift = -106 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2101,11 +2335,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^5B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -96.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -120.000000 cm, xshift = 0.000000 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2137,7 +2372,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 8 cm]
+\begin{scope}[yshift = -120 cm, xshift = 8 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2164,12 +2399,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^6$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 16 cm]
+\begin{scope}[yshift = -120 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 16 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2201,7 +2444,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 16 cm]
+\begin{scope}[yshift = -126 cm, xshift = 16 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -2233,7 +2476,13 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 24 cm]
+\begin{scope}[yshift = -128 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 24 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2260,12 +2509,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^6F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 24 cm]
+\begin{scope}[yshift = -126 cm, xshift = 24 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2292,12 +2541,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^6B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -128 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -4 ~\DoFB)$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 32 cm]
+\begin{scope}[yshift = -120 cm, xshift = 32 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2324,12 +2581,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^7F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 32 cm]
+\begin{scope}[yshift = -126 cm, xshift = 32 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -2360,7 +2616,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 40 cm]
+\begin{scope}[yshift = -120 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 40 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 40 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2386,12 +2658,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^7$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 48 cm]
+\begin{scope}[yshift = -120 cm, xshift = 48 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -2418,11 +2690,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^6F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 48 cm]
+\begin{scope}[yshift = -126 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2449,11 +2722,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^6B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -112.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -140.000000 cm, xshift = 0.000000 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2485,7 +2759,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 8 cm]
+\begin{scope}[yshift = -140 cm, xshift = 8 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2512,12 +2786,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^7$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 16 cm]
+\begin{scope}[yshift = -140 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 16 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2549,7 +2831,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -118 cm, xshift = 16 cm]
+\begin{scope}[yshift = -146 cm, xshift = 16 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2581,7 +2863,13 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 24 cm]
+\begin{scope}[yshift = -148 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 24 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2608,12 +2896,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^7F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -118 cm, xshift = 24 cm]
+\begin{scope}[yshift = -146 cm, xshift = 24 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2640,12 +2928,18 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AK^7B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(4,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -148 cm, xshift = 24 cm]
+
 
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 32 cm]
+\begin{scope}[yshift = -140 cm, xshift = 32 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2672,12 +2966,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^8F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -118 cm, xshift = 32 cm]
+\begin{scope}[yshift = -146 cm, xshift = 32 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2708,7 +3001,23 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 40 cm]
+\begin{scope}[yshift = -140 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 40 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-44,-12) -- (-44,-18) -- (-40,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 40 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2734,12 +3043,12 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^8$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -112 cm, xshift = 48 cm]
+\begin{scope}[yshift = -140 cm, xshift = 48 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -2766,11 +3075,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^7F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -118 cm, xshift = 48 cm]
+\begin{scope}[yshift = -146 cm, xshift = 48 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -2797,11 +3107,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\K^7B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -128.000000 cm, xshift = 0.000000 cm]
+\begin{scope}[yshift = -160.000000 cm, xshift = 0.000000 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2829,11 +3140,12 @@
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^8$};
 \draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+\path (-2,0.8) node {\scriptsize$\StMatch$};
 
 \end{scope}
 
 
-\begin{scope}[yshift = -128 cm, xshift = 8 cm]
+\begin{scope}[yshift = -160 cm, xshift = 8 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2860,12 +3172,20 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^8$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -128 cm, xshift = 16 cm]
+\begin{scope}[yshift = -160 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 16 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2892,12 +3212,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^8F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(12,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -134 cm, xshift = 16 cm]
+\begin{scope}[yshift = -166 cm, xshift = 16 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2924,12 +3244,18 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\MC^8B$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Add}+(12,0);
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -128 cm, xshift = 32 cm]
+\begin{scope}[yshift = -168 cm, xshift = 16 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 24 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2956,11 +3282,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AT$};
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};\node[scale = 0.800000, XOR] at (-2.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -134 cm, xshift = 32 cm]
+\begin{scope}[yshift = -166 cm, xshift = 24 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -2987,135 +3314,12 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\AT$};
-
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};\node[scale = 0.800000, XOR] at (-2.000000,2.000000){};
 \end{scope}
 
 
-\begin{scope}[yshift = -128 cm, xshift = 48 cm]
-
-\fill[\FW] (0,3) rectangle + (1,1);
-\fill[\CW] (1,3) rectangle + (1,1);
-\fill[\FW] (2,3) rectangle + (1,1);
-\fill[\CW] (3,3) rectangle + (1,1);
-\fill[\UW] (0,2) rectangle + (1,1);
-\fill[\UW] (1,2) rectangle + (1,1);
-\fill[\UW] (2,2) rectangle + (1,1);
-\fill[\UW] (3,2) rectangle + (1,1);
-\fill[\FW] (0,1) rectangle + (1,1);
-\fill[\CW] (1,1) rectangle + (1,1);
-\fill[\FW] (2,1) rectangle + (1,1);
-\fill[\CW] (3,1) rectangle + (1,1);
-\fill[\UW] (0,0) rectangle + (1,1);
-\fill[\UW] (1,0) rectangle + (1,1);
-\fill[\UW] (2,0) rectangle + (1,1);
-\fill[\UW] (3,0) rectangle + (1,1);
-% draw grid lines:
-\draw (0,0) rectangle (4,4);
-\draw (0,1) rectangle (4,0);
-\draw (0,2) rectangle (4,0);
-\draw (0,3) rectangle (4,0);
-\draw (1,0) rectangle (0,4);
-\draw (2,0) rectangle (0,4);
-\draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\K^8F$};
-
-\end{scope}
-
-
-\begin{scope}[yshift = -134 cm, xshift = 48 cm]
-
-\fill[\BW] (0,3) rectangle + (1,1);
-\fill[\BW] (1,3) rectangle + (1,1);
-\fill[\BW] (2,3) rectangle + (1,1);
-\fill[\BW] (3,3) rectangle + (1,1);
-\fill[\UW] (0,2) rectangle + (1,1);
-\fill[\UW] (1,2) rectangle + (1,1);
-\fill[\UW] (2,2) rectangle + (1,1);
-\fill[\UW] (3,2) rectangle + (1,1);
-\fill[\BW] (0,1) rectangle + (1,1);
-\fill[\BW] (1,1) rectangle + (1,1);
-\fill[\BW] (2,1) rectangle + (1,1);
-\fill[\BW] (3,1) rectangle + (1,1);
-\fill[\UW] (0,0) rectangle + (1,1);
-\fill[\UW] (1,0) rectangle + (1,1);
-\fill[\UW] (2,0) rectangle + (1,1);
-\fill[\UW] (3,0) rectangle + (1,1);
-% draw grid lines:
-\draw (0,0) rectangle (4,4);
-\draw (0,1) rectangle (4,0);
-\draw (0,2) rectangle (4,0);
-\draw (0,3) rectangle (4,0);
-\draw (1,0) rectangle (0,4);
-\draw (2,0) rectangle (0,4);
-\draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\K^8B$};
-
-\end{scope}
-
-
-\begin{scope}[yshift = -144 cm, xshift = 48 cm]
-
-\fill[\UW] (0,3) rectangle + (1,1);
-\fill[\CW] (1,3) rectangle + (1,1);
-\fill[\CW] (2,3) rectangle + (1,1);
-\fill[\CW] (3,3) rectangle + (1,1);
-\fill[\CW] (0,2) rectangle + (1,1);
-\fill[\CW] (1,2) rectangle + (1,1);
-\fill[\FW] (2,2) rectangle + (1,1);
-\fill[\FW] (3,2) rectangle + (1,1);
-\fill[\UW] (0,1) rectangle + (1,1);
-\fill[\CW] (1,1) rectangle + (1,1);
-\fill[\CW] (2,1) rectangle + (1,1);
-\fill[\CW] (3,1) rectangle + (1,1);
-\fill[\CW] (0,0) rectangle + (1,1);
-\fill[\CW] (1,0) rectangle + (1,1);
-\fill[\FW] (2,0) rectangle + (1,1);
-\fill[\FW] (3,0) rectangle + (1,1);
-% draw grid lines:
-\draw (0,0) rectangle (4,4);
-\draw (0,1) rectangle (4,0);
-\draw (0,2) rectangle (4,0);
-\draw (0,3) rectangle (4,0);
-\draw (1,0) rectangle (0,4);
-\draw (2,0) rectangle (0,4);
-\draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\K^{w}F$};
-
-\end{scope}
-
-
-\begin{scope}[yshift = -150 cm, xshift = 48 cm]
-
-\fill[\UW] (0,3) rectangle + (1,1);
-\fill[\BW] (1,3) rectangle + (1,1);
-\fill[\BW] (2,3) rectangle + (1,1);
-\fill[\BW] (3,3) rectangle + (1,1);
-\fill[\BW] (0,2) rectangle + (1,1);
-\fill[\BW] (1,2) rectangle + (1,1);
-\fill[\BW] (2,2) rectangle + (1,1);
-\fill[\BW] (3,2) rectangle + (1,1);
-\fill[\UW] (0,1) rectangle + (1,1);
-\fill[\BW] (1,1) rectangle + (1,1);
-\fill[\BW] (2,1) rectangle + (1,1);
-\fill[\BW] (3,1) rectangle + (1,1);
-\fill[\BW] (0,0) rectangle + (1,1);
-\fill[\BW] (1,0) rectangle + (1,1);
-\fill[\BW] (2,0) rectangle + (1,1);
-\fill[\BW] (3,0) rectangle + (1,1);
-% draw grid lines:
-\draw (0,0) rectangle (4,4);
-\draw (0,1) rectangle (4,0);
-\draw (0,2) rectangle (4,0);
-\draw (0,3) rectangle (4,0);
-\draw (1,0) rectangle (0,4);
-\draw (2,0) rectangle (0,4);
-\draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\K^{w}B$};
-
-\end{scope}
-
-
-\begin{scope}[yshift = -144 cm, xshift = 32 cm]
+\begin{scope}[yshift = -160 cm, xshift = 32 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -3142,12 +3346,11 @@
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
 \path (2.000000,4.500000) node {\scriptsize$\SB^0F$};
-\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
 
 \end{scope}
 
 
-\begin{scope}[yshift = -150 cm, xshift = 32 cm]
+\begin{scope}[yshift = -166 cm, xshift = 32 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -3178,7 +3381,17 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -144 cm, xshift = 40 cm]
+\begin{scope}[yshift = -160 cm, xshift = 32 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\draw[edge, ->] (42,-158) -- (42,-172) -- (-6,-172) -- (-6,2) -- (0,2);
+\begin{scope}[yshift = -160 cm, xshift = 40 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (1,3) rectangle + (1,1);
@@ -3204,7 +3417,135 @@
 \draw (1,0) rectangle (0,4);
 \draw (2,0) rectangle (0,4);
 \draw (3,0) rectangle (0,4);
-\path (2.000000,4.500000) node {\scriptsize$\SB^0$};
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 48 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^8F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-26,6) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^8B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-26,-2) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 56 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^{w}F$};
+\draw (4,2) -- (6,2) -- (6,7) -- (-26,7) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 56 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^{w}B$};
+\draw (4,2) -- (6,2) -- (6,-1) -- (-26,-1) -- (-26,2);
 
 \end{scope}
 
@@ -3339,7 +3680,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 70 cm]
+\begin{scope}[yshift = -20 cm, xshift = 70 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -3380,7 +3721,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 70 cm]
+\begin{scope}[yshift = -26 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -3421,7 +3762,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 80 cm]
+\begin{scope}[yshift = -20 cm, xshift = 80 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3437,7 +3778,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -16 cm, xshift = 87 cm]
+\begin{scope}[yshift = -20 cm, xshift = 87 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (0,2) rectangle + (1,1);
@@ -3453,7 +3794,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -22 cm, xshift = 87 cm]
+\begin{scope}[yshift = -26 cm, xshift = 87 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3469,7 +3810,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 70 cm]
+\begin{scope}[yshift = -40 cm, xshift = 70 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -3510,7 +3851,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 70 cm]
+\begin{scope}[yshift = -46 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -3551,7 +3892,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 80 cm]
+\begin{scope}[yshift = -40 cm, xshift = 80 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3567,7 +3908,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -32 cm, xshift = 87 cm]
+\begin{scope}[yshift = -40 cm, xshift = 87 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (0,2) rectangle + (1,1);
@@ -3583,7 +3924,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -38 cm, xshift = 87 cm]
+\begin{scope}[yshift = -46 cm, xshift = 87 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3599,7 +3940,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 70 cm]
+\begin{scope}[yshift = -60 cm, xshift = 70 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -3640,7 +3981,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 70 cm]
+\begin{scope}[yshift = -66 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -3681,7 +4022,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 80 cm]
+\begin{scope}[yshift = -60 cm, xshift = 80 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3697,7 +4038,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -48 cm, xshift = 87 cm]
+\begin{scope}[yshift = -60 cm, xshift = 87 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (0,2) rectangle + (1,1);
@@ -3713,7 +4054,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -54 cm, xshift = 87 cm]
+\begin{scope}[yshift = -66 cm, xshift = 87 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3729,7 +4070,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 70 cm]
+\begin{scope}[yshift = -80 cm, xshift = 70 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -3770,7 +4111,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 70 cm]
+\begin{scope}[yshift = -86 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -3811,7 +4152,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 80 cm]
+\begin{scope}[yshift = -80 cm, xshift = 80 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3827,7 +4168,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -64 cm, xshift = 87 cm]
+\begin{scope}[yshift = -80 cm, xshift = 87 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\CW] (0,2) rectangle + (1,1);
@@ -3843,7 +4184,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -70 cm, xshift = 87 cm]
+\begin{scope}[yshift = -86 cm, xshift = 87 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\BW] (0,2) rectangle + (1,1);
@@ -3859,7 +4200,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 70 cm]
+\begin{scope}[yshift = -100 cm, xshift = 70 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\FW] (1,3) rectangle + (1,1);
@@ -3900,7 +4241,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 70 cm]
+\begin{scope}[yshift = -106 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -3941,7 +4282,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 80 cm]
+\begin{scope}[yshift = -100 cm, xshift = 80 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -3957,7 +4298,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -80 cm, xshift = 87 cm]
+\begin{scope}[yshift = -100 cm, xshift = 87 cm]
 
 \fill[\CW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -3973,7 +4314,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -86 cm, xshift = 87 cm]
+\begin{scope}[yshift = -106 cm, xshift = 87 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -3989,7 +4330,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 70 cm]
+\begin{scope}[yshift = -120 cm, xshift = 70 cm]
 
 \fill[\FW] (0,3) rectangle + (1,1);
 \fill[\CW] (1,3) rectangle + (1,1);
@@ -4030,7 +4371,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 70 cm]
+\begin{scope}[yshift = -126 cm, xshift = 70 cm]
 
 \fill[\BW] (0,3) rectangle + (1,1);
 \fill[\BW] (1,3) rectangle + (1,1);
@@ -4071,7 +4412,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 80 cm]
+\begin{scope}[yshift = -120 cm, xshift = 80 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -4087,7 +4428,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -96 cm, xshift = 87 cm]
+\begin{scope}[yshift = -120 cm, xshift = 87 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -4103,7 +4444,7 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -102 cm, xshift = 87 cm]
+\begin{scope}[yshift = -126 cm, xshift = 87 cm]
 
 \fill[\UW] (0,3) rectangle + (1,1);
 \fill[\UW] (0,2) rectangle + (1,1);
@@ -4119,7 +4460,74 @@
 \end{scope}
 
 
-\begin{scope}[yshift = -176.000000 cm, xshift = 16.000000 cm]
+\begin{scope}[yshift = -180.000000 cm, xshift = 8.000000 cm]
+
+\path (-4,1.5) node {\scriptsize$\StMatch$};
+\draw[edge, ->] (4.000000,2.000000) -- +(2,0);
+\draw[edge, <-] (6.000000,2.000000) -- +(2,0);
+\path (6.0,3) node {\tiny Meet};
+
+\end{scope}
+\begin{scope}[yshift = -180.000000 cm, xshift = 8.000000 cm]
+
+\path (-4,2.5) node {\tiny id};
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\meet^F$};
+
+\end{scope}
+\begin{scope}[yshift = -180.000000 cm, xshift = 16.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^0$};
+
+\end{scope}
+\begin{scope}[yshift = -200.000000 cm, xshift = 16.000000 cm]
 
 \node[draw, thick, rectangle, text width=6.5cm, label={[shift={(-2.8,-0)}]\footnotesize Config}] at (-7, 0) {
 {\footnotesize
