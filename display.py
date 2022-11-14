@@ -19,7 +19,7 @@ ROW = range(NROW)
 COL = range(NCOL)
 TAB = ' ' * 4
 
-def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir):
+def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir:str):
     def draw_gridlines(file, id = 'ENC'):
         if id == 'ENC':
             ncol = NCOL
@@ -254,8 +254,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
     GnD_br = Sol["GND_br"]
     Obj = Sol["Obj"]
 
-
-
     color_fill = np.ndarray(shape=(2, 2),dtype='object')
     color_fill[0, 0] = '\\fill[\\UW]'
     color_fill[0, 1] = '\\fill[\\BW]'
@@ -271,36 +269,38 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         y_shift = NROW
         x_shift = NCOL // 2
 
-
-    outfile = './x'
-    f = open(outfile + '.tex', 'w')
+    
+    #outfile = dir  + model_name
+    f = open(dir  + model_name + '.tex', 'w')
+    #print(outfile)
     
     # write latex header
     f.write( '%' + ' Vis_' + model_name + '\n'
         '\\documentclass{standalone}' + '\n'
         '\\usepackage[usenames,dvipsnames]{xcolor}' + '\n'
-        '\\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor}' + '\n'
-        '\\usepackage[margin=2.5cm]{geometry}' + '\n'
+        '\\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor,import}' + '\n'
         '\\usepackage{xspace}' + '\n'
+        #'\\input{./crypto_tex/pgflibraryarrows.new.code}' + '\n'
+        #'\\input{./crypto_tex/tikzlibrarycrypto.symbols.code}' + '\n'
         '\\usetikzlibrary{crypto.symbols,patterns,calc}' + '\n'
         '\\tikzset{shadows=no}' + '\n'
         '\\input{macro}' + '\n')
-    f.write('\n\n')
     
     f.write( '%' + 'document starts' + '\n'
         '\\begin{document}' + '\n' +
         '\\begin{tikzpicture}[scale=0.2, every node/.style={font=\\boldmath\\bf}]' + '\n'
 	    '\\everymath{\\scriptstyle}' + '\n'
 	    '\\tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};' + '\n')
-    f.write('\n\n')
-    f.write('\\draw -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n\n'
+    # borderline
+    f.write('%'+'borderline\n' + '\\draw -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n\n'
     %(
         -2*xtab, ytab,
         9*(Nr+x_shift), ytab,
         9*(Nr+x_shift), -(total_round+2)*ytab,
         -2*xtab, -(total_round+2)*ytab
     ))
-    # draw solution
+    
+    # draw enc states
     for r in range(total_round):
         mc_cost_fwd_col = 0
         mc_cost_bwd_col = 0
@@ -340,7 +340,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
-
         # draw arrow
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
         f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op1, x_shift))
@@ -439,8 +438,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         
         # SupP SubByte state (next round)
         slot += 1
-        if r != total_round - 1:    # inter round, SupP NSB state
-            pass
         # fwd
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
         original_r = copy.deepcopy(r)
@@ -466,8 +463,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         
         # SubByte state (next round)
         slot += 1
-        if r != total_round - 1:
-            pass
         # draw arrow
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), (slot-1)*(NCOL+x_shift))) 
         f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op2, x_shift))
@@ -555,13 +550,13 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         # last round features
         if r == total_round - 1:
             slot+=1
-            # whitening key
+            # whitening key fwd
             r = -1
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-(total_round-1)*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
             draw_cells(fKEY_x, fKEY_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\K^{w}F$};\n'    %(NCOL//2, NROW+0.5))
-            f.write('\\draw (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n'
+            f.write('\\draw (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n' # draw arrow
             %(
                 NCOL, 0.5*NROW,
                 1.5*NCOL, 0.5*NROW,
@@ -571,12 +566,12 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
             ))
             f.write('\n'+'\\end{scope}'+'\n')
             f.write('\n\n')
-            
+            # whitening key bwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-(total_round-1)*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
             draw_cells(bKEY_x, bKEY_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\K^{w}B$};\n'    %(NCOL//2, NROW+0.5))
-            f.write('\\draw (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n'
+            f.write('\\draw (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n' # draw arrow
             %(
                 NCOL, 0.5*NROW,
                 1.5*NCOL, 0.5*NROW,
@@ -586,10 +581,8 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
             ))
             f.write('\n'+'\\end{scope}'+'\n')
             f.write('\n\n')
-     
             break
             
-
     # draw key schedule
     for r in range(Nr):
         slot = 7
@@ -637,8 +630,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         #f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny KeySschedule}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
-
-        continue
     
     # Match state
     # lengends
@@ -696,12 +687,12 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         )
     f.write('\n'+'\\end{scope}'+'\n')
     
-    
     f.write('\n\n')
     f.write('\\end{tikzpicture}'+'\n\n'+'\\end{document}')
     f.close()
     from os import system
-    system("pdflatex -output-directory='./' ./" + outfile + ".tex") 
+    system("pdflatex --output-directory=" + dir +' ' + dir +  model_name + ".tex") 
+    system("latexmk -c --output-directory=" + dir + ' ' + dir + model_name +'.tex' )
     f.close()
 
     return

@@ -1,21 +1,17 @@
 % Vis_AES192RK_9r_ENC_r3_Meet_r8_KEY_r3
 \documentclass{standalone}
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor,import}
 \usepackage{xspace}
 \usetikzlibrary{crypto.symbols,patterns,calc}
 \tikzset{shadows=no}
 \input{macro}
-
-
 %document starts
 \begin{document}
 \begin{tikzpicture}[scale=0.2, every node/.style={font=\boldmath\bf}]
 \everymath{\scriptstyle}
 \tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};
-
-
+%borderline
 \draw -- (-16,20) -- (99,20) -- (99,-220) -- (-16,-220);
 
 \begin{scope}[yshift = 0.000000 cm, xshift = 0.000000 cm]
