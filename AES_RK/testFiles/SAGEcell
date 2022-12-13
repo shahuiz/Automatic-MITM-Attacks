@@ -1,4 +1,4 @@
-from sagemath import *
+from sagemath import Polyhedron
 
 poly = Polyhedron(vertices=[
     (0,0,0,0,0),
