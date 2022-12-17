@@ -67,26 +67,21 @@ Maximize
    + 0 bA_col_w[4,0] + 0 bA_col_w[4,1] + 0 bA_col_w[4,2] + 0 bA_col_w[4,3]
    + 0 bA_col_w[5,0] + 0 bA_col_w[5,1] + 0 bA_col_w[5,2] + 0 bA_col_w[5,3]
    + 0 bA_col_w[6,0] + 0 bA_col_w[6,1] + 0 bA_col_w[6,2] + 0 bA_col_w[6,3]
-   + 0 Meet_lhs_info[0,0] + 0 Meet_lhs_info[0,1] + 0 Meet_lhs_info[0,2]
-   + 0 Meet_lhs_info[0,3] + 0 Meet_lhs_info[1,0] + 0 Meet_lhs_info[1,1]
-   + 0 Meet_lhs_info[1,2] + 0 Meet_lhs_info[1,3] + 0 Meet_lhs_info[2,0]
-   + 0 Meet_lhs_info[2,1] + 0 Meet_lhs_info[2,2] + 0 Meet_lhs_info[2,3]
-   + 0 Meet_lhs_info[3,0] + 0 Meet_lhs_info[3,1] + 0 Meet_lhs_info[3,2]
-   + 0 Meet_lhs_info[3,3] + 0 Ksub_x[5,0] + 0 Ksub_x[5,1] + 0 Ksub_x[5,2]
-   + 0 Ksub_x[5,3] + 0 Ksub_y[5,0] + 0 Ksub_y[5,1] + 0 Ksub_y[5,2]
-   + 0 Ksub_y[5,3] + 0 fKsub_g[0,0] + 0 fKsub_g[0,1] + 0 fKsub_g[0,2]
-   + 0 fKsub_g[0,3] + 0 fKsub_g[1,0] + 0 fKsub_g[1,1] + 0 fKsub_g[1,2]
-   + 0 fKsub_g[1,3] + 0 fKsub_g[2,0] + 0 fKsub_g[2,1] + 0 fKsub_g[2,2]
-   + 0 fKsub_g[2,3] + 0 fKsub_g[3,0] + 0 fKsub_g[3,1] + 0 fKsub_g[3,2]
-   + 0 fKsub_g[3,3] + 0 fKsub_g[4,0] + 0 fKsub_g[4,1] + 0 fKsub_g[4,2]
-   + 0 fKsub_g[4,3] + 0 fKsub_g[5,0] + 0 fKsub_g[5,1] + 0 fKsub_g[5,2]
-   + 0 fKsub_g[5,3] + 0 bKsub_g[0,0] + 0 bKsub_g[0,1] + 0 bKsub_g[0,2]
-   + 0 bKsub_g[0,3] + 0 bKsub_g[1,0] + 0 bKsub_g[1,1] + 0 bKsub_g[1,2]
-   + 0 bKsub_g[1,3] + 0 bKsub_g[2,0] + 0 bKsub_g[2,1] + 0 bKsub_g[2,2]
-   + 0 bKsub_g[2,3] + 0 bKsub_g[3,0] + 0 bKsub_g[3,1] + 0 bKsub_g[3,2]
-   + 0 bKsub_g[3,3] + 0 bKsub_g[4,0] + 0 bKsub_g[4,1] + 0 bKsub_g[4,2]
-   + 0 bKsub_g[4,3] + 0 bKsub_g[5,0] + 0 bKsub_g[5,1] + 0 bKsub_g[5,2]
-   + 0 bKsub_g[5,3] + Obj
+   + 0 Ksub_x[5,0] + 0 Ksub_x[5,1] + 0 Ksub_x[5,2] + 0 Ksub_x[5,3]
+   + 0 Ksub_y[5,0] + 0 Ksub_y[5,1] + 0 Ksub_y[5,2] + 0 Ksub_y[5,3]
+   + 0 fKsub_g[0,0] + 0 fKsub_g[0,1] + 0 fKsub_g[0,2] + 0 fKsub_g[0,3]
+   + 0 fKsub_g[1,0] + 0 fKsub_g[1,1] + 0 fKsub_g[1,2] + 0 fKsub_g[1,3]
+   + 0 fKsub_g[2,0] + 0 fKsub_g[2,1] + 0 fKsub_g[2,2] + 0 fKsub_g[2,3]
+   + 0 fKsub_g[3,0] + 0 fKsub_g[3,1] + 0 fKsub_g[3,2] + 0 fKsub_g[3,3]
+   + 0 fKsub_g[4,0] + 0 fKsub_g[4,1] + 0 fKsub_g[4,2] + 0 fKsub_g[4,3]
+   + 0 fKsub_g[5,0] + 0 fKsub_g[5,1] + 0 fKsub_g[5,2] + 0 fKsub_g[5,3]
+   + 0 bKsub_g[0,0] + 0 bKsub_g[0,1] + 0 bKsub_g[0,2] + 0 bKsub_g[0,3]
+   + 0 bKsub_g[1,0] + 0 bKsub_g[1,1] + 0 bKsub_g[1,2] + 0 bKsub_g[1,3]
+   + 0 bKsub_g[2,0] + 0 bKsub_g[2,1] + 0 bKsub_g[2,2] + 0 bKsub_g[2,3]
+   + 0 bKsub_g[3,0] + 0 bKsub_g[3,1] + 0 bKsub_g[3,2] + 0 bKsub_g[3,3]
+   + 0 bKsub_g[4,0] + 0 bKsub_g[4,1] + 0 bKsub_g[4,2] + 0 bKsub_g[4,3]
+   + 0 bKsub_g[5,0] + 0 bKsub_g[5,1] + 0 bKsub_g[5,2] + 0 bKsub_g[5,3]
+   + Obj
 Subject To
  R0: Const0 = 0
  R1: E_ini_x[0,0] + E_ini_y[0,0] >= 1
@@ -5651,8 +5646,8 @@ Subject To
  R5174: - Const0 + bA_y[1,0,0] - XOR_Cost_bwd[1,0,0] >= 0
  R5175: fA_w[1,0,0] + fMeet_rhs_info[0,0] = 1
  R5176: bA_w[1,0,0] + bMeet_rhs_info[0,0] = 1
- R5177: fS_w[0,0,0] + fMeet_lhs_info[0,0] = 1
- R5178: bS_w[0,0,0] + bMeet_lhs_info[0,0] = 1
+ R5177: fS_w[1,0,0] + fMeet_lhs_info[0,0] = 1
+ R5178: bS_w[1,0,0] + bMeet_lhs_info[0,0] = 1
  R5179: - S_y[2,0,1] + fS_y[2,0,1] = 0
  R5180: - S_x[2,0,1] + bS_x[2,0,1] = 0
  R5181: XOR_Cost_fwd[1,0,1] >= 0
@@ -5679,8 +5674,8 @@ Subject To
  R5200: - Const0 + bA_y[1,0,1] - XOR_Cost_bwd[1,0,1] >= 0
  R5201: fA_w[1,0,1] + fMeet_rhs_info[0,1] = 1
  R5202: bA_w[1,0,1] + bMeet_rhs_info[0,1] = 1
- R5203: fS_w[0,0,1] + fMeet_lhs_info[0,1] = 1
- R5204: bS_w[0,0,1] + bMeet_lhs_info[0,1] = 1
+ R5203: fS_w[1,0,1] + fMeet_lhs_info[0,1] = 1
+ R5204: bS_w[1,0,1] + bMeet_lhs_info[0,1] = 1
  R5205: - S_y[2,0,2] + fS_y[2,0,2] = 0
  R5206: - S_x[2,0,2] + bS_x[2,0,2] = 0
  R5207: XOR_Cost_fwd[1,0,2] >= 0
@@ -5707,8 +5702,8 @@ Subject To
  R5226: - Const0 + bA_y[1,0,2] - XOR_Cost_bwd[1,0,2] >= 0
  R5227: fA_w[1,0,2] + fMeet_rhs_info[0,2] = 1
  R5228: bA_w[1,0,2] + bMeet_rhs_info[0,2] = 1
- R5229: fS_w[0,0,2] + fMeet_lhs_info[0,2] = 1
- R5230: bS_w[0,0,2] + bMeet_lhs_info[0,2] = 1
+ R5229: fS_w[1,0,2] + fMeet_lhs_info[0,2] = 1
+ R5230: bS_w[1,0,2] + bMeet_lhs_info[0,2] = 1
  R5231: - S_y[2,0,3] + fS_y[2,0,3] = 0
  R5232: - S_x[2,0,3] + bS_x[2,0,3] = 0
  R5233: XOR_Cost_fwd[1,0,3] >= 0
@@ -5735,8 +5730,8 @@ Subject To
  R5252: - Const0 + bA_y[1,0,3] - XOR_Cost_bwd[1,0,3] >= 0
  R5253: fA_w[1,0,3] + fMeet_rhs_info[0,3] = 1
  R5254: bA_w[1,0,3] + bMeet_rhs_info[0,3] = 1
- R5255: fS_w[0,0,3] + fMeet_lhs_info[0,3] = 1
- R5256: bS_w[0,0,3] + bMeet_lhs_info[0,3] = 1
+ R5255: fS_w[1,0,3] + fMeet_lhs_info[0,3] = 1
+ R5256: bS_w[1,0,3] + bMeet_lhs_info[0,3] = 1
  R5257: - S_y[2,1,0] + fS_y[2,1,0] = 0
  R5258: - S_x[2,1,0] + bS_x[2,1,0] = 0
  R5259: XOR_Cost_fwd[1,1,0] >= 0
@@ -5763,8 +5758,8 @@ Subject To
  R5278: - Const0 + bA_y[1,1,0] - XOR_Cost_bwd[1,1,0] >= 0
  R5279: fA_w[1,1,0] + fMeet_rhs_info[1,0] = 1
  R5280: bA_w[1,1,0] + bMeet_rhs_info[1,0] = 1
- R5281: fS_w[0,1,0] + fMeet_lhs_info[1,0] = 1
- R5282: bS_w[0,1,0] + bMeet_lhs_info[1,0] = 1
+ R5281: fS_w[1,1,0] + fMeet_lhs_info[1,0] = 1
+ R5282: bS_w[1,1,0] + bMeet_lhs_info[1,0] = 1
  R5283: - S_y[2,1,1] + fS_y[2,1,1] = 0
  R5284: - S_x[2,1,1] + bS_x[2,1,1] = 0
  R5285: XOR_Cost_fwd[1,1,1] >= 0
@@ -5791,8 +5786,8 @@ Subject To
  R5304: - Const0 + bA_y[1,1,1] - XOR_Cost_bwd[1,1,1] >= 0
  R5305: fA_w[1,1,1] + fMeet_rhs_info[1,1] = 1
  R5306: bA_w[1,1,1] + bMeet_rhs_info[1,1] = 1
- R5307: fS_w[0,1,1] + fMeet_lhs_info[1,1] = 1
- R5308: bS_w[0,1,1] + bMeet_lhs_info[1,1] = 1
+ R5307: fS_w[1,1,1] + fMeet_lhs_info[1,1] = 1
+ R5308: bS_w[1,1,1] + bMeet_lhs_info[1,1] = 1
  R5309: - S_y[2,1,2] + fS_y[2,1,2] = 0
  R5310: - S_x[2,1,2] + bS_x[2,1,2] = 0
  R5311: XOR_Cost_fwd[1,1,2] >= 0
@@ -5819,8 +5814,8 @@ Subject To
  R5330: - Const0 + bA_y[1,1,2] - XOR_Cost_bwd[1,1,2] >= 0
  R5331: fA_w[1,1,2] + fMeet_rhs_info[1,2] = 1
  R5332: bA_w[1,1,2] + bMeet_rhs_info[1,2] = 1
- R5333: fS_w[0,1,2] + fMeet_lhs_info[1,2] = 1
- R5334: bS_w[0,1,2] + bMeet_lhs_info[1,2] = 1
+ R5333: fS_w[1,1,2] + fMeet_lhs_info[1,2] = 1
+ R5334: bS_w[1,1,2] + bMeet_lhs_info[1,2] = 1
  R5335: - S_y[2,1,3] + fS_y[2,1,3] = 0
  R5336: - S_x[2,1,3] + bS_x[2,1,3] = 0
  R5337: XOR_Cost_fwd[1,1,3] >= 0
@@ -5847,8 +5842,8 @@ Subject To
  R5356: - Const0 + bA_y[1,1,3] - XOR_Cost_bwd[1,1,3] >= 0
  R5357: fA_w[1,1,3] + fMeet_rhs_info[1,3] = 1
  R5358: bA_w[1,1,3] + bMeet_rhs_info[1,3] = 1
- R5359: fS_w[0,1,3] + fMeet_lhs_info[1,3] = 1
- R5360: bS_w[0,1,3] + bMeet_lhs_info[1,3] = 1
+ R5359: fS_w[1,1,3] + fMeet_lhs_info[1,3] = 1
+ R5360: bS_w[1,1,3] + bMeet_lhs_info[1,3] = 1
  R5361: - S_y[2,2,0] + fS_y[2,2,0] = 0
  R5362: - S_x[2,2,0] + bS_x[2,2,0] = 0
  R5363: XOR_Cost_fwd[1,2,0] >= 0
@@ -5875,8 +5870,8 @@ Subject To
  R5382: - Const0 + bA_y[1,2,0] - XOR_Cost_bwd[1,2,0] >= 0
  R5383: fA_w[1,2,0] + fMeet_rhs_info[2,0] = 1
  R5384: bA_w[1,2,0] + bMeet_rhs_info[2,0] = 1
- R5385: fS_w[0,2,0] + fMeet_lhs_info[2,0] = 1
- R5386: bS_w[0,2,0] + bMeet_lhs_info[2,0] = 1
+ R5385: fS_w[1,2,0] + fMeet_lhs_info[2,0] = 1
+ R5386: bS_w[1,2,0] + bMeet_lhs_info[2,0] = 1
  R5387: - S_y[2,2,1] + fS_y[2,2,1] = 0
  R5388: - S_x[2,2,1] + bS_x[2,2,1] = 0
  R5389: XOR_Cost_fwd[1,2,1] >= 0
@@ -5903,8 +5898,8 @@ Subject To
  R5408: - Const0 + bA_y[1,2,1] - XOR_Cost_bwd[1,2,1] >= 0
  R5409: fA_w[1,2,1] + fMeet_rhs_info[2,1] = 1
  R5410: bA_w[1,2,1] + bMeet_rhs_info[2,1] = 1
- R5411: fS_w[0,2,1] + fMeet_lhs_info[2,1] = 1
- R5412: bS_w[0,2,1] + bMeet_lhs_info[2,1] = 1
+ R5411: fS_w[1,2,1] + fMeet_lhs_info[2,1] = 1
+ R5412: bS_w[1,2,1] + bMeet_lhs_info[2,1] = 1
  R5413: - S_y[2,2,2] + fS_y[2,2,2] = 0
  R5414: - S_x[2,2,2] + bS_x[2,2,2] = 0
  R5415: XOR_Cost_fwd[1,2,2] >= 0
@@ -5931,8 +5926,8 @@ Subject To
  R5434: - Const0 + bA_y[1,2,2] - XOR_Cost_bwd[1,2,2] >= 0
  R5435: fA_w[1,2,2] + fMeet_rhs_info[2,2] = 1
  R5436: bA_w[1,2,2] + bMeet_rhs_info[2,2] = 1
- R5437: fS_w[0,2,2] + fMeet_lhs_info[2,2] = 1
- R5438: bS_w[0,2,2] + bMeet_lhs_info[2,2] = 1
+ R5437: fS_w[1,2,2] + fMeet_lhs_info[2,2] = 1
+ R5438: bS_w[1,2,2] + bMeet_lhs_info[2,2] = 1
  R5439: - S_y[2,2,3] + fS_y[2,2,3] = 0
  R5440: - S_x[2,2,3] + bS_x[2,2,3] = 0
  R5441: XOR_Cost_fwd[1,2,3] >= 0
@@ -5959,8 +5954,8 @@ Subject To
  R5460: - Const0 + bA_y[1,2,3] - XOR_Cost_bwd[1,2,3] >= 0
  R5461: fA_w[1,2,3] + fMeet_rhs_info[2,3] = 1
  R5462: bA_w[1,2,3] + bMeet_rhs_info[2,3] = 1
- R5463: fS_w[0,2,3] + fMeet_lhs_info[2,3] = 1
- R5464: bS_w[0,2,3] + bMeet_lhs_info[2,3] = 1
+ R5463: fS_w[1,2,3] + fMeet_lhs_info[2,3] = 1
+ R5464: bS_w[1,2,3] + bMeet_lhs_info[2,3] = 1
  R5465: - S_y[2,3,0] + fS_y[2,3,0] = 0
  R5466: - S_x[2,3,0] + bS_x[2,3,0] = 0
  R5467: XOR_Cost_fwd[1,3,0] >= 0
@@ -5987,8 +5982,8 @@ Subject To
  R5486: - Const0 + bA_y[1,3,0] - XOR_Cost_bwd[1,3,0] >= 0
  R5487: fA_w[1,3,0] + fMeet_rhs_info[3,0] = 1
  R5488: bA_w[1,3,0] + bMeet_rhs_info[3,0] = 1
- R5489: fS_w[0,3,0] + fMeet_lhs_info[3,0] = 1
- R5490: bS_w[0,3,0] + bMeet_lhs_info[3,0] = 1
+ R5489: fS_w[1,3,0] + fMeet_lhs_info[3,0] = 1
+ R5490: bS_w[1,3,0] + bMeet_lhs_info[3,0] = 1
  R5491: - S_y[2,3,1] + fS_y[2,3,1] = 0
  R5492: - S_x[2,3,1] + bS_x[2,3,1] = 0
  R5493: XOR_Cost_fwd[1,3,1] >= 0
@@ -6015,8 +6010,8 @@ Subject To
  R5512: - Const0 + bA_y[1,3,1] - XOR_Cost_bwd[1,3,1] >= 0
  R5513: fA_w[1,3,1] + fMeet_rhs_info[3,1] = 1
  R5514: bA_w[1,3,1] + bMeet_rhs_info[3,1] = 1
- R5515: fS_w[0,3,1] + fMeet_lhs_info[3,1] = 1
- R5516: bS_w[0,3,1] + bMeet_lhs_info[3,1] = 1
+ R5515: fS_w[1,3,1] + fMeet_lhs_info[3,1] = 1
+ R5516: bS_w[1,3,1] + bMeet_lhs_info[3,1] = 1
  R5517: - S_y[2,3,2] + fS_y[2,3,2] = 0
  R5518: - S_x[2,3,2] + bS_x[2,3,2] = 0
  R5519: XOR_Cost_fwd[1,3,2] >= 0
@@ -6043,8 +6038,8 @@ Subject To
  R5538: - Const0 + bA_y[1,3,2] - XOR_Cost_bwd[1,3,2] >= 0
  R5539: fA_w[1,3,2] + fMeet_rhs_info[3,2] = 1
  R5540: bA_w[1,3,2] + bMeet_rhs_info[3,2] = 1
- R5541: fS_w[0,3,2] + fMeet_lhs_info[3,2] = 1
- R5542: bS_w[0,3,2] + bMeet_lhs_info[3,2] = 1
+ R5541: fS_w[1,3,2] + fMeet_lhs_info[3,2] = 1
+ R5542: bS_w[1,3,2] + bMeet_lhs_info[3,2] = 1
  R5543: - S_y[2,3,3] + fS_y[2,3,3] = 0
  R5544: - S_x[2,3,3] + bS_x[2,3,3] = 0
  R5545: XOR_Cost_fwd[1,3,3] >= 0
@@ -6071,24 +6066,20 @@ Subject To
  R5564: - Const0 + bA_y[1,3,3] - XOR_Cost_bwd[1,3,3] >= 0
  R5565: fA_w[1,3,3] + fMeet_rhs_info[3,3] = 1
  R5566: bA_w[1,3,3] + bMeet_rhs_info[3,3] = 1
- R5567: fS_w[0,3,3] + fMeet_lhs_info[3,3] = 1
- R5568: bS_w[0,3,3] + bMeet_lhs_info[3,3] = 1
- R5569: - S_x[1,0,0] - S_x[1,1,1] - S_x[1,2,2] - S_x[1,3,3] - S_y[1,0,0]
-   - S_y[1,1,1] - S_y[1,2,2] - S_y[1,3,3] + S_g[1,0,0] + S_g[1,1,1]
-   + S_g[1,2,2] + S_g[1,3,3] - Meet_rhs_info[0,0] - Meet_rhs_info[1,0]
-   - Meet_rhs_info[2,0] - Meet_rhs_info[3,0] + Meet_signed[0] = -4
- R5570: - S_x[1,0,1] - S_x[1,1,2] - S_x[1,2,3] - S_x[1,3,0] - S_y[1,0,1]
-   - S_y[1,1,2] - S_y[1,2,3] - S_y[1,3,0] + S_g[1,0,1] + S_g[1,1,2]
-   + S_g[1,2,3] + S_g[1,3,0] - Meet_rhs_info[0,1] - Meet_rhs_info[1,1]
-   - Meet_rhs_info[2,1] - Meet_rhs_info[3,1] + Meet_signed[1] = -4
- R5571: - S_x[1,0,2] - S_x[1,1,3] - S_x[1,2,0] - S_x[1,3,1] - S_y[1,0,2]
-   - S_y[1,1,3] - S_y[1,2,0] - S_y[1,3,1] + S_g[1,0,2] + S_g[1,1,3]
-   + S_g[1,2,0] + S_g[1,3,1] - Meet_rhs_info[0,2] - Meet_rhs_info[1,2]
-   - Meet_rhs_info[2,2] - Meet_rhs_info[3,2] + Meet_signed[2] = -4
- R5572: - S_x[1,0,3] - S_x[1,1,0] - S_x[1,2,1] - S_x[1,3,2] - S_y[1,0,3]
-   - S_y[1,1,0] - S_y[1,2,1] - S_y[1,3,2] + S_g[1,0,3] + S_g[1,1,0]
-   + S_g[1,2,1] + S_g[1,3,2] - Meet_rhs_info[0,3] - Meet_rhs_info[1,3]
-   - Meet_rhs_info[2,3] - Meet_rhs_info[3,3] + Meet_signed[3] = -4
+ R5567: fS_w[1,3,3] + fMeet_lhs_info[3,3] = 1
+ R5568: bS_w[1,3,3] + bMeet_lhs_info[3,3] = 1
+ R5569: - Meet_lhs_info[0,0] - Meet_lhs_info[1,0] - Meet_lhs_info[2,0]
+   - Meet_lhs_info[3,0] - Meet_rhs_info[0,0] - Meet_rhs_info[1,0]
+   - Meet_rhs_info[2,0] - Meet_rhs_info[3,0] + match_case_2_signed[0] = -4
+ R5570: - Meet_lhs_info[0,1] - Meet_lhs_info[1,1] - Meet_lhs_info[2,1]
+   - Meet_lhs_info[3,1] - Meet_rhs_info[0,1] - Meet_rhs_info[1,1]
+   - Meet_rhs_info[2,1] - Meet_rhs_info[3,1] + match_case_2_signed[1] = -4
+ R5571: - Meet_lhs_info[0,2] - Meet_lhs_info[1,2] - Meet_lhs_info[2,2]
+   - Meet_lhs_info[3,2] - Meet_rhs_info[0,2] - Meet_rhs_info[1,2]
+   - Meet_rhs_info[2,2] - Meet_rhs_info[3,2] + match_case_2_signed[2] = -4
+ R5572: - Meet_lhs_info[0,3] - Meet_lhs_info[1,3] - Meet_lhs_info[2,3]
+   - Meet_lhs_info[3,3] - Meet_rhs_info[0,3] - Meet_rhs_info[1,3]
+   - Meet_rhs_info[2,3] - Meet_rhs_info[3,3] + match_case_2_signed[3] = -4
  R5573: - S_y[3,0,0] + fS_y[3,0,0] = 0
  R5574: - S_x[3,0,0] + bS_x[3,0,0] = 0
  R5575: - S_y[3,0,1] + fS_y[3,0,1] = 0
@@ -10200,6 +10191,26 @@ Subject To
  R8339: - DF_b + Obj + GND_r <= 0
  R8340: - DF_r + Obj + GND_b <= 0
  R8341: - Match + Obj + GND_b + GND_r + GND_br <= 0
+ qc0: match_case_2[0] + [
+   - four_same_color_indicator[0] * match_case_2_signed[0] ] = 0
+ qc1: match_case_2[1] + [
+   - four_same_color_indicator[1] * match_case_2_signed[1] ] = 0
+ qc2: match_case_2[2] + [
+   - four_same_color_indicator[2] * match_case_2_signed[2] ] = 0
+ qc3: match_case_2[3] + [
+   - four_same_color_indicator[3] * match_case_2_signed[3] ] = 0
+ GC2280: four_same_color_indicator[0] = 1 -> S_x[1,0,0] + S_x[1,1,1]
+   + S_x[1,2,2] + S_x[1,3,3] + Meet_rhs_x[0,0] + Meet_rhs_x[1,0]
+   + Meet_rhs_x[2,0] + Meet_rhs_x[3,0] >= 4
+ GC2282: four_same_color_indicator[1] = 1 -> S_x[1,0,1] + S_x[1,1,2]
+   + S_x[1,2,3] + S_x[1,3,0] + Meet_rhs_x[0,1] + Meet_rhs_x[1,1]
+   + Meet_rhs_x[2,1] + Meet_rhs_x[3,1] >= 4
+ GC2284: four_same_color_indicator[2] = 1 -> S_x[1,0,2] + S_x[1,1,3]
+   + S_x[1,2,0] + S_x[1,3,1] + Meet_rhs_x[0,2] + Meet_rhs_x[1,2]
+   + Meet_rhs_x[2,2] + Meet_rhs_x[3,2] >= 4
+ GC2286: four_same_color_indicator[3] = 1 -> S_x[1,0,3] + S_x[1,1,0]
+   + S_x[1,2,1] + S_x[1,3,2] + Meet_rhs_x[0,3] + Meet_rhs_x[1,3]
+   + Meet_rhs_x[2,3] + Meet_rhs_x[3,3] >= 4
 Bounds
  MC_Cost_fwd[0,0] <= 4
  MC_Cost_fwd[0,1] <= 4
@@ -10261,14 +10272,10 @@ Bounds
  Meet[1] <= 4
  Meet[2] <= 4
  Meet[3] <= 4
- -4 <= Meet_signed[0] <= 4
- -4 <= Meet_signed[1] <= 4
- -4 <= Meet_signed[2] <= 4
- -4 <= Meet_signed[3] <= 4
- 2 <= DF_b <= 5
- 2 <= DF_r <= 5
- 2 <= Match <= 5
- 2 <= Obj <= 5
+ 2 <= DF_b <= 6
+ 2 <= DF_r <= 6
+ 2 <= Match <= 6
+ 2 <= Obj <= 6
 Binaries
  Const0 E_ini_x[0,0] E_ini_x[0,1] E_ini_x[0,2] E_ini_x[0,3] E_ini_x[1,0]
  E_ini_x[1,1] E_ini_x[1,2] E_ini_x[1,3] E_ini_x[2,0] E_ini_x[2,1]
@@ -11612,6 +11619,8 @@ Binaries
  bKsub_c[2,2] bKsub_c[2,3] bKsub_c[3,0] bKsub_c[3,1] bKsub_c[3,2]
  bKsub_c[3,3] bKsub_c[4,0] bKsub_c[4,1] bKsub_c[4,2] bKsub_c[4,3]
  bKsub_c[5,0] bKsub_c[5,1] bKsub_c[5,2] bKsub_c[5,3]
+ four_same_color_indicator[0] four_same_color_indicator[1]
+ four_same_color_indicator[2] four_same_color_indicator[3]
  true_key_cost_fwd[0,0,0] true_key_cost_fwd[0,0,1] true_key_cost_fwd[0,0,2]
  true_key_cost_fwd[0,0,3] true_key_cost_fwd[0,0,4] true_key_cost_fwd[0,0,5]
  true_key_cost_fwd[0,1,0] true_key_cost_fwd[0,1,1] true_key_cost_fwd[0,1,2]
@@ -11723,8 +11732,10 @@ Generals
  MC_Cost_bwd[4,0] MC_Cost_bwd[4,1] MC_Cost_bwd[4,2] MC_Cost_bwd[4,3]
  MC_Cost_bwd[5,0] MC_Cost_bwd[5,1] MC_Cost_bwd[5,2] MC_Cost_bwd[5,3]
  MC_Cost_bwd[6,0] MC_Cost_bwd[6,1] MC_Cost_bwd[6,2] MC_Cost_bwd[6,3]
- Meet[0] Meet[1] Meet[2] Meet[3] Meet_signed[0] Meet_signed[1]
- Meet_signed[2] Meet_signed[3] DF_b DF_r Match Obj GND_b GND_r GND_br
+ Meet[0] Meet[1] Meet[2] Meet[3] match_case_2_signed[0]
+ match_case_2_signed[1] match_case_2_signed[2] match_case_2_signed[3]
+ match_case_2[0] match_case_2[1] match_case_2[2] match_case_2[3] DF_b DF_r
+ Match Obj GND_b GND_r GND_br
 General Constraints
  GC0: E_ini_g[0,0] = MIN ( E_ini_x[0,0] , E_ini_y[0,0] )
  GC1: E_ini_g[0,1] = MIN ( E_ini_x[0,1] , E_ini_y[0,1] )
@@ -14838,328 +14849,328 @@ General Constraints
    bMeet_rhs_info[3,3] )
  GC2279: Meet_lhs_info[3,3] = MIN ( fMeet_lhs_info[3,3] ,
    bMeet_lhs_info[3,3] )
- GC2280: Meet[0] = MAX ( Meet_signed[0] , 0 )
- GC2281: Meet[1] = MAX ( Meet_signed[1] , 0 )
- GC2282: Meet[2] = MAX ( Meet_signed[2] , 0 )
- GC2283: Meet[3] = MAX ( Meet_signed[3] , 0 )
- GC2284: fS_x[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
- GC2285: bS_y[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
- GC2286: fS_x[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
- GC2287: bS_y[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
- GC2288: fS_x[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
- GC2289: bS_y[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
- GC2290: fS_x[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
- GC2291: bS_y[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
- GC2292: fS_x[3,1,0] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
- GC2293: bS_y[3,1,0] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
- GC2294: fS_x[3,1,1] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
- GC2295: bS_y[3,1,1] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
- GC2296: fS_x[3,1,2] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
- GC2297: bS_y[3,1,2] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
- GC2298: fS_x[3,1,3] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
- GC2299: bS_y[3,1,3] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
- GC2300: fS_x[3,2,0] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
- GC2301: bS_y[3,2,0] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
- GC2302: fS_x[3,2,1] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
- GC2303: bS_y[3,2,1] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
- GC2304: fS_x[3,2,2] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
- GC2305: bS_y[3,2,2] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
- GC2306: fS_x[3,2,3] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
- GC2307: bS_y[3,2,3] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
- GC2308: fS_x[3,3,0] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
- GC2309: bS_y[3,3,0] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
- GC2310: fS_x[3,3,1] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
- GC2311: bS_y[3,3,1] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
- GC2312: fS_x[3,3,2] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
- GC2313: bS_y[3,3,2] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
- GC2314: fS_x[3,3,3] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
- GC2315: bS_y[3,3,3] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
- GC2316: S_x[2,0,0] = MIN ( fM_x[2,0,0] , bM_x[2,0,0] )
- GC2317: S_y[2,0,0] = MIN ( fM_y[2,0,0] , bM_y[2,0,0] )
- GC2318: S_x[2,0,1] = MIN ( fM_x[2,0,1] , bM_x[2,0,1] )
- GC2319: S_y[2,0,1] = MIN ( fM_y[2,0,1] , bM_y[2,0,1] )
- GC2320: S_x[2,0,2] = MIN ( fM_x[2,0,2] , bM_x[2,0,2] )
- GC2321: S_y[2,0,2] = MIN ( fM_y[2,0,2] , bM_y[2,0,2] )
- GC2322: S_x[2,0,3] = MIN ( fM_x[2,0,3] , bM_x[2,0,3] )
- GC2323: S_y[2,0,3] = MIN ( fM_y[2,0,3] , bM_y[2,0,3] )
- GC2324: S_x[2,1,1] = MIN ( fM_x[2,1,0] , bM_x[2,1,0] )
- GC2325: S_y[2,1,1] = MIN ( fM_y[2,1,0] , bM_y[2,1,0] )
- GC2326: S_x[2,1,2] = MIN ( fM_x[2,1,1] , bM_x[2,1,1] )
- GC2327: S_y[2,1,2] = MIN ( fM_y[2,1,1] , bM_y[2,1,1] )
- GC2328: S_x[2,1,3] = MIN ( fM_x[2,1,2] , bM_x[2,1,2] )
- GC2329: S_y[2,1,3] = MIN ( fM_y[2,1,2] , bM_y[2,1,2] )
- GC2330: S_x[2,1,0] = MIN ( fM_x[2,1,3] , bM_x[2,1,3] )
- GC2331: S_y[2,1,0] = MIN ( fM_y[2,1,3] , bM_y[2,1,3] )
- GC2332: S_x[2,2,2] = MIN ( fM_x[2,2,0] , bM_x[2,2,0] )
- GC2333: S_y[2,2,2] = MIN ( fM_y[2,2,0] , bM_y[2,2,0] )
- GC2334: S_x[2,2,3] = MIN ( fM_x[2,2,1] , bM_x[2,2,1] )
- GC2335: S_y[2,2,3] = MIN ( fM_y[2,2,1] , bM_y[2,2,1] )
- GC2336: S_x[2,2,0] = MIN ( fM_x[2,2,2] , bM_x[2,2,2] )
- GC2337: S_y[2,2,0] = MIN ( fM_y[2,2,2] , bM_y[2,2,2] )
- GC2338: S_x[2,2,1] = MIN ( fM_x[2,2,3] , bM_x[2,2,3] )
- GC2339: S_y[2,2,1] = MIN ( fM_y[2,2,3] , bM_y[2,2,3] )
- GC2340: S_x[2,3,3] = MIN ( fM_x[2,3,0] , bM_x[2,3,0] )
- GC2341: S_y[2,3,3] = MIN ( fM_y[2,3,0] , bM_y[2,3,0] )
- GC2342: S_x[2,3,0] = MIN ( fM_x[2,3,1] , bM_x[2,3,1] )
- GC2343: S_y[2,3,0] = MIN ( fM_y[2,3,1] , bM_y[2,3,1] )
- GC2344: S_x[2,3,1] = MIN ( fM_x[2,3,2] , bM_x[2,3,2] )
- GC2345: S_y[2,3,1] = MIN ( fM_y[2,3,2] , bM_y[2,3,2] )
- GC2346: S_x[2,3,2] = MIN ( fM_x[2,3,3] , bM_x[2,3,3] )
- GC2347: S_y[2,3,2] = MIN ( fM_y[2,3,3] , bM_y[2,3,3] )
- GC2348: fM_x[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
- GC2349: bM_y[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
- GC2350: fM_x[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
- GC2351: bM_y[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
- GC2352: fM_x[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
- GC2353: bM_y[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
- GC2354: fM_x[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
- GC2355: bM_y[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
- GC2356: fM_x[3,1,0] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
- GC2357: bM_y[3,1,0] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
- GC2358: fM_x[3,1,1] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
- GC2359: bM_y[3,1,1] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
- GC2360: fM_x[3,1,2] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
- GC2361: bM_y[3,1,2] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
- GC2362: fM_x[3,1,3] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
- GC2363: bM_y[3,1,3] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
- GC2364: fM_x[3,2,0] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
- GC2365: bM_y[3,2,0] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
- GC2366: fM_x[3,2,1] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
- GC2367: bM_y[3,2,1] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
- GC2368: fM_x[3,2,2] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
- GC2369: bM_y[3,2,2] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
- GC2370: fM_x[3,2,3] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
- GC2371: bM_y[3,2,3] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
- GC2372: fM_x[3,3,0] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
- GC2373: bM_y[3,3,0] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
- GC2374: fM_x[3,3,1] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
- GC2375: bM_y[3,3,1] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
- GC2376: fM_x[3,3,2] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
- GC2377: bM_y[3,3,2] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
- GC2378: fM_x[3,3,3] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
- GC2379: bM_y[3,3,3] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
- GC2380: S_x[4,0,0] = MIN ( fS_x[4,0,0] , bS_x[4,0,0] )
- GC2381: S_y[4,0,0] = MIN ( fS_y[4,0,0] , bS_y[4,0,0] )
- GC2382: S_x[4,0,1] = MIN ( fS_x[4,0,1] , bS_x[4,0,1] )
- GC2383: S_y[4,0,1] = MIN ( fS_y[4,0,1] , bS_y[4,0,1] )
- GC2384: S_x[4,0,2] = MIN ( fS_x[4,0,2] , bS_x[4,0,2] )
- GC2385: S_y[4,0,2] = MIN ( fS_y[4,0,2] , bS_y[4,0,2] )
- GC2386: S_x[4,0,3] = MIN ( fS_x[4,0,3] , bS_x[4,0,3] )
- GC2387: S_y[4,0,3] = MIN ( fS_y[4,0,3] , bS_y[4,0,3] )
- GC2388: S_x[4,1,0] = MIN ( fS_x[4,1,0] , bS_x[4,1,0] )
- GC2389: S_y[4,1,0] = MIN ( fS_y[4,1,0] , bS_y[4,1,0] )
- GC2390: S_x[4,1,1] = MIN ( fS_x[4,1,1] , bS_x[4,1,1] )
- GC2391: S_y[4,1,1] = MIN ( fS_y[4,1,1] , bS_y[4,1,1] )
- GC2392: S_x[4,1,2] = MIN ( fS_x[4,1,2] , bS_x[4,1,2] )
- GC2393: S_y[4,1,2] = MIN ( fS_y[4,1,2] , bS_y[4,1,2] )
- GC2394: S_x[4,1,3] = MIN ( fS_x[4,1,3] , bS_x[4,1,3] )
- GC2395: S_y[4,1,3] = MIN ( fS_y[4,1,3] , bS_y[4,1,3] )
- GC2396: S_x[4,2,0] = MIN ( fS_x[4,2,0] , bS_x[4,2,0] )
- GC2397: S_y[4,2,0] = MIN ( fS_y[4,2,0] , bS_y[4,2,0] )
- GC2398: S_x[4,2,1] = MIN ( fS_x[4,2,1] , bS_x[4,2,1] )
- GC2399: S_y[4,2,1] = MIN ( fS_y[4,2,1] , bS_y[4,2,1] )
- GC2400: S_x[4,2,2] = MIN ( fS_x[4,2,2] , bS_x[4,2,2] )
- GC2401: S_y[4,2,2] = MIN ( fS_y[4,2,2] , bS_y[4,2,2] )
- GC2402: S_x[4,2,3] = MIN ( fS_x[4,2,3] , bS_x[4,2,3] )
- GC2403: S_y[4,2,3] = MIN ( fS_y[4,2,3] , bS_y[4,2,3] )
- GC2404: S_x[4,3,0] = MIN ( fS_x[4,3,0] , bS_x[4,3,0] )
- GC2405: S_y[4,3,0] = MIN ( fS_y[4,3,0] , bS_y[4,3,0] )
- GC2406: S_x[4,3,1] = MIN ( fS_x[4,3,1] , bS_x[4,3,1] )
- GC2407: S_y[4,3,1] = MIN ( fS_y[4,3,1] , bS_y[4,3,1] )
- GC2408: S_x[4,3,2] = MIN ( fS_x[4,3,2] , bS_x[4,3,2] )
- GC2409: S_y[4,3,2] = MIN ( fS_y[4,3,2] , bS_y[4,3,2] )
- GC2410: S_x[4,3,3] = MIN ( fS_x[4,3,3] , bS_x[4,3,3] )
- GC2411: S_y[4,3,3] = MIN ( fS_y[4,3,3] , bS_y[4,3,3] )
- GC2412: fM_x[4,0,0] = MAX ( S_x[4,0,0] , S_y[4,0,0] )
- GC2413: bM_y[4,0,0] = MAX ( S_x[4,0,0] , S_y[4,0,0] )
- GC2414: fM_x[4,0,1] = MAX ( S_x[4,0,1] , S_y[4,0,1] )
- GC2415: bM_y[4,0,1] = MAX ( S_x[4,0,1] , S_y[4,0,1] )
- GC2416: fM_x[4,0,2] = MAX ( S_x[4,0,2] , S_y[4,0,2] )
- GC2417: bM_y[4,0,2] = MAX ( S_x[4,0,2] , S_y[4,0,2] )
- GC2418: fM_x[4,0,3] = MAX ( S_x[4,0,3] , S_y[4,0,3] )
- GC2419: bM_y[4,0,3] = MAX ( S_x[4,0,3] , S_y[4,0,3] )
- GC2420: fM_x[4,1,0] = MAX ( S_x[4,1,1] , S_y[4,1,1] )
- GC2421: bM_y[4,1,0] = MAX ( S_x[4,1,1] , S_y[4,1,1] )
- GC2422: fM_x[4,1,1] = MAX ( S_x[4,1,2] , S_y[4,1,2] )
- GC2423: bM_y[4,1,1] = MAX ( S_x[4,1,2] , S_y[4,1,2] )
- GC2424: fM_x[4,1,2] = MAX ( S_x[4,1,3] , S_y[4,1,3] )
- GC2425: bM_y[4,1,2] = MAX ( S_x[4,1,3] , S_y[4,1,3] )
- GC2426: fM_x[4,1,3] = MAX ( S_x[4,1,0] , S_y[4,1,0] )
- GC2427: bM_y[4,1,3] = MAX ( S_x[4,1,0] , S_y[4,1,0] )
- GC2428: fM_x[4,2,0] = MAX ( S_x[4,2,2] , S_y[4,2,2] )
- GC2429: bM_y[4,2,0] = MAX ( S_x[4,2,2] , S_y[4,2,2] )
- GC2430: fM_x[4,2,1] = MAX ( S_x[4,2,3] , S_y[4,2,3] )
- GC2431: bM_y[4,2,1] = MAX ( S_x[4,2,3] , S_y[4,2,3] )
- GC2432: fM_x[4,2,2] = MAX ( S_x[4,2,0] , S_y[4,2,0] )
- GC2433: bM_y[4,2,2] = MAX ( S_x[4,2,0] , S_y[4,2,0] )
- GC2434: fM_x[4,2,3] = MAX ( S_x[4,2,1] , S_y[4,2,1] )
- GC2435: bM_y[4,2,3] = MAX ( S_x[4,2,1] , S_y[4,2,1] )
- GC2436: fM_x[4,3,0] = MAX ( S_x[4,3,3] , S_y[4,3,3] )
- GC2437: bM_y[4,3,0] = MAX ( S_x[4,3,3] , S_y[4,3,3] )
- GC2438: fM_x[4,3,1] = MAX ( S_x[4,3,0] , S_y[4,3,0] )
- GC2439: bM_y[4,3,1] = MAX ( S_x[4,3,0] , S_y[4,3,0] )
- GC2440: fM_x[4,3,2] = MAX ( S_x[4,3,1] , S_y[4,3,1] )
- GC2441: bM_y[4,3,2] = MAX ( S_x[4,3,1] , S_y[4,3,1] )
- GC2442: fM_x[4,3,3] = MAX ( S_x[4,3,2] , S_y[4,3,2] )
- GC2443: bM_y[4,3,3] = MAX ( S_x[4,3,2] , S_y[4,3,2] )
- GC2444: S_x[5,0,0] = MIN ( fS_x[5,0,0] , bS_x[5,0,0] )
- GC2445: S_y[5,0,0] = MIN ( fS_y[5,0,0] , bS_y[5,0,0] )
- GC2446: S_x[5,0,1] = MIN ( fS_x[5,0,1] , bS_x[5,0,1] )
- GC2447: S_y[5,0,1] = MIN ( fS_y[5,0,1] , bS_y[5,0,1] )
- GC2448: S_x[5,0,2] = MIN ( fS_x[5,0,2] , bS_x[5,0,2] )
- GC2449: S_y[5,0,2] = MIN ( fS_y[5,0,2] , bS_y[5,0,2] )
- GC2450: S_x[5,0,3] = MIN ( fS_x[5,0,3] , bS_x[5,0,3] )
- GC2451: S_y[5,0,3] = MIN ( fS_y[5,0,3] , bS_y[5,0,3] )
- GC2452: S_x[5,1,0] = MIN ( fS_x[5,1,0] , bS_x[5,1,0] )
- GC2453: S_y[5,1,0] = MIN ( fS_y[5,1,0] , bS_y[5,1,0] )
- GC2454: S_x[5,1,1] = MIN ( fS_x[5,1,1] , bS_x[5,1,1] )
- GC2455: S_y[5,1,1] = MIN ( fS_y[5,1,1] , bS_y[5,1,1] )
- GC2456: S_x[5,1,2] = MIN ( fS_x[5,1,2] , bS_x[5,1,2] )
- GC2457: S_y[5,1,2] = MIN ( fS_y[5,1,2] , bS_y[5,1,2] )
- GC2458: S_x[5,1,3] = MIN ( fS_x[5,1,3] , bS_x[5,1,3] )
- GC2459: S_y[5,1,3] = MIN ( fS_y[5,1,3] , bS_y[5,1,3] )
- GC2460: S_x[5,2,0] = MIN ( fS_x[5,2,0] , bS_x[5,2,0] )
- GC2461: S_y[5,2,0] = MIN ( fS_y[5,2,0] , bS_y[5,2,0] )
- GC2462: S_x[5,2,1] = MIN ( fS_x[5,2,1] , bS_x[5,2,1] )
- GC2463: S_y[5,2,1] = MIN ( fS_y[5,2,1] , bS_y[5,2,1] )
- GC2464: S_x[5,2,2] = MIN ( fS_x[5,2,2] , bS_x[5,2,2] )
- GC2465: S_y[5,2,2] = MIN ( fS_y[5,2,2] , bS_y[5,2,2] )
- GC2466: S_x[5,2,3] = MIN ( fS_x[5,2,3] , bS_x[5,2,3] )
- GC2467: S_y[5,2,3] = MIN ( fS_y[5,2,3] , bS_y[5,2,3] )
- GC2468: S_x[5,3,0] = MIN ( fS_x[5,3,0] , bS_x[5,3,0] )
- GC2469: S_y[5,3,0] = MIN ( fS_y[5,3,0] , bS_y[5,3,0] )
- GC2470: S_x[5,3,1] = MIN ( fS_x[5,3,1] , bS_x[5,3,1] )
- GC2471: S_y[5,3,1] = MIN ( fS_y[5,3,1] , bS_y[5,3,1] )
- GC2472: S_x[5,3,2] = MIN ( fS_x[5,3,2] , bS_x[5,3,2] )
- GC2473: S_y[5,3,2] = MIN ( fS_y[5,3,2] , bS_y[5,3,2] )
- GC2474: S_x[5,3,3] = MIN ( fS_x[5,3,3] , bS_x[5,3,3] )
- GC2475: S_y[5,3,3] = MIN ( fS_y[5,3,3] , bS_y[5,3,3] )
- GC2476: fM_x[5,0,0] = MAX ( S_x[5,0,0] , S_y[5,0,0] )
- GC2477: bM_y[5,0,0] = MAX ( S_x[5,0,0] , S_y[5,0,0] )
- GC2478: fM_x[5,0,1] = MAX ( S_x[5,0,1] , S_y[5,0,1] )
- GC2479: bM_y[5,0,1] = MAX ( S_x[5,0,1] , S_y[5,0,1] )
- GC2480: fM_x[5,0,2] = MAX ( S_x[5,0,2] , S_y[5,0,2] )
- GC2481: bM_y[5,0,2] = MAX ( S_x[5,0,2] , S_y[5,0,2] )
- GC2482: fM_x[5,0,3] = MAX ( S_x[5,0,3] , S_y[5,0,3] )
- GC2483: bM_y[5,0,3] = MAX ( S_x[5,0,3] , S_y[5,0,3] )
- GC2484: fM_x[5,1,0] = MAX ( S_x[5,1,1] , S_y[5,1,1] )
- GC2485: bM_y[5,1,0] = MAX ( S_x[5,1,1] , S_y[5,1,1] )
- GC2486: fM_x[5,1,1] = MAX ( S_x[5,1,2] , S_y[5,1,2] )
- GC2487: bM_y[5,1,1] = MAX ( S_x[5,1,2] , S_y[5,1,2] )
- GC2488: fM_x[5,1,2] = MAX ( S_x[5,1,3] , S_y[5,1,3] )
- GC2489: bM_y[5,1,2] = MAX ( S_x[5,1,3] , S_y[5,1,3] )
- GC2490: fM_x[5,1,3] = MAX ( S_x[5,1,0] , S_y[5,1,0] )
- GC2491: bM_y[5,1,3] = MAX ( S_x[5,1,0] , S_y[5,1,0] )
- GC2492: fM_x[5,2,0] = MAX ( S_x[5,2,2] , S_y[5,2,2] )
- GC2493: bM_y[5,2,0] = MAX ( S_x[5,2,2] , S_y[5,2,2] )
- GC2494: fM_x[5,2,1] = MAX ( S_x[5,2,3] , S_y[5,2,3] )
- GC2495: bM_y[5,2,1] = MAX ( S_x[5,2,3] , S_y[5,2,3] )
- GC2496: fM_x[5,2,2] = MAX ( S_x[5,2,0] , S_y[5,2,0] )
- GC2497: bM_y[5,2,2] = MAX ( S_x[5,2,0] , S_y[5,2,0] )
- GC2498: fM_x[5,2,3] = MAX ( S_x[5,2,1] , S_y[5,2,1] )
- GC2499: bM_y[5,2,3] = MAX ( S_x[5,2,1] , S_y[5,2,1] )
- GC2500: fM_x[5,3,0] = MAX ( S_x[5,3,3] , S_y[5,3,3] )
- GC2501: bM_y[5,3,0] = MAX ( S_x[5,3,3] , S_y[5,3,3] )
- GC2502: fM_x[5,3,1] = MAX ( S_x[5,3,0] , S_y[5,3,0] )
- GC2503: bM_y[5,3,1] = MAX ( S_x[5,3,0] , S_y[5,3,0] )
- GC2504: fM_x[5,3,2] = MAX ( S_x[5,3,1] , S_y[5,3,1] )
- GC2505: bM_y[5,3,2] = MAX ( S_x[5,3,1] , S_y[5,3,1] )
- GC2506: fM_x[5,3,3] = MAX ( S_x[5,3,2] , S_y[5,3,2] )
- GC2507: bM_y[5,3,3] = MAX ( S_x[5,3,2] , S_y[5,3,2] )
- GC2508: S_x[6,0,0] = MIN ( fS_x[6,0,0] , bS_x[6,0,0] )
- GC2509: S_y[6,0,0] = MIN ( fS_y[6,0,0] , bS_y[6,0,0] )
- GC2510: S_x[6,0,1] = MIN ( fS_x[6,0,1] , bS_x[6,0,1] )
- GC2511: S_y[6,0,1] = MIN ( fS_y[6,0,1] , bS_y[6,0,1] )
- GC2512: S_x[6,0,2] = MIN ( fS_x[6,0,2] , bS_x[6,0,2] )
- GC2513: S_y[6,0,2] = MIN ( fS_y[6,0,2] , bS_y[6,0,2] )
- GC2514: S_x[6,0,3] = MIN ( fS_x[6,0,3] , bS_x[6,0,3] )
- GC2515: S_y[6,0,3] = MIN ( fS_y[6,0,3] , bS_y[6,0,3] )
- GC2516: S_x[6,1,0] = MIN ( fS_x[6,1,0] , bS_x[6,1,0] )
- GC2517: S_y[6,1,0] = MIN ( fS_y[6,1,0] , bS_y[6,1,0] )
- GC2518: S_x[6,1,1] = MIN ( fS_x[6,1,1] , bS_x[6,1,1] )
- GC2519: S_y[6,1,1] = MIN ( fS_y[6,1,1] , bS_y[6,1,1] )
- GC2520: S_x[6,1,2] = MIN ( fS_x[6,1,2] , bS_x[6,1,2] )
- GC2521: S_y[6,1,2] = MIN ( fS_y[6,1,2] , bS_y[6,1,2] )
- GC2522: S_x[6,1,3] = MIN ( fS_x[6,1,3] , bS_x[6,1,3] )
- GC2523: S_y[6,1,3] = MIN ( fS_y[6,1,3] , bS_y[6,1,3] )
- GC2524: S_x[6,2,0] = MIN ( fS_x[6,2,0] , bS_x[6,2,0] )
- GC2525: S_y[6,2,0] = MIN ( fS_y[6,2,0] , bS_y[6,2,0] )
- GC2526: S_x[6,2,1] = MIN ( fS_x[6,2,1] , bS_x[6,2,1] )
- GC2527: S_y[6,2,1] = MIN ( fS_y[6,2,1] , bS_y[6,2,1] )
- GC2528: S_x[6,2,2] = MIN ( fS_x[6,2,2] , bS_x[6,2,2] )
- GC2529: S_y[6,2,2] = MIN ( fS_y[6,2,2] , bS_y[6,2,2] )
- GC2530: S_x[6,2,3] = MIN ( fS_x[6,2,3] , bS_x[6,2,3] )
- GC2531: S_y[6,2,3] = MIN ( fS_y[6,2,3] , bS_y[6,2,3] )
- GC2532: S_x[6,3,0] = MIN ( fS_x[6,3,0] , bS_x[6,3,0] )
- GC2533: S_y[6,3,0] = MIN ( fS_y[6,3,0] , bS_y[6,3,0] )
- GC2534: S_x[6,3,1] = MIN ( fS_x[6,3,1] , bS_x[6,3,1] )
- GC2535: S_y[6,3,1] = MIN ( fS_y[6,3,1] , bS_y[6,3,1] )
- GC2536: S_x[6,3,2] = MIN ( fS_x[6,3,2] , bS_x[6,3,2] )
- GC2537: S_y[6,3,2] = MIN ( fS_y[6,3,2] , bS_y[6,3,2] )
- GC2538: S_x[6,3,3] = MIN ( fS_x[6,3,3] , bS_x[6,3,3] )
- GC2539: S_y[6,3,3] = MIN ( fS_y[6,3,3] , bS_y[6,3,3] )
- GC2540: fM_x[6,0,0] = MAX ( S_x[6,0,0] , S_y[6,0,0] )
- GC2541: bM_y[6,0,0] = MAX ( S_x[6,0,0] , S_y[6,0,0] )
- GC2542: S_x[0,0,0] = MIN ( fS_x[0,0,0] , bS_x[0,0,0] )
- GC2543: S_y[0,0,0] = MIN ( fS_y[0,0,0] , bS_y[0,0,0] )
- GC2544: fM_x[6,0,1] = MAX ( S_x[6,0,1] , S_y[6,0,1] )
- GC2545: bM_y[6,0,1] = MAX ( S_x[6,0,1] , S_y[6,0,1] )
- GC2546: S_x[0,0,1] = MIN ( fS_x[0,0,1] , bS_x[0,0,1] )
- GC2547: S_y[0,0,1] = MIN ( fS_y[0,0,1] , bS_y[0,0,1] )
- GC2548: fM_x[6,0,2] = MAX ( S_x[6,0,2] , S_y[6,0,2] )
- GC2549: bM_y[6,0,2] = MAX ( S_x[6,0,2] , S_y[6,0,2] )
- GC2550: S_x[0,0,2] = MIN ( fS_x[0,0,2] , bS_x[0,0,2] )
- GC2551: S_y[0,0,2] = MIN ( fS_y[0,0,2] , bS_y[0,0,2] )
- GC2552: fM_x[6,0,3] = MAX ( S_x[6,0,3] , S_y[6,0,3] )
- GC2553: bM_y[6,0,3] = MAX ( S_x[6,0,3] , S_y[6,0,3] )
- GC2554: S_x[0,0,3] = MIN ( fS_x[0,0,3] , bS_x[0,0,3] )
- GC2555: S_y[0,0,3] = MIN ( fS_y[0,0,3] , bS_y[0,0,3] )
- GC2556: fM_x[6,1,0] = MAX ( S_x[6,1,1] , S_y[6,1,1] )
- GC2557: bM_y[6,1,0] = MAX ( S_x[6,1,1] , S_y[6,1,1] )
- GC2558: S_x[0,1,0] = MIN ( fS_x[0,1,0] , bS_x[0,1,0] )
- GC2559: S_y[0,1,0] = MIN ( fS_y[0,1,0] , bS_y[0,1,0] )
- GC2560: fM_x[6,1,1] = MAX ( S_x[6,1,2] , S_y[6,1,2] )
- GC2561: bM_y[6,1,1] = MAX ( S_x[6,1,2] , S_y[6,1,2] )
- GC2562: S_x[0,1,1] = MIN ( fS_x[0,1,1] , bS_x[0,1,1] )
- GC2563: S_y[0,1,1] = MIN ( fS_y[0,1,1] , bS_y[0,1,1] )
- GC2564: fM_x[6,1,2] = MAX ( S_x[6,1,3] , S_y[6,1,3] )
- GC2565: bM_y[6,1,2] = MAX ( S_x[6,1,3] , S_y[6,1,3] )
- GC2566: S_x[0,1,2] = MIN ( fS_x[0,1,2] , bS_x[0,1,2] )
- GC2567: S_y[0,1,2] = MIN ( fS_y[0,1,2] , bS_y[0,1,2] )
- GC2568: fM_x[6,1,3] = MAX ( S_x[6,1,0] , S_y[6,1,0] )
- GC2569: bM_y[6,1,3] = MAX ( S_x[6,1,0] , S_y[6,1,0] )
- GC2570: S_x[0,1,3] = MIN ( fS_x[0,1,3] , bS_x[0,1,3] )
- GC2571: S_y[0,1,3] = MIN ( fS_y[0,1,3] , bS_y[0,1,3] )
- GC2572: fM_x[6,2,0] = MAX ( S_x[6,2,2] , S_y[6,2,2] )
- GC2573: bM_y[6,2,0] = MAX ( S_x[6,2,2] , S_y[6,2,2] )
- GC2574: S_x[0,2,0] = MIN ( fS_x[0,2,0] , bS_x[0,2,0] )
- GC2575: S_y[0,2,0] = MIN ( fS_y[0,2,0] , bS_y[0,2,0] )
- GC2576: fM_x[6,2,1] = MAX ( S_x[6,2,3] , S_y[6,2,3] )
- GC2577: bM_y[6,2,1] = MAX ( S_x[6,2,3] , S_y[6,2,3] )
- GC2578: S_x[0,2,1] = MIN ( fS_x[0,2,1] , bS_x[0,2,1] )
- GC2579: S_y[0,2,1] = MIN ( fS_y[0,2,1] , bS_y[0,2,1] )
- GC2580: fM_x[6,2,2] = MAX ( S_x[6,2,0] , S_y[6,2,0] )
- GC2581: bM_y[6,2,2] = MAX ( S_x[6,2,0] , S_y[6,2,0] )
- GC2582: S_x[0,2,2] = MIN ( fS_x[0,2,2] , bS_x[0,2,2] )
- GC2583: S_y[0,2,2] = MIN ( fS_y[0,2,2] , bS_y[0,2,2] )
- GC2584: fM_x[6,2,3] = MAX ( S_x[6,2,1] , S_y[6,2,1] )
- GC2585: bM_y[6,2,3] = MAX ( S_x[6,2,1] , S_y[6,2,1] )
- GC2586: S_x[0,2,3] = MIN ( fS_x[0,2,3] , bS_x[0,2,3] )
- GC2587: S_y[0,2,3] = MIN ( fS_y[0,2,3] , bS_y[0,2,3] )
- GC2588: fM_x[6,3,0] = MAX ( S_x[6,3,3] , S_y[6,3,3] )
- GC2589: bM_y[6,3,0] = MAX ( S_x[6,3,3] , S_y[6,3,3] )
- GC2590: S_x[0,3,0] = MIN ( fS_x[0,3,0] , bS_x[0,3,0] )
- GC2591: S_y[0,3,0] = MIN ( fS_y[0,3,0] , bS_y[0,3,0] )
- GC2592: fM_x[6,3,1] = MAX ( S_x[6,3,0] , S_y[6,3,0] )
- GC2593: bM_y[6,3,1] = MAX ( S_x[6,3,0] , S_y[6,3,0] )
- GC2594: S_x[0,3,1] = MIN ( fS_x[0,3,1] , bS_x[0,3,1] )
- GC2595: S_y[0,3,1] = MIN ( fS_y[0,3,1] , bS_y[0,3,1] )
- GC2596: fM_x[6,3,2] = MAX ( S_x[6,3,1] , S_y[6,3,1] )
- GC2597: bM_y[6,3,2] = MAX ( S_x[6,3,1] , S_y[6,3,1] )
- GC2598: S_x[0,3,2] = MIN ( fS_x[0,3,2] , bS_x[0,3,2] )
- GC2599: S_y[0,3,2] = MIN ( fS_y[0,3,2] , bS_y[0,3,2] )
- GC2600: fM_x[6,3,3] = MAX ( S_x[6,3,2] , S_y[6,3,2] )
- GC2601: bM_y[6,3,3] = MAX ( S_x[6,3,2] , S_y[6,3,2] )
- GC2602: S_x[0,3,3] = MIN ( fS_x[0,3,3] , bS_x[0,3,3] )
- GC2603: S_y[0,3,3] = MIN ( fS_y[0,3,3] , bS_y[0,3,3] )
+ GC2281: Meet[0] = MAX ( match_case_2[0] , 0 )
+ GC2283: Meet[1] = MAX ( match_case_2[1] , 0 )
+ GC2285: Meet[2] = MAX ( match_case_2[2] , 0 )
+ GC2287: Meet[3] = MAX ( match_case_2[3] , 0 )
+ GC2288: fS_x[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
+ GC2289: bS_y[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
+ GC2290: fS_x[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
+ GC2291: bS_y[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
+ GC2292: fS_x[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
+ GC2293: bS_y[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
+ GC2294: fS_x[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
+ GC2295: bS_y[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
+ GC2296: fS_x[3,1,0] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
+ GC2297: bS_y[3,1,0] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
+ GC2298: fS_x[3,1,1] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
+ GC2299: bS_y[3,1,1] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
+ GC2300: fS_x[3,1,2] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
+ GC2301: bS_y[3,1,2] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
+ GC2302: fS_x[3,1,3] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
+ GC2303: bS_y[3,1,3] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
+ GC2304: fS_x[3,2,0] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
+ GC2305: bS_y[3,2,0] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
+ GC2306: fS_x[3,2,1] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
+ GC2307: bS_y[3,2,1] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
+ GC2308: fS_x[3,2,2] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
+ GC2309: bS_y[3,2,2] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
+ GC2310: fS_x[3,2,3] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
+ GC2311: bS_y[3,2,3] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
+ GC2312: fS_x[3,3,0] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
+ GC2313: bS_y[3,3,0] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
+ GC2314: fS_x[3,3,1] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
+ GC2315: bS_y[3,3,1] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
+ GC2316: fS_x[3,3,2] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
+ GC2317: bS_y[3,3,2] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
+ GC2318: fS_x[3,3,3] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
+ GC2319: bS_y[3,3,3] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
+ GC2320: S_x[2,0,0] = MIN ( fM_x[2,0,0] , bM_x[2,0,0] )
+ GC2321: S_y[2,0,0] = MIN ( fM_y[2,0,0] , bM_y[2,0,0] )
+ GC2322: S_x[2,0,1] = MIN ( fM_x[2,0,1] , bM_x[2,0,1] )
+ GC2323: S_y[2,0,1] = MIN ( fM_y[2,0,1] , bM_y[2,0,1] )
+ GC2324: S_x[2,0,2] = MIN ( fM_x[2,0,2] , bM_x[2,0,2] )
+ GC2325: S_y[2,0,2] = MIN ( fM_y[2,0,2] , bM_y[2,0,2] )
+ GC2326: S_x[2,0,3] = MIN ( fM_x[2,0,3] , bM_x[2,0,3] )
+ GC2327: S_y[2,0,3] = MIN ( fM_y[2,0,3] , bM_y[2,0,3] )
+ GC2328: S_x[2,1,1] = MIN ( fM_x[2,1,0] , bM_x[2,1,0] )
+ GC2329: S_y[2,1,1] = MIN ( fM_y[2,1,0] , bM_y[2,1,0] )
+ GC2330: S_x[2,1,2] = MIN ( fM_x[2,1,1] , bM_x[2,1,1] )
+ GC2331: S_y[2,1,2] = MIN ( fM_y[2,1,1] , bM_y[2,1,1] )
+ GC2332: S_x[2,1,3] = MIN ( fM_x[2,1,2] , bM_x[2,1,2] )
+ GC2333: S_y[2,1,3] = MIN ( fM_y[2,1,2] , bM_y[2,1,2] )
+ GC2334: S_x[2,1,0] = MIN ( fM_x[2,1,3] , bM_x[2,1,3] )
+ GC2335: S_y[2,1,0] = MIN ( fM_y[2,1,3] , bM_y[2,1,3] )
+ GC2336: S_x[2,2,2] = MIN ( fM_x[2,2,0] , bM_x[2,2,0] )
+ GC2337: S_y[2,2,2] = MIN ( fM_y[2,2,0] , bM_y[2,2,0] )
+ GC2338: S_x[2,2,3] = MIN ( fM_x[2,2,1] , bM_x[2,2,1] )
+ GC2339: S_y[2,2,3] = MIN ( fM_y[2,2,1] , bM_y[2,2,1] )
+ GC2340: S_x[2,2,0] = MIN ( fM_x[2,2,2] , bM_x[2,2,2] )
+ GC2341: S_y[2,2,0] = MIN ( fM_y[2,2,2] , bM_y[2,2,2] )
+ GC2342: S_x[2,2,1] = MIN ( fM_x[2,2,3] , bM_x[2,2,3] )
+ GC2343: S_y[2,2,1] = MIN ( fM_y[2,2,3] , bM_y[2,2,3] )
+ GC2344: S_x[2,3,3] = MIN ( fM_x[2,3,0] , bM_x[2,3,0] )
+ GC2345: S_y[2,3,3] = MIN ( fM_y[2,3,0] , bM_y[2,3,0] )
+ GC2346: S_x[2,3,0] = MIN ( fM_x[2,3,1] , bM_x[2,3,1] )
+ GC2347: S_y[2,3,0] = MIN ( fM_y[2,3,1] , bM_y[2,3,1] )
+ GC2348: S_x[2,3,1] = MIN ( fM_x[2,3,2] , bM_x[2,3,2] )
+ GC2349: S_y[2,3,1] = MIN ( fM_y[2,3,2] , bM_y[2,3,2] )
+ GC2350: S_x[2,3,2] = MIN ( fM_x[2,3,3] , bM_x[2,3,3] )
+ GC2351: S_y[2,3,2] = MIN ( fM_y[2,3,3] , bM_y[2,3,3] )
+ GC2352: fM_x[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
+ GC2353: bM_y[3,0,0] = MAX ( S_x[3,0,0] , S_y[3,0,0] )
+ GC2354: fM_x[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
+ GC2355: bM_y[3,0,1] = MAX ( S_x[3,0,1] , S_y[3,0,1] )
+ GC2356: fM_x[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
+ GC2357: bM_y[3,0,2] = MAX ( S_x[3,0,2] , S_y[3,0,2] )
+ GC2358: fM_x[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
+ GC2359: bM_y[3,0,3] = MAX ( S_x[3,0,3] , S_y[3,0,3] )
+ GC2360: fM_x[3,1,0] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
+ GC2361: bM_y[3,1,0] = MAX ( S_x[3,1,1] , S_y[3,1,1] )
+ GC2362: fM_x[3,1,1] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
+ GC2363: bM_y[3,1,1] = MAX ( S_x[3,1,2] , S_y[3,1,2] )
+ GC2364: fM_x[3,1,2] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
+ GC2365: bM_y[3,1,2] = MAX ( S_x[3,1,3] , S_y[3,1,3] )
+ GC2366: fM_x[3,1,3] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
+ GC2367: bM_y[3,1,3] = MAX ( S_x[3,1,0] , S_y[3,1,0] )
+ GC2368: fM_x[3,2,0] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
+ GC2369: bM_y[3,2,0] = MAX ( S_x[3,2,2] , S_y[3,2,2] )
+ GC2370: fM_x[3,2,1] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
+ GC2371: bM_y[3,2,1] = MAX ( S_x[3,2,3] , S_y[3,2,3] )
+ GC2372: fM_x[3,2,2] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
+ GC2373: bM_y[3,2,2] = MAX ( S_x[3,2,0] , S_y[3,2,0] )
+ GC2374: fM_x[3,2,3] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
+ GC2375: bM_y[3,2,3] = MAX ( S_x[3,2,1] , S_y[3,2,1] )
+ GC2376: fM_x[3,3,0] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
+ GC2377: bM_y[3,3,0] = MAX ( S_x[3,3,3] , S_y[3,3,3] )
+ GC2378: fM_x[3,3,1] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
+ GC2379: bM_y[3,3,1] = MAX ( S_x[3,3,0] , S_y[3,3,0] )
+ GC2380: fM_x[3,3,2] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
+ GC2381: bM_y[3,3,2] = MAX ( S_x[3,3,1] , S_y[3,3,1] )
+ GC2382: fM_x[3,3,3] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
+ GC2383: bM_y[3,3,3] = MAX ( S_x[3,3,2] , S_y[3,3,2] )
+ GC2384: S_x[4,0,0] = MIN ( fS_x[4,0,0] , bS_x[4,0,0] )
+ GC2385: S_y[4,0,0] = MIN ( fS_y[4,0,0] , bS_y[4,0,0] )
+ GC2386: S_x[4,0,1] = MIN ( fS_x[4,0,1] , bS_x[4,0,1] )
+ GC2387: S_y[4,0,1] = MIN ( fS_y[4,0,1] , bS_y[4,0,1] )
+ GC2388: S_x[4,0,2] = MIN ( fS_x[4,0,2] , bS_x[4,0,2] )
+ GC2389: S_y[4,0,2] = MIN ( fS_y[4,0,2] , bS_y[4,0,2] )
+ GC2390: S_x[4,0,3] = MIN ( fS_x[4,0,3] , bS_x[4,0,3] )
+ GC2391: S_y[4,0,3] = MIN ( fS_y[4,0,3] , bS_y[4,0,3] )
+ GC2392: S_x[4,1,0] = MIN ( fS_x[4,1,0] , bS_x[4,1,0] )
+ GC2393: S_y[4,1,0] = MIN ( fS_y[4,1,0] , bS_y[4,1,0] )
+ GC2394: S_x[4,1,1] = MIN ( fS_x[4,1,1] , bS_x[4,1,1] )
+ GC2395: S_y[4,1,1] = MIN ( fS_y[4,1,1] , bS_y[4,1,1] )
+ GC2396: S_x[4,1,2] = MIN ( fS_x[4,1,2] , bS_x[4,1,2] )
+ GC2397: S_y[4,1,2] = MIN ( fS_y[4,1,2] , bS_y[4,1,2] )
+ GC2398: S_x[4,1,3] = MIN ( fS_x[4,1,3] , bS_x[4,1,3] )
+ GC2399: S_y[4,1,3] = MIN ( fS_y[4,1,3] , bS_y[4,1,3] )
+ GC2400: S_x[4,2,0] = MIN ( fS_x[4,2,0] , bS_x[4,2,0] )
+ GC2401: S_y[4,2,0] = MIN ( fS_y[4,2,0] , bS_y[4,2,0] )
+ GC2402: S_x[4,2,1] = MIN ( fS_x[4,2,1] , bS_x[4,2,1] )
+ GC2403: S_y[4,2,1] = MIN ( fS_y[4,2,1] , bS_y[4,2,1] )
+ GC2404: S_x[4,2,2] = MIN ( fS_x[4,2,2] , bS_x[4,2,2] )
+ GC2405: S_y[4,2,2] = MIN ( fS_y[4,2,2] , bS_y[4,2,2] )
+ GC2406: S_x[4,2,3] = MIN ( fS_x[4,2,3] , bS_x[4,2,3] )
+ GC2407: S_y[4,2,3] = MIN ( fS_y[4,2,3] , bS_y[4,2,3] )
+ GC2408: S_x[4,3,0] = MIN ( fS_x[4,3,0] , bS_x[4,3,0] )
+ GC2409: S_y[4,3,0] = MIN ( fS_y[4,3,0] , bS_y[4,3,0] )
+ GC2410: S_x[4,3,1] = MIN ( fS_x[4,3,1] , bS_x[4,3,1] )
+ GC2411: S_y[4,3,1] = MIN ( fS_y[4,3,1] , bS_y[4,3,1] )
+ GC2412: S_x[4,3,2] = MIN ( fS_x[4,3,2] , bS_x[4,3,2] )
+ GC2413: S_y[4,3,2] = MIN ( fS_y[4,3,2] , bS_y[4,3,2] )
+ GC2414: S_x[4,3,3] = MIN ( fS_x[4,3,3] , bS_x[4,3,3] )
+ GC2415: S_y[4,3,3] = MIN ( fS_y[4,3,3] , bS_y[4,3,3] )
+ GC2416: fM_x[4,0,0] = MAX ( S_x[4,0,0] , S_y[4,0,0] )
+ GC2417: bM_y[4,0,0] = MAX ( S_x[4,0,0] , S_y[4,0,0] )
+ GC2418: fM_x[4,0,1] = MAX ( S_x[4,0,1] , S_y[4,0,1] )
+ GC2419: bM_y[4,0,1] = MAX ( S_x[4,0,1] , S_y[4,0,1] )
+ GC2420: fM_x[4,0,2] = MAX ( S_x[4,0,2] , S_y[4,0,2] )
+ GC2421: bM_y[4,0,2] = MAX ( S_x[4,0,2] , S_y[4,0,2] )
+ GC2422: fM_x[4,0,3] = MAX ( S_x[4,0,3] , S_y[4,0,3] )
+ GC2423: bM_y[4,0,3] = MAX ( S_x[4,0,3] , S_y[4,0,3] )
+ GC2424: fM_x[4,1,0] = MAX ( S_x[4,1,1] , S_y[4,1,1] )
+ GC2425: bM_y[4,1,0] = MAX ( S_x[4,1,1] , S_y[4,1,1] )
+ GC2426: fM_x[4,1,1] = MAX ( S_x[4,1,2] , S_y[4,1,2] )
+ GC2427: bM_y[4,1,1] = MAX ( S_x[4,1,2] , S_y[4,1,2] )
+ GC2428: fM_x[4,1,2] = MAX ( S_x[4,1,3] , S_y[4,1,3] )
+ GC2429: bM_y[4,1,2] = MAX ( S_x[4,1,3] , S_y[4,1,3] )
+ GC2430: fM_x[4,1,3] = MAX ( S_x[4,1,0] , S_y[4,1,0] )
+ GC2431: bM_y[4,1,3] = MAX ( S_x[4,1,0] , S_y[4,1,0] )
+ GC2432: fM_x[4,2,0] = MAX ( S_x[4,2,2] , S_y[4,2,2] )
+ GC2433: bM_y[4,2,0] = MAX ( S_x[4,2,2] , S_y[4,2,2] )
+ GC2434: fM_x[4,2,1] = MAX ( S_x[4,2,3] , S_y[4,2,3] )
+ GC2435: bM_y[4,2,1] = MAX ( S_x[4,2,3] , S_y[4,2,3] )
+ GC2436: fM_x[4,2,2] = MAX ( S_x[4,2,0] , S_y[4,2,0] )
+ GC2437: bM_y[4,2,2] = MAX ( S_x[4,2,0] , S_y[4,2,0] )
+ GC2438: fM_x[4,2,3] = MAX ( S_x[4,2,1] , S_y[4,2,1] )
+ GC2439: bM_y[4,2,3] = MAX ( S_x[4,2,1] , S_y[4,2,1] )
+ GC2440: fM_x[4,3,0] = MAX ( S_x[4,3,3] , S_y[4,3,3] )
+ GC2441: bM_y[4,3,0] = MAX ( S_x[4,3,3] , S_y[4,3,3] )
+ GC2442: fM_x[4,3,1] = MAX ( S_x[4,3,0] , S_y[4,3,0] )
+ GC2443: bM_y[4,3,1] = MAX ( S_x[4,3,0] , S_y[4,3,0] )
+ GC2444: fM_x[4,3,2] = MAX ( S_x[4,3,1] , S_y[4,3,1] )
+ GC2445: bM_y[4,3,2] = MAX ( S_x[4,3,1] , S_y[4,3,1] )
+ GC2446: fM_x[4,3,3] = MAX ( S_x[4,3,2] , S_y[4,3,2] )
+ GC2447: bM_y[4,3,3] = MAX ( S_x[4,3,2] , S_y[4,3,2] )
+ GC2448: S_x[5,0,0] = MIN ( fS_x[5,0,0] , bS_x[5,0,0] )
+ GC2449: S_y[5,0,0] = MIN ( fS_y[5,0,0] , bS_y[5,0,0] )
+ GC2450: S_x[5,0,1] = MIN ( fS_x[5,0,1] , bS_x[5,0,1] )
+ GC2451: S_y[5,0,1] = MIN ( fS_y[5,0,1] , bS_y[5,0,1] )
+ GC2452: S_x[5,0,2] = MIN ( fS_x[5,0,2] , bS_x[5,0,2] )
+ GC2453: S_y[5,0,2] = MIN ( fS_y[5,0,2] , bS_y[5,0,2] )
+ GC2454: S_x[5,0,3] = MIN ( fS_x[5,0,3] , bS_x[5,0,3] )
+ GC2455: S_y[5,0,3] = MIN ( fS_y[5,0,3] , bS_y[5,0,3] )
+ GC2456: S_x[5,1,0] = MIN ( fS_x[5,1,0] , bS_x[5,1,0] )
+ GC2457: S_y[5,1,0] = MIN ( fS_y[5,1,0] , bS_y[5,1,0] )
+ GC2458: S_x[5,1,1] = MIN ( fS_x[5,1,1] , bS_x[5,1,1] )
+ GC2459: S_y[5,1,1] = MIN ( fS_y[5,1,1] , bS_y[5,1,1] )
+ GC2460: S_x[5,1,2] = MIN ( fS_x[5,1,2] , bS_x[5,1,2] )
+ GC2461: S_y[5,1,2] = MIN ( fS_y[5,1,2] , bS_y[5,1,2] )
+ GC2462: S_x[5,1,3] = MIN ( fS_x[5,1,3] , bS_x[5,1,3] )
+ GC2463: S_y[5,1,3] = MIN ( fS_y[5,1,3] , bS_y[5,1,3] )
+ GC2464: S_x[5,2,0] = MIN ( fS_x[5,2,0] , bS_x[5,2,0] )
+ GC2465: S_y[5,2,0] = MIN ( fS_y[5,2,0] , bS_y[5,2,0] )
+ GC2466: S_x[5,2,1] = MIN ( fS_x[5,2,1] , bS_x[5,2,1] )
+ GC2467: S_y[5,2,1] = MIN ( fS_y[5,2,1] , bS_y[5,2,1] )
+ GC2468: S_x[5,2,2] = MIN ( fS_x[5,2,2] , bS_x[5,2,2] )
+ GC2469: S_y[5,2,2] = MIN ( fS_y[5,2,2] , bS_y[5,2,2] )
+ GC2470: S_x[5,2,3] = MIN ( fS_x[5,2,3] , bS_x[5,2,3] )
+ GC2471: S_y[5,2,3] = MIN ( fS_y[5,2,3] , bS_y[5,2,3] )
+ GC2472: S_x[5,3,0] = MIN ( fS_x[5,3,0] , bS_x[5,3,0] )
+ GC2473: S_y[5,3,0] = MIN ( fS_y[5,3,0] , bS_y[5,3,0] )
+ GC2474: S_x[5,3,1] = MIN ( fS_x[5,3,1] , bS_x[5,3,1] )
+ GC2475: S_y[5,3,1] = MIN ( fS_y[5,3,1] , bS_y[5,3,1] )
+ GC2476: S_x[5,3,2] = MIN ( fS_x[5,3,2] , bS_x[5,3,2] )
+ GC2477: S_y[5,3,2] = MIN ( fS_y[5,3,2] , bS_y[5,3,2] )
+ GC2478: S_x[5,3,3] = MIN ( fS_x[5,3,3] , bS_x[5,3,3] )
+ GC2479: S_y[5,3,3] = MIN ( fS_y[5,3,3] , bS_y[5,3,3] )
+ GC2480: fM_x[5,0,0] = MAX ( S_x[5,0,0] , S_y[5,0,0] )
+ GC2481: bM_y[5,0,0] = MAX ( S_x[5,0,0] , S_y[5,0,0] )
+ GC2482: fM_x[5,0,1] = MAX ( S_x[5,0,1] , S_y[5,0,1] )
+ GC2483: bM_y[5,0,1] = MAX ( S_x[5,0,1] , S_y[5,0,1] )
+ GC2484: fM_x[5,0,2] = MAX ( S_x[5,0,2] , S_y[5,0,2] )
+ GC2485: bM_y[5,0,2] = MAX ( S_x[5,0,2] , S_y[5,0,2] )
+ GC2486: fM_x[5,0,3] = MAX ( S_x[5,0,3] , S_y[5,0,3] )
+ GC2487: bM_y[5,0,3] = MAX ( S_x[5,0,3] , S_y[5,0,3] )
+ GC2488: fM_x[5,1,0] = MAX ( S_x[5,1,1] , S_y[5,1,1] )
+ GC2489: bM_y[5,1,0] = MAX ( S_x[5,1,1] , S_y[5,1,1] )
+ GC2490: fM_x[5,1,1] = MAX ( S_x[5,1,2] , S_y[5,1,2] )
+ GC2491: bM_y[5,1,1] = MAX ( S_x[5,1,2] , S_y[5,1,2] )
+ GC2492: fM_x[5,1,2] = MAX ( S_x[5,1,3] , S_y[5,1,3] )
+ GC2493: bM_y[5,1,2] = MAX ( S_x[5,1,3] , S_y[5,1,3] )
+ GC2494: fM_x[5,1,3] = MAX ( S_x[5,1,0] , S_y[5,1,0] )
+ GC2495: bM_y[5,1,3] = MAX ( S_x[5,1,0] , S_y[5,1,0] )
+ GC2496: fM_x[5,2,0] = MAX ( S_x[5,2,2] , S_y[5,2,2] )
+ GC2497: bM_y[5,2,0] = MAX ( S_x[5,2,2] , S_y[5,2,2] )
+ GC2498: fM_x[5,2,1] = MAX ( S_x[5,2,3] , S_y[5,2,3] )
+ GC2499: bM_y[5,2,1] = MAX ( S_x[5,2,3] , S_y[5,2,3] )
+ GC2500: fM_x[5,2,2] = MAX ( S_x[5,2,0] , S_y[5,2,0] )
+ GC2501: bM_y[5,2,2] = MAX ( S_x[5,2,0] , S_y[5,2,0] )
+ GC2502: fM_x[5,2,3] = MAX ( S_x[5,2,1] , S_y[5,2,1] )
+ GC2503: bM_y[5,2,3] = MAX ( S_x[5,2,1] , S_y[5,2,1] )
+ GC2504: fM_x[5,3,0] = MAX ( S_x[5,3,3] , S_y[5,3,3] )
+ GC2505: bM_y[5,3,0] = MAX ( S_x[5,3,3] , S_y[5,3,3] )
+ GC2506: fM_x[5,3,1] = MAX ( S_x[5,3,0] , S_y[5,3,0] )
+ GC2507: bM_y[5,3,1] = MAX ( S_x[5,3,0] , S_y[5,3,0] )
+ GC2508: fM_x[5,3,2] = MAX ( S_x[5,3,1] , S_y[5,3,1] )
+ GC2509: bM_y[5,3,2] = MAX ( S_x[5,3,1] , S_y[5,3,1] )
+ GC2510: fM_x[5,3,3] = MAX ( S_x[5,3,2] , S_y[5,3,2] )
+ GC2511: bM_y[5,3,3] = MAX ( S_x[5,3,2] , S_y[5,3,2] )
+ GC2512: S_x[6,0,0] = MIN ( fS_x[6,0,0] , bS_x[6,0,0] )
+ GC2513: S_y[6,0,0] = MIN ( fS_y[6,0,0] , bS_y[6,0,0] )
+ GC2514: S_x[6,0,1] = MIN ( fS_x[6,0,1] , bS_x[6,0,1] )
+ GC2515: S_y[6,0,1] = MIN ( fS_y[6,0,1] , bS_y[6,0,1] )
+ GC2516: S_x[6,0,2] = MIN ( fS_x[6,0,2] , bS_x[6,0,2] )
+ GC2517: S_y[6,0,2] = MIN ( fS_y[6,0,2] , bS_y[6,0,2] )
+ GC2518: S_x[6,0,3] = MIN ( fS_x[6,0,3] , bS_x[6,0,3] )
+ GC2519: S_y[6,0,3] = MIN ( fS_y[6,0,3] , bS_y[6,0,3] )
+ GC2520: S_x[6,1,0] = MIN ( fS_x[6,1,0] , bS_x[6,1,0] )
+ GC2521: S_y[6,1,0] = MIN ( fS_y[6,1,0] , bS_y[6,1,0] )
+ GC2522: S_x[6,1,1] = MIN ( fS_x[6,1,1] , bS_x[6,1,1] )
+ GC2523: S_y[6,1,1] = MIN ( fS_y[6,1,1] , bS_y[6,1,1] )
+ GC2524: S_x[6,1,2] = MIN ( fS_x[6,1,2] , bS_x[6,1,2] )
+ GC2525: S_y[6,1,2] = MIN ( fS_y[6,1,2] , bS_y[6,1,2] )
+ GC2526: S_x[6,1,3] = MIN ( fS_x[6,1,3] , bS_x[6,1,3] )
+ GC2527: S_y[6,1,3] = MIN ( fS_y[6,1,3] , bS_y[6,1,3] )
+ GC2528: S_x[6,2,0] = MIN ( fS_x[6,2,0] , bS_x[6,2,0] )
+ GC2529: S_y[6,2,0] = MIN ( fS_y[6,2,0] , bS_y[6,2,0] )
+ GC2530: S_x[6,2,1] = MIN ( fS_x[6,2,1] , bS_x[6,2,1] )
+ GC2531: S_y[6,2,1] = MIN ( fS_y[6,2,1] , bS_y[6,2,1] )
+ GC2532: S_x[6,2,2] = MIN ( fS_x[6,2,2] , bS_x[6,2,2] )
+ GC2533: S_y[6,2,2] = MIN ( fS_y[6,2,2] , bS_y[6,2,2] )
+ GC2534: S_x[6,2,3] = MIN ( fS_x[6,2,3] , bS_x[6,2,3] )
+ GC2535: S_y[6,2,3] = MIN ( fS_y[6,2,3] , bS_y[6,2,3] )
+ GC2536: S_x[6,3,0] = MIN ( fS_x[6,3,0] , bS_x[6,3,0] )
+ GC2537: S_y[6,3,0] = MIN ( fS_y[6,3,0] , bS_y[6,3,0] )
+ GC2538: S_x[6,3,1] = MIN ( fS_x[6,3,1] , bS_x[6,3,1] )
+ GC2539: S_y[6,3,1] = MIN ( fS_y[6,3,1] , bS_y[6,3,1] )
+ GC2540: S_x[6,3,2] = MIN ( fS_x[6,3,2] , bS_x[6,3,2] )
+ GC2541: S_y[6,3,2] = MIN ( fS_y[6,3,2] , bS_y[6,3,2] )
+ GC2542: S_x[6,3,3] = MIN ( fS_x[6,3,3] , bS_x[6,3,3] )
+ GC2543: S_y[6,3,3] = MIN ( fS_y[6,3,3] , bS_y[6,3,3] )
+ GC2544: fM_x[6,0,0] = MAX ( S_x[6,0,0] , S_y[6,0,0] )
+ GC2545: bM_y[6,0,0] = MAX ( S_x[6,0,0] , S_y[6,0,0] )
+ GC2546: S_x[0,0,0] = MIN ( fS_x[0,0,0] , bS_x[0,0,0] )
+ GC2547: S_y[0,0,0] = MIN ( fS_y[0,0,0] , bS_y[0,0,0] )
+ GC2548: fM_x[6,0,1] = MAX ( S_x[6,0,1] , S_y[6,0,1] )
+ GC2549: bM_y[6,0,1] = MAX ( S_x[6,0,1] , S_y[6,0,1] )
+ GC2550: S_x[0,0,1] = MIN ( fS_x[0,0,1] , bS_x[0,0,1] )
+ GC2551: S_y[0,0,1] = MIN ( fS_y[0,0,1] , bS_y[0,0,1] )
+ GC2552: fM_x[6,0,2] = MAX ( S_x[6,0,2] , S_y[6,0,2] )
+ GC2553: bM_y[6,0,2] = MAX ( S_x[6,0,2] , S_y[6,0,2] )
+ GC2554: S_x[0,0,2] = MIN ( fS_x[0,0,2] , bS_x[0,0,2] )
+ GC2555: S_y[0,0,2] = MIN ( fS_y[0,0,2] , bS_y[0,0,2] )
+ GC2556: fM_x[6,0,3] = MAX ( S_x[6,0,3] , S_y[6,0,3] )
+ GC2557: bM_y[6,0,3] = MAX ( S_x[6,0,3] , S_y[6,0,3] )
+ GC2558: S_x[0,0,3] = MIN ( fS_x[0,0,3] , bS_x[0,0,3] )
+ GC2559: S_y[0,0,3] = MIN ( fS_y[0,0,3] , bS_y[0,0,3] )
+ GC2560: fM_x[6,1,0] = MAX ( S_x[6,1,1] , S_y[6,1,1] )
+ GC2561: bM_y[6,1,0] = MAX ( S_x[6,1,1] , S_y[6,1,1] )
+ GC2562: S_x[0,1,0] = MIN ( fS_x[0,1,0] , bS_x[0,1,0] )
+ GC2563: S_y[0,1,0] = MIN ( fS_y[0,1,0] , bS_y[0,1,0] )
+ GC2564: fM_x[6,1,1] = MAX ( S_x[6,1,2] , S_y[6,1,2] )
+ GC2565: bM_y[6,1,1] = MAX ( S_x[6,1,2] , S_y[6,1,2] )
+ GC2566: S_x[0,1,1] = MIN ( fS_x[0,1,1] , bS_x[0,1,1] )
+ GC2567: S_y[0,1,1] = MIN ( fS_y[0,1,1] , bS_y[0,1,1] )
+ GC2568: fM_x[6,1,2] = MAX ( S_x[6,1,3] , S_y[6,1,3] )
+ GC2569: bM_y[6,1,2] = MAX ( S_x[6,1,3] , S_y[6,1,3] )
+ GC2570: S_x[0,1,2] = MIN ( fS_x[0,1,2] , bS_x[0,1,2] )
+ GC2571: S_y[0,1,2] = MIN ( fS_y[0,1,2] , bS_y[0,1,2] )
+ GC2572: fM_x[6,1,3] = MAX ( S_x[6,1,0] , S_y[6,1,0] )
+ GC2573: bM_y[6,1,3] = MAX ( S_x[6,1,0] , S_y[6,1,0] )
+ GC2574: S_x[0,1,3] = MIN ( fS_x[0,1,3] , bS_x[0,1,3] )
+ GC2575: S_y[0,1,3] = MIN ( fS_y[0,1,3] , bS_y[0,1,3] )
+ GC2576: fM_x[6,2,0] = MAX ( S_x[6,2,2] , S_y[6,2,2] )
+ GC2577: bM_y[6,2,0] = MAX ( S_x[6,2,2] , S_y[6,2,2] )
+ GC2578: S_x[0,2,0] = MIN ( fS_x[0,2,0] , bS_x[0,2,0] )
+ GC2579: S_y[0,2,0] = MIN ( fS_y[0,2,0] , bS_y[0,2,0] )
+ GC2580: fM_x[6,2,1] = MAX ( S_x[6,2,3] , S_y[6,2,3] )
+ GC2581: bM_y[6,2,1] = MAX ( S_x[6,2,3] , S_y[6,2,3] )
+ GC2582: S_x[0,2,1] = MIN ( fS_x[0,2,1] , bS_x[0,2,1] )
+ GC2583: S_y[0,2,1] = MIN ( fS_y[0,2,1] , bS_y[0,2,1] )
+ GC2584: fM_x[6,2,2] = MAX ( S_x[6,2,0] , S_y[6,2,0] )
+ GC2585: bM_y[6,2,2] = MAX ( S_x[6,2,0] , S_y[6,2,0] )
+ GC2586: S_x[0,2,2] = MIN ( fS_x[0,2,2] , bS_x[0,2,2] )
+ GC2587: S_y[0,2,2] = MIN ( fS_y[0,2,2] , bS_y[0,2,2] )
+ GC2588: fM_x[6,2,3] = MAX ( S_x[6,2,1] , S_y[6,2,1] )
+ GC2589: bM_y[6,2,3] = MAX ( S_x[6,2,1] , S_y[6,2,1] )
+ GC2590: S_x[0,2,3] = MIN ( fS_x[0,2,3] , bS_x[0,2,3] )
+ GC2591: S_y[0,2,3] = MIN ( fS_y[0,2,3] , bS_y[0,2,3] )
+ GC2592: fM_x[6,3,0] = MAX ( S_x[6,3,3] , S_y[6,3,3] )
+ GC2593: bM_y[6,3,0] = MAX ( S_x[6,3,3] , S_y[6,3,3] )
+ GC2594: S_x[0,3,0] = MIN ( fS_x[0,3,0] , bS_x[0,3,0] )
+ GC2595: S_y[0,3,0] = MIN ( fS_y[0,3,0] , bS_y[0,3,0] )
+ GC2596: fM_x[6,3,1] = MAX ( S_x[6,3,0] , S_y[6,3,0] )
+ GC2597: bM_y[6,3,1] = MAX ( S_x[6,3,0] , S_y[6,3,0] )
+ GC2598: S_x[0,3,1] = MIN ( fS_x[0,3,1] , bS_x[0,3,1] )
+ GC2599: S_y[0,3,1] = MIN ( fS_y[0,3,1] , bS_y[0,3,1] )
+ GC2600: fM_x[6,3,2] = MAX ( S_x[6,3,1] , S_y[6,3,1] )
+ GC2601: bM_y[6,3,2] = MAX ( S_x[6,3,1] , S_y[6,3,1] )
+ GC2602: S_x[0,3,2] = MIN ( fS_x[0,3,2] , bS_x[0,3,2] )
+ GC2603: S_y[0,3,2] = MIN ( fS_y[0,3,2] , bS_y[0,3,2] )
+ GC2604: fM_x[6,3,3] = MAX ( S_x[6,3,2] , S_y[6,3,2] )
+ GC2605: bM_y[6,3,3] = MAX ( S_x[6,3,2] , S_y[6,3,2] )
+ GC2606: S_x[0,3,3] = MIN ( fS_x[0,3,3] , bS_x[0,3,3] )
+ GC2607: S_y[0,3,3] = MIN ( fS_y[0,3,3] , bS_y[0,3,3] )
 End

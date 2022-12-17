@@ -76,10 +76,10 @@ def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.nda
         m.addConstr(meet[j] == gp.max_(meet_signed[j], 0))
     m.update()
 
-def gen_new_match_rule(m: gp.Model, lhs_x, lhs_info: np.ndarray, rhs_x, rhs_info: np.ndarray, meet_signed, meet):
-    ind_4same = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
-    match_case_2_signed = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2_signed').values())
-    match_case_2 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2').values())
+def gen_new_match_rule(m: gp.Model, lhs_x, lhs_info: np.ndarray, rhs_x, rhs_info: np.ndarray, meet):
+    ind_4same = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
+    match_case_2_signed = np.asarray(m.addVars(NCOL, vtype = GRB.INTEGER, name='match_case_2_signed').values())
+    match_case_2 = np.asarray(m.addVars(NCOL, vtype = GRB.INTEGER, name='match_case_2').values())
     for j in COL:
         m.addConstr((ind_4same[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
         m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
@@ -130,10 +130,10 @@ def set_obj(m: gp.Model, Nr, Nb, Nk,
                 m.addConstr(true_key_cost_bwd[r,i,j] == key_cost_bwd[r,i,j] - bKS_eq_g[r,i,j])
 
     # reduce search pool
-    df_b = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_b")
-    df_r = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_r")
-    dm = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="Match")
-    obj = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="Obj")
+    df_b = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="DF_r")
+    dm = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="Match")
+    obj = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
@@ -433,7 +433,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
                 MC_x[ri, i, j] = SB_x[ri, i, (j + i)%NCOL]
                 MC_y[ri, i, j] = SB_y[ri, i, (j + i)%NCOL]
 
-    
     KeyS_r = 0
     KeyS_j = 0
     for r in range(-1, total_round):
@@ -501,7 +500,7 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
-        meet_s[j] = Sol["Meet_signed[%d]" %j]
+        #meet_s[j] = Sol["Meet_signed[%d]" %j]
 
     ini_df_enc_b = np.sum(ini_enc_x[:,:]) - np.sum(ini_enc_g[:,:])
     ini_df_enc_r = np.sum(ini_enc_y[:,:]) - np.sum(ini_enc_g[:,:])
@@ -879,7 +878,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
-        meet_s[j] = Sol["Meet_signed[%d]" %j]
+        #meet_s[j] = Sol["Meet_signed[%d]" %j]
 
     ini_df_enc_b = np.sum(ini_enc_x[:,:]) - np.sum(ini_enc_g[:,:])
     ini_df_enc_r = np.sum(ini_enc_y[:,:]) - np.sum(ini_enc_g[:,:])
@@ -1688,12 +1687,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     m.addConstr(bMeet_rhs_info[i,j] == 1 - bA_w[r,i,j]) 
                     m.addConstr(Meet_rhs_info[i,j] == gp.min_(fMeet_rhs_info[i,j], bMeet_rhs_info[i,j]))
                     
-                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fS_w[lr,i,j]) 
-                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bS_w[lr,i,j]) 
+                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fS_w[r,i,j]) 
+                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bS_w[r,i,j]) 
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
             # generate match rule
-            gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
-            #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
+            #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
+            gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
             continue
         
         # last round

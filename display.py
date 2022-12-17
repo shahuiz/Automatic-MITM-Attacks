@@ -19,7 +19,7 @@ ROW = range(NROW)
 COL = range(NCOL)
 TAB = ' ' * 4
 
-def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir:str):
+def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir:str):
     def draw_gridlines(file, id = 'ENC'):
         if id == 'ENC':
             ncol = NCOL
@@ -66,7 +66,6 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
                     i = nrow - 1 - ri
                     #for j in range(ncol):
                     file.write(color_fill[W_x[r,i], W_y[r,i]] + ' (%d,%d) rectangle + (1,1);\n'   %(0, i))
-
 
     solFile = open(dir + model_name + '_sol_' + str(sol_i) + '.sol', 'r')
     Sol = dict()
@@ -231,10 +230,10 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
 
     for i in ROW:
         for j in COL:
-            Meet_fwd_x[i,j] = Sol["Meet_fwd_x[%d,%d]" %(i,j)]
-            Meet_fwd_y[i,j] = Sol["Meet_fwd_y[%d,%d]" %(i,j)]
-            Meet_bwd_x[i,j] = Sol["Meet_bwd_x[%d,%d]" %(i,j)]
-            Meet_bwd_y[i,j] = Sol["Meet_bwd_y[%d,%d]" %(i,j)]
+            Meet_fwd_x[i,j] = Sol["Meet_lhs_x[%d,%d]" %(i,j)]
+            Meet_fwd_y[i,j] = Sol["Meet_lhs_y[%d,%d]" %(i,j)]
+            Meet_bwd_x[i,j] = Sol["Meet_rhs_x[%d,%d]" %(i,j)]
+            Meet_bwd_y[i,j] = Sol["Meet_rhs_y[%d,%d]" %(i,j)]
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
@@ -295,8 +294,8 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
     f.write('%'+'borderline\n' + '\\draw -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n\n'
     %(
         -2*xtab, ytab,
-        9*(Nr+x_shift), ytab,
-        9*(Nr+x_shift), -(total_round+2)*ytab,
+        10*(Nr+x_shift), ytab,
+        10*(Nr+x_shift), -(total_round+2)*ytab,
         -2*xtab, -(total_round+2)*ytab
     ))
     
@@ -327,7 +326,8 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
             f.write('\\path (' + str(NCOL//2) + ',' + str(-0.8) + ') node {\\scriptsize$(+' + str(ini_df_enc_b) + '~\\DoFF,~+' + str(ini_df_enc_r) + '~\\DoFB)$};'+'\n')
             f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StENC$};'+'\n')
         if r == match_round:
-            f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StMatch$};'+'\n')
+            pass
+            #f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StMatch$};'+'\n')
 
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
@@ -340,49 +340,62 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
-        # draw arrow
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op1, x_shift))
-        if op1 == 'SupP':
-            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
-            f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
-        else: 
-            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
-            f.write('\\draw (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
         
         # SupP MixCol state
-        slot += 1
-        # fwd
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        draw_cells(fMC_x, fMC_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
-        if r != total_round -1:
-            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        if r == match_round and r != total_round - 1:
+            # draw arrow
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny \\scriptsize$\\StMatch$}+(%d,0);\n'    %(arrow, NCOL, NROW//2, 3*x_shift))
+            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(2*x_shift+NCOL//2, NROW//2))
+            f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 2*x_shift+NCOL//2, NROW//2, 2*x_shift+NCOL//2, -NROW, 4*x_shift, -NROW))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            slot+=1
+            pass
         else:
-            f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        # bwd
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-        draw_cells(bMC_x, bMC_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
-        if r != total_round - 1:
-            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        else: 
-            f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        # consumed df
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-2*NROW, slot*(NCOL+x_shift))) 
-        if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
-            f.write('\\path (%f,%f) node {\\tiny MC Cost};\n'  %(1.5*NCOL, -1))
-            f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(mc_cost_fwd[r,:]), np.sum(mc_cost_bwd[r,:])))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
+            # draw arrow
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op1, x_shift))
+            if op1 == 'SupP':
+                f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
+                f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
+            else: 
+                f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
+                f.write('\\draw (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            slot += 1
+            # fwd
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fMC_x, fMC_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            if r != total_round -1:
+                f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            else:
+                f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            # bwd
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bMC_x, bMC_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            if r != total_round - 1:
+                f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            else: 
+                f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            # consumed df
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-2*NROW, slot*(NCOL+x_shift))) 
+            if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
+                f.write('\\path (%f,%f) node {\\tiny MC Cost};\n'  %(1.5*NCOL, -1))
+                f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(mc_cost_fwd[r,:]), np.sum(mc_cost_bwd[r,:])))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
 
         # SupP AddKey state
         slot += 1
@@ -660,13 +673,13 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
         # MC
         r = match_round
         f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round)*(ytab), (xtab))) 
-        draw_cells(SB_x, SB_y, f)
+        draw_cells(MC_x, MC_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         # Meet_bwd
         f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round)*(ytab), 2*(xtab))) 
-        draw_cells(Meet_fwd_x, Meet_fwd_y, f)
+        draw_cells(Meet_bwd_x, Meet_bwd_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\meet^B$};\n'    %(NCOL//2, NROW+0.5))
         f.write('\n'+'\\end{scope}'+'\n')
@@ -697,4 +710,4 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
 
     return
 
-displaySol(192, 9, 3, 8, 3, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,9,3,8,3), 0, dir='./AES_SupP_GnD_RKc_Wmeet/solutions/')
+tex_display(192, 9, 3, 8, 3, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,9,3,8,3), 0, dir='./AES_SupP_GnD_RKc_Wmeet/runs/')

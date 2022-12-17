@@ -5,10 +5,10 @@ Model:
     KEY start at: r3
 
 Initialization:
-    ENC FWD: 15
-    ENC BWD: 0
-    KEY FWD: 17
-    KEY BWD: 7
+    ENC FWD: 0
+    ENC BWD: 15
+    KEY FWD: 6
+    KEY BWD: 17
 
 Solution:
     Obj := min{DF_b=4 - GnD_b=0, DF_r=4 - GnD_r=0, Match=4 - GnD_b - GnD_r - GnD_br=0} = 4
@@ -16,253 +16,251 @@ Solution:
 Visualization:
 r0  fwd --->
 SB#0        MC#0        fMC#0       fAK#0       fKEY#0      fSB#1       SB#1
-bwww        bwww        bwww        bwww        bbbb        gwww        rwww
-wrww        rwww        gwww        bwww        bgbb        gwww        rwww
-wwrw        rwww        gwww        bwww        bbbb        gwww        rwww
-wwwr        rwww        gwww        bwww        bgbb        gwww        rwww
+wwbw        wwbw        wwbw        wwbw        bbgg        wwbw        wwbw
+wwwb        wwbw        wwbw        wwbw        bbgg        wwbw        wwww
+bwww        wwbw        wwbw        wwbw        gggg        wwbw        wwww
+wbww        wwbw        wwbw        wwbw        bbbb        wwbw        wwww
 
                         bMC#0       bAK#0       bKEY#0      bSB#1   
-                        gwww        rwww        rrgg        rwww
-                        rwww        rwww        rrgg        rwww
-                        rwww        rwww        rrrg        rwww
-                        rwww        rwww        rrgg        rwww
+                        wwgw        wwgw        rggr        wwgw
+                        wwgw        wwgw        rrrr        wwrw
+                        wwgw        wwgw        rrrr        wwrw
+                        wwgw        wwgw        rgrr        wwrw
 
-AddKey costs fwdDf: 
-[[1 0 0 0]
- [1 0 0 0]
- [1 0 0 0]
- [1 0 0 0]]
 
 r1  mat -><-
 SB#1        MC#1        fMC#1       fAK#1       fKEY#1      fSB#2       SB#2
-rwww        rwww        wwrw        bbbb        bbbb        bbbg        bbbr
-rwww        wwwr        rwrw        bbbb        bbbb        gbbg        rbbr
-rwww        wwrw        wrgw        bbbb        bbbb        ggbb        rrbb
-rwww        wrww        wrrw        bbgb        bbgg        bggb        brrb
+wwbw        wwbw        wbbb        bbbb        bbbb        bgbb        brbb
+wwww        wwww        wbrb        bbbb        bgbg        bbgb        bbrb
+wwww        wwww        wgrr        bbbg        gggg        bbbg        bbbr
+wwww        wwww        wwrr        bbbb        bgbg        gbbb        rbbb
 
                         bMC#1       bAK#1       bKEY#1      bSB#2   
-                        bbwb        rgrr        rgrg        gggr
-                        bbwr        rgrr        rgrg        rggr
-                        bbwb        rrrg        rgrg        rrgg
-                        bbwr        rrrr        rrrr        grrg
+                        bbwb        rrgg        rrgg        grgg
+                        bbwb        rrgr        rrrr        ggrg
+                        bbwr        rrrr        rrrr        gggr
+                        bbwb        rrgg        rrgg        rggg
 
+AddKey costs bwdDf: 
+[[0 0 0 0]
+ [0 0 1 0]
+ [0 0 0 0]
+ [0 0 0 0]]
 
 Match Thru MC:
 MC#1        Meet_BWD
-rwww        wbww
-wwwr        wbww
-wwrw        wwwb
-wrww        wwrw
-Degree of Matching:[1 1 1 1]
+wwbw        wwbb
+wwww        wwbw
+wwww        wwwr
+wwww        wwbb
+Degree of Matching:[0 0 4 0]
 
 r2  bwd <---
 SB#2        MC#2        fMC#2       fAK#2       fKEY#2      fSB#3       SB#3
-bbbr        bbbr        bbbg        bbbg        bbbb        bbbb        bbbb
-rbbr        bbrr        bbgg        bbbg        bbbb        bbbb        bbbb
-rrbb        bbrr        bbgg        bbbg        bbbb        bbbb        bbbb
-brrb        bbrr        bbgg        bbbg        bbbg        bbbg        bbbg
+brbb        brbb        bgbb        ggbb        ggbb        gggg        rrrg
+bbrb        brbb        bgbb        ggbb        ggbb        gggg        rrrr
+bbbr        brbb        bgbb        gggg        gggg        gggg        rrrr
+rbbb        brbb        bgbb        bgbb        bgbb        gggg        rrrr
 
                         bMC#2       bAK#2       bKEY#2      bSB#3   
-                        gggr        ggrr        ggrr        gggg
-                        ggrr        ggrr        ggrr        gggg
-                        ggrr        ggrr        ggrr        gggg
-                        ggrr        ggrr        ggrr        gggg
+                        grgg        grgg        rrrg        rrrg
+                        grgg        grgg        rrrr        rrrr
+                        grgg        grgg        rrrr        rrrr
+                        grgg        grgg        rrrr        rrrr
 
-MixCol costs fwdDf: [0 0 3 0]    bwdDf: [0 0 1 0]
-AddKey costs fwdDf: 
-[[0 0 0 1]
- [0 0 0 1]
- [0 0 0 1]
- [0 0 0 0]]
+AddKey costs bwdDf: 
+[[1 0 1 0]
+ [1 0 1 1]
+ [1 0 1 1]
+ [1 0 1 1]]
 
 r3  fwd --->        ENC_start
 SB#3        MC#3        fMC#3       fAK#3       fKEY#3      fSB#4       SB#4
-bbbb        bbbb        bbbb        bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb        bbbb        bbbb        bbbb
-bbbb        bbbb        bbbb        bbbb        bbbb        bbbb        bbbb
-bbbg        gbbb        gbbb        gbbb        ggbb        gbbb        rbbb
+rrrg        rrrg        gggg        gggg        gbgg        gbgg        rbrr
+rrrr        rrrr        gggg        gggg        gggg        gggg        rrrr
+rrrr        rrrr        gggg        gggg        gggg        gggg        rrrr
+rrrr        rrrr        gggg        gggg        gggg        gggg        rrrr
 
                         bMC#3       bAK#3       bKEY#3      bSB#4   
-                        gggg        gggg        gggg        gggg
-                        gggg        gggg        gggg        gggg
-                        gggg        gggg        gggg        gggg
-                        gggg        gggg        rggg        rggg
+                        rrrg        rgrr        ggrr        rgrr
+                        rrrr        rrrr        rrrr        rrrr
+                        rrrr        rrrr        rrrr        rrrr
+                        rrrr        rrrr        rrrr        rrrr
 
-MixCol costs fwdDf: [1 0 0 0]    bwdDf: [0 0 0 0]
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [0 1 0 0]
 
 r4  fwd --->
 SB#4        MC#4        fMC#4       fAK#4       fKEY#4      fSB#5       SB#5
-bbbb        bbbb        bbbb        gbbb        gbbb        ggbb        rrbb
-bbbb        bbbb        bbbb        bbbb        gbbb        bgbb        wrbb
-bbbb        bbbb        bbbb        gbbb        gbbb        gbbg        rwbg
-rbbb        brbb        bgbb        bgbg        gggg        bgbg        wrwr
+rbrr        rbrr        gbgg        gbgg        bbbb        bbbb        bwbw
+rrrr        rrrr        gggg        gbgg        bggg        bbgg        wbrr
+rrrr        rrrr        gggg        gbgg        gggg        gbgg        rwrr
+rrrr        rrrr        gggg        gbgg        bggg        bbgg        wbrr
 
                         bMC#4       bAK#4       bKEY#4      bSB#5   
-                        gggg        grgg        rggg        rrgg
-                        gggg        grgg        rggg        rrgg
-                        gggg        grgg        rggg        rrgg
-                        grgg        grgg        rrrr        rrrr
+                        rgrr        grgr        gggg        grgr
+                        rrrr        rrrr        grrg        rgrr
+                        rrrr        rrrr        rrrr        rrrr
+                        rrrr        rrrr        grrr        rgrr
 
-MixCol costs fwdDf: [2 1 0 1]    bwdDf: [0 0 0 0]
-AddKey costs fwdDf: 
-[[0 1 0 0]
+MixCol costs fwdDf: [0 0 0 0]    bwdDf: [1 0 1 0]
+AddKey costs bwdDf: 
+[[0 0 0 0]
  [0 1 0 0]
- [0 0 0 1]
- [0 0 0 0]]
+ [0 0 0 0]
+ [0 1 0 0]]
 
 r5  fwd --->
 SB#5        MC#5        fMC#5       fAK#5       fKEY#5      fSB#6       SB#6
-rrbb        rrbb        ggbb        bwbw        bbbb        gwbw        rwww
-wrbb        rbbw        gbbw        bwbw        bbbb        bwgw        wwrw
-rwbg        bgrw        bggw        bwbw        bbbb        gwbw        rwww
-wrwr        rwrw        gwgw        bwgw        bggg        bwgw        wwrw
+bwbw        bwbw        bwbw        bwbw        ggbb        bwgw        wwrw
+wbrr        brrw        bggw        bwbw        ggbb        bwbw        bwww
+rwrr        rrrw        gggw        bwbw        gggg        bwbw        wwbw
+wbrr        rwbr        gwbg        bwbw        bbbb        bwbw        bwww
 
                         bMC#5       bAK#5       bKEY#5      bSB#6   
-                        rrgg        rwrw        ggrr        rwrw
-                        rggw        rwrw        ggrr        rwrw
-                        ggrw        rwrw        rrrr        rwrw
-                        rwrw        rwrw        ggrr        rwrw
+                        gwgw        rwrw        rrrr        rwrw
+                        grrw        rwrw        rrrr        gwrw
+                        rrrw        rwrw        rrrr        rwgw
+                        rwgr        rwrw        rrrr        gwrw
 
-MixCol costs fwdDf: [0 0 1 0]    bwdDf: [0 0 0 0]
 AddKey costs fwdDf: 
-[[1 0 0 0]
- [0 0 1 0]
- [1 0 0 0]
+[[0 0 1 0]
+ [0 0 0 0]
+ [0 0 0 0]
  [0 0 0 0]]
+AddKey costs bwdDf: 
+[[0 0 0 0]
+ [1 0 0 0]
+ [0 0 1 0]
+ [1 0 0 0]]
 
 r6  fwd --->
 SB#6        MC#6        fMC#6       fAK#6       fKEY#6      fSB#0       SB#0
-rwww        rwww        gwww        ////        bgww        bwww        bwww
-wwrw        wrww        wgww        ////        bbww        wgww        wrww
-rwww        wwrw        wwgw        ////        bbbb        wwgw        wwrw
-wwrw        wwwr        wwwg        ////        ggbb        wwwg        wwwr
+wwrw        wwrw        wwgw        ////        bbbb        wwbw        wwbw
+bwww        wwwb        wwwb        ////        bbgg        wwwb        wwwb
+wwbw        bwww        bwww        ////        ggww        bwww        bwww
+bwww        wbww        wbww        ////        bbww        wbww        wbww
 
                         bMC#6       bAK#6       bKEY#6      bSB#0   
-                        rwww        ////        rrww        gwww
-                        wrww        ////        rrww        wrww
-                        wwrw        ////        rrrr        wwrw
-                        wwwr        ////        rrrr        wwwr
+                        wwrw        ////        rrrr        wwgw
+                        wwwg        ////        ggrr        wwwg
+                        gwww        ////        rrww        gwww
+                        wgww        ////        rrww        wgww
 
 
                                     fAT         fKEY#-1      fSB#0       SB#0
-                                    bwww        bbbb
-                                    wbww        wbbb
-                                    wwbw        bbbb
-                                    wwwb        wbbb
+                                    wwbw        wgbb
+                                    wwwb        ggbb
+                                    bwww        bggg
+                                    wbww        bbbb
 
                                     bAT         bKEY#-1      bSB#0   
-                                    rwww        rgrr
-                                    wrww        wgrr
-                                    wwrw        rrrr
-                                    wwwr        wgrr
+                                    wwrw        wrrr
+                                    wwwr        rrrr
+                                    rwww        rrrr
+                                    wrww        rrrr
 
-AddKey costs fwdDf: 
-[[0 0 0 0]
- [0 1 0 0]
- [0 0 1 0]
- [0 0 0 1]]
 AddKey costs bwdDf: 
-[[1 0 0 0]
- [0 0 0 0]
- [0 0 0 0]
- [0 0 0 0]]
+[[0 0 1 0]
+ [0 0 0 1]
+ [1 0 0 0]
+ [0 1 0 0]]
 
 Key Schedule: starts at r3
 KEY_SCHEDULE_0
+wgbbbb
+ggbbbb
+bggggg
 bbbbbb
-wbbbbg
-bbbbbb
-wbbbbg
 
-rgrrrr
-wgrrrr
+wrrrrg
 rrrrrr
-wgrrrr
+rrrrrr
+rrrrrg
+
+
+
+
+KEY_SCHEDULE_1
+ggbbbb    b    r    g
+ggbgbg    r    r    g
+gggggg    r    g    g
+bbbgbg    g    b    b
+
+grrrgg              r
+rrrrrr              r
+rrrrrr              g
+rrrrgg              g
+
+
+KeyExp costs bwdDf: 
+[[1 0 0 0 0 0]
+ [0 0 0 0 0 0]
+ [0 0 0 0 0 0]
+ [0 0 0 0 1 1]]
+
+
+KEY_SCHEDULE_2
+ggbbgb    b    r    g
+ggbbgg    r    r    g
+gggggg    r    r    g
+bgbbgg    r    b    b
+
+rrrggg              r
+rrrrrr              r
+rrrrrr              r
+rrrrrr              g
 
 
 KeyExp costs fwdDf: 
-[[0 0 0 0 0 0]
- [0 0 0 0 0 1]
+[[0 0 0 0 1 0]
+ [0 0 0 0 0 0]
  [0 0 0 0 0 0]
  [0 0 0 0 0 0]]
 
 
-KEY_SCHEDULE_1
-bbbbbb    b    b    b
-bbbbbb    b    b    b
-bbbbbb    b    r    g
-bbbbgg    r    b    b
-
-ggrgrg              g
-ggrgrg              g
-rgrgrg              r
-ggrrrr              g
-
-
-
-
-KEY_SCHEDULE_2
-bbbbbb    b    b    b
-bbbbbb    b    b    b
-bbbbbb    b    g    g
-bbbggg    g    b    b
-
-ggrrgg              g
-ggrrgg              g
-ggrrgg              g
-ggrrrg              g
-
-
-KeyExp costs bwdDf: 
-[[0 0 0 0 0 0]
- [0 0 0 0 0 0]
- [0 0 0 0 0 0]
- [0 0 0 0 0 1]]
-
-
 KEY_SCHEDULE_3
-bbgbbb    b    b    b
-bbgbbb    b    b    b
-bbgbbb    b    r    g
-bbgggg    r    b    b
+ggbbbb    b    g    g
+ggbggg    g    r    g
+gggggg    r    r    g
+ggbggg    r    b    b
 
-ggrggg              g
-ggrggg              g
-ggrggg              r
-ggrrrr              g
+rrgggg              g
+rrgrrg              r
+rrrrrr              r
+rrgrrr              g
 
 
 
 
 KEY_SCHEDULE_4
-bbbbbg    r    w    w
+ggbbbb    w    b    b
+ggbbbb    b    r    g
+gggggg    r    w    w
 bbbbbb    w    w    w
-bbbbbb    w    r    g
-bggggg    r    r    g
 
-ggrrrr              w
-ggrrrr              w
-rrrrrr              r
-ggrrrr              r
+rrrrrr              g
+rrrrgg              r
+rrrrrr              w
+rrrrrr              w
 
 
-KeyExp costs fwdDf: 
-[[0 0 0 0 0 1]
+KeyExp costs bwdDf: 
+[[0 0 0 0 0 0]
+ [0 0 0 0 1 0]
  [0 0 0 0 0 0]
- [0 0 0 0 0 0]
- [0 1 0 0 0 0]]
+ [0 0 0 0 0 0]]
 
 
 KEY_SCHEDULE_5
+bbbbbb
+ggbgbg
 wwwwww
 wwwwww
-bbbbbb
-bbbbbb
 
-wwwwww
-wwwwww
 rrrrrr
 rrrrrr
+wwwwww
+wwwwww
 
 
 
