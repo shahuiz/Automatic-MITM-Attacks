@@ -54,7 +54,6 @@ def gen_XOR_ktag_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, 
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, known, cost_fwd, cost_bwd]
     m.addMConstr(XOR_biD_k_LHS, list(enum), '>=', -XOR_biD_k_RHS)
 
-
 # generate MC rule with SupP versions
 def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
@@ -70,12 +69,49 @@ def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Va
     m.update()
 
 # generate matching rules, for easy calculation of dm
-def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.ndarray, out_b: np.ndarray, out_r: np.ndarray, out_g: np.ndarray, meet_signed, meet):
-    m.addConstr(meet_signed == 
-        gp.quicksum(in_b) + gp.quicksum(in_r) - gp.quicksum(in_g) +
-        gp.quicksum(out_b) + gp.quicksum(out_r) - gp.quicksum(out_g) - NROW)
-    m.addConstr(meet == gp.max_(meet_signed, 0))
+def gen_match_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_g: np.ndarray, in_info: np.ndarray, out_b: np.ndarray, out_r: np.ndarray, out_g: np.ndarray, out_info: np.ndarray, meet):
+    meet_signed = np.asarray(m.addVars(NCOL, lb=-NROW, ub=NROW, vtype=GRB.INTEGER, name='Meet_signed').values())
+    for j in COL:
+        m.addConstr(meet_signed[j] == gp.quicksum(in_b[:,j]) + gp.quicksum(in_r[:,j]) - gp.quicksum(in_g[:,j]) + gp.quicksum(out_info[:,j]) - NROW)
+        m.addConstr(meet[j] == gp.max_(meet_signed[j], 0))
     m.update()
+
+def gen_new_match_rule(m: gp.Model, lhs_x, lhs_info: np.ndarray, rhs_x, rhs_info: np.ndarray, meet_signed, meet):
+    ind_4same = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
+    match_case_2_signed = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2_signed').values())
+    match_case_2 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2').values())
+    for j in COL:
+        m.addConstr((ind_4same[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
+        m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
+        m.addConstr(match_case_2[j] == ind_4same[j] * match_case_2_signed[j])
+        m.addConstr(meet[j] == gp.max_(match_case_2[j], 0))
+    m.update()
+
+def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rhs_y, rhs_g, rhs_info, ind_4blue, ind_4red, ind_4same, meet):
+    
+    ind_4blue = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
+    ind_4red = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
+    ind_4same = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
+
+    match_case_1 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_1').values())
+    match_case_2_signed = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2_signed').values())
+    match_case_2 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2').values())
+    
+    for j in COL:
+        # basic match rule: lhs have to be pure color, rhs can be linear combination state
+        m.addConstr(match_case_1[j] == gp.quicksum(lhs_x[:,j]) + gp.quicksum(lhs_y[:,j]) - gp.quicksum(lhs_g[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
+        # additional match rule 1: if has 4 same pure color cells at lhs and rhs of MC, then linear combination could be traced thru S-box
+        m.addConstr((ind_4blue[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
+        m.addConstr((ind_4red[j] == 1) >> (gp.quicksum(lhs_y[:,j]) + gp.quicksum(rhs_y[:,j]) >= NROW))
+        m.addConstr(ind_4same[j] == gp.max_(ind_4blue[j], ind_4red[j]))
+        # activate the match rule
+        m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
+        m.addConstr(match_case_2[j] == ind_4same[j] * match_case_2_signed[j])
+        # pick the largest df for matching
+        m.addConstr(meet[j] == gp.max_(match_case_1[j], match_case_2[j], 0))
+    
+    m.update()
+    return
 
 # set objective function
 def set_obj(m: gp.Model, Nr, Nb, Nk,
@@ -97,7 +133,7 @@ def set_obj(m: gp.Model, Nr, Nb, Nk,
     df_b = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_b")
     df_r = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="DF_r")
     dm = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="Match")
-    obj = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="Obj")
+    obj = m.addVar(lb=2, ub=5, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
@@ -458,10 +494,10 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
 
     for i in ROW:
         for j in COL:
-            Meet_fwd_x[i,j] = Sol["Meet_fwd_x[%d,%d]" %(i,j)]
-            Meet_fwd_y[i,j] = Sol["Meet_fwd_y[%d,%d]" %(i,j)]
-            Meet_bwd_x[i,j] = Sol["Meet_bwd_x[%d,%d]" %(i,j)]
-            Meet_bwd_y[i,j] = Sol["Meet_bwd_y[%d,%d]" %(i,j)]
+            Meet_fwd_x[i,j] = Sol["Meet_lhs_x[%d,%d]" %(i,j)]
+            Meet_fwd_y[i,j] = Sol["Meet_lhs_y[%d,%d]" %(i,j)]
+            Meet_bwd_x[i,j] = Sol["Meet_rhs_x[%d,%d]" %(i,j)]
+            Meet_bwd_y[i,j] = Sol["Meet_rhs_y[%d,%d]" %(i,j)]
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
@@ -673,7 +709,6 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
                     #for j in range(ncol):
                     file.write(color_fill[W_x[r,i], W_y[r,i]] + ' (%d,%d) rectangle + (1,1);\n'   %(0, i))
 
-
     solFile = open(dir + model_name + '_sol_' + str(sol_i) + '.sol', 'r')
     Sol = dict()
     for line in solFile:
@@ -837,10 +872,10 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
 
     for i in ROW:
         for j in COL:
-            Meet_fwd_x[i,j] = Sol["Meet_fwd_x[%d,%d]" %(i,j)]
-            Meet_fwd_y[i,j] = Sol["Meet_fwd_y[%d,%d]" %(i,j)]
-            Meet_bwd_x[i,j] = Sol["Meet_bwd_x[%d,%d]" %(i,j)]
-            Meet_bwd_y[i,j] = Sol["Meet_bwd_y[%d,%d]" %(i,j)]
+            Meet_fwd_x[i,j] = Sol["Meet_lhs_x[%d,%d]" %(i,j)]
+            Meet_fwd_y[i,j] = Sol["Meet_lhs_y[%d,%d]" %(i,j)]
+            Meet_bwd_x[i,j] = Sol["Meet_rhs_x[%d,%d]" %(i,j)]
+            Meet_bwd_y[i,j] = Sol["Meet_rhs_y[%d,%d]" %(i,j)]
     
     for j in COL:
         meet[j] = Sol["Meet[%d]" %j]
@@ -901,8 +936,8 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     f.write('%'+'borderline\n' + '\\draw -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n\n'
     %(
         -2*xtab, ytab,
-        9*(Nr+x_shift), ytab,
-        9*(Nr+x_shift), -(total_round+2)*ytab,
+        10*(Nr+x_shift), ytab,
+        10*(Nr+x_shift), -(total_round+2)*ytab,
         -2*xtab, -(total_round+2)*ytab
     ))
     
@@ -933,7 +968,8 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\\path (' + str(NCOL//2) + ',' + str(-0.8) + ') node {\\scriptsize$(+' + str(ini_df_enc_b) + '~\\DoFF,~+' + str(ini_df_enc_r) + '~\\DoFB)$};'+'\n')
             f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StENC$};'+'\n')
         if r == match_round:
-            f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StMatch$};'+'\n')
+            pass
+            #f.write('\\path (' + str(-2) + ',' + str(0.8) + ') node {\\scriptsize$\\StMatch$};'+'\n')
 
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
@@ -946,49 +982,62 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
-        # draw arrow
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op1, x_shift))
-        if op1 == 'SupP':
-            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
-            f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
-        else: 
-            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
-            f.write('\\draw (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
         
         # SupP MixCol state
-        slot += 1
-        # fwd
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-        draw_cells(fMC_x, fMC_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
-        if r != total_round -1:
-            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+        if r == match_round and r != total_round - 1:
+            # draw arrow
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny \\scriptsize$\\StMatch$}+(%d,0);\n'    %(arrow, NCOL, NROW//2, 3*x_shift))
+            f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(2*x_shift+NCOL//2, NROW//2))
+            f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 2*x_shift+NCOL//2, NROW//2, 2*x_shift+NCOL//2, -NROW, 4*x_shift, -NROW))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            slot+=1
+            pass
         else:
-            f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        # bwd
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-        draw_cells(bMC_x, bMC_y, f)
-        draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
-        if r != total_round - 1:
-            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        else: 
-            f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
-        # consumed df
-        f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-2*NROW, slot*(NCOL+x_shift))) 
-        if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
-            f.write('\\path (%f,%f) node {\\tiny MC Cost};\n'  %(1.5*NCOL, -1))
-            f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(mc_cost_fwd[r,:]), np.sum(mc_cost_bwd[r,:])))
-        f.write('\n'+'\\end{scope}'+'\n')
-        f.write('\n\n')
+            # draw arrow
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny %s}+(%d,0);\n'    %(arrow, NCOL, NROW//2, op1, x_shift))
+            if op1 == 'SupP':
+                f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
+                f.write('\\draw[edge, %s] (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(arrow, 1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
+            else: 
+                f.write('\\filldraw [black] (%d,%d) circle (4 pt);\n'    %(1.5*NCOL, NROW//2))
+                f.write('\\draw (%d,%d) -- (%f,%f) -- (%d,%d);\n'    %(1.5*NCOL, NROW//2, 1.5*NCOL, -NROW, 2*x_shift, -NROW))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+
+            slot += 1
+            # fwd
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
+            draw_cells(fMC_x, fMC_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            if r != total_round -1:
+                f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            else:
+                f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            # bwd
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
+            draw_cells(bMC_x, bMC_y, f)
+            draw_gridlines(f)
+            f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            if r != total_round - 1:
+                f.write('\\draw[edge, %s] (%f,%f) -- node[above] {\\tiny MC}+(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            else: 
+                f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
+            # consumed df
+            f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-2*NROW, slot*(NCOL+x_shift))) 
+            if mc_cost_fwd[r,:].any() or mc_cost_bwd[r,:].any():
+                f.write('\\path (%f,%f) node {\\tiny MC Cost};\n'  %(1.5*NCOL, -1))
+                f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(mc_cost_fwd[r,:]), np.sum(mc_cost_bwd[r,:])))
+            f.write('\n'+'\\end{scope}'+'\n')
+            f.write('\n\n')
 
         # SupP AddKey state
         slot += 1
@@ -1266,13 +1315,13 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         # MC
         r = match_round
         f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round)*(ytab), (xtab))) 
-        draw_cells(SB_x, SB_y, f)
+        draw_cells(MC_x, MC_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\MC^%d$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         # Meet_bwd
         f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round)*(ytab), 2*(xtab))) 
-        draw_cells(Meet_fwd_x, Meet_fwd_y, f)
+        draw_cells(Meet_bwd_x, Meet_bwd_y, f)
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\meet^B$};\n'    %(NCOL//2, NROW+0.5))
         f.write('\n'+'\\end{scope}'+'\n')
@@ -1391,9 +1440,6 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     bA_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_y').values()).reshape((total_round, NROW, NCOL))
     bA_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_g').values()).reshape((total_round, NROW, NCOL))
     bA_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_w').values()).reshape((total_round, NROW, NCOL))
-    # track if the cell is in a known state: a linear combination of blue red and grey, or an unknown state
-    fA_k = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_k').values()).reshape((total_round, NROW, NCOL))
-    bA_k = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_k').values()).reshape((total_round, NROW, NCOL))
 
     # define vars storing the state after adding the key with superposition at each round with encoding scheme
     fS_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fS_x').values()).reshape((total_round, NROW, NCOL))
@@ -1404,10 +1450,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     bS_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_y').values()).reshape((total_round, NROW, NCOL))
     bS_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_g').values()).reshape((total_round, NROW, NCOL))
     bS_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_w').values()).reshape((total_round, NROW, NCOL))
-    # track if the cell is in a known state: a linear combination of blue red and grey, or an unknown state
-    fS_k = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fS_k').values()).reshape((total_round, NROW, NCOL))
-    bS_k = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_k').values()).reshape((total_round, NROW, NCOL))
-
+ 
     # blue add grey and white constriants
     for r in range(total_round):
         for i in ROW:
@@ -1539,25 +1582,33 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     key_cost_fwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((Nr, NROW, Nk))
     key_cost_bwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((Nr, NROW, Nk))
     
-    # Define final states for meet in the middle
-    Meet_fwd_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_fwd_x').values()).reshape((NROW, NCOL))
-    Meet_fwd_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_fwd_y').values()).reshape((NROW, NCOL))
-    Meet_fwd_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_fwd_g').values()).reshape((NROW, NCOL)) 
-    Meet_fwd_w = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_fwd_w').values()).reshape((NROW, NCOL)) 
-    Meet_bwd_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_bwd_x').values()).reshape((NROW, NCOL))
-    Meet_bwd_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_bwd_y').values()).reshape((NROW, NCOL))
-    Meet_bwd_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_bwd_g').values()).reshape((NROW, NCOL)) 
-    Meet_bwd_w = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_bwd_w').values()).reshape((NROW, NCOL)) 
+    # define final states for meet in the middle
+    fMeet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fMeet_lhs_info').values()).reshape((NROW, NCOL))
+    bMeet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bMeet_lhs_info').values()).reshape((NROW, NCOL))
+    fMeet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fMeet_rhs_info').values()).reshape((NROW, NCOL))
+    bMeet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bMeet_rhs_info').values()).reshape((NROW, NCOL))
+    
+    Meet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_info').values()).reshape((NROW, NCOL))
+    Meet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_info').values()).reshape((NROW, NCOL))
+
+    Meet_lhs_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_x').values()).reshape((NROW, NCOL))
+    Meet_lhs_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_y').values()).reshape((NROW, NCOL))
+    Meet_lhs_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_g').values()).reshape((NROW, NCOL)) 
+    Meet_lhs_w = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_w').values()).reshape((NROW, NCOL)) 
+    
+    Meet_rhs_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_x').values()).reshape((NROW, NCOL))
+    Meet_rhs_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_y').values()).reshape((NROW, NCOL))
+    Meet_rhs_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_g').values()).reshape((NROW, NCOL)) 
+    Meet_rhs_w = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_w').values()).reshape((NROW, NCOL)) 
     # add constriants for grey indicators
     for i in ROW:
         for j in COL:
-            m.addConstr(Meet_fwd_g[i,j] == gp.min_(Meet_fwd_x[i,j], Meet_fwd_y[i,j]))
-            m.addConstr(Meet_fwd_w[i,j] + Meet_fwd_x[i,j] + Meet_fwd_y[i,j] - Meet_fwd_g[i,j] == 1)
-            m.addConstr(Meet_bwd_g[i,j] == gp.min_(Meet_bwd_x[i,j], Meet_bwd_y[i,j]))
-            m.addConstr(Meet_bwd_w[i,j] + Meet_bwd_x[i,j] + Meet_bwd_y[i,j] - Meet_bwd_g[i,j] == 1)
+            m.addConstr(Meet_lhs_g[i,j] == gp.min_(Meet_lhs_x[i,j], Meet_lhs_y[i,j]))
+            m.addConstr(Meet_lhs_w[i,j] + Meet_lhs_x[i,j] + Meet_lhs_y[i,j] - Meet_lhs_g[i,j] == 1)
+            m.addConstr(Meet_rhs_g[i,j] == gp.min_(Meet_rhs_x[i,j], Meet_rhs_y[i,j]))
+            m.addConstr(Meet_rhs_w[i,j] + Meet_rhs_x[i,j] + Meet_rhs_y[i,j] - Meet_rhs_g[i,j] == 1)
     
     # define auxiliary vars for computations on degree of matching
-    meet_signed = np.asarray(m.addVars(NCOL, lb=-NROW, ub=NROW, vtype=GRB.INTEGER, name='Meet_signed').values())
     meet = np.asarray(m.addVars(NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Meet').values())
 
 #### Main Procedure ####
@@ -1607,20 +1658,20 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[nr,i,j], fK_y[nr,i,j], fS_x[0,i,j], fS_y[0,i,j], xor_cost_fwd[nr,i,j], CONST0)
                     gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[nr,i,j], bK_y[nr,i,j], bS_x[0,i,j], bS_y[0,i,j], CONST0, xor_cost_bwd[nr,i,j])
                     # Exit SupP at Meet_fwd
-                    ext_SupP(m, fS_x[0,i,j], fS_y[0,i,j], bS_x[0,i,j], bS_y[0,i,j], Meet_fwd_x[i,j], Meet_fwd_y[i,j]) 
+                    ext_SupP(m, fS_x[0,i,j], fS_y[0,i,j], bS_x[0,i,j], bS_y[0,i,j], Meet_lhs_x[i,j], Meet_lhs_y[i,j]) 
             # calculate degree of match
             tempMeet = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempMeet').values()).reshape((NROW, NCOL))
             for j in COL:
                 for i in ROW:
-                    m.addConstr(tempMeet[i,j] == gp.max_(Meet_fwd_w[i,j], S_w[0,i,j]))
+                    m.addConstr(tempMeet[i,j] == gp.max_(Meet_lhs_w[i,j], S_w[0,i,j]))
                 m.addConstr(meet[j] == NROW - gp.quicksum(tempMeet[:,j]))
-                m.addConstr(meet_signed[j] == 0)
             continue
         
         # General structure
         # match round
-        if r == match_round:
+        elif r == match_round:
             print('mat', r)  
+            lr = (r-1+total_round)%total_round
             for i in ROW:
                 for j in COL:
                     # Enter SupP at next round SB state
@@ -1628,15 +1679,25 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     # (reverse) AddKey with SupP  
                     gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
                     gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
-                    # Exit SupP to Meet_bwd
-                    ext_SupP(m, fA_x[r,i,j], fA_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], Meet_bwd_x[i,j], Meet_bwd_y[i,j])
-            # meet-in-the-middle for M(Meet_fwd) and Meet_bwd
-            for j in COL:
-                gen_match_rule(m, M_x[r,:,j], M_y[r,:,j], M_g[r,:,j], Meet_bwd_x[:,j], Meet_bwd_y[:,j], Meet_bwd_g[:,j], meet_signed[j], meet[j])
+                    # exit SupP at rhs of MC gate (for 4 same color matching)
+                    ext_SupP(m, fA_x[r,i,j], fA_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], Meet_rhs_x[i,j], Meet_rhs_y[i,j])
+                    # 
+                    Meet_lhs_x, Meet_lhs_y, Meet_lhs_g = M_x[r,:,:], M_y[r,:,:], M_g[r,:,:]
+                    # if both of the superposition branches carry information (i.e. non-white), then we mark the meet state carries information and could be used for matching
+                    m.addConstr(fMeet_rhs_info[i,j] == 1 - fA_w[r,i,j]) 
+                    m.addConstr(bMeet_rhs_info[i,j] == 1 - bA_w[r,i,j]) 
+                    m.addConstr(Meet_rhs_info[i,j] == gp.min_(fMeet_rhs_info[i,j], bMeet_rhs_info[i,j]))
+                    
+                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fS_w[lr,i,j]) 
+                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bS_w[lr,i,j]) 
+                    m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
+            # generate match rule
+            gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
+            #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
             continue
         
         # last round
-        if r == total_round - 1:
+        elif r == total_round - 1:
             #continue
             print('lastr', r)
             # MC of last round is skipped, hence no cost in df
@@ -1672,7 +1733,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             continue 
         
         # forward direction
-        if r in fwd:
+        elif r in fwd:
             # Enter SupP at current round MC state
             print('fwd', r)
             for i in ROW:
@@ -1733,11 +1794,11 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    #m.setParam(GRB.Param.BestObjStop, 1.999999999)
     m.setParam(GRB.Param.Threads, 8)
     m.optimize()
     
-    if not os.path.exists(path= dir):
+    if not os.path.exists(path = dir):
         os.makedirs(dir)
     
     m.write(dir + m.modelName + '.lp')
@@ -1745,9 +1806,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     if m.SolCount > 0:
         for sol_i in range(m.SolCount):
             m.write(dir + m.modelName + '_sol_' + str(sol_i) + '.sol')
+            displaySol(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, dir)
             tex_display(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, dir)
         return m.SolCount
     else:
         return 0
 
-solve(key_size=192, total_round=9, enc_start_round=3, match_round=8, key_start_round=3, dir='./AES_v5/runs/')
+#solve(key_size=192, total_round=8, enc_start_round=3, match_round=7, key_start_round=3, dir='./AES_v5/runs/')
+solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
+#solve(key_size=128, total_round=8, enc_start_round=4, match_round=1, key_start_round=5, dir='./AES_v5/runs/')
