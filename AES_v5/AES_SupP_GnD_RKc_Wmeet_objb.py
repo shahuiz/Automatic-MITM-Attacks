@@ -7,6 +7,7 @@ import re
 import os
 import math
 import copy
+import time
 
 # AES parameters
 NROW = 4
@@ -87,15 +88,15 @@ def gen_new_match_rule(m: gp.Model, lhs_x, lhs_info: np.ndarray, rhs_x, rhs_info
         m.addConstr(meet[j] == gp.max_(match_case_2[j], 0))
     m.update()
 
-def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rhs_y, rhs_g, rhs_info, ind_4blue, ind_4red, ind_4same, meet):
+def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rhs_y, rhs_g, rhs_info, meet):
     
-    ind_4blue = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
-    ind_4red = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
-    ind_4same = np.asarray(m.addVar(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
+    ind_4blue = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
+    ind_4red = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
+    ind_4same = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
 
-    match_case_1 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_1').values())
-    match_case_2_signed = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2_signed').values())
-    match_case_2 = np.asarray(m.addVar(vtype = GRB.INTEGER, name='match_case_2').values())
+    match_case_1 = np.asarray(m.addVars(NCOL, vtype = GRB.INTEGER, name='match_case_1').values())
+    match_case_2_signed = np.asarray(m.addVars(NCOL, vtype = GRB.INTEGER, name='match_case_2_signed').values())
+    match_case_2 = np.asarray(m.addVars(NCOL, vtype = GRB.INTEGER, name='match_case_2').values())
     
     for j in COL:
         # basic match rule: lhs have to be pure color, rhs can be linear combination state
@@ -660,7 +661,7 @@ def displaySol(key_size:int, total_round:int, enc_start_round:int, match_round:i
 
     f.close()
 
-def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, dir:str):
+def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, model_name:str, sol_i:int, time:int, dir:str):
     def draw_gridlines(file, id = 'ENC'):
         if id == 'ENC':
             ncol = NCOL
@@ -911,7 +912,9 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
 
     
     #outfile = dir  + model_name
-    f = open(dir  + model_name + '.tex', 'w')
+    pdfname = 'AES%d_%d%d%d%d_obj%d_sol%d' % (key_size, total_round, enc_start_round, match_round, key_start_round, Obj, sol_i)
+    f = open(dir + pdfname + '.tex', 'w')
+    #f = open(dir  + 'AES' + key_size + '_' + total_round + enc_start_round + match_round + key_start_round +'_obj_' + Obj +'_sol_' + sol_i + '.tex', 'w')
     #print(outfile)
     
     # write latex header
@@ -1324,7 +1327,12 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         draw_gridlines(f)
         f.write('\\path (%f,%f) node {\\scriptsize$\\meet^B$};\n'    %(NCOL//2, NROW+0.5))
         f.write('\n'+'\\end{scope}'+'\n')
-
+    
+    # display time cost
+    f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round)*(ytab)-2*NROW, x_shift)) 
+    f.write('\\node[draw] at (0,0) {time cost = %d sec};' %time)
+    f.write('\n'+'\\end{scope}'+'\n')
+    
     ## Final footnote
     f.write('\\begin{scope}[yshift = %f cm, xshift = %f cm]\n\n'   %(-(total_round+1)*(3*NROW+y_shift), 2*(NCOL+x_shift))) 
     #f.write('\\begin{scope}[yshift =' + str(- total_round * (NROW + y_shift) + y_shift)+' cm, xshift =' +str(2 * (NCOL + x_shift))+' cm]'+'\n')
@@ -1345,8 +1353,8 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     f.write('\\end{tikzpicture}'+'\n\n'+'\\end{document}')
     f.close()
     from os import system
-    system("pdflatex --output-directory=" + dir +' ' + dir +  model_name + ".tex") 
-    system("latexmk -c --output-directory=" + dir + ' ' + dir + model_name +'.tex' )
+    system("pdflatex --output-directory=" + dir +' ' + dir +  pdfname + ".tex") 
+    system("latexmk -c --output-directory=" + dir + ' ' + dir + pdfname +'.tex' )
     f.close()
 
     return
@@ -1692,7 +1700,8 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
             # generate match rule
             #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
-            gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
+            #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
+            gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
             continue
         
         # last round
@@ -1793,9 +1802,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    #m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    m.setParam(GRB.Param.BestObjStop, 3.999999999)
     m.setParam(GRB.Param.Threads, 8)
+    start_time = time.time()
     m.optimize()
+    end_time = time.time()
+    time_cost = end_time - start_time
     
     if not os.path.exists(path = dir):
         os.makedirs(dir)
@@ -1805,12 +1817,13 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     if m.SolCount > 0:
         for sol_i in range(m.SolCount):
             m.write(dir + m.modelName + '_sol_' + str(sol_i) + '.sol')
-            displaySol(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, dir)
-            tex_display(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, dir)
+            #displaySol(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, time_cost, dir)
+            tex_display(key_size, total_round, enc_start_round, match_round, key_start_round, m.modelName, sol_i, time_cost, dir)
         return m.SolCount
     else:
         return 0
 
 #solve(key_size=192, total_round=8, enc_start_round=3, match_round=7, key_start_round=3, dir='./AES_v5/runs/')
-solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
-#solve(key_size=128, total_round=8, enc_start_round=4, match_round=1, key_start_round=5, dir='./AES_v5/runs/')
+#solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
+#solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
+solve(key_size=192, total_round=9, enc_start_round=4, match_round=1, key_start_round=4, dir='./AES_v5/runs/')
