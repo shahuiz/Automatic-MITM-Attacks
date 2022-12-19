@@ -131,10 +131,10 @@ def set_obj(m: gp.Model, Nr, Nb, Nk,
                 m.addConstr(true_key_cost_bwd[r,i,j] == key_cost_bwd[r,i,j] - bKS_eq_g[r,i,j])
 
     # reduce search pool
-    df_b = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="DF_b")
-    df_r = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="DF_r")
-    dm = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="Match")
-    obj = m.addVar(lb=2, ub=6, vtype=GRB.INTEGER, name="Obj")
+    df_b = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="DF_r")
+    dm = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="Match")
+    obj = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
@@ -1700,8 +1700,8 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
             # generate match rule
             #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
-            #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
-            gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
+            gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
+            #gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
             continue
         
         # last round
@@ -1802,7 +1802,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 3.999999999)
+    m.setParam(GRB.Param.BestObjStop, 1.999999999)
     m.setParam(GRB.Param.Threads, 8)
     start_time = time.time()
     m.optimize()
@@ -1823,7 +1823,4 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-#solve(key_size=192, total_round=8, enc_start_round=3, match_round=7, key_start_round=3, dir='./AES_v5/runs/')
-#solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
-#solve(key_size=192, total_round=7, enc_start_round=3, match_round=1, key_start_round=3, dir='./AES_v5/runs/')
-solve(key_size=192, total_round=9, enc_start_round=4, match_round=1, key_start_round=4, dir='./AES_v5/runs/')
+solve(key_size=192, total_round=9, enc_start_round=3, match_round=7, key_start_round=2, dir='./AES_SupP_GnD_RKc_NewMatch/runs/')
