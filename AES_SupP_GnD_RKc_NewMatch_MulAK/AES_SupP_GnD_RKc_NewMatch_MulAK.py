@@ -47,14 +47,6 @@ def gen_XOR_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r
     enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, cost_fwd, cost_bwd]
     m.addMConstr(XOR_biD_LHS, list(enum), '>=', -XOR_biD_RHS)
 
-def gen_XOR_ktag_rule(m: gp.Model, in1_b: gp.Var, in1_r: gp.Var, in2_b: gp.Var, in2_r: gp.Var, out_b: gp.Var, out_r: gp.Var, known:gp.Var, cost_fwd: gp.Var, cost_bwd: gp.Var):
-    # linear constriants for XOR operations, gennerated by Convex Hull method
-    XOR_biD_k_LHS = np.asarray([[0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1], [0, -1, 0, -1, 0, 1, 0, -2, 0], [0, -1, -1, 0, 0, 0, 1, -1, -1], [0, 0, 1, 0, -1, 0, 0, 0, 1], [0, 0, 0, 1, 0, -1, 0, 1, 0], [-1, 0, -1, 0, 1, 0, 0, 0, -2], [0, 0, 0, 0, 0, 0, -1, 0, 0], [1, 0, 0, 0, -1, 0, 0, 0, 1], [-1, 0, 0, -1, 0, 0, 1, -1, -1], [0, 1, 0, 0, 0, -1, 0, 1, 0], [0, 0, 1, 1, 0, 0, -1, 0, 0], [1, 0, 1, 0, -1, 1, -1, -1, 1], [0, 1, 0, 1, 1, -1, -1, 1, -1], [1, 1, 0, 0, 0, 0, -1, 0, 0], [0, 0, 0, 0, 0, 1, 0, -1, -1], [0, 0, 0, 0, 1, 0, 0, -1, -1], [0, 0, 0, 0, 0, -1, 1, 0, 0], [0, 0, 0, 0, -1, 0, 1, 0, 0]])
-    XOR_biD_k_RHS = np.asarray([0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-
-    enum = [in1_b, in1_r, in2_b, in2_r, out_b, out_r, known, cost_fwd, cost_bwd]
-    m.addMConstr(XOR_biD_k_LHS, list(enum), '>=', -XOR_biD_k_RHS)
-
 # generate MC rule with SupP versions
 def gen_MC_rule(m: gp.Model, in_b: np.ndarray, in_r: np.ndarray, in_col_u: gp.Var, in_col_x: gp.Var, in_col_y: gp.Var ,out_b: np.ndarray, out_r: np.ndarray, fwd: gp.Var, bwd: gp.Var):
     m.addConstr(NROW*in_col_u + gp.quicksum(out_b) <= NROW)
@@ -117,10 +109,10 @@ def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rh
 # set objective function
 def set_obj(m: gp.Model, Nr, Nb, Nk,
     ini_enc_b: np.ndarray, ini_enc_r: np.ndarray, ini_enc_g: np.ndarray, ini_key_b: np.ndarray, ini_key_r: np.ndarray, ini_key_g: np.ndarray, 
-    cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_cost_fwd: np.ndarray, xor_cost_bwd: np.ndarray, 
+    cost_fwd: np.ndarray, cost_bwd: np.ndarray, xor_lhs_cost_fwd: np.ndarray, xor_lhs_cost_bwd: np.ndarray, xor_rhs_cost_fwd: np.ndarray, xor_rhs_cost_bwd: np.ndarray, 
     key_cost_fwd: np.ndarray, key_cost_bwd: np.ndarray, fKS_eq_g, bKS_eq_g,
-    fM_Gx: np.ndarray, fM_x: np.ndarray, bM_Gy: np.ndarray, bM_y: np.ndarray, fA_Gx: np.ndarray, fA_x: np.ndarray, bA_Gy: np.ndarray, bA_y: np.ndarray, 
-    M_Gxy: np.ndarray, A_Gxy: np.ndarray, meet: np.ndarray):
+    fM_Gx: np.ndarray, fM_x: np.ndarray, bM_Gy: np.ndarray, bM_y: np.ndarray, fA_Gx: np.ndarray, fA_x: np.ndarray, bA_Gy: np.ndarray, bA_y: np.ndarray, fK_Gx, fK_x, bK_Gy, bK_y,
+    M_Gxy: np.ndarray, A_Gxy: np.ndarray, K_Gxy, meet: np.ndarray):
     
     true_key_cost_fwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='true_key_cost_fwd').values()).reshape((Nr, NROW, Nk))
     true_key_cost_bwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='true_key_cost_bwd').values()).reshape((Nr, NROW, Nk))
@@ -140,12 +132,12 @@ def set_obj(m: gp.Model, Nr, Nb, Nk,
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
     GnD_br = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_br")
 
-    m.addConstr(GnD_b == gp.quicksum(fM_Gx.flatten()) - gp.quicksum(fM_x.flatten()) + gp.quicksum(fA_Gx.flatten()) - gp.quicksum(fA_x.flatten()))
-    m.addConstr(GnD_b == gp.quicksum(bM_Gy.flatten()) - gp.quicksum(bM_y.flatten()) + gp.quicksum(bA_Gy.flatten()) - gp.quicksum(bA_y.flatten())) 
-    m.addConstr(GnD_br == gp.quicksum(M_Gxy.flatten()) + gp.quicksum(A_Gxy.flatten()))
+    m.addConstr(GnD_b == gp.quicksum(fM_Gx.flatten()) - gp.quicksum(fM_x.flatten()) + gp.quicksum(fA_Gx.flatten()) - gp.quicksum(fA_x.flatten()) + gp.quicksum(fK_Gx.flatten()) - gp.quicksum(fK_x.flatten()))
+    m.addConstr(GnD_b == gp.quicksum(bM_Gy.flatten()) - gp.quicksum(bM_y.flatten()) + gp.quicksum(bA_Gy.flatten()) - gp.quicksum(bA_y.flatten()) + gp.quicksum(bK_Gy.flatten()) - gp.quicksum(bK_y.flatten())) 
+    m.addConstr(GnD_br == gp.quicksum(M_Gxy.flatten()) + gp.quicksum(A_Gxy.flatten()) + gp.quicksum(K_Gxy.flatten()))
 
-    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_cost_fwd.flatten()) - gp.quicksum(true_key_cost_fwd.flatten()) )
-    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_cost_bwd.flatten()) - gp.quicksum(true_key_cost_bwd.flatten()) )
+    m.addConstr(df_b == gp.quicksum(ini_enc_b.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_b.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_fwd.flatten()) - gp.quicksum(xor_lhs_cost_fwd.flatten()) - gp.quicksum(xor_rhs_cost_fwd.flatten()) - gp.quicksum(true_key_cost_fwd.flatten()) )
+    m.addConstr(df_r == gp.quicksum(ini_enc_r.flatten()) - gp.quicksum(ini_enc_g.flatten()) + gp.quicksum(ini_key_r.flatten()) - gp.quicksum(ini_key_g.flatten()) - gp.quicksum(cost_bwd.flatten()) - gp.quicksum(xor_lhs_cost_bwd.flatten()) - gp.quicksum(xor_rhs_cost_bwd.flatten()) - gp.quicksum(true_key_cost_bwd.flatten()) )
     m.addConstr(dm == gp.quicksum(meet.flatten()))
    
     m.addConstr(obj <= df_b - GnD_r)
@@ -742,15 +734,31 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     bMC_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     bMC_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     
-    fAK_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
-    fAK_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
-    bAK_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
-    bAK_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    fAR_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    fAR_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    bAR_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    bAR_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    
+    fAL_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    fAL_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    bAL_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
+    bAL_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     
     fKEY_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     fKEY_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     bKEY_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     bKEY_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+
+    fKEYL_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    fKEYL_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    bKEYL_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    bKEYL_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+
+    fKEYR_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    fKEYR_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    bKEYR_x= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    bKEYR_y= np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    
 
     fKSch_x= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     fKSch_y= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
@@ -766,8 +774,10 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     
     Key_cost_fwd= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
     Key_cost_bwd= np.ndarray(shape=(Nr, NROW, Nk), dtype=int)
-    xor_cost_fwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
-    xor_cost_bwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    xor_rhs_cost_fwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    xor_rhs_cost_bwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    xor_lhs_cost_fwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
+    xor_lhs_cost_bwd = np.ndarray(shape=(total_round+1, NROW, NCOL), dtype=int)
     mc_cost_fwd = np.ndarray(shape=(total_round, NCOL), dtype=int)
     mc_cost_bwd = np.ndarray(shape=(total_round, NCOL), dtype=int)
 
@@ -795,10 +805,15 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
                 bSB_x[r,i,j]=Sol["bS_x[%d,%d,%d]" %(r,i,j)]
                 bSB_y[r,i,j]=Sol["bS_y[%d,%d,%d]" %(r,i,j)]
 
-                fAK_x[r,i,j]=Sol["fA_x[%d,%d,%d]" %(r,i,j)]
-                fAK_y[r,i,j]=Sol["fA_y[%d,%d,%d]" %(r,i,j)]
-                bAK_x[r,i,j]=Sol["bA_x[%d,%d,%d]" %(r,i,j)]
-                bAK_y[r,i,j]=Sol["bA_y[%d,%d,%d]" %(r,i,j)]
+                fAR_x[r,i,j]=Sol["fAR_x[%d,%d,%d]" %(r,i,j)]
+                fAR_y[r,i,j]=Sol["fAR_y[%d,%d,%d]" %(r,i,j)]
+                bAR_x[r,i,j]=Sol["bAR_x[%d,%d,%d]" %(r,i,j)]
+                bAR_y[r,i,j]=Sol["bAR_y[%d,%d,%d]" %(r,i,j)]
+
+                fAL_x[r,i,j]=Sol["fAL_x[%d,%d,%d]" %(r,i,j)]
+                fAL_y[r,i,j]=Sol["fAL_y[%d,%d,%d]" %(r,i,j)]
+                bAL_x[r,i,j]=Sol["bAL_x[%d,%d,%d]" %(r,i,j)]
+                bAL_y[r,i,j]=Sol["bAL_y[%d,%d,%d]" %(r,i,j)]
 
                 fMC_x[r,i,j]=Sol["fM_x[%d,%d,%d]" %(r,i,j)]
                 fMC_y[r,i,j]=Sol["fM_y[%d,%d,%d]" %(r,i,j)]
@@ -850,8 +865,10 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     for r in range(total_round+1):
         for i in ROW:
             for j in COL:
-                xor_cost_fwd[r,i,j] = Sol["XOR_Cost_fwd[%d,%d,%d]" %(r,i,j)]
-                xor_cost_bwd[r,i,j] = Sol["XOR_Cost_bwd[%d,%d,%d]" %(r,i,j)]
+                xor_rhs_cost_fwd[r,i,j] = Sol["XOR_RHS_Cost_fwd[%d,%d,%d]" %(r,i,j)]
+                xor_rhs_cost_bwd[r,i,j] = Sol["XOR_RHS_Cost_bwd[%d,%d,%d]" %(r,i,j)]
+                xor_lhs_cost_fwd[r,i,j] = Sol["XOR_LHS_Cost_fwd[%d,%d,%d]" %(r,i,j)]
+                xor_lhs_cost_bwd[r,i,j] = Sol["XOR_LHS_Cost_bwd[%d,%d,%d]" %(r,i,j)]
     
     for r in range(total_round):
         for j in COL:
@@ -1046,7 +1063,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         if r != total_round - 1:
             # fwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-            draw_cells(fAK_x, fAK_y, f)
+            draw_cells(fAR_x, fAR_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
@@ -1055,7 +1072,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\n\n')
             # bwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-            draw_cells(bAK_x, bAK_y, f)
+            draw_cells(bAR_x, bAR_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
@@ -1064,15 +1081,15 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\n\n')
             # consumed df
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-2*NROW, slot*(NCOL+x_shift))) 
-            if xor_cost_fwd[r,:].any() or xor_cost_bwd[r,:].any():
+            if xor_rhs_cost_fwd[r,:].any() or xor_rhs_cost_bwd[r,:].any():
                 f.write('\\path (%f,%f) node {\\tiny AK Cost};\n'  %(1.5*NCOL, -1))
-                f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(xor_cost_fwd[r,:]), np.sum(xor_cost_bwd[r,:])))
+                f.write('\\path (%f,%f) node {\\scriptsize$(-%d ~\\DoFF, -%d ~\\DoFB)$};\n'  %(1.5*NCOL, -2, np.sum(xor_rhs_cost_fwd[r,:]), np.sum(xor_rhs_cost_bwd[r,:])))
             f.write('\n'+'\\end{scope}'+'\n')
             f.write('\n\n')
         else:   # last round, SupP AT state
             # fwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
-            draw_cells(fAK_x, fAK_y, f)
+            draw_cells(fAR_x, fAR_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\AT$};\n'    %(NCOL//2, NROW+0.5))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
@@ -1082,7 +1099,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\n\n')
             # bwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
-            draw_cells(bAK_x, bAK_y, f)
+            draw_cells(bAR_x, bAR_y, f)
             draw_gridlines(f)
             f.write('\\path (%f,%f) node {\\scriptsize$\\AT$};\n'    %(NCOL//2, NROW+0.5))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
@@ -1361,6 +1378,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
 
 # interable solve function with parameters
 def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, key_start_round:int, dir):
+#### Besic Info ####
     # define optimization model
     m = gp.Model('AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (key_size, total_round, enc_start_round, match_round, key_start_round))
     
@@ -1377,11 +1395,18 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
         bwd = list(range(match_round+1, enc_start_round))
         fwd = list(range(enc_start_round, total_round)) + list(range(0, match_round))
 
+
+
+
+
 #### Define Variables ####
-    # define a constant zero, to force cost of df as 0
+    # trick: define a constant zero, to force cost of df as 0
     CONST0 = m.addVar(vtype = GRB.BINARY, name='Const0')
     m.addConstr(CONST0 == 0)
 
+
+
+    ### State Vars
     # define vars to track the start state of Encryption states (E) 
     E_ini_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='E_ini_x').values()).reshape((NROW, NCOL))
     E_ini_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='E_ini_y').values()).reshape((NROW, NCOL))
@@ -1438,15 +1463,26 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     bM_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bM_g').values()).reshape((total_round, NROW, NCOL))
     bM_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bM_w').values()).reshape((total_round, NROW, NCOL))
 
-    # define vars storing the Add key state with superposition at each round with encoding scheme
-    fA_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_x').values()).reshape((total_round, NROW, NCOL))
-    fA_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_y').values()).reshape((total_round, NROW, NCOL))
-    fA_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_g').values()).reshape((total_round, NROW, NCOL))
-    fA_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fA_w').values()).reshape((total_round, NROW, NCOL))
-    bA_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_x').values()).reshape((total_round, NROW, NCOL))
-    bA_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_y').values()).reshape((total_round, NROW, NCOL))
-    bA_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_g').values()).reshape((total_round, NROW, NCOL))
-    bA_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bA_w').values()).reshape((total_round, NROW, NCOL))
+    # define vars storing the AK state with superposition at each round with encoding scheme
+    # AL means AK at the LHS of MC, AR means AK at the RHS of MC, SB->fAL,bAL->fM,bM->fAR,bAR->NSB
+    # DFAULT: AR
+    fAL_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAL_x').values()).reshape((total_round, NROW, NCOL))
+    fAL_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAL_y').values()).reshape((total_round, NROW, NCOL))
+    fAL_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAL_g').values()).reshape((total_round, NROW, NCOL))
+    fAL_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAL_w').values()).reshape((total_round, NROW, NCOL))
+    bAL_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAL_x').values()).reshape((total_round, NROW, NCOL))
+    bAL_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAL_y').values()).reshape((total_round, NROW, NCOL))
+    bAL_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAL_g').values()).reshape((total_round, NROW, NCOL))
+    bAL_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAL_w').values()).reshape((total_round, NROW, NCOL))
+
+    fAR_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAR_x').values()).reshape((total_round, NROW, NCOL))
+    fAR_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAR_y').values()).reshape((total_round, NROW, NCOL))
+    fAR_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAR_g').values()).reshape((total_round, NROW, NCOL))
+    fAR_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fAR_w').values()).reshape((total_round, NROW, NCOL))
+    bAR_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAR_x').values()).reshape((total_round, NROW, NCOL))
+    bAR_y = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAR_y').values()).reshape((total_round, NROW, NCOL))
+    bAR_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAR_g').values()).reshape((total_round, NROW, NCOL))
+    bAR_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bAR_w').values()).reshape((total_round, NROW, NCOL))
 
     # define vars storing the state after adding the key with superposition at each round with encoding scheme
     fS_x = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='fS_x').values()).reshape((total_round, NROW, NCOL))
@@ -1458,7 +1494,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     bS_g = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_g').values()).reshape((total_round, NROW, NCOL))
     bS_w = np.asarray(m.addVars(total_round, NROW, NCOL, vtype= GRB.BINARY, name='bS_w').values()).reshape((total_round, NROW, NCOL))
  
-    # blue add grey and white constriants
+    # bulk add grey and white constriants
     for r in range(total_round):
         for i in ROW:
             for j in COL:             
@@ -1467,10 +1503,15 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                 m.addConstr(bM_g[r,i,j] == gp.min_(bM_x[r,i,j], bM_y[r,i,j]))
                 m.addConstr(bM_w[r,i,j] + bM_x[r,i,j] + bM_y[r,i,j] - bM_g[r,i,j] == 1)
                 
-                m.addConstr(fA_g[r,i,j] == gp.min_(fA_x[r,i,j], fA_y[r,i,j]))
-                m.addConstr(fA_w[r,i,j] + fA_x[r,i,j] + fA_y[r,i,j] - fA_g[r,i,j] == 1)
-                m.addConstr(bA_g[r,i,j] == gp.min_(bA_x[r,i,j], bA_y[r,i,j]))
-                m.addConstr(bA_w[r,i,j] + bA_x[r,i,j] + bA_y[r,i,j] - bA_g[r,i,j] == 1)
+                m.addConstr(fAL_g[r,i,j] == gp.min_(fAL_x[r,i,j], fAL_y[r,i,j]))
+                m.addConstr(fAL_w[r,i,j] + fAL_x[r,i,j] + fAL_y[r,i,j] - fAL_g[r,i,j] == 1)
+                m.addConstr(bAL_g[r,i,j] == gp.min_(bAL_x[r,i,j], bAL_y[r,i,j]))
+                m.addConstr(bAL_w[r,i,j] + bAL_x[r,i,j] + bAL_y[r,i,j] - bAL_g[r,i,j] == 1)
+
+                m.addConstr(fAR_g[r,i,j] == gp.min_(fAR_x[r,i,j], fAR_y[r,i,j]))
+                m.addConstr(fAR_w[r,i,j] + fAR_x[r,i,j] + fAR_y[r,i,j] - fAR_g[r,i,j] == 1)
+                m.addConstr(bAR_g[r,i,j] == gp.min_(bAR_x[r,i,j], bAR_y[r,i,j]))
+                m.addConstr(bAR_w[r,i,j] + bAR_x[r,i,j] + bAR_y[r,i,j] - bAR_g[r,i,j] == 1)
 
                 m.addConstr(fS_g[r,i,j] == gp.min_(fS_x[r,i,j], fS_y[r,i,j]))
                 m.addConstr(fS_w[r,i,j] + fS_x[r,i,j] + fS_y[r,i,j] - fS_g[r,i,j] == 1)
@@ -1495,14 +1536,51 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for r in range(total_round):
         for i in ROW:
             for j in COL: 
+                # structure: fM,bM <-[MC]-> fAR,bAR
                 m.addConstr(fM_Gx[r,i,j] >= fM_x[r,i,j])
                 m.addConstr(bM_Gy[r,i,j] >= bM_y[r,i,j])
                 m.addConstr(M_Gxy[r,i,j] == gp.min_(fM_Gx[r,i,j], bM_Gy[r,i,j], fM_w[r,i,j], bM_w[r,i,j]))
 
-                m.addConstr(fA_Gx[r,i,j] >= fA_x[r,i,j])
-                m.addConstr(bA_Gy[r,i,j] >= bA_y[r,i,j])
-                m.addConstr(A_Gxy[r,i,j] == gp.min_(fA_Gx[r,i,j], bA_Gy[r,i,j], fA_w[r,i,j], bA_w[r,i,j]))
+                m.addConstr(fA_Gx[r,i,j] >= fAR_x[r,i,j])
+                m.addConstr(bA_Gy[r,i,j] >= bAR_y[r,i,j])
+                m.addConstr(A_Gxy[r,i,j] == gp.min_(fA_Gx[r,i,j], bA_Gy[r,i,j], fAR_w[r,i,j], bAR_w[r,i,j]))
 
+    # define vars for columnwise encoding for MixCol input, including MC(fwd) and AK(bwd)
+    fM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_u').values()).reshape((total_round, NCOL))
+    fM_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_v').values()).reshape((total_round, NCOL))
+    fM_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_w').values()).reshape((total_round, NCOL))
+    bM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_u').values()).reshape((total_round, NCOL))
+    bM_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_v').values()).reshape((total_round, NCOL))
+    bM_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_w').values()).reshape((total_round, NCOL))
+
+    fA_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_u').values()).reshape((total_round, NCOL))
+    fA_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_v').values()).reshape((total_round, NCOL))
+    fA_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_w').values()).reshape((total_round, NCOL))
+    bA_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_u').values()).reshape((total_round, NCOL))
+    bA_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_v').values()).reshape((total_round, NCOL))
+    bA_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_w').values()).reshape((total_round, NCOL))
+
+    # add constraints for u-v-w encoding
+    for r in range(total_round):
+        for j in COL:
+            m.addConstr(fM_col_v[r,j] == gp.min_(fM_Gx[r,:,j].tolist()))
+            m.addConstr(fM_col_w[r,j] == gp.min_(fM_y[r,:,j].tolist()))
+            m.addConstr(fM_col_u[r,j] == gp.max_(fM_w[r,:,j].tolist()))
+            m.addConstr(bM_col_v[r,j] == gp.min_(bM_x[r,:,j].tolist()))
+            m.addConstr(bM_col_w[r,j] == gp.min_(bM_Gy[r,:,j].tolist()))
+            m.addConstr(bM_col_u[r,j] == gp.max_(bM_w[r,:,j].tolist()))
+            
+            # calculated based on AR
+            m.addConstr(fA_col_v[r,j] == gp.min_(fA_Gx[r,:,j].tolist()))
+            m.addConstr(fA_col_w[r,j] == gp.min_(fAR_y[r,:,j].tolist()))
+            m.addConstr(fA_col_u[r,j] == gp.max_(fAR_w[r,:,j].tolist()))
+            m.addConstr(bA_col_v[r,j] == gp.min_(bAR_x[r,:,j].tolist()))
+            m.addConstr(bA_col_w[r,j] == gp.min_(bA_Gy[r,:,j].tolist()))
+            m.addConstr(bA_col_u[r,j] == gp.max_(bAR_w[r,:,j].tolist()))
+
+
+
+    ### Key Vars (reminder, length = total_round + 1)
     # define vars storing the key state in key schedule (the long key), in total Nr rounds, with shape NROW*Nk
     fKS_x = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_x').values()).reshape((Nr, NROW, Nk))
     fKS_y = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='fKS_y').values()).reshape((Nr, NROW, Nk))
@@ -1529,6 +1607,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     fK_y = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
     bK_x = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
     bK_y = np.ndarray(shape= (total_round + 1, NROW, NCOL), dtype= gp.Var)
+    
     # match the states in key schedule to round keys alias
     KeyS_r = 0
     KeyS_j = 0
@@ -1544,51 +1623,80 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             if KeyS_j % Nk == 0:
                 KeyS_r += 1
                 KeyS_j = 0
-
-    # define vars for columnwise encoding for MixCol input, including MC(fwd) and AK(bwd)
-    fM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_u').values()).reshape((total_round, NCOL))
-    fM_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_v').values()).reshape((total_round, NCOL))
-    fM_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fM_col_w').values()).reshape((total_round, NCOL))
-    bM_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_u').values()).reshape((total_round, NCOL))
-    bM_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_v').values()).reshape((total_round, NCOL))
-    bM_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bM_col_w').values()).reshape((total_round, NCOL))
-
-    fA_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_u').values()).reshape((total_round, NCOL))
-    fA_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_v').values()).reshape((total_round, NCOL))
-    fA_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='fA_col_w').values()).reshape((total_round, NCOL))
-    bA_col_u = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_u').values()).reshape((total_round, NCOL))
-    bA_col_v = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_v').values()).reshape((total_round, NCOL))
-    bA_col_w = np.asarray(m.addVars(total_round, NCOL, vtype=GRB.BINARY, name='bA_col_w').values()).reshape((total_round, NCOL))
-
-    # add constraints for u-x-y encoding
-    for r in range(total_round):
-        for j in COL:
-            m.addConstr(fM_col_v[r,j] == gp.min_(fM_Gx[r,:,j].tolist()))
-            m.addConstr(fM_col_w[r,j] == gp.min_(fM_y[r,:,j].tolist()))
-            m.addConstr(fM_col_u[r,j] == gp.max_(fM_w[r,:,j].tolist()))
-            m.addConstr(bM_col_v[r,j] == gp.min_(bM_x[r,:,j].tolist()))
-            m.addConstr(bM_col_w[r,j] == gp.min_(bM_Gy[r,:,j].tolist()))
-            m.addConstr(bM_col_u[r,j] == gp.max_(bM_w[r,:,j].tolist()))
-            
-            m.addConstr(fA_col_v[r,j] == gp.min_(fA_Gx[r,:,j].tolist()))
-            m.addConstr(fA_col_w[r,j] == gp.min_(fA_y[r,:,j].tolist()))
-            m.addConstr(fA_col_u[r,j] == gp.max_(fA_w[r,:,j].tolist()))
-            m.addConstr(bA_col_v[r,j] == gp.min_(bA_x[r,:,j].tolist()))
-            m.addConstr(bA_col_w[r,j] == gp.min_(bA_Gy[r,:,j].tolist()))
-            m.addConstr(bA_col_u[r,j] == gp.max_(bA_w[r,:,j].tolist()))
     
-    # define auxiliary vars tracking cost of df at MC operations, cost_fwd is solely for MC, cost_bwd is for XOR_MC
+    # add grey and white indicators and constraints
+    fK_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fK_g').values()).reshape((total_round + 1, NROW, NCOL))
+    fK_w = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fK_w').values()).reshape((total_round + 1, NROW, NCOL))
+    bK_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bK_g').values()).reshape((total_round + 1, NROW, NCOL))
+    bK_w = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bK_w').values()).reshape((total_round + 1, NROW, NCOL)) 
+    
+    for r in range(total_round + 1):
+        for i in ROW:
+            for j in COL:             
+                m.addConstr(fK_g[r,i,j] == gp.min_(fK_x[r,i,j], fK_y[r,i,j]))
+                m.addConstr(fK_w[r,i,j] + fK_x[r,i,j] + fK_y[r,i,j] - fK_g[r,i,j] == 1)
+                m.addConstr(bK_g[r,i,j] == gp.min_(bK_x[r,i,j], bK_y[r,i,j]))
+                m.addConstr(bK_w[r,i,j] + bK_x[r,i,j] + bK_y[r,i,j] - bK_g[r,i,j] == 1)
+    
+    # add guess and determine bits and constriants
+    fK_Gx = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='fK_Gb').values()).reshape((total_round + 1, NROW, NCOL))
+    bK_Gy = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='bK_Gr').values()).reshape((total_round + 1, NROW, NCOL))
+    K_Gxy = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype= GRB.BINARY, name='K_Gbr').values()).reshape((total_round + 1, NROW, NCOL))
+    
+    for r in range(total_round + 1):
+        for i in ROW:
+            for j in COL: 
+                m.addConstr(fK_Gx[r,i,j] >= fK_x[r,i,j])
+                m.addConstr(bK_Gy[r,i,j] >= bK_y[r,i,j])
+                m.addConstr(K_Gxy[r,i,j] == gp.min_(fK_Gx[r,i,j], bK_Gy[r,i,j], fK_w[r,i,j], bK_w[r,i,j]))
+
+    # add column-wise u-v-w encoding and constriants
+    fK_col_u = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='fK_col_u').values()).reshape((total_round + 1, NCOL))
+    fK_col_v = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='fK_col_v').values()).reshape((total_round + 1, NCOL))
+    fK_col_w = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='fK_col_w').values()).reshape((total_round + 1, NCOL))
+    bK_col_u = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='bK_col_u').values()).reshape((total_round + 1, NCOL))
+    bK_col_v = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='bK_col_v').values()).reshape((total_round + 1, NCOL))
+    bK_col_w = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='bK_col_w').values()).reshape((total_round + 1, NCOL))
+    
+    for r in range(total_round + 1):
+        for j in COL:
+            m.addConstr(fK_col_v[r,j] == gp.min_(fK_Gx[r,:,j].tolist()))
+            m.addConstr(fK_col_w[r,j] == gp.min_(fK_y[r,:,j].tolist()))
+            m.addConstr(fK_col_u[r,j] == gp.max_(fK_w[r,:,j].tolist()))
+            m.addConstr(bK_col_v[r,j] == gp.min_(bK_x[r,:,j].tolist()))
+            m.addConstr(bK_col_w[r,j] == gp.min_(bK_Gy[r,:,j].tolist()))
+            m.addConstr(bK_col_u[r,j] == gp.max_(bK_w[r,:,j].tolist()))
+
+    # add equivalent key for MulAK
+    fK_invMC_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fK_invMC_x').values()).reshape((total_round + 1, NROW, NCOL))
+    fK_invMC_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fK_invMC_y').values()).reshape((total_round + 1, NROW, NCOL))
+    bK_invMC_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bK_invMC_x').values()).reshape((total_round + 1, NROW, NCOL))
+    bK_invMC_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bK_invMC_y').values()).reshape((total_round + 1, NROW, NCOL))
+    
+
+
+    ### Cost Vars
+    # define auxiliary vars tracking cost of df at MC operations
     mc_cost_fwd = np.asarray(m.addVars(total_round, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='MC_Cost_fwd').values()).reshape((total_round, NCOL))
     mc_cost_bwd = np.asarray(m.addVars(total_round, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='MC_Cost_bwd').values()).reshape((total_round, NCOL))
     
-    # define auxiliary vars tracking cost of df at Add Key operations in foward direction
-    xor_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_Cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
-    xor_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_Cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
+    # define auxiliary vars tracking cost of df for MulAK (moving the key before the MC layer)
+    mc_inv_cost_fwd = np.asarray(m.addVars(total_round + 1, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='MC_INV_Cost_fwd').values()).reshape((total_round + 1, NCOL))
+    mc_inv_cost_bwd = np.asarray(m.addVars(total_round + 1, NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='MC_INV_Cost_bwd').values()).reshape((total_round + 1, NCOL))
+    
+    # define auxiliary vars tracking cost of df at Add Key operations in foward direction, at the LHS and the RHS of MC gate
+    xor_lhs_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_LHS_Cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
+    xor_lhs_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_LHS_Cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
+    xor_rhs_cost_fwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_RHS_Cost_fwd').values()).reshape((total_round+1, NROW, NCOL))
+    xor_rhs_cost_bwd = np.asarray(m.addVars(total_round+1, NROW, NCOL, vtype= GRB.BINARY, name='XOR_RHS_Cost_bwd').values()).reshape((total_round+1, NROW, NCOL))
 
     # define auxiliary vars trackin cost of df in the key expansion process, unpossible combinations are set to zeros
     key_cost_fwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_fwd').values()).reshape((Nr, NROW, Nk))
     key_cost_bwd = np.asarray(m.addVars(Nr, NROW, Nk, vtype= GRB.BINARY, name='Key_cost_bwd').values()).reshape((Nr, NROW, Nk))
     
+
+
+    ### Meet Vars
     # define final states for meet in the middle
     fMeet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fMeet_lhs_info').values()).reshape((NROW, NCOL))
     bMeet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bMeet_lhs_info').values()).reshape((NROW, NCOL))
@@ -1607,6 +1715,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     Meet_rhs_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_y').values()).reshape((NROW, NCOL))
     Meet_rhs_g = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_g').values()).reshape((NROW, NCOL)) 
     Meet_rhs_w = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_w').values()).reshape((NROW, NCOL)) 
+    
     # add constriants for grey indicators
     for i in ROW:
         for j in COL:
@@ -1618,9 +1727,66 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # define auxiliary vars for computations on degree of matching
     meet = np.asarray(m.addVars(NCOL, lb=0, ub=NROW, vtype=GRB.INTEGER, name='Meet').values())
 
-#### Main Procedure ####
-    # add constriants according to the key expansion algorithm
-    key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, fKS_g, fKS_c, fKS_eq_g, bKS_x, bKS_y, bKS_g, bKS_c, bKS_eq_g, CONST0, key_cost_fwd, key_cost_bwd)
+
+
+    ### MulAK
+    # generate MC constraints on K and K_invMC, cost recorded in mc_inv
+    for r in range(total_round + 1):
+        for j in COL:
+            gen_MC_rule(m, fK_Gx[r,:,j], fK_y[r,:,j], fK_col_u[r,j], fK_col_v[r,j], fK_col_w[r,j], fK_invMC_x[r,:,j], fK_invMC_y[r,:,j], mc_inv_cost_fwd[r,j], CONST0)
+            gen_MC_rule(m, bK_x[r,:,j], bK_Gy[r,:,j], bK_col_u[r,j], bK_col_v[r,j], bK_col_w[r,j], bK_invMC_x[r,:,j], bK_invMC_y[r,:,j], CONST0, mc_inv_cost_bwd[r,j])
+
+    # define MulAK indicators, used as conditional canstraints
+    ind_MulAK = np.asarray(m.addVars(total_round + 1, NCOL, vtype=GRB.BINARY, name='MulAK_indicator').values()).reshape((total_round + 1, NCOL))
+    
+    # fix the MulAK be off at the last round add key process
+    for j in COL:
+        m.addConstr(ind_MulAK[total_round - 1, j] == 0)
+        m.addConstr(ind_MulAK[total_round, j] == 0)
+
+    # compose LHS and RHS equivalent key according to MulAK indicators
+    # DEFAULT: KR
+    fKL_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKL_x').values()).reshape((total_round + 1, NROW, NCOL))
+    fKL_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKL_y').values()).reshape((total_round + 1, NROW, NCOL))
+    bKL_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKL_x').values()).reshape((total_round + 1, NROW, NCOL))
+    bKL_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKL_y').values()).reshape((total_round + 1, NROW, NCOL)) 
+    
+    fKR_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKR_x').values()).reshape((total_round + 1, NROW, NCOL))
+    fKR_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKR_y').values()).reshape((total_round + 1, NROW, NCOL))
+    bKR_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKR_x').values()).reshape((total_round + 1, NROW, NCOL))
+    bKR_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKR_y').values()).reshape((total_round + 1, NROW, NCOL)) 
+    
+    # perform column selection according to MulAK indicator
+    for r in range(total_round + 1):
+        for j in COL:
+            for i in ROW:
+                # MulAK==0: KR=K (the original key), KL==g (no influence)
+                m.addConstr((ind_MulAK[r,j]==0) >> (fKR_x[r,i,j] == fK_x[r,i,j])) 
+                m.addConstr((ind_MulAK[r,j]==0) >> (fKR_y[r,i,j] == fK_y[r,i,j])) 
+                m.addConstr((ind_MulAK[r,j]==0) >> (fKL_x[r,i,j] == 1)) 
+                m.addConstr((ind_MulAK[r,j]==0) >> (bKL_y[r,i,j] == 1)) 
+
+                # MulAK==1: KR==g (no influence), KL=K_invMC (the equivalent key after inv MC gate)
+                m.addConstr((ind_MulAK[r,j]==1) >> (fKR_x[r,i,j] == 1)) 
+                m.addConstr((ind_MulAK[r,j]==1) >> (bKR_y[r,i,j] == 1)) 
+                m.addConstr((ind_MulAK[r,j]==1) >> (fKL_x[r,i,j] == fK_invMC_x[r,i,j])) 
+                m.addConstr((ind_MulAK[r,j]==1) >> (fKL_y[r,i,j] == fK_invMC_y[r,i,j])) 
+
+
+
+
+
+#### Tweak Panel ####
+    # MulAK switch: default off
+    for r in range(total_round+1):
+        for j in COL:
+            #continue
+            m.addConstr(ind_MulAK[r,j]==0)
+    
+    # BiDir switch: default on
+    for r in range(total_round + 1):
+        if r == match_round:
+            pass
 
     # proposition: fix start state to be all red (WLOG), in compensate of the efficiency
     for i in ROW:
@@ -1640,6 +1806,13 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             m.addConstr(K_ini_y[i, j] == 1) #test
             m.addConstr(K_ini_x[i, j] == 0) #test
 
+
+
+
+#### Main Procedure ####
+    # add constriants according to the key expansion algorithm
+    key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, fKS_g, fKS_c, fKS_eq_g, bKS_x, bKS_y, bKS_g, bKS_c, bKS_eq_g, CONST0, key_cost_fwd, key_cost_bwd)
+
     # initialize the enc states, avoid unknown to maximize performance
     for i in ROW:
         for j in COL:
@@ -1651,21 +1824,27 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     for r in range(total_round):
         nr = r + 1   # alias for next round
         
-        # special case: meet at last round
+        # special matching: identity meet at last round, only allows same pure colored cells to match 
+        # DEFAULT: using xor_rhs, AK_RHS and K_RHS (same as K in this situation), and fix xor_lhs == 0
         if r == match_round and match_round == total_round - 1:
             print('mat lastr', r)
             for i in ROW:
                 for j in COL:
                     # Enter SupP at last round MC state
                     ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j])
-                    # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
-                    gen_XOR_rule(m, fM_x[r,i,j], fM_y[r,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
-                    gen_XOR_rule(m, bM_x[r,i,j], bM_y[r,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
+                    # add last round key: AK_RHS[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
+                    gen_XOR_rule(m, fM_x[r,i,j], fM_y[r,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fAR_x[r,i,j], fAR_y[r,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bM_x[r,i,j], bM_y[r,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bAR_x[r,i,j], bAR_y[r,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
                     # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
-                    gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[nr,i,j], fK_y[nr,i,j], fS_x[0,i,j], fS_y[0,i,j], xor_cost_fwd[nr,i,j], CONST0)
-                    gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[nr,i,j], bK_y[nr,i,j], bS_x[0,i,j], bS_y[0,i,j], CONST0, xor_cost_bwd[nr,i,j])
+                    gen_XOR_rule(m, fAR_x[r,i,j], fAR_y[r,i,j], fKR_x[nr,i,j], fKR_y[nr,i,j], fS_x[0,i,j], fS_y[0,i,j], xor_rhs_cost_fwd[nr,i,j], CONST0)
+                    gen_XOR_rule(m, bAR_x[r,i,j], bAR_y[r,i,j], bKR_x[nr,i,j], bKR_y[nr,i,j], bS_x[0,i,j], bS_y[0,i,j], CONST0, xor_rhs_cost_bwd[nr,i,j])
                     # Exit SupP at Meet_fwd
                     ext_SupP(m, fS_x[0,i,j], fS_y[0,i,j], bS_x[0,i,j], bS_y[0,i,j], Meet_lhs_x[i,j], Meet_lhs_y[i,j]) 
+                    # Fix xor_lhs == 0
+                    m.addConstr(xor_lhs_cost_fwd[r,i,j] == 0) 
+                    m.addConstr(xor_lhs_cost_bwd[r,i,j] == 0) 
+                    m.addConstr(xor_lhs_cost_fwd[nr,i,j] == 0) 
+                    m.addConstr(xor_lhs_cost_bwd[nr,i,j] == 0) 
             # calculate degree of match
             tempMeet = np.asarray(m.addVars(NROW, NCOL, vtype= GRB.BINARY, name='tempMeet').values()).reshape((NROW, NCOL))
             for j in COL:
@@ -1674,33 +1853,43 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                 m.addConstr(meet[j] == NROW - gp.quicksum(tempMeet[:,j]))
             continue
         
-        # General structure
-        # match round
+        # normal matching
         elif r == match_round:
             print('mat', r)  
-            lr = (r-1+total_round)%total_round
+            lr = (r - 1 + total_round) % total_round
             for i in ROW:
                 for j in COL:
-                    # Enter SupP at next round SB state
+                    # RHS of the MC
+                    # Enter SupP at next round SB state, to SupP NSB
                     ent_SupP(m, S_x[nr,i,j], S_y[nr,i,j], fS_x[nr,i,j], fS_y[nr,i,j], bS_x[nr,i,j], bS_y[nr,i,j])
-                    # (reverse) AddKey with SupP  
-                    gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
-                    gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
+                    # (reverse) Add eq rhs key with SupP to NSB, get AK_RHS  
+                    gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fAR_x[r,i,j], fAR_y[r,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bAR_x[r,i,j], bAR_y[r,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
                     # exit SupP at rhs of MC gate (for 4 same color matching)
-                    ext_SupP(m, fA_x[r,i,j], fA_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], Meet_rhs_x[i,j], Meet_rhs_y[i,j])
-                    # 
-                    Meet_lhs_x, Meet_lhs_y, Meet_lhs_g = M_x[r,:,:], M_y[r,:,:], M_g[r,:,:]
-                    # if both of the superposition branches carry information (i.e. non-white), then we mark the meet state carries information and could be used for matching
-                    m.addConstr(fMeet_rhs_info[i,j] == 1 - fA_w[r,i,j]) 
-                    m.addConstr(bMeet_rhs_info[i,j] == 1 - bA_w[r,i,j]) 
+                    ext_SupP(m, fAR_x[r,i,j], fAR_y[r,i,j], bAR_x[r,i,j], bAR_y[r,i,j], Meet_rhs_x[i,j], Meet_rhs_y[i,j])
+
+                    # LHS of the MC
+                    # Enter SupP at current round MC state, to SupP AK_LHS
+                    ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fAL_x[r,i,j], fAL_y[nr,i,j], bAL_x[r,i,j], bAL_y[r,i,j])
+                    # Add eq lhs key with SupP to AK_LHS, get MC  
+                    gen_XOR_rule(m, fAL_x[r,i,j], fAL_y[r,i,j], fKL_x[r,i,j], fKL_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], xor_lhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bAL_x[r,i,j], bAL_y[r,i,j], bKL_x[r,i,j], bKL_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], CONST0, xor_lhs_cost_bwd[r,i,j])
+                    # exit SupP at lhs of MC gate (for 4 same color matching)
+                    ext_SupP(m, fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], Meet_lhs_x[i,j], Meet_lhs_y[i,j])
+                    
+                    # Match in SupP state: determine if both of the superposition branches carry information (i.e. non-white) 
+                    # the info var marks if the meet state contains information thus could be used for matching
+                    m.addConstr(fMeet_rhs_info[i,j] == 1 - fAR_w[r,i,j]) 
+                    m.addConstr(bMeet_rhs_info[i,j] == 1 - bAR_w[r,i,j]) 
                     m.addConstr(Meet_rhs_info[i,j] == gp.min_(fMeet_rhs_info[i,j], bMeet_rhs_info[i,j]))
                     
-                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fS_w[r,i,j]) 
-                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bS_w[r,i,j]) 
+                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fM_w[r,i,j]) 
+                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bM_w[r,i,j]) 
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
+            
             # generate match rule
-            #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
-            gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
+            gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
+            #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_info, Meet_rhs_x, Meet_rhs_info, meet)
             #gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
             continue
         
@@ -1718,11 +1907,11 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                         # Enter SupP at last round MC state
                         ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j])
                         # add last round key: AK[lr](storing AT) = id(MC[lr]) XOR KEY[lr]
-                        gen_XOR_rule(m, fM_x[r,i,j], fM_y[r,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
-                        gen_XOR_rule(m, bM_x[r,i,j], bM_y[r,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
+                        gen_XOR_rule(m, fM_x[r,i,j], fM_y[r,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fAR_x[r,i,j], fAR_y[r,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                        gen_XOR_rule(m, bM_x[r,i,j], bM_y[r,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bAR_x[r,i,j], bAR_y[r,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
                         # add whitening key: SB[0] = AK[lr](storing AT) XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[nr,i,j], fK_y[nr,i,j], fS_x[0,i,j], fS_y[0,i,j], xor_cost_fwd[nr,i,j], CONST0)
-                        gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[nr,i,j], bK_y[nr,i,j], bS_x[0,i,j], bS_y[0,i,j], CONST0, xor_cost_bwd[nr,i,j])
+                        gen_XOR_rule(m, fAR_x[r,i,j], fAR_y[r,i,j], fKR_x[nr,i,j], fKR_y[nr,i,j], fS_x[0,i,j], fS_y[0,i,j], xor_rhs_cost_fwd[nr,i,j], CONST0)
+                        gen_XOR_rule(m, bAR_x[r,i,j], bAR_y[r,i,j], bKR_x[nr,i,j], bKR_y[nr,i,j], bS_x[0,i,j], bS_y[0,i,j], CONST0, xor_rhs_cost_bwd[nr,i,j])
                         # Exit SupP at round 0 SB state
                         ext_SupP(m, fS_x[0,i,j], fS_y[0,i,j], bS_x[0,i,j], bS_y[0,i,j], S_x[0,i,j], S_y[0,i,j])  
             elif r in bwd:  # enter last round in bwd direction
@@ -1731,78 +1920,100 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                         # Enter SupP at round 0 SB state
                         ent_SupP(m, S_x[0,i,j], S_y[0,i,j], fS_x[0,i,j], fS_y[0,i,j], bS_x[0,i,j], bS_y[0,i,j])
                         # add whitening key: AK[tr-1](storing AT) =  SB[0] XOR KEY[tr](storing KEY[-1])
-                        gen_XOR_rule(m, fS_x[0,i,j], fS_y[0,i,j], fK_x[nr,i,j], fK_y[nr,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[nr,i,j], CONST0)
-                        gen_XOR_rule(m, bS_x[0,i,j], bS_y[0,i,j], bK_x[nr,i,j], bK_y[nr,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[nr,i,j])
+                        gen_XOR_rule(m, fS_x[0,i,j], fS_y[0,i,j], fKR_x[nr,i,j], fKR_y[nr,i,j], fAR_x[r,i,j], fAR_y[r,i,j], xor_rhs_cost_fwd[nr,i,j], CONST0)
+                        gen_XOR_rule(m, bS_x[0,i,j], bS_y[0,i,j], bKR_x[nr,i,j], bKR_y[nr,i,j], bAR_x[r,i,j], bAR_y[r,i,j], CONST0, xor_rhs_cost_bwd[nr,i,j])
                         # add last round key: MC[lr] == id(MC[lr]) = AK[lr](storing AT) XOR KEY[lr]
-                        gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[r,i,j], fK_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
-                        gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[r,i,j], bK_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
+                        gen_XOR_rule(m, fAR_x[r,i,j], fAR_y[r,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                        gen_XOR_rule(m, bAR_x[r,i,j], bAR_y[r,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
                         # Ext SupP feed the outcome to current MC state
                         ext_SupP(m, fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], M_x[r,i,j], M_y[r,i,j])
             continue 
         
-        # forward direction
+        # ENC Propagation: forward direction
         elif r in fwd:
-            # Enter SupP at current round MC state
+            # Enter SupP at current round AK_LHS
             print('fwd', r)
             for i in ROW:
                 for j in COL:
-                    ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j])
-            # MixCol with SupP and GnD
-            for j in COL:
-                #continue
-                gen_MC_rule(m, fM_Gx[r,:,j], fM_y[r,:,j], fM_col_u[r,j], fM_col_v[r,j], fM_col_w[r,j], fA_x[r,:,j], fA_y[r,:,j], mc_cost_fwd[r,j], CONST0)
-                gen_MC_rule(m, bM_x[r,:,j], bM_Gy[r,:,j], bM_col_u[r,j], bM_col_v[r,j], bM_col_w[r,j], bA_x[r,:,j], bA_y[r,:,j], CONST0, mc_cost_bwd[r,j])
-                for i in ROW:   # fix unused guess bits
-                    m.addConstr(fA_x[r,i,j] == fA_Gx[r,i,j])
-                    m.addConstr(bA_y[r,i,j] == bA_Gy[r,i,j])
-            # AddKey with SupP    
+                    ent_SupP(m, M_x[r,i,j], M_y[r,i,j], fAL_x[r,i,j], fAL_y[r,i,j], bAL_x[r,i,j], bAL_y[r,i,j])
+            # Add eq LHS Key with SupP to AK_LHS, get MC  
             for i in ROW:
                 for j in COL:
                     #continue
-                    gen_XOR_rule(m, fA_x[r,i,j], fA_y[r,i,j], fK_x[r,i,j], fK_y[r,i,j], fS_x[nr,i,j], fS_y[nr,i,j], xor_cost_fwd[r,i,j], CONST0)
-                    gen_XOR_rule(m, bA_x[r,i,j], bA_y[r,i,j], bK_x[r,i,j], bK_y[r,i,j], bS_x[nr,i,j], bS_y[nr,i,j], CONST0, xor_cost_bwd[r,i,j])
-            
+                    gen_XOR_rule(m, fAL_x[r,i,j], fAL_y[r,i,j], fKL_x[r,i,j], fKL_y[r,i,j], fM_x[r,i,j], fM_y[r,i,j], xor_lhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bAL_x[r,i,j], bAL_y[r,i,j], bKL_x[r,i,j], bKL_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], CONST0, xor_lhs_cost_bwd[r,i,j])
+            # MixCol with SupP and GnD, between MC and AK_RHS
+            for j in COL:
+                #continue
+                gen_MC_rule(m, fM_Gx[r,:,j], fM_y[r,:,j], fM_col_u[r,j], fM_col_v[r,j], fM_col_w[r,j], fAR_x[r,:,j], fAR_y[r,:,j], mc_cost_fwd[r,j], CONST0)
+                gen_MC_rule(m, bM_x[r,:,j], bM_Gy[r,:,j], bM_col_u[r,j], bM_col_v[r,j], bM_col_w[r,j], bAR_x[r,:,j], bAR_y[r,:,j], CONST0, mc_cost_bwd[r,j])
+                for i in ROW:   # fix unused guess bits
+                    m.addConstr(fAR_x[r,i,j] == fA_Gx[r,i,j])
+                    m.addConstr(bAR_y[r,i,j] == bA_Gy[r,i,j])
+            # Add eq RHS Key with SupP to AK_RHS, get NSB    
+            for i in ROW:
+                for j in COL:
+                    #continue
+                    gen_XOR_rule(m, fAR_x[r,i,j], fAR_y[r,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fS_x[nr,i,j], fS_y[nr,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bAR_x[r,i,j], bAR_y[r,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bS_x[nr,i,j], bS_y[nr,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
             # Ext SupP and feed the outcome to next SB state
             for i in ROW:
                 for j in COL:
                     ext_SupP(m, fS_x[nr,i,j], fS_y[nr,i,j], bS_x[nr,i,j], bS_y[nr,i,j], S_x[nr,i,j], S_y[nr,i,j])
             continue
         
-        # backward direction
+        # ENC Propagation: backward direction
         elif r in bwd:
             print('bwd', r)
             # Enter SupP at next round SB state
             for i in ROW:
                 for j in COL:
                     ent_SupP(m, S_x[nr,i,j], S_y[nr,i,j], fS_x[nr,i,j], fS_y[nr,i,j], bS_x[nr,i,j], bS_y[nr,i,j])
-            # (reverse) AddKey with SupP    
+            # (reverse) Add eq RHS key with SupP to NSB, get AK_RHS    
             for i in ROW:
                 for j in COL:
                     #continue
-                    gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fK_x[r,i,j], fK_y[r,i,j], fA_x[r,i,j], fA_y[r,i,j], xor_cost_fwd[r,i,j], CONST0)
-                    gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bK_x[r,i,j], bK_y[r,i,j], bA_x[r,i,j], bA_y[r,i,j], CONST0, xor_cost_bwd[r,i,j])
-            # (reverse) MixCol with SupP and GnD
+                    gen_XOR_rule(m, fS_x[nr,i,j], fS_y[nr,i,j], fKR_x[r,i,j], fKR_y[r,i,j], fAR_x[r,i,j], fAR_y[r,i,j], xor_rhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bS_x[nr,i,j], bS_y[nr,i,j], bKR_x[r,i,j], bKR_y[r,i,j], bAR_x[r,i,j], bAR_y[r,i,j], CONST0, xor_rhs_cost_bwd[r,i,j])
+            # (reverse) MixCol with SupP and GnD, between AK_RHS and MC
             for j in COL:
                 #continue
-                gen_MC_rule(m, fA_Gx[r,:,j], fA_y[r,:,j], fA_col_u[r,j], fA_col_v[r,j], fA_col_w[r,j], fM_x[r,:,j], fM_y[r,:,j], mc_cost_fwd[r,j], CONST0)
-                gen_MC_rule(m, bA_x[r,:,j], bA_Gy[r,:,j], bA_col_u[r,j], bA_col_v[r,j], bA_col_w[r,j], bM_x[r,:,j], bM_y[r,:,j], CONST0, mc_cost_bwd[r,j])
+                gen_MC_rule(m, fA_Gx[r,:,j], fAR_y[r,:,j], fA_col_u[r,j], fA_col_v[r,j], fA_col_w[r,j], fM_x[r,:,j], fM_y[r,:,j], mc_cost_fwd[r,j], CONST0)
+                gen_MC_rule(m, bAR_x[r,:,j], bA_Gy[r,:,j], bA_col_u[r,j], bA_col_v[r,j], bA_col_w[r,j], bM_x[r,:,j], bM_y[r,:,j], CONST0, mc_cost_bwd[r,j])
                 for i in ROW:   # fix unused guess bits
                     m.addConstr(fM_x[r,i,j] == fM_Gx[r,i,j])
                     m.addConstr(bM_y[r,i,j] == bM_Gy[r,i,j])
+            # (reverse) Add eq LHS key with SupP to MC, get AK_LHS  
+            for i in ROW:
+                for j in COL:
+                    #continue
+                    gen_XOR_rule(m, fM_x[r,i,j], fM_y[r,i,j], fKL_x[r,i,j], fKL_y[r,i,j], fAL_x[r,i,j], fAL_y[r,i,j], xor_lhs_cost_fwd[r,i,j], CONST0)
+                    gen_XOR_rule(m, bM_x[r,i,j], bM_y[r,i,j], bKL_x[r,i,j], bKL_y[r,i,j], bAL_x[r,i,j], bAL_y[r,i,j], CONST0, xor_lhs_cost_bwd[r,i,j])
             # Ext SupP and feed the outcome to current MC state
             for i in ROW:
                 for j in COL:
-                    ext_SupP(m, fM_x[r,i,j], fM_y[r,i,j], bM_x[r,i,j], bM_y[r,i,j], M_x[r,i,j], M_y[r,i,j])
+                    ext_SupP(m, fAL_x[r,i,j], fAL_y[r,i,j], bAL_x[r,i,j], bAL_y[r,i,j], M_x[r,i,j], M_y[r,i,j])
             continue
         else:
             raise Exception("Irregular Behavior at encryption")
     
     # set objective function
-    set_obj(m, Nr, Nb, Nk, E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, mc_cost_fwd, mc_cost_bwd, xor_cost_fwd, xor_cost_bwd, key_cost_fwd, key_cost_bwd, fKS_eq_g, bKS_eq_g, fM_Gx, fM_x, bM_Gy, bM_y, fA_Gx, fA_x, bA_Gy, bA_y, M_Gxy, A_Gxy, meet)
+    set_obj(
+        m, Nr, Nb, Nk, 
+        E_ini_x, E_ini_y, E_ini_g, K_ini_x, K_ini_y, K_ini_g, 
+        mc_cost_fwd, mc_cost_bwd, 
+        xor_lhs_cost_fwd, xor_lhs_cost_bwd, xor_rhs_cost_fwd, xor_rhs_cost_bwd, 
+        key_cost_fwd, key_cost_bwd, fKS_eq_g, bKS_eq_g, 
+        fM_Gx, fM_x, bM_Gy, bM_y, 
+        fA_Gx, fAR_x, bA_Gy, bAR_y, 
+        fK_Gx, fK_x, bK_Gy, bK_y, 
+        M_Gxy, A_Gxy, K_Gxy, 
+        meet
+    )
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    m.setParam(GRB.Param.BestObjStop, 0.999999999)
     m.setParam(GRB.Param.Threads, 8)
     start_time = time.time()
     m.optimize()
