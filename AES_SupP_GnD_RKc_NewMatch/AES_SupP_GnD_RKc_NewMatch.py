@@ -1639,6 +1639,17 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                 continue
             m.addConstr(K_ini_y[i, j] == 1) #test
             m.addConstr(K_ini_x[i, j] == 0) #test
+    
+    # test for key schedule (known solution)
+    for i in ROW:
+        for j in range(Nk):
+            #continue
+            if (i==1 and j==2) or (i==3 and j==2) or (i==1 and j==3) or (i==3 and j==3):
+                m.addConstr(K_ini_y[i, j] == 0) #test
+                m.addConstr(K_ini_x[i, j] == 1) #test
+            else: 
+                m.addConstr(K_ini_y[i, j] == 1) #test
+                m.addConstr(K_ini_x[i, j] == 0) #test
 
     # initialize the enc states, avoid unknown to maximize performance
     for i in ROW:
@@ -1802,7 +1813,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 1.999999999)
+    m.setParam(GRB.Param.BestObjStop, 2.999999999)
     m.setParam(GRB.Param.Threads, 8)
     start_time = time.time()
     m.optimize()
@@ -1823,4 +1834,4 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-solve(key_size=192, total_round=9, enc_start_round=3, match_round=7, key_start_round=2, dir='./AES_SupP_GnD_RKc_NewMatch/runs/')
+solve(key_size=192, total_round=9, enc_start_round=2, match_round=7, key_start_round=2, dir='./AES_SupP_GnD_RKc_NewMatch/runs/')

@@ -1,0 +1,6096 @@
+% Vis_AES192RK_9r_ENC_r2_Meet_r7_KEY_r2
+\documentclass{standalone}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor,import}
+\usepackage{xspace}
+\usetikzlibrary{crypto.symbols,patterns,calc}
+\tikzset{shadows=no}
+\input{macro}
+%document starts
+\begin{document}
+\begin{tikzpicture}[scale=0.2, every node/.style={font=\boldmath\bf}]
+\everymath{\scriptstyle}
+\tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};
+%borderline
+\draw -- (-8,20) -- (132,20) -- (132,-220) -- (-8,-220);
+
+\begin{scope}[yshift = 0.000000 cm, xshift = 0.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^0$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC0
+\begin{scope}[yshift = 0 cm, xshift = 8 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^0$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 16 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 16 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 24 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^0F$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 24 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^0B$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -8 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^0F$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^0B$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -8 cm, xshift = 32 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 40 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 48 cm]
+
+\draw[edge, <-] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 48 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^1$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^0F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^0B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 64 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 64 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20.000000 cm, xshift = 0.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^1$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC1
+\begin{scope}[yshift = -20 cm, xshift = 8 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^1$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 16 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 24 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^1F$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^1B$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -28 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 32 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^1F$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^1B$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -28 cm, xshift = 32 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 40 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 40 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 48 cm]
+
+\draw[edge, <-] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^2$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^1F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^1B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 72 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40.000000 cm, xshift = 0.000000 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^2$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+\path (2,-0.8) node {\scriptsize$(+8~\DoFF,~+8~\DoFB)$};
+\path (-2,0.8) node {\scriptsize$\StENC$};
+
+\end{scope}
+
+
+%MC2
+\begin{scope}[yshift = -40 cm, xshift = 8 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^2$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 16 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 24 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^2F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^2B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -48 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-2 ~\DoFF, -0 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 32 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^2F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^2B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -48 cm, xshift = 32 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-2 ~\DoFF, -0 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 40 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^3$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^2F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^2B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 64 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60.000000 cm, xshift = 0.000000 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^3$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC3
+\begin{scope}[yshift = -60 cm, xshift = 8 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^3$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 16 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 24 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^3F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^3B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -68 cm, xshift = 24 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 32 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^3F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^3B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -68 cm, xshift = 32 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 40 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^4$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^3F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^3B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 64 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80.000000 cm, xshift = 0.000000 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^4$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC4
+\begin{scope}[yshift = -80 cm, xshift = 8 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^4$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 16 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 24 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^4F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^4B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -88 cm, xshift = 24 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 32 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^4F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^4B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -88 cm, xshift = 32 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 40 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^5$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^4F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^4B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 72 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100.000000 cm, xshift = 0.000000 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^5$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC5
+\begin{scope}[yshift = -100 cm, xshift = 8 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^5$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 16 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 24 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^5F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^5B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -108 cm, xshift = 24 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 32 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^5F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^5B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -108 cm, xshift = 32 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -10 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 40 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 48 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^6$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^5F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^5B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 64 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120.000000 cm, xshift = 0.000000 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^6$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC6
+\begin{scope}[yshift = -120 cm, xshift = 8 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^6$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, ->] (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 16 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 16 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 24 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^6F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 24 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^6B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -128 cm, xshift = 24 cm]
+
+\path (6.000000,-1.000000) node {\tiny MC Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -2 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 32 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^6F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 32 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^6B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -128 cm, xshift = 32 cm]
+
+\path (6.000000,-1.000000) node {\tiny AK Cost};
+\path (6.000000,-2.000000) node {\scriptsize$(-0 ~\DoFF, -1 ~\DoFB)$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 40 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^7F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 40 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^7B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 48 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^7$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 56 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^6F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^6B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 72 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140.000000 cm, xshift = 0.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^7$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC7
+\begin{scope}[yshift = -140 cm, xshift = 8 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^7$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 8 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny \scriptsize$\StMatch$}+(12,0);
+\filldraw [black] (10,2) circle (4 pt);
+\draw[edge, ->] (10,2) -- (10.000000,-4.000000) -- (16,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 24 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^7F$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 24 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^7B$};
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny MC}+(4,0);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -148 cm, xshift = 24 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^7F$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AR^7B$};
+\draw[edge, ->] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -148 cm, xshift = 32 cm]
+
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^8F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^8B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 40 cm]
+
+\draw[edge, ->] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 48 cm]
+
+\draw[edge, ->] (2,0) -- (2,-12) -- (-52,-12) -- (-52,-18) -- (-48,-18);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 48 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^8$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 56 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^7F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-18,6) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^7B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-18,-2) -- (-18,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 64 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^7F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 64 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^7B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -140 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^7F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -146 cm, xshift = 72 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^7B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160.000000 cm, xshift = 0.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^8$};
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SB} node[below] {\tiny SR} +(4,0);
+
+\end{scope}
+
+
+%MC8
+\begin{scope}[yshift = -160 cm, xshift = 8 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^8$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 8 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny Eval}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw (6,2) -- (6.000000,-4.000000) -- (8,-4);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 16 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^8F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 16 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AL^8B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AT$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};\node[scale = 0.800000, XOR] at (-2.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 32 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\AT$};
+\draw[edge, <-] (4.000000,2.000000) -- +(4,0);
+\node[scale = 0.800000, XOR] at (6.000000,2.000000){};\node[scale = 0.800000, XOR] at (-2.000000,2.000000){};
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 40 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 40 cm]
+
+\draw[edge, <-] (4.000000,2.000000) -- node[above] {\tiny SupP}+(4,0);
+\filldraw [black] (6,2) circle (4 pt);
+\draw[edge, <-] (6,2) -- (6.000000,-4.000000) -- (4,-4);
+
+\end{scope}
+
+
+\draw[edge, <-] (50,-158) -- (50,-172) -- (-6,-172) -- (-6,2) -- (0,2);
+\begin{scope}[yshift = -160 cm, xshift = 48 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\SB^0$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 56 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^8F$};
+\draw (4,2) -- (6,2) -- (6,6) -- (-26,6) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 56 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^8B$};
+\draw (4,2) -- (6,2) -- (6,-2) -- (-26,-2) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^8F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 64 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KL^8B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 72 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^8F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 72 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KR^8B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -160 cm, xshift = 80 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^{w}F$};
+\draw (4,2) -- (6,2) -- (6,7) -- (-26,7) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = -166 cm, xshift = 80 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\K^{w}B$};
+\draw (4,2) -- (6,2) -- (6,-1) -- (-26,-1) -- (-26,2);
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 90 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (4,2) rectangle + (1,1);
+\fill[\FW] (5,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+\fill[\FW] (4,0) rectangle + (1,1);
+\fill[\FW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 90 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\BW] (5,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\BW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 100 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^0$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = 0 cm, xshift = 107 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^0F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -6 cm, xshift = 107 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^0B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 90 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (4,2) rectangle + (1,1);
+\fill[\CW] (5,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+\fill[\FW] (4,0) rectangle + (1,1);
+\fill[\CW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\BW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\BW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 100 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^1$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -20 cm, xshift = 107 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^1F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -26 cm, xshift = 107 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^1B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 90 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\CW] (4,2) rectangle + (1,1);
+\fill[\CW] (5,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+\fill[\CW] (4,0) rectangle + (1,1);
+\fill[\CW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\CW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\BW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\CW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\BW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 100 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^2$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -40 cm, xshift = 107 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^2F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -46 cm, xshift = 107 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^2B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 90 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\CW] (4,2) rectangle + (1,1);
+\fill[\CW] (5,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+\fill[\CW] (4,0) rectangle + (1,1);
+\fill[\CW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\BW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\BW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 100 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^3$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -60 cm, xshift = 107 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^3F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -66 cm, xshift = 107 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^3B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 90 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\CW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\CW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\FW] (3,2) rectangle + (1,1);
+\fill[\FW] (4,2) rectangle + (1,1);
+\fill[\FW] (5,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\CW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\CW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\FW] (3,0) rectangle + (1,1);
+\fill[\FW] (4,0) rectangle + (1,1);
+\fill[\FW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\CW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\CW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 100 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^4$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -80 cm, xshift = 107 cm]
+
+\fill[\CW] (0,3) rectangle + (1,1);
+\fill[\FW] (0,2) rectangle + (1,1);
+\fill[\CW] (0,1) rectangle + (1,1);
+\fill[\FW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^4F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -86 cm, xshift = 107 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^4B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 90 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\FW] (3,3) rectangle + (1,1);
+\fill[\FW] (4,3) rectangle + (1,1);
+\fill[\FW] (5,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\CW] (1,2) rectangle + (1,1);
+\fill[\FW] (2,2) rectangle + (1,1);
+\fill[\CW] (3,2) rectangle + (1,1);
+\fill[\FW] (4,2) rectangle + (1,1);
+\fill[\CW] (5,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\FW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\FW] (3,1) rectangle + (1,1);
+\fill[\FW] (4,1) rectangle + (1,1);
+\fill[\FW] (5,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+\fill[\CW] (1,0) rectangle + (1,1);
+\fill[\FW] (2,0) rectangle + (1,1);
+\fill[\CW] (3,0) rectangle + (1,1);
+\fill[\FW] (4,0) rectangle + (1,1);
+\fill[\CW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\BW] (1,2) rectangle + (1,1);
+\fill[\BW] (2,2) rectangle + (1,1);
+\fill[\BW] (3,2) rectangle + (1,1);
+\fill[\BW] (4,2) rectangle + (1,1);
+\fill[\BW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+\fill[\BW] (1,0) rectangle + (1,1);
+\fill[\BW] (2,0) rectangle + (1,1);
+\fill[\BW] (3,0) rectangle + (1,1);
+\fill[\BW] (4,0) rectangle + (1,1);
+\fill[\BW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 100 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^5$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -100 cm, xshift = 107 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\CW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\CW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^5F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -106 cm, xshift = 107 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\BW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\BW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^5B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 90 cm]
+
+\fill[\FW] (0,3) rectangle + (1,1);
+\fill[\CW] (1,3) rectangle + (1,1);
+\fill[\FW] (2,3) rectangle + (1,1);
+\fill[\CW] (3,3) rectangle + (1,1);
+\fill[\FW] (4,3) rectangle + (1,1);
+\fill[\CW] (5,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (4,2) rectangle + (1,1);
+\fill[\UW] (5,2) rectangle + (1,1);
+\fill[\FW] (0,1) rectangle + (1,1);
+\fill[\CW] (1,1) rectangle + (1,1);
+\fill[\FW] (2,1) rectangle + (1,1);
+\fill[\CW] (3,1) rectangle + (1,1);
+\fill[\FW] (4,1) rectangle + (1,1);
+\fill[\CW] (5,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+\fill[\UW] (4,0) rectangle + (1,1);
+\fill[\UW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 90 cm]
+
+\fill[\BW] (0,3) rectangle + (1,1);
+\fill[\BW] (1,3) rectangle + (1,1);
+\fill[\BW] (2,3) rectangle + (1,1);
+\fill[\BW] (3,3) rectangle + (1,1);
+\fill[\BW] (4,3) rectangle + (1,1);
+\fill[\BW] (5,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (4,2) rectangle + (1,1);
+\fill[\UW] (5,2) rectangle + (1,1);
+\fill[\BW] (0,1) rectangle + (1,1);
+\fill[\BW] (1,1) rectangle + (1,1);
+\fill[\BW] (2,1) rectangle + (1,1);
+\fill[\BW] (3,1) rectangle + (1,1);
+\fill[\BW] (4,1) rectangle + (1,1);
+\fill[\BW] (5,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\UW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+\fill[\UW] (4,0) rectangle + (1,1);
+\fill[\UW] (5,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (6,4);
+\draw (0,1) rectangle (6,0);
+\draw (0,2) rectangle (6,0);
+\draw (0,3) rectangle (6,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\draw (4,0) rectangle (0,4);
+\draw (5,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\KS^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 100 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^6$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -120 cm, xshift = 107 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^6F$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -126 cm, xshift = 107 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (1,4);
+\draw (0,1) rectangle (1,0);
+\draw (0,2) rectangle (1,0);
+\draw (0,3) rectangle (1,0);
+\path (2.000000,4.500000) node {\scriptsize$\temp^6B$};
+
+\end{scope}
+
+
+\begin{scope}[yshift = -180.000000 cm, xshift = 8.000000 cm]
+
+\path (-4,1.5) node {\scriptsize$\StMatch$};
+\draw[edge, ->] (4.000000,2.000000) -- +(2,0);
+\draw[edge, <-] (6.000000,2.000000) -- +(2,0);
+\path (6.0,3) node {\tiny Meet};
+
+\end{scope}
+\begin{scope}[yshift = -180.000000 cm, xshift = 8.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\FW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\FW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\MC^7$};
+
+\end{scope}
+\begin{scope}[yshift = -180.000000 cm, xshift = 16.000000 cm]
+
+\fill[\UW] (0,3) rectangle + (1,1);
+\fill[\UW] (1,3) rectangle + (1,1);
+\fill[\UW] (2,3) rectangle + (1,1);
+\fill[\UW] (3,3) rectangle + (1,1);
+\fill[\UW] (0,2) rectangle + (1,1);
+\fill[\UW] (1,2) rectangle + (1,1);
+\fill[\UW] (2,2) rectangle + (1,1);
+\fill[\UW] (3,2) rectangle + (1,1);
+\fill[\UW] (0,1) rectangle + (1,1);
+\fill[\UW] (1,1) rectangle + (1,1);
+\fill[\UW] (2,1) rectangle + (1,1);
+\fill[\UW] (3,1) rectangle + (1,1);
+\fill[\UW] (0,0) rectangle + (1,1);
+\fill[\FW] (1,0) rectangle + (1,1);
+\fill[\UW] (2,0) rectangle + (1,1);
+\fill[\UW] (3,0) rectangle + (1,1);
+% draw grid lines:
+\draw (0,0) rectangle (4,4);
+\draw (0,1) rectangle (4,0);
+\draw (0,2) rectangle (4,0);
+\draw (0,3) rectangle (4,0);
+\draw (1,0) rectangle (0,4);
+\draw (2,0) rectangle (0,4);
+\draw (3,0) rectangle (0,4);
+\path (2.000000,4.500000) node {\scriptsize$\meet^B$};
+
+\end{scope}
+\begin{scope}[yshift = -188.000000 cm, xshift = 4.000000 cm]
+
+\node[draw] at (0,0) {time cost = 1303 sec};
+\end{scope}
+\begin{scope}[yshift = -200.000000 cm, xshift = 16.000000 cm]
+
+\node[draw, thick, rectangle, text width=15cm, label={[shift={(-7,0)}]\footnotesize Config}] at (16, 0) {
+{\footnotesize
+$\bullet~(\varInitBL,~\varInitRD)~=~(~+12~\DoFF, ~+28~\DoFB) ~~~ \StENC=(~+8~\DoFF, ~+4~\DoFB) ~~~ \StKSA=(~+8~\DoFF, ~+20~\DoFB)~$
+\\ 
+$\bullet~(\varDoFBL,~\varDoFRD,~\varDoM, ~\varDoFGESSBL, ~\varDoFGESSRD, ~\varDoFGESSBR)~=~(~+2~\DoFF,~+2~\DoFB,~+2~\DoM,~-0~\DoFFG,~-0~\DoFB,~+0~\DoFFBG))$
+}};
+\end{scope}
+
+
+\end{tikzpicture}
+
+\end{document}

@@ -86,7 +86,8 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     Nb = NCOL
     Nk = key_size // NBYTE
     Nr = math.ceil((total_round + 1)*Nb / Nk)
-        
+
+#### Register variables  
     S_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     S_y = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
     fS_x = np.ndarray(shape=(total_round, NROW, NCOL), dtype=int)
@@ -162,7 +163,6 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     Meet_bwd_x = np.ndarray(shape=(NROW, NCOL), dtype=int)
     Meet_bwd_y = np.ndarray(shape=(NROW, NCOL), dtype=int)
     meet =  np.ndarray(shape=(NCOL), dtype=int)
-    #meet_s =  np.ndarray(shape=(NCOL), dtype=int)
 
     for r in range(total_round):
         for i in ROW:
@@ -233,6 +233,20 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     for r in range(total_round+1):
         for i in ROW:
             for j in COL:
+                fKL_x[r,i,j] = Sol["fKL_x[%d,%d,%d]" %(r,i,j)]
+                fKL_y[r,i,j] = Sol["fKL_y[%d,%d,%d]" %(r,i,j)]
+                bKL_x[r,i,j] = Sol["bKL_x[%d,%d,%d]" %(r,i,j)]
+                bKL_y[r,i,j] = Sol["bKL_y[%d,%d,%d]" %(r,i,j)]
+
+                fKR_x[r,i,j] = Sol["fKR_x[%d,%d,%d]" %(r,i,j)]
+                fKR_y[r,i,j] = Sol["fKR_y[%d,%d,%d]" %(r,i,j)]
+                bKR_x[r,i,j] = Sol["bKR_x[%d,%d,%d]" %(r,i,j)]
+                bKR_y[r,i,j] = Sol["bKR_y[%d,%d,%d]" %(r,i,j)]
+
+
+    for r in range(total_round+1):
+        for i in ROW:
+            for j in COL:
                 xor_rhs_cost_fwd[r,i,j] = Sol["XOR_RHS_Cost_fwd[%d,%d,%d]" %(r,i,j)]
                 xor_rhs_cost_bwd[r,i,j] = Sol["XOR_RHS_Cost_bwd[%d,%d,%d]" %(r,i,j)]
                 xor_lhs_cost_fwd[r,i,j] = Sol["XOR_LHS_Cost_fwd[%d,%d,%d]" %(r,i,j)]
@@ -293,13 +307,12 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
     color_fill[1, 1] = '\\fill[\\CW]'
     
     if NROW == 4:
+        # shift notes the space that the message is taking
         y_shift = NROW*2
         x_shift = NCOL
+        # tab notes the indent
         xtab = x_shift + NCOL
         ytab = y_shift + NROW*3
-    else:
-        y_shift = NROW
-        x_shift = NCOL // 2
 
     ##########
     dir = './test/'
@@ -315,8 +328,6 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         '\\usepackage[usenames,dvipsnames]{xcolor}' + '\n'
         '\\usepackage{amsmath,amssymb,mathtools,tikz,calc,pgffor,import}' + '\n'
         '\\usepackage{xspace}' + '\n'
-        #'\\input{./crypto_tex/pgflibraryarrows.new.code}' + '\n'
-        #'\\input{./crypto_tex/tikzlibrarycrypto.symbols.code}' + '\n'
         '\\usetikzlibrary{crypto.symbols,patterns,calc}' + '\n'
         '\\tikzset{shadows=no}' + '\n'
         '\\input{macro}' + '\n')
@@ -326,13 +337,14 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         '\\begin{tikzpicture}[scale=0.2, every node/.style={font=\\boldmath\\bf}]' + '\n'
 	    '\\everymath{\\scriptstyle}' + '\n'
 	    '\\tikzset{edge/.style=->, >=stealth, arrow head=8pt, thick};' + '\n')
+    
     # borderline
     f.write('%'+'borderline\n' + '\\draw -- (%d,%d) -- (%d,%d) -- (%d,%d) -- (%d,%d);\n\n'
     %(
-        -2*xtab, ytab,
-        10*(Nr+x_shift), ytab,
-        10*(Nr+x_shift), -(total_round+2)*ytab,
-        -2*xtab, -(total_round+2)*ytab
+        -1*xtab, ytab,
+        12*(Nr+x_shift), ytab,
+        12*(Nr+x_shift), -(total_round+2)*ytab,
+        -1*xtab, -(total_round+2)*ytab
     ))
     
     # draw enc states
@@ -418,7 +430,8 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\n\n')
 
         slot += 1
-        if r == match_round and r != total_round - 1:
+        if r != total_round - 1:
+            # MC state
             # fwd
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
             draw_cells(fM_x, fM_y, f)
@@ -456,7 +469,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
             draw_cells(fAR_x, fAR_y, f)
             draw_gridlines(f)
-            f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AR^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
             f.write('\\node[scale = %f, XOR] at (%f,%f){};'   %(0.8, 1.5*NCOL, 0.5*NROW))
             f.write('\n'+'\\end{scope}'+'\n')
@@ -465,7 +478,7 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
             f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
             draw_cells(bAR_x, bAR_y, f)
             draw_gridlines(f)
-            f.write('\\path (%f,%f) node {\\scriptsize$\\AK^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+            f.write('\\path (%f,%f) node {\\scriptsize$\\AR^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
             f.write('\\draw[edge, %s] (%f,%f) -- +(%d,0);\n'    %(arrow, NCOL, NROW//2, x_shift))
             f.write('\\node[scale = %f, XOR] at (%f,%f){};'   %(0.8, 1.5*NCOL, 0.5*NROW))
             f.write('\n'+'\\end{scope}'+'\n')
@@ -635,14 +648,14 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift), slot*(NCOL+x_shift))) 
         draw_cells(fKR_x, fKR_y, f)
         draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\KL^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\path (%f,%f) node {\\scriptsize$\\KR^%dF$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
         # bwd
         f.write('\\begin{scope}[yshift = %d cm, xshift = %d cm]\n\n'   %(-r*(3*NROW+y_shift)-1.5*NROW, slot*(NCOL+x_shift))) 
         draw_cells(bKR_x, bKR_y, f)
         draw_gridlines(f)
-        f.write('\\path (%f,%f) node {\\scriptsize$\\KL^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
+        f.write('\\path (%f,%f) node {\\scriptsize$\\KR^%dB$};\n'    %(NCOL//2, NROW+0.5, r))
         f.write('\n'+'\\end{scope}'+'\n')
         f.write('\n\n')
 
@@ -800,4 +813,4 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
 
     return
 
-tex_display(192, 9, 3, 7, 2, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,9,3,7,2), 0, 20, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+tex_display(192, 9, 2, 7, 2, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,9,2,7,2), 0, 20, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
