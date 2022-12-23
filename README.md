@@ -3,6 +3,3 @@ This project focuses on the automation of Meet-In-The-Middle (MITM) attacks on s
 1. 7-round AES128 single key MILP MITM
 2. 8-round AES128/9-round AES192 related key MILP MITM
 3. 9-round AES192 related key MILP MITM with superposition technique
-
-The codes are organized as follows:
-- AES v5: AES MITM with Superpositon, Guess_and_Determine, Related Key Correction, superpositioned match rules, and match thru 4 same color cells.
