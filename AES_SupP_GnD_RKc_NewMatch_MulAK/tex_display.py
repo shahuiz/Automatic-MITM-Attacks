@@ -1027,4 +1027,5 @@ def tex_display(key_size:int, total_round:int, enc_start_round:int, match_round:
 
     return
 
-#tex_display(192, 9, 2, 7, 3, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,9,2,7,3), 0, 20, dir='./milestones/192-9273/old_rule/')
+#tex_display(192, 8, 3, 6, 3, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (192,8,3,6,3), 0, 3527, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+#tex_display(128, 8, 3, 6, 3, 'AES%dRK_%dr_ENC_r%d_Meet_r%d_KEY_r%d' % (128,8,3,6,3), 0, 20, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')

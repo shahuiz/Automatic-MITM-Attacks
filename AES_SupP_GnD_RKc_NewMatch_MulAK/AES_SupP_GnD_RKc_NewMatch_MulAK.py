@@ -695,10 +695,10 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
 
     ### Obj vars
-    df_b = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="DF_b")
-    df_r = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="DF_r")
-    dm = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="Match")
-    obj = m.addVar(lb=1, ub=5, vtype=GRB.INTEGER, name="Obj")
+    df_b = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="DF_r")
+    dm = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="Match")
+    obj = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
@@ -785,6 +785,9 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
 
 #### Main Procedure ####
+    print(m.modelName)
+    print(Nb, Nk, Nr)
+
     # add constriants according to the key expansion algorithm
     key_expansion(m, key_size, total_round, key_start_round, K_ini_x, K_ini_y, fKS_x, fKS_y, fKS_g, fKS_c, fKS_eq_g, bKS_x, bKS_y, bKS_g, bKS_c, bKS_eq_g, CONST0, key_cost_fwd, key_cost_bwd)
     
@@ -1035,7 +1038,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+#solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
 
 # batch search
 for r in range(9):
@@ -1044,4 +1047,4 @@ for r in range(9):
         print('AES192-9%d43 Fix Key Start\n' %r)
         solve(key_size=192, total_round=9, enc_start_round=r, match_round=4, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/192_9X43_fixKey/')
 
-solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/8r_runs/')
