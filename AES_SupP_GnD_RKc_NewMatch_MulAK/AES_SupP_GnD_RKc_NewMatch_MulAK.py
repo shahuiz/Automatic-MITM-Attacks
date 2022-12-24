@@ -1035,7 +1035,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-#solve(key_size=192, total_round=9, enc_start_round=3, match_round=7, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
 
 # batch search
 for r in range(9):
