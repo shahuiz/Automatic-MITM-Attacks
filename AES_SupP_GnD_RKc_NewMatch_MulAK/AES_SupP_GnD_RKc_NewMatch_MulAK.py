@@ -89,7 +89,7 @@ def gen_new_match_rule(m: gp.Model, lhs_x, lhs_y, lhs_info: np.ndarray, rhs_x, r
         m.addConstr(meet[j] == gp.max_(match_case_2[j], 0))
     m.update()
 
-def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rhs_y, rhs_g, rhs_info, meet):
+def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_info, lhs_trace, rhs_x, rhs_y, rhs_info, rhs_trace, meet):
     
     ind_4blue = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
     ind_4red = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
@@ -103,14 +103,14 @@ def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_g, lhs_info, rhs_x, rh
     
     for j in COL:
         # basic match rule: lhs have to be pure color, rhs can be linear combination state
-        m.addConstr(match_case_1_signed[j] == gp.quicksum(lhs_x[:,j]) + gp.quicksum(lhs_y[:,j]) - gp.quicksum(lhs_g[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
+        m.addConstr(match_case_1_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
         m.addConstr(match_case_1[j] == gp.max_(match_case_1_signed[j], 0))
         # additional match rule 1: if has 4 same pure color cells at lhs and rhs of MC, then linear combination could be traced thru S-box
         m.addConstr((ind_4blue[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
         m.addConstr((ind_4red[j] == 1) >> (gp.quicksum(lhs_y[:,j]) + gp.quicksum(rhs_y[:,j]) >= NROW))
         m.addConstr(ind_4same[j] == gp.max_(ind_4blue[j], ind_4red[j]))
         # activate the match rule
-        m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
+        m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_trace[:,j]) + gp.quicksum(rhs_trace[:,j]) - NROW)
         m.addConstr(match_case_2[j] == ind_4same[j] * match_case_2_signed[j])
         # pick the largest df for matching
         m.addConstr(meet[j] == gp.max_(match_case_1[j], match_case_2[j]))
@@ -608,9 +608,15 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     bMeet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bMeet_lhs_info').values()).reshape((NROW, NCOL))
     fMeet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fMeet_rhs_info').values()).reshape((NROW, NCOL))
     bMeet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bMeet_rhs_info').values()).reshape((NROW, NCOL))
-    
     Meet_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_info').values()).reshape((NROW, NCOL))
     Meet_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_rhs_info').values()).reshape((NROW, NCOL))
+
+    fTrace_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fTrace_lhs_info').values()).reshape((NROW, NCOL))
+    bTrace_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bTrace_lhs_info').values()).reshape((NROW, NCOL))
+    fTrace_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='fTrace_rhs_info').values()).reshape((NROW, NCOL))
+    bTrace_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='bTrace_rhs_info').values()).reshape((NROW, NCOL))
+    Trace_lhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Trace_lhs_info').values()).reshape((NROW, NCOL))
+    Trace_rhs_info = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Trace_rhs_info').values()).reshape((NROW, NCOL))
 
     Meet_lhs_x = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_x').values()).reshape((NROW, NCOL))
     Meet_lhs_y = np.asarray(m.addVars(NROW, NCOL, vtype=GRB.BINARY, name='Meet_lhs_y').values()).reshape((NROW, NCOL))
@@ -733,10 +739,21 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
             m.addConstr(E_ini_y[i, j] == 1) #test
             m.addConstr(E_ini_x[i, j] == 0) #test
 
+    # possible optimal for key start at 4
+    for i in ROW:
+        for j in range(Nk):
+            continue
+            if i==j:
+                m.addConstr(E_ini_y[i, j] == 0) #test
+                m.addConstr(E_ini_x[i, j] == 1) #test
+            else: 
+                m.addConstr(E_ini_y[i, j] == 1) #test
+                m.addConstr(E_ini_x[i, j] == 0) #test
+
     # possible optimal for key start at 3
     for i in ROW:
         for j in range(Nk):
-            #continue
+            continue
             if (i==0 and j==2) or (i==2 and j==2):
                 m.addConstr(K_ini_y[i, j] == 0) #test
                 m.addConstr(K_ini_x[i, j] == 1) #test
@@ -848,20 +865,26 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     
                     # Match in SupP state: determine if both of the superposition branches carry information (i.e. non-white) 
                     # the info var marks if the meet state contains information thus could be used for matching
-                    #m.addConstr(fMeet_rhs_info[i,j] == 1 - fAR_w[r,i,j]) 
-                    #m.addConstr(bMeet_rhs_info[i,j] == 1 - bAR_w[r,i,j])
-                    m.addConstr(fMeet_rhs_info[i,j] == 1 - fM_w[r+1,i,(j+i)%NCOL]) 
-                    m.addConstr(bMeet_rhs_info[i,j] == 1 - bM_w[r+1,i,(j+i)%NCOL])  
+                    m.addConstr(fMeet_rhs_info[i,j] == 1 - fAR_w[r,i,j]) 
+                    m.addConstr(bMeet_rhs_info[i,j] == 1 - bAR_w[r,i,j])
                     m.addConstr(Meet_rhs_info[i,j] == gp.min_(fMeet_rhs_info[i,j], bMeet_rhs_info[i,j]))
                     
-                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fS_w[r,i,(j-i+NCOL)%NCOL]) 
-                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bS_w[r,i,(j-i+NCOL)%NCOL]) 
+                    m.addConstr(fMeet_lhs_info[i,j] == 1 - fAL_w[r,i,j]) 
+                    m.addConstr(bMeet_lhs_info[i,j] == 1 - bAL_w[r,i,j])
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
+
+                    m.addConstr(fTrace_rhs_info[i,j] == 1 - fM_w[r+1,i,(j+i)%NCOL]) 
+                    m.addConstr(bTrace_rhs_info[i,j] == 1 - bM_w[r+1,i,(j+i)%NCOL]) 
+                    m.addConstr(Trace_rhs_info[i,j] == gp.min_(fTrace_rhs_info[i,j], fKR_x[r,i,j], bTrace_rhs_info[i,j], bKR_y[r,i,j])) 
+
+                    m.addConstr(fTrace_lhs_info[i,j] == 1 - fS_w[r,i,(j-i+NCOL)%NCOL]) 
+                    m.addConstr(bTrace_lhs_info[i,j] == 1 - bS_w[r,i,(j-i+NCOL)%NCOL]) 
+                    m.addConstr(Trace_lhs_info[i,j] == gp.min_(fTrace_lhs_info[i,j], fKL_x[r,i,j], bTrace_lhs_info[i,j], bKL_y[r,i,j])) 
             
             # generate match rule
             #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
             #gen_new_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_info, meet)
-            gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
+            gen_combined_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_info, Trace_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_info, Trace_rhs_info, meet)
             continue
         
         # last round
@@ -990,7 +1013,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # set parameters
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 2.999999999)
+    m.setParam(GRB.Param.BestObjStop, 3.999999999)
     m.setParam(GRB.Param.Threads, 8)
     
     # optimization
@@ -1016,6 +1039,9 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
 # batch search
 for r in range(9):
+    continue
     if r != 4:
         print('AES192-9%d43 Fix Key Start\n' %r)
         solve(key_size=192, total_round=9, enc_start_round=r, match_round=4, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/192_9X43_fixKey/')
+
+solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
