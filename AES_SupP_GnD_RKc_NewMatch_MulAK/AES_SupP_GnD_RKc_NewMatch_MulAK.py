@@ -736,7 +736,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # possible optimal for key start at 3
     for i in ROW:
         for j in range(Nk):
-            #continue
+            continue
             if (i==0 and j==2) or (i==2 and j==2):
                 m.addConstr(K_ini_y[i, j] == 0) #test
                 m.addConstr(K_ini_x[i, j] == 1) #test
@@ -1012,10 +1012,11 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     else:
         return 0
 
-#solve(key_size=192, total_round=9, enc_start_round=3, match_round=7, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
+solve(key_size=192, total_round=8, enc_start_round=3, match_round=6, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/runs/')
 
 # batch search
 for r in range(9):
+    continue
     if r != 4:
         print('AES192-9%d43 Fix Key Start\n' %r)
         solve(key_size=192, total_round=9, enc_start_round=r, match_round=4, key_start_round=3, dir='./AES_SupP_GnD_RKc_NewMatch_MulAK/192_9X43_fixKey/')
