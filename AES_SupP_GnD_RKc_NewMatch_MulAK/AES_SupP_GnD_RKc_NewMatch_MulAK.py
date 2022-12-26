@@ -876,12 +876,12 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
                     m.addConstr(bMeet_lhs_info[i,j] == 1 - bAL_w[r,i,j])
                     m.addConstr(Meet_lhs_info[i,j] == gp.min_(fMeet_lhs_info[i,j], bMeet_lhs_info[i,j]))
 
-                    m.addConstr(fTrace_rhs_info[i,j] == 1 - fM_w[r+1,i,(j+i)%NCOL]) 
-                    m.addConstr(bTrace_rhs_info[i,j] == 1 - bM_w[r+1,i,(j+i)%NCOL]) 
+                    m.addConstr(fTrace_rhs_info[i,j] == 1 - fM_w[r+1,i,(j-i+NCOL)%NCOL]) 
+                    m.addConstr(bTrace_rhs_info[i,j] == 1 - bM_w[r+1,i,(j-i+NCOL)%NCOL]) 
                     m.addConstr(Trace_rhs_info[i,j] == gp.min_(fTrace_rhs_info[i,j], fKR_x[r,i,j], bTrace_rhs_info[i,j], bKR_y[r,i,j])) 
 
-                    m.addConstr(fTrace_lhs_info[i,j] == 1 - fS_w[r,i,(j-i+NCOL)%NCOL]) 
-                    m.addConstr(bTrace_lhs_info[i,j] == 1 - bS_w[r,i,(j-i+NCOL)%NCOL]) 
+                    m.addConstr(fTrace_lhs_info[i,j] == 1 - fS_w[r,i,(j+i+NCOL)%NCOL]) 
+                    m.addConstr(bTrace_lhs_info[i,j] == 1 - bS_w[r,i,(j+i+NCOL)%NCOL]) 
                     m.addConstr(Trace_lhs_info[i,j] == gp.min_(fTrace_lhs_info[i,j], fKL_x[r,i,j], bTrace_lhs_info[i,j], bKL_y[r,i,j])) 
             
             # generate match rule
@@ -1016,9 +1016,9 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # set parameters
     m.setParam(GRB.Param.PoolSearchMode, 2)
     m.setParam(GRB.Param.PoolSolutions,  1)
-    m.setParam(GRB.Param.BestObjStop, 3.999999999)
+    #m.setParam(GRB.Param.BestObjStop, 2.999999999)
     m.setParam(GRB.Param.Threads, 8)
-    
+
     # optimization
     start_time = time.time()
     m.optimize()
