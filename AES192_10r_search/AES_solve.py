@@ -817,7 +817,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # test for key schedule: 192-9363-obj3
     for i in ROW:
         for j in range(Nk):
-            #continue
+            continue
             if (i==2 and j==0):
                 m.addConstr(K_ini_y[i, j] == 1) #test
                 m.addConstr(K_ini_x[i, j] == 1) #test
@@ -831,7 +831,7 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     
     for i in ROW:
         for j in COL:
-            #continue
+            continue
             m.addConstr(S_x[4,i,j] == 0)
             m.addConstr(S_y[4,i,j] == 1)
 
