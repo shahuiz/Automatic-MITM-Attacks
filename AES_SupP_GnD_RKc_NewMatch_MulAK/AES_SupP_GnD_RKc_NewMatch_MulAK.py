@@ -90,9 +90,9 @@ def gen_new_match_rule(m: gp.Model, lhs_x, lhs_y, lhs_info: np.ndarray, rhs_x, r
     m.update()
 
 def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_info, lhs_trace, rhs_x, rhs_y, rhs_info, rhs_trace, meet):
-    
-    ind_4blue = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
-    ind_4red = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
+    # for simplicity, consider only four blue scenario
+    #ind_4blue = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_blue_indicator').values())
+    #ind_4red = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_red_indicator').values())
     ind_4same = np.asarray(m.addVars(NCOL, vtype = GRB.BINARY, name='four_same_color_indicator').values())
 
     match_case_1_signed = np.asarray(m.addVars(NCOL, lb=-NROW, ub=NROW, vtype = GRB.INTEGER, name='match_case_1_signed').values())
@@ -106,9 +106,10 @@ def gen_combined_match_rule(m:gp.Model, lhs_x, lhs_y, lhs_info, lhs_trace, rhs_x
         m.addConstr(match_case_1_signed[j] == gp.quicksum(lhs_info[:,j]) + gp.quicksum(rhs_info[:,j]) - NROW)
         m.addConstr(match_case_1[j] == gp.max_(match_case_1_signed[j], 0))
         # additional match rule 1: if has 4 same pure color cells at lhs and rhs of MC, then linear combination could be traced thru S-box
-        m.addConstr((ind_4blue[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
-        m.addConstr((ind_4red[j] == 1) >> (gp.quicksum(lhs_y[:,j]) + gp.quicksum(rhs_y[:,j]) >= NROW))
-        m.addConstr(ind_4same[j] == gp.max_(ind_4blue[j], ind_4red[j]))
+        #m.addConstr((ind_4blue[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
+        #m.addConstr((ind_4red[j] == 1) >> (gp.quicksum(lhs_y[:,j]) + gp.quicksum(rhs_y[:,j]) >= NROW))
+        #m.addConstr(ind_4same[j] == gp.max_(ind_4blue[j], ind_4red[j]))
+        m.addConstr((ind_4same[j] == 1) >> (gp.quicksum(lhs_x[:,j]) + gp.quicksum(rhs_x[:,j]) >= NROW))
         # activate the match rule
         m.addConstr(match_case_2_signed[j] == gp.quicksum(lhs_trace[:,j]) + gp.quicksum(rhs_trace[:,j]) - NROW)
         m.addConstr(match_case_2[j] == ind_4same[j] * match_case_2_signed[j])
@@ -660,14 +661,27 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
     # DEFAULT: KR
     fKL_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKL_x').values()).reshape((total_round + 1, NROW, NCOL))
     fKL_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKL_y').values()).reshape((total_round + 1, NROW, NCOL))
+    fKL_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKL_g').values()).reshape((total_round + 1, NROW, NCOL))
     bKL_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKL_x').values()).reshape((total_round + 1, NROW, NCOL))
     bKL_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKL_y').values()).reshape((total_round + 1, NROW, NCOL)) 
+    bKL_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKL_g').values()).reshape((total_round + 1, NROW, NCOL)) 
     
     fKR_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKR_x').values()).reshape((total_round + 1, NROW, NCOL))
     fKR_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKR_y').values()).reshape((total_round + 1, NROW, NCOL))
+    fKR_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='fKR_g').values()).reshape((total_round + 1, NROW, NCOL))
     bKR_x = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKR_x').values()).reshape((total_round + 1, NROW, NCOL))
     bKR_y = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKR_y').values()).reshape((total_round + 1, NROW, NCOL)) 
+    bKR_g = np.asarray(m.addVars(total_round + 1, NROW, NCOL, vtype=GRB.BINARY, name='bKR_g').values()).reshape((total_round + 1, NROW, NCOL)) 
     
+    # add grey constraints
+    for r in range(total_round + 1):
+        for i in ROW:    
+            for j in COL:
+                m.addConstr(fKL_g[r,i,j] == gp.min_(fKL_x[r,i,j], fKL_y[r,i,j]))
+                m.addConstr(bKL_g[r,i,j] == gp.min_(bKL_x[r,i,j], bKL_y[r,i,j]))
+                m.addConstr(fKR_g[r,i,j] == gp.min_(fKR_x[r,i,j], fKR_y[r,i,j]))
+                m.addConstr(bKR_g[r,i,j] == gp.min_(bKR_x[r,i,j], bKR_y[r,i,j]))
+
     # perform column selection according to MulAK indicator
     for r in range(total_round + 1):
         for j in COL:
@@ -695,10 +709,10 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
 
     ### Obj vars
-    df_b = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="DF_b")
-    df_r = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="DF_r")
-    dm = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="Match")
-    obj = m.addVar(lb=3, ub=5, vtype=GRB.INTEGER, name="Obj")
+    df_b = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="DF_b")
+    df_r = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="DF_r")
+    dm = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="Match")
+    obj = m.addVar(lb=2, ub=4, vtype=GRB.INTEGER, name="Obj")
 
     GnD_b = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_b")
     GnD_r = m.addVar(lb=0, vtype=GRB.INTEGER, name="GND_r")
@@ -878,11 +892,11 @@ def solve(key_size:int, total_round:int, enc_start_round:int, match_round:int, k
 
                     m.addConstr(fTrace_rhs_info[i,j] == 1 - fM_w[r+1,i,(j-i+NCOL)%NCOL]) 
                     m.addConstr(bTrace_rhs_info[i,j] == 1 - bM_w[r+1,i,(j-i+NCOL)%NCOL]) 
-                    m.addConstr(Trace_rhs_info[i,j] == gp.min_(fTrace_rhs_info[i,j], fKR_x[r,i,j], bTrace_rhs_info[i,j], bKR_y[r,i,j])) 
+                    m.addConstr(Trace_rhs_info[i,j] == gp.min_(fTrace_rhs_info[i,j], fKR_x[r,i,j], bTrace_rhs_info[i,j], bKR_g[r,i,j])) 
 
                     m.addConstr(fTrace_lhs_info[i,j] == 1 - fS_w[r,i,(j+i+NCOL)%NCOL]) 
                     m.addConstr(bTrace_lhs_info[i,j] == 1 - bS_w[r,i,(j+i+NCOL)%NCOL]) 
-                    m.addConstr(Trace_lhs_info[i,j] == gp.min_(fTrace_lhs_info[i,j], fKL_x[r,i,j], bTrace_lhs_info[i,j], bKL_y[r,i,j])) 
+                    m.addConstr(Trace_lhs_info[i,j] == gp.min_(fTrace_lhs_info[i,j], fKL_x[r,i,j], bTrace_lhs_info[i,j], bKL_g[r,i,j])) 
             
             # generate match rule
             #gen_match_rule(m, Meet_lhs_x, Meet_lhs_y, Meet_lhs_g, Meet_lhs_info, Meet_rhs_x, Meet_rhs_y, Meet_rhs_g, Meet_rhs_info, meet)
